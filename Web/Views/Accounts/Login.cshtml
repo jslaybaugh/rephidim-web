@@ -1,0 +1,42 @@
+﻿@model LoginView
+@{
+	ViewBag.Title = "Login";
+	Layout = "~/Views/Shared/_NoAuth.cshtml";
+}
+<div class="login-container">
+	<p class="church">REPHIDIM CHURCH</p>
+	<p class="scripture">Do not give what is holy to dogs, and do not cast your pearls before swine, lest they trample them under their feet, and turn to tear you to pieces.</p>
+	<p class="scripture">Ask, and it shall be given to you; seek, and you shall find; knock, and it shall be opened to you.</p>
+	<p class="scripture" style="text-align:right;color:#888;">~ Matthew 7:6-7</p>
+	@using (Html.BeginForm("Login", "Accounts", FormMethod.Post, new { id = "frmLogin", autocomplete = "off" }))
+	{ 
+		@Html.HiddenFor(m => m.ReturnUrl)
+		@Html.ValidationSummary()
+		<div class="login-bg clearfix">
+			<div class="login-contents clearfix">
+				<div id="user-box" class="clearfix none">
+					<label for="UserName">User Name:</label> @Html.TextBoxFor(m => m.UserName)
+				</div>
+				<div class="clearfix">
+					<label for="Password">Password:</label> @Html.PasswordFor(m => m.Password, new { placeholder = "Enter Password" }) &nbsp; <input type="submit" value="Knock" style="color:#000;" />
+				</div>
+			</div>
+			<a id="lnk-more" href="#">More Options</a>
+		</div>
+		<p class="center-align">&copy; Rephidim Church, Inc. / RDBS, Inc. 1971-@DateTime.Now.Year<br />4430 Allendale Rd, Wichita Falls, TX 76310</p>
+	 }
+ </div>
+
+ @section scripts
+ {
+	<script type="text/javascript">
+		$(function ()
+		{
+			$("#lnk-more").live("click", function ()
+			{
+				$("#user-box").fadeIn();
+				$(this).hide();
+			});
+		});
+	</script>
+ }

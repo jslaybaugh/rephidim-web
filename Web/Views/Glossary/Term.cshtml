@@ -1,0 +1,56 @@
+﻿@model Web.Models.GlossaryView
+
+@{
+	ViewBag.Title = Model.ActiveTerm != null ? Model.ActiveTerm.Term + " - Glossary" : "Glossary";
+	ViewBag.NavGlossary = true;
+}
+
+<div class="row">
+	<div class="span5 module">
+		<div class="scrollable" id="uxList">
+			<ul id="ulTerms" class="unstyled"></ul>
+		</div>
+		<div id="uxFooter" class="center-align">
+			Version: 
+			@if (User.IsInRole("Edit")) 
+			{ 
+				<a href="#" id="lnkVersion">@Model.Version.Number</a>  
+			}
+			else 
+			{ 
+				<span>@Model.Version.Number</span>  
+			}
+			// Terms: @Model.Terms.Count()</div>
+	</div>
+	<div class="span11" id="uxTerm">
+	</div>
+</div>
+
+@section templates
+{
+	<script id="tmpTermList" type="text/html">
+		<li><a class="term-link" name="${Id}" data-value="${Term}" href="${App.ResolveUrl('~/Glossary/Term/' + Id)}">${Term}</a></li>
+	</script>
+
+	<script id="tmpTermFull" type="text/html">
+		<h1 id="uxTermName">${Term}</h1>
+		<div id="uxDefinition" class="scrollable module">
+			<div style="margin:10px;">
+				{{html Definition}}
+			</div>
+		</div>
+	</script>
+}
+
+@section scripts
+{
+	<script type="text/javascript">		
+		$(function ()
+		{
+			var terms = @Html.Raw(Json.Encode(Model.Terms));
+			var activeTerm = @Html.Raw(Json.Encode(Model.ActiveTerm));
+			window.Glossary = new App.Glossary(terms, activeTerm);
+		});
+	</script>
+
+}

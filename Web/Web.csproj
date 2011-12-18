@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7D51E93C-A98C-4BCA-8DE4-67589FF5BBFB}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Web</RootNamespace>
+    <AssemblyName>Web</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxMin">
+      <HintPath>..\packages\AjaxMin.4.37.4345.34101\lib\net20\AjaxMin.dll</HintPath>
+    </Reference>
+    <Reference Include="Cassette">
+      <HintPath>..\packages\Cassette.0.9.5\lib\net40-Client\Cassette.dll</HintPath>
+    </Reference>
+    <Reference Include="Cassette.Views">
+      <HintPath>..\packages\Cassette.Views.0.9.5\lib\net40\Cassette.Views.dll</HintPath>
+    </Reference>
+    <Reference Include="Cassette.Web">
+      <HintPath>..\packages\Cassette.Web.0.9.5\lib\net40\Cassette.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Jurassic">
+      <HintPath>..\packages\Jurassic.2.1.1\lib\Jurassic.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc">
+      <HintPath>..\packages\Mvc3Futures.3.0.20105.0\lib\Microsoft.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcContrib">
+      <HintPath>..\packages\MvcContrib.Mvc3-ci.3.0.92.0\lib\MvcContrib.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.0.5\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NotFoundMvc">
+      <HintPath>..\packages\NotFoundMvc.0.2.0\lib\net40\NotFoundMvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Postal, Version=0.7.1.0, Culture=neutral, PublicKeyToken=45719375b8b4d528, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\postal.0.7.1\lib\net40\Postal.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine">
+      <HintPath>..\packages\RazorEngine.3.0.5\lib\net40\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\RazorEngine.3.0.5\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebActivator">
+      <HintPath>..\packages\WebActivator.1.5\lib\net40\WebActivator.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CassetteConfiguration.cs" />
+    <Compile Include="Code\DataAccess.cs" />
+    <Compile Include="Code\Extensions\Cookies.cs" />
+    <Compile Include="Code\Extensions\Dates.cs" />
+    <Compile Include="Code\Extensions\Dynamics.cs" />
+    <Compile Include="Code\Extensions\Exceptions.cs" />
+    <Compile Include="Code\Extensions\IO.cs" />
+    <Compile Include="Code\Extensions\Lists.cs" />
+    <Compile Include="Code\Extensions\Phones.cs" />
+    <Compile Include="Code\Extensions\RegexPattern.cs" />
+    <Compile Include="Code\Extensions\Strings.cs" />
+    <Compile Include="Code\Extensions\StringValidations.cs" />
+    <Compile Include="Code\Extensions\Url.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\FilesController.cs" />
+    <Compile Include="Controllers\GlossaryController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Dapper\SqlMapper.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FileView.cs" />
+    <Compile Include="Models\GlossaryItem.cs" />
+    <Compile Include="Models\GlossarySummary.cs" />
+    <Compile Include="Models\GlossaryView.cs" />
+    <Compile Include="Models\HomeView.cs" />
+    <Compile Include="Models\LoginView.cs" />
+    <Compile Include="Models\MessageItem.cs" />
+    <Compile Include="Models\UserItem.cs" />
+    <Compile Include="Models\VersionItem.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\Rephidim.sdf" />
+    <Content Include="App_Sprites\icon_audio.png" />
+    <Content Include="App_Sprites\icon_binoculars.png" />
+    <Content Include="App_Sprites\icon_bmp.png" />
+    <Content Include="App_Sprites\icon_clock.png" />
+    <Content Include="App_Sprites\icon_download.png" />
+    <Content Include="App_Sprites\icon_edit.png" />
+    <Content Include="App_Sprites\icon_email.png" />
+    <Content Include="App_Sprites\icon_emaildownload.png" />
+    <Content Include="App_Sprites\icon_favorite.png" />
+    <Content Include="App_Sprites\icon_flow.png" />
+    <Content Include="App_Sprites\icon_folder.png" />
+    <Content Include="App_Sprites\icon_gif.png" />
+    <Content Include="App_Sprites\icon_goodreader.png" />
+    <Content Include="App_Sprites\icon_help.png" />
+    <Content Include="App_Sprites\icon_jpg.png" />
+    <Content Include="App_Sprites\icon_mp3.png" />
+    <Content Include="App_Sprites\icon_pdf.png" />
+    <Content Include="App_Sprites\icon_plus.png" />
+    <Content Include="App_Sprites\icon_png.png" />
+    <Content Include="App_Sprites\icon_save.png" />
+    <Content Include="App_Sprites\icon_text.png" />
+    <Content Include="App_Sprites\icon_tif.png" />
+    <Content Include="App_Sprites\icon_usb.png" />
+    <Content Include="App_Sprites\icon_window.png" />
+    <Content Include="App_Sprites\icon_windows.png" />
+    <Content Include="App_Sprites\icon_zoom.png" />
+    <Content Include="Content\css\app.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\jquery-ui-1.8.16.custom.css" />
+    <Content Include="Content\css\media.css" />
+    <Content Include="Content\css\module.txt" />
+    <Content Include="Content\img\bg1.png" />
+    <Content Include="Content\img\bg2.png" />
+    <Content Include="Content\img\jquery-ui\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Content\img\jquery-ui\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Content\img\jquery-ui\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="Content\img\jquery-ui\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Content\img\jquery-ui\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Content\img\jquery-ui\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\img\jquery-ui\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Content\img\jquery-ui\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Content\img\jquery-ui\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="Content\img\jquery-ui\ui-icons_222222_256x240.png" />
+    <Content Include="Content\img\jquery-ui\ui-icons_228ef1_256x240.png" />
+    <Content Include="Content\img\jquery-ui\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Content\img\jquery-ui\ui-icons_ffd27a_256x240.png" />
+    <Content Include="Content\img\jquery-ui\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\img\login1.png" />
+    <Content Include="Content\img\login2.png" />
+    <Content Include="Content\img\microphone.png" />
+    <Content Include="Global.asax" />
+    <Content Include="humans.txt" />
+    <Content Include="robots.txt" />
+    <Content Include="Scripts\app\app.js" />
+    <Content Include="Scripts\app\Files.js" />
+    <Content Include="Scripts\app\Glossary.js" />
+    <Content Include="Scripts\libs\bootstrap-dropdown.js" />
+    <Content Include="Scripts\libs\Class.js" />
+    <Content Include="Scripts\libs\consolelog.js" />
+    <Content Include="Scripts\libs\date.format.js" />
+    <Content Include="Scripts\libs\jquery-1.7.1.js" />
+    <Content Include="Scripts\libs\jquery-ui-1.8.16.js" />
+    <Content Include="Scripts\libs\jquery.ba-throttle-debounce.min.js" />
+    <Content Include="Scripts\libs\jquery.form.js" />
+    <Content Include="Scripts\libs\jquery.scrollTo-1.4.2.js" />
+    <Content Include="Scripts\libs\jquery.tmpl.js" />
+    <Content Include="Scripts\libs\jquery.todictionary.js" />
+    <Content Include="Scripts\libs\jquery.validate.js" />
+    <Content Include="Scripts\libs\json2.js" />
+    <Content Include="Scripts\libs\knockout.bindings.js" />
+    <Content Include="Scripts\libs\knockout.js" />
+    <Content Include="Scripts\libs\knockout.mapping.js" />
+    <Content Include="Scripts\libs\module.txt" />
+    <Content Include="Scripts\pre\modernizr-2.0.min.js" />
+    <Content Include="Scripts\pre\respond.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Accounts\Login.cshtml" />
+    <Content Include="Views\Files\Index.cshtml" />
+    <Content Include="Views\Glossary\Term.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\NotFound.cshtml" />
+    <Content Include="Views\Shared\_Master.cshtml" />
+    <Content Include="Views\Shared\_NoAuth.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Emails\_ViewStart.cshtml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49799</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost/RephidimWeb2011</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

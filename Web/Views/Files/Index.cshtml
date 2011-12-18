@@ -1,0 +1,93 @@
+﻿@model Web.Models.FileView
+
+@{
+	ViewBag.Title = "Files";
+	ViewBag.NavFiles = true;
+}
+
+@section styles
+{
+
+	@Sprite.ImportStylesheet("~/App_Sprites/")
+	
+}
+
+<div class="row">
+	<div class="span7 module">
+		<div class="scrollable" id="uxFolders">
+			<ul id="ulFolders" class="folders"></ul>
+		</div>
+	</div>
+	<div class="span9 module">
+		<div class="scrollable" id="uxContents">
+		</div>
+	</div>
+</div>
+
+@section templates
+{
+	<script id="tmpFolders" type="text/html">
+		<li>
+			{{if DirectoryCount > 0}}
+				<a class="folder-expand ui-icon ui-icon-plus" href="#" data-path="${Path}"></a>
+			{{else}}
+				<a class="folder-noexpand ui-icon"></a>
+			{{/if}}
+			@(Sprite.Image("~/App_Sprites/icon_folder.png")) 
+			<a class="folder-view" href="#" data-path="${Path}">${Name}</a> 
+			<span>${DirectoryCount} folder{{if DirectoryCount != 1}}s{{/if}} &amp; ${FileCount} file{{if FileCount != 1}}s{{/if}}</span>
+		</li>
+	</script>
+
+	<script id="tmpContent" type="text/html">
+		{{if Files != null && Files.length > 0}}
+			<ul class="files">
+				{{each Files}}
+					<li data-file="${Name}.${Extension}">
+						<div class="file-actions">
+							<a href="/RephidimWeb/Files/File?path=${Path}" target="_blank">@(Sprite.Image("~/App_Sprites/icon_goodreader.png")) VIEW</a>
+							<a href="/RephidimWeb/Files/Download?path=${Path}" target="_blank">@(Sprite.Image("~/App_Sprites/icon_usb.png")) DOWNLOAD</a>
+							<a href="/RephidimWeb/Files/Email?path=${Path}" target="_blank">@(Sprite.Image("~/App_Sprites/icon_email.png")) EMAIL</a>
+						</div>
+						{{html ChooseIcon(Extension)}} <span title="${Name}.${Extension}: ${Size}, Loaded on ">${Name}</span>
+						<span>${Size}, Loaded on </span>
+					</li>
+				{{/each}}
+			</ul>
+		{{else}}
+			<div class="empty">
+				There are no files in this directory.
+			</div>
+		{{/if}}
+	</script>
+}
+
+@section scripts
+{
+
+	<script type="text/javascript">
+
+		var ChooseIcon = function (ext)
+		{
+			switch (ext)
+			{
+				case "txt": case "rtf": return '@Sprite.Image("~/App_Sprites/icon_text.png")';
+				case "pdf": return '@Sprite.Image("~/App_Sprites/icon_pdf.png")';
+				case "mp3": return '@Sprite.Image("~/App_Sprites/icon_mp3.png")';
+				case "exe": return '@Sprite.Image("~/App_Sprites/icon_window.png")';
+				case "jpg": case "jpeg": return '@Sprite.Image("~/App_Sprites/icon_jpg.png")';
+				case "tif": case "tiff": return '@Sprite.Image("~/App_Sprites/icon_tif.png")';
+				case "gif": return '@Sprite.Image("~/App_Sprites/icon_gif.png")';
+				case "cdr": case "asd": return '@Sprite.Image("~/App_Sprites/icon_flow.png")';
+				default: return '@Sprite.Image("~/App_Sprites/icon_help.png")';
+			}
+		}
+
+		$(function ()
+		{
+			var Files = new App.Files();
+		});
+		
+	</script>
+
+}

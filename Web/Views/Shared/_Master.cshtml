@@ -1,0 +1,100 @@
+﻿@using Cassette.Views;
+@using MvcContrib;
+@using Web.Controllers;
+@{	
+	Bundles.Reference("content/css/app.css", "head");
+
+	Bundles.Reference("scripts/pre", "head");
+	Bundles.Reference("scripts/app/app.js");
+
+	string titleFormat = "{0} : Rephidim Church";
+	
+}
+
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	
+	<title>@String.Format(titleFormat, ViewBag.Title)</title>
+	<meta name="description" content="Rephidim Web Site, Created 12/2011">
+	<meta name="author" content="Jorin Slaybaugh">
+
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	@*<link rel="shortcut icon" href="@Href("~/content/img/favicon.ico")">
+	<link rel="apple-touch-icon" href="@Href("~/content/img/apple-touch-icon.png")">*@
+	@Bundles.RenderStylesheets("head")
+	@if (IsSectionDefined("styles"))
+	{
+		@RenderSection("styles")
+	}
+	@Bundles.RenderScripts("head")
+</head>
+<body>
+	<div class="topbar-wrapper" style="z-index: 5;">
+		<div class="topbar" data-dropdown="dropdown" >
+			<div class="topbar-inner">
+				<div class="container">
+					<h3><a href="@(Url.Action<HomeController>(x=>x.Index()))">Rephidim</a></h3>
+					<ul class="nav">
+						<li @(ViewBag.NavHome != null && ViewBag.NavHome == true ? "class=active" : "")><a href="@(Url.Action<HomeController>(x=>x.Index()))">Home</a></li>
+						<li @(ViewBag.NavGlossary != null && ViewBag.NavGlossary == true ? "class=active" : "")><a href="@(Url.Action<GlossaryController>(x=>x.Term(null)))">Glossary</a></li>
+						<li @(ViewBag.NavFiles != null && ViewBag.NavFiles == true ? "class=active" : "")><a href="@(Url.Action<FilesController>(x=>x.Index()))">Files</a></li>
+						<li @(ViewBag.NavChronology != null && ViewBag.NavChronology == true ? "class=active" : "")><a href="#">Chronology</a></li>
+						<li @(ViewBag.NavChronology != null && ViewBag.NavChronology == true ? "class=active" : "")><a href="#">Tape List</a></li>
+					</ul>
+					<form id="frmNavSearch" class="pull-left" action="@(Url.Action<HomeController>(x=>x.Search(null)))">
+						<input type="text" placeholder="Global Search" />
+					</form>
+					<ul class="nav secondary-nav">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle">User: <b>@User.Identity.Name</b></a>
+							<ul class="dropdown-menu">
+								@if (User.IsInRole("Edit"))
+								{
+									<li><a href="#">Manage Messages</a></li>
+									<li class="divider"></li>
+								}
+								<li><a href="@(Url.Action<AccountsController>(x=>x.Logout()))">Logout</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		@RenderBody()
+	</div>
+
+
+	@if (IsSectionDefined("templates"))
+	{
+		@RenderSection("templates")
+	}
+	@Bundles.RenderScripts()
+	<script type="text/javascript">
+		App.SetRoot("@Href("~/")");
+		App.SetTitleFormat("@titleFormat");
+
+		$(function()
+		{
+			$(".topbar-wrapper").dropdown();
+		});
+	</script>
+	@if (IsSectionDefined("scripts"))
+	{ 
+		@RenderSection("scripts")
+	}
+	<!--[if lt IE 8 ]>
+		<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
+		<script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
+	<![endif]-->
+
+</body>
+</html>

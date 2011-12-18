@@ -1,0 +1,78 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using MvcContrib;
+using Web.Models;
+using System.Data.SqlClient;
+using Dapper;
+using Web.Code;
+using System.Web.Security;
+
+namespace Web.Controllers
+{
+	public class AccountsController : Controller
+	{
+		[HttpGet]
+		public ActionResult Index()
+		{
+			return this.RedirectToAction<AccountsController>(x => x.Login(string.Empty));
+		}
+
+		[HttpGet]
+		public ActionResult Login(string returnUrl)
+		{
+			var m = new LoginView();
+			m.UserName = "rephidim";
+			m.ReturnUrl = returnUrl;
+			
+			return View("Login", m);
+		}
+
+		[HttpPost]
+		public ActionResult Login(LoginView m)
+		{
+			if (!ModelState.IsValid) return View(m);
+
+			var user = DataAccess.Authenticate(m.UserName, m.Password);
+
+			if (user != null)
+			{
+
+				var ticket = new FormsAuthenticationTicket(1, user.Name, DateTime.Now, DateTime.Now.AddDays(30), false, user.Rights);
+				var encTicket = FormsAuthentication.Encrypt(ticket);
+
+				var authCookie = FormsAuthentication.GetAuthCookie(FormsAuthentication.FormsCookieName, false);
+				authCookie.Value = encTicket;
+				Response.SetCookie(authCookie);
+
+				if (!string.IsNullOrEmpty(m.ReturnUrl)) return Redirect(m.ReturnUrl);
+				else return this.RedirectToAction<HomeController>(x => x.Index()); ;
+			}
+			else
+			{
+				m.Error = true;
+				return View(m);
+			}
+
+		}
+
+		[HttpGet]
+		public ActionResult Logout()
+		{
+			if (Request.IsAuthenticated)
+			{
+				var authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+				if (authCookie != null)
+				{
+					authCookie.Expires = DateTime.Now.AddDays(-1);
+					Response.SetCookie(authCookie);
+				}
+			}
+			return this.RedirectToAction<HomeController>(x => x.Index());
+		}
+
+
+	}
+}
