@@ -36,7 +36,7 @@
 	{
 		$.ajax(
 		{
-			url: "/Files/AjaxFolders",
+			url: App.ResolveUrl("~/Files/AjaxFolders"),
 			data: { path: path },
 			success: function (data)
 			{
@@ -53,7 +53,7 @@
 	{
 		$.ajax(
 		{
-			url: "/Files/AjaxContents",
+			url: App.ResolveUrl("~/Files/AjaxContents"),
 			data: { path: path },
 			success: function (data)
 			{
@@ -80,6 +80,34 @@
 		//				};
 		//			}, 0);
 		//		}
+
+		$(".file-name").live("click", function (evt)
+		{
+			//					log(1);
+			//					$(this).popover('show');
+			//					log(2)
+			var x = $(this);
+			$(".popover").hide();
+
+			$(this).popover(
+			{
+
+				trigger: "manual",
+				html: true,
+				content: function () { return x.parent("li").find(".popover-content").html(); },
+				title: function () { return x.parent("li").find(".popover-title").html(); },
+				offset: 20
+			});
+			$(this).popover("show");
+			evt.preventDefault();
+		});
+
+		$(".popover-close").live("click", function (evt)
+		{
+			$(this).parents(".popover").fadeOut('fast');
+			evt.preventDefault();
+		});
+
 
 		$(".folder-expand").live("click", function ()
 		{
@@ -138,6 +166,8 @@
 				//if (file == null) return false;
 
 				//$("[data-file='" + file + "']").addClass("highlight");
+
+
 
 			});
 			//			}

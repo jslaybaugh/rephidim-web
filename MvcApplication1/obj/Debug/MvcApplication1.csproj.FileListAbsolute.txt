@@ -1,7 +1,0 @@
-C:\Side Work\Rephidim Church\Rephidim Web 2011\MvcApplication1\bin\MvcApplication1.dll
-C:\Side Work\Rephidim Church\Rephidim Web 2011\MvcApplication1\bin\MvcApplication1.pdb
-C:\Side Work\Rephidim Church\Rephidim Web 2011\MvcApplication1\bin\EntityFramework.dll
-C:\Side Work\Rephidim Church\Rephidim Web 2011\MvcApplication1\bin\EntityFramework.xml
-C:\Side Work\Rephidim Church\Rephidim Web 2011\MvcApplication1\obj\Debug\ResolveAssemblyReference.cache
-C:\Side Work\Rephidim Church\Rephidim Web 2011\MvcApplication1\obj\Debug\MvcApplication1.dll
-C:\Side Work\Rephidim Church\Rephidim Web 2011\MvcApplication1\obj\Debug\MvcApplication1.pdb

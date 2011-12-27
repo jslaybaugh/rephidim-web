@@ -60,6 +60,12 @@
     <Reference Include="Microsoft.Web.Mvc">
       <HintPath>..\packages\Mvc3Futures.3.0.20105.0\lib\Microsoft.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Samples.ImageOptimizationFramework">
+      <HintPath>..\packages\AspNetSprites-Core.0.4\lib\Microsoft.Web.Samples.ImageOptimizationFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Samples.SpriteHelper">
+      <HintPath>..\packages\AspNetSprites-MvcAndRazorHelper.0.4\lib\Microsoft.Web.Samples.SpriteHelper.dll</HintPath>
+    </Reference>
     <Reference Include="MvcContrib">
       <HintPath>..\packages\MvcContrib.Mvc3-ci.3.0.92.0\lib\MvcContrib.dll</HintPath>
     </Reference>
@@ -169,8 +175,10 @@
     <Content Include="App_Sprites\icon_window.png" />
     <Content Include="App_Sprites\icon_windows.png" />
     <Content Include="App_Sprites\icon_zoom.png" />
+    <Content Include="App_Sprites\README.txt" />
     <Content Include="Content\css\app.css" />
     <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\fonts.css" />
     <Content Include="Content\css\jquery-ui-1.8.16.custom.css" />
     <Content Include="Content\css\media.css" />
     <Content Include="Content\css\module.txt" />
@@ -196,10 +204,12 @@
     <Content Include="Global.asax" />
     <Content Include="humans.txt" />
     <Content Include="robots.txt" />
-    <Content Include="Scripts\app\app.js" />
+    <Content Include="Scripts\app\App.js" />
     <Content Include="Scripts\app\Files.js" />
     <Content Include="Scripts\app\Glossary.js" />
     <Content Include="Scripts\libs\bootstrap-dropdown.js" />
+    <Content Include="Scripts\libs\bootstrap-popover.js" />
+    <Content Include="Scripts\libs\bootstrap-twipsy.js" />
     <Content Include="Scripts\libs\Class.js" />
     <Content Include="Scripts\libs\consolelog.js" />
     <Content Include="Scripts\libs\date.format.js" />
@@ -210,6 +220,7 @@
     <Content Include="Scripts\libs\jquery.scrollTo-1.4.2.js" />
     <Content Include="Scripts\libs\jquery.tmpl.js" />
     <Content Include="Scripts\libs\jquery.todictionary.js" />
+    <Content Include="Scripts\libs\jquery.touch-scroll.js" />
     <Content Include="Scripts\libs\jquery.validate.js" />
     <Content Include="Scripts\libs\json2.js" />
     <Content Include="Scripts\libs\knockout.bindings.js" />
@@ -218,14 +229,18 @@
     <Content Include="Scripts\libs\module.txt" />
     <Content Include="Scripts\pre\modernizr-2.0.min.js" />
     <Content Include="Scripts\pre\respond.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>

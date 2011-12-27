@@ -2,8 +2,7 @@
    Author: Jorin Slaybaugh
    ========================================================================== */
    
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300);
-@import url(http://fonts.googleapis.com/css?family=Sorts+Mill+Goudy);
+
 
 html, body, input, select, textarea {font-family: 'Open Sans', sans-serif;font-size:14px/16px;}
 body { background: #eee url(../img/bg2.png) repeat; padding-top:50px;}
@@ -51,6 +50,7 @@ img {vertical-align:bottom;}
 .folder-noexpand {margin-left:-15px;display:inline-block;visibility:hidden;}
 .files { list-style-type: none;margin:0px; padding: 0px; }
 .files li {padding:3px 0px 3px 0px;border:none;border-bottom:solid 1px #ddd;width:100%;overflow:hidden;text-overflow:ellipsis;}
+.files a {font-size:14px;}
 .file-info {font-size:8px;color:#999;}
 .file-actions {font-size:10px;color:#666;font-weight:bold;text-transform:uppercase;float:right;}
 /*
@@ -61,3 +61,12 @@ img {vertical-align:bottom;}
 #uxContents .box-content {overflow:auto;}
 #uxContents .box-content li {white-space:nowrap;}
 */
+
+.popover.right .arrow {
+	top: 50%;
+	left: -8px;
+	margin-top: -15px;
+	border-top: 15px solid transparent;
+	border-bottom: 15px solid transparent;
+	border-right: 15px solid black;
+}

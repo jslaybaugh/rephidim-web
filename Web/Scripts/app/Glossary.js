@@ -27,6 +27,11 @@
 			$("#tmpTermFull").tmpl(_activeTerm).appendTo($("#uxTerm").empty());
 			$(window).resize();
 			setTimeout(function () { $("#uxDefinition a").switchClass("inactive-link", "active-link", "slow"); }, 0);
+
+			if (!!("ontouchstart" in window))
+			{
+				$(".scrollable").touchScroll("update");
+			}
 		}
 		else
 		{
@@ -96,6 +101,11 @@
 			history.replaceState({ TermName: _activeTerm.Term }, _activeTerm.Term, App.ResolveUrl("~/Glossary/Term/" + _activeTerm.Id));
 		}
 		displayDefinition(false);
+
+		if (!!("ontouchstart" in window))
+		{
+			$(".scrollable").touchScroll({ touchTags: ['a'] });
+		}
 	};
 
 	this.App.Glossary = Class.extend(

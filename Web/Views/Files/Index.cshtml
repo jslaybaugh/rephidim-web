@@ -43,14 +43,20 @@
 		{{if Files != null && Files.length > 0}}
 			<ul class="files">
 				{{each Files}}
-					<li data-file="${Name}.${Extension}">
-						<div class="file-actions">
-							<a href="/RephidimWeb/Files/File?path=${Path}" target="_blank">@(Sprite.Image("~/App_Sprites/icon_goodreader.png")) VIEW</a>
-							<a href="/RephidimWeb/Files/Download?path=${Path}" target="_blank">@(Sprite.Image("~/App_Sprites/icon_usb.png")) DOWNLOAD</a>
-							<a href="/RephidimWeb/Files/Email?path=${Path}" target="_blank">@(Sprite.Image("~/App_Sprites/icon_email.png")) EMAIL</a>
+					<li>
+						<a href="#" class="file-name">{{html ChooseIcon(Extension)}} <span title="${Name}.${Extension}: ${Size}, Loaded on ">${Name}</span></a>
+						<span style="float:right">${Size}, Loaded on </span>
+						<div class="popover-title none">
+							<a style="float:right;" href="#" class="popover-close"><span class="ui-icon ui-icon-closethick">close</span></a>
+							<span>File Actions</span>
 						</div>
-						{{html ChooseIcon(Extension)}} <span title="${Name}.${Extension}: ${Size}, Loaded on ">${Name}</span>
-						<span>${Size}, Loaded on </span>
+						<div class="popover-content none">
+							<ul class="files">
+								<li><a href="/RephidimWeb/Files/File?path=${Path}" target="_blank">@(Sprite.Image("~/App_Sprites/icon_goodreader.png")) Open in GoodReader</a></li>
+								<li><a href="/RephidimWeb/Files/Download?path=${Path}" target="_blank">@(Sprite.Image("~/App_Sprites/icon_usb.png")) Download</a></li>
+								<li><a href="/RephidimWeb/Files/Email?path=${Path}" target="_blank">@(Sprite.Image("~/App_Sprites/icon_email.png")) Send in Email</a></li>
+							</ul>
+						</div>
 					</li>
 				{{/each}}
 			</ul>

@@ -10,7 +10,10 @@ jquery.todictionary.js
 jquery.validate.js
 jquery-ui-1.8.16.js
 jquery.scrollTo-1.4.2.js
+jquery.touch-scroll.js
 knockout.js
 knockout.mapping.js
 knockout.bindings.js
 bootstrap-dropdown.js
+bootstrap-twipsy.js
+bootstrap-popover.js

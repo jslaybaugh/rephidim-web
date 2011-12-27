@@ -9,6 +9,7 @@
 
 	string titleFormat = "{0} : Rephidim Church";
 	
+	string appPath = Request.ApplicationPath + (Request.ApplicationPath.EndsWith("/") ? "" : "/");
 }
 
 <!DOCTYPE html>
@@ -24,7 +25,8 @@
 	<meta name="description" content="Rephidim Web Site, Created 12/2011">
 	<meta name="author" content="Jorin Slaybaugh">
 
-	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
 	@*<link rel="shortcut icon" href="@Href("~/content/img/favicon.ico")">
 	<link rel="apple-touch-icon" href="@Href("~/content/img/apple-touch-icon.png")">*@
 	@Bundles.RenderStylesheets("head")
@@ -79,7 +81,7 @@
 	}
 	@Bundles.RenderScripts()
 	<script type="text/javascript">
-		App.SetRoot("@Href("~/")");
+		App.SetRoot("@appPath");
 		App.SetTitleFormat("@titleFormat");
 
 		$(function()

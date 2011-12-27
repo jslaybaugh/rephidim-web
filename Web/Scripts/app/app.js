@@ -25,7 +25,7 @@
 
 		SetRoot: function (root)
 		{
-			_root = root == "./" ? "/" : root ;
+			_root = root;
 		},
 
 		ResolveUrl: function (relative)
