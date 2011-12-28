@@ -24,8 +24,8 @@
 	<title>@String.Format(titleFormat, ViewBag.Title)</title>
 	<meta name="description" content="Rephidim Web Site, Created 12/2011">
 	<meta name="author" content="Jorin Slaybaugh">
-
-	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	
+	<meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	@*<link rel="shortcut icon" href="@Href("~/content/img/favicon.ico")">
 	<link rel="apple-touch-icon" href="@Href("~/content/img/apple-touch-icon.png")">*@
@@ -45,12 +45,13 @@
 					<ul class="nav">
 						<li @(ViewBag.NavHome != null && ViewBag.NavHome == true ? "class=active" : "")><a href="@(Url.Action<HomeController>(x=>x.Index()))">Home</a></li>
 						<li @(ViewBag.NavGlossary != null && ViewBag.NavGlossary == true ? "class=active" : "")><a href="@(Url.Action<GlossaryController>(x=>x.Term(null)))">Glossary</a></li>
-						<li @(ViewBag.NavFiles != null && ViewBag.NavFiles == true ? "class=active" : "")><a href="@(Url.Action<FilesController>(x=>x.Index()))">Files</a></li>
+						<li @(ViewBag.NavFiles != null && ViewBag.NavFiles == true ? "class=active" : "")><a href="@(Url.Action<FilesController>(x=>x.Browse(null)))">Files</a></li>
 						<li @(ViewBag.NavChronology != null && ViewBag.NavChronology == true ? "class=active" : "")><a href="#">Chronology</a></li>
 						<li @(ViewBag.NavChronology != null && ViewBag.NavChronology == true ? "class=active" : "")><a href="#">Tape List</a></li>
 					</ul>
 					<form id="frmNavSearch" class="pull-left" action="@(Url.Action<HomeController>(x=>x.Search(null)))">
 						<input type="text" placeholder="Global Search" />
+						<span id="uxAppWait" class="waiter-light" style="display:none;"></span>
 					</form>
 					<ul class="nav secondary-nav">
 						<li class="dropdown">

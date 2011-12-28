@@ -10,17 +10,33 @@ using Postal;
 
 namespace Web.Controllers
 {
-	[Authorize]
-    public class FilesController : Controller
+	public class FilesController : Controller
 	{
-
 		[Authorize]
-		public ActionResult Index()
+		public ActionResult Browse(string path)
 		{
 			var m = new FileView();
-			m.Root = ConfigurationManager.AppSettings["FilesRoot"];
+			m.Path = path;
 
-			return View(m);
+			var cookie = Request.Cookies["rephidim"];
+			if (cookie != null)
+			{
+				m.Email = cookie["email"];
+			}
+			
+			return View("Browse", m);
+		}
+
+		public ActionResult Open(string path)
+		{
+			var m = GetData(path);
+			return File(m.Path, m.ContentType);
+		}
+
+		public ActionResult Download(string path)
+		{
+			var m = GetData(path);
+			return File(m.Path, m.ContentType, m.Name);
 		}
 
 		private dynamic GetData(string path)
@@ -55,86 +71,6 @@ namespace Web.Controllers
 			}
 
 			return new { Path = path, ContentType = contentType, Name = f.Name };
-		}
-
-		[Authorize]
-		public ActionResult File(string path)
-		{
-			var m = GetData(path);
-			return File(m.Path, m.ContentType);
-		}
-		[Authorize]
-		public ActionResult Download(string path)
-		{
-			var m = GetData(path);
-			return File(m.Path, m.ContentType, m.Name);
-		}
-
-		public ActionResult Email(string path)
-		{
-			string root = ConfigurationManager.AppSettings["FilesRoot"];
-			root = root.Trim().EndsWith(@"\") ? root = root.Substring(0, root.Length - 2) : root;
-
-			path = string.Format(@"{0}{1}", ConfigurationManager.AppSettings["FilesRoot"], path.Replace("/", "\\"));
-
-
-			dynamic email = new Email("Example");
-			email.To = "jslaybaugh@brushfiresoftware.com";
-			email.Attach(new System.Net.Mail.Attachment(path));
-			email.Send();
-
-			return View();
-		}
-
-		// JSON Actions
-
-		public JsonResult AjaxFolders(string path)
-		{
-			string root = ConfigurationManager.AppSettings["FilesRoot"];
-			root = root.Trim().EndsWith(@"\") ? root = root.Substring(0, root.Length - 1) : root;
-
-			path = string.Format(@"{0}{1}", ConfigurationManager.AppSettings["FilesRoot"], path.Replace("/", "\\"));
-
-			var dir = new DirectoryInfo(path);
-
-			var dirs = dir.EnumerateDirectories().Select(x => new
-			{
-				Name = x.Name,
-				Path = x.FullName.Replace(root, "").Replace(@"\", "/"),
-				DirectoryCount = x.EnumerateDirectories().Count(),
-				FileCount = x.EnumerateFiles().Count()
-			}).OrderBy(x => x.Name);
-
-			return Json(dirs, JsonRequestBehavior.AllowGet);
-		}
-
-		public JsonResult AjaxContents(string path)
-		{
-			string root = ConfigurationManager.AppSettings["FilesRoot"];
-			root = root.Trim().EndsWith(@"\") ? root = root.Substring(0, root.Length - 1) : root;
-
-			path = string.Format(@"{0}{1}", ConfigurationManager.AppSettings["FilesRoot"], path.Replace("/", "\\"));
-
-			var dir = new DirectoryInfo(path);
-
-			var files = dir.EnumerateFiles().Select(x => new
-			{
-				Name = x.Name.Substring(0, x.Name.LastIndexOf(".")),
-				Path = x.FullName.Replace(root, "").Replace(@"\", "/"),
-				Size = PrintFileSize(x.Length),
-				FileDate = x.LastWriteTime,
-				Extension = x.Extension.ToLower().Replace(".", "")
-			}).Where(x => x.Extension != "ini" && x.Extension != "db" && x.Extension != "lnk").OrderBy(x => x.Name);
-
-			return Json(files, JsonRequestBehavior.AllowGet);
-		}
-
-		private string PrintFileSize(Int64 size)
-		{
-			if (size < 1024) return "< 1 kb";
-			else if (size < 1024 * 1000) return string.Format("{0} kb", Math.Ceiling(size / 1000.0));
-			else return string.Format("{0:N1} mb", size / (1000.0 * 1024));
-
 		}
 
 		//int dirCounter = 0;
@@ -176,5 +112,5 @@ namespace Web.Controllers
 		//    }
 		//}
 
-    }
+	}
 }

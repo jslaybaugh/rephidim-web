@@ -24,13 +24,22 @@ namespace Web
 			routes.MapRoute(
 				"Glossary", // Route name
 				"Glossary/{action}/{id}", // URL with parameters
-				new { controller = "Glossary", action = "Term", id = UrlParameter.Optional } // Parameter defaults
+				new { controller = "Glossary", action = "Term", id = UrlParameter.Optional }, // Parameter defaults
+				new string[] { "Web.Controllers" }
+			); 
+
+			routes.MapRoute(
+				"Files", // Route name
+				"Files/{action}/{*path}", // URL with parameters
+				new { controller = "Files", action = "Browse", id = UrlParameter.Optional }, // Parameter defaults
+				new string[] { "Web.Controllers" }
 			);
 
 			routes.MapRoute(
 				"Default", // Route name
 				"{controller}/{action}/{id}", // URL with parameters
-				new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+				new { controller = "Home", action = "Index", id = UrlParameter.Optional }, // Parameter defaults
+				new string[] { "Web.Controllers" }
 			);
 
 		}

@@ -7,6 +7,7 @@ namespace Web.Models
 {
 	public class FileView
 	{
-		public string Root { get; set; }
+		public string Path { get; set; }
+		public string Email {get;set;}
 	}
 }

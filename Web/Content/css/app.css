@@ -45,13 +45,13 @@ body { background: #eee url(../img/bg2.png) repeat; padding-top:50px;}
 /* Files */
 img {vertical-align:bottom;}
 .folders { list-style-type: none;margin-left:15px; padding: 0px; }
-.folders li { margin: 0px;padding:0px; }
+.folders li { margin: 0px;padding:0px;white-space:nowrap; }
 .folder-expand {margin-left:-15px;display:inline-block;}
 .folder-noexpand {margin-left:-15px;display:inline-block;visibility:hidden;}
-.files { list-style-type: none;margin:0px; padding: 0px; }
+.files { list-style-type: none;margin:5px; padding: 0px; }
 .files li {padding:3px 0px 3px 0px;border:none;border-bottom:solid 1px #ddd;width:100%;overflow:hidden;text-overflow:ellipsis;}
 .files a {font-size:14px;}
-.file-info {font-size:8px;color:#999;}
+.file-info {font-size:10px;color:#999;font-weight:normal;}
 .file-actions {font-size:10px;color:#666;font-weight:bold;text-transform:uppercase;float:right;}
 /*
 #uxFolders {width:250px;}
@@ -70,3 +70,23 @@ img {vertical-align:bottom;}
 	border-bottom: 15px solid transparent;
 	border-right: 15px solid black;
 }
+
+.popover.left .arrow {
+	top: 50%;
+	right: -8px;
+	margin-top: -15px;
+	border-top: 15px solid transparent;
+	border-bottom: 15px solid transparent;
+	border-left: 15px solid black;
+}
+.popover .content {padding:5px;}
+.topbar {z-index:10;}
+
+.ui-widget-overlay {
+	background: #111;
+	opacity: .80;
+	filter: Alpha(Opacity=80);
+}
+
+.waiter-dark {height:16px;width:16px;display:inline-block;background:url("../img/ajax-loader-dark.gif") top center no-repeat;}
+.waiter-light {height:21px;width:56px;display:inline-block;background:url("../img/ajax-loader-light.gif") top center no-repeat;margin:-8px auto -8px 20px;}

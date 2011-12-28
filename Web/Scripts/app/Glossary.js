@@ -46,7 +46,7 @@
 		{
 			$.ajax(
 			{
-				url: App.ResolveUrl("~/Glossary/AjaxSingle"),
+				url: App.ResolveUrl("~/Ajax/Glossary/Details"),
 				data: { term: termName },
 				success: function (data)
 				{
@@ -96,16 +96,12 @@
 
 		$("#tmpTermList").tmpl(_terms).appendTo("#ulTerms");
 
-		if (_activeTerm != null)
+		if (_activeTerm != null && Modernizr.history)
 		{
 			history.replaceState({ TermName: _activeTerm.Term }, _activeTerm.Term, App.ResolveUrl("~/Glossary/Term/" + _activeTerm.Id));
 		}
 		displayDefinition(false);
 
-		if (!!("ontouchstart" in window))
-		{
-			$(".scrollable").touchScroll({ touchTags: ['a'] });
-		}
 	};
 
 	this.App.Glossary = Class.extend(

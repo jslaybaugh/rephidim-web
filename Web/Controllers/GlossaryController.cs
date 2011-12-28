@@ -25,10 +25,5 @@ namespace Web.Controllers
             return View("Term",m);
         }
 
-		public JsonResult AjaxSingle(string term)
-		{
-			return Json(DataAccess.GetSingleTerm(term), JsonRequestBehavior.AllowGet);
-		}
-
     }
 }
