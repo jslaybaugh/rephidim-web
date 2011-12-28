@@ -135,6 +135,47 @@ namespace Web.Code
 				return null;
 			}
 		}
+		public static IEnumerable<GlossaryItem> SearchTerms(string query)
+		{
+			try
+			{
+				using (var cn = new SqlCeConnection(ConnString))
+				{
+					cn.Open();
+
+					var p = new DynamicParameters();
+					p.Add("@query", query);
+
+					var res = cn.Query("SELECT TermId, Term, Definition, DateCreated, DateModified FROM GlossaryTerms WHERE Term LIKE '%' + @query + '%' OR convert(nvarchar(max),Definition) LIKE '%' + @query + '%' ORDER BY Term", p);
+
+					if (res == null) return null;
+
+					return res.Select(x => new GlossaryItem
+					{
+						Id = x.TermId,
+						Term = x.Term,
+						Definition = x.Definition,
+						DateCreated = x.DateCreated,
+						DateModified = x.DateModified
+					});
+				}
+			}
+			catch (Exception)
+			{
+				return null;
+			}
+		}
+		private static string SliceRelevantPart(string definition, string query)
+		{
+			var index = definition.IndexOf(query, StringComparison.OrdinalIgnoreCase);
+			int right = 125;
+			int left = 125;
+			if (definition.Length - index < right) right = definition.Length - index;
+			if (index < left) left = index;
+
+			return "..." + definition.Substring(index - left, index + right - index - left) + "...";
+		}
+
 		public static GlossaryItem GetSingleTerm(string term)
 		{
 			try

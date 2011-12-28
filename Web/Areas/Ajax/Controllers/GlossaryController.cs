@@ -7,6 +7,7 @@ using Web.Code;
 
 namespace Web.Areas.Ajax.Controllers
 {
+	[Authorize]
     public class GlossaryController : Controller
 	{
 		public JsonResult Details(string term)

@@ -49,8 +49,8 @@
 						<li @(ViewBag.NavChronology != null && ViewBag.NavChronology == true ? "class=active" : "")><a href="#">Chronology</a></li>
 						<li @(ViewBag.NavChronology != null && ViewBag.NavChronology == true ? "class=active" : "")><a href="#">Tape List</a></li>
 					</ul>
-					<form id="frmNavSearch" class="pull-left" action="@(Url.Action<HomeController>(x=>x.Search(null)))">
-						<input type="text" placeholder="Global Search" />
+					<form id="frmNavSearch" method="get" class="pull-left" action="@(Url.Action<HomeController>(x=>x.Search(null)))">
+						<input type="text" placeholder="Global Search" name="query" />
 						<span id="uxAppWait" class="waiter-light" style="display:none;"></span>
 					</form>
 					<ul class="nav secondary-nav">

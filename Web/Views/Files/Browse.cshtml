@@ -34,6 +34,7 @@
 			<a class="folder-{{if DirectoryCount == 0}}no{{/if}}expand ui-icon {{if DirectoryCount > 0}}ui-icon-plus{{/if}}" href="#" data-path="${Path}">&nbsp;</a>
 			@(Sprite.Image("~/App_Sprites/icon_folder.png")) 
 			<a class="folder-view" href="#" data-path="${Path}">${Name}</a> 
+			{{if New}}<span class="label success">New</span>{{/if}}
 			<span class="file-info">{{if DirectoryCount > 0}}${DirectoryCount} folder{{if DirectoryCount != 1}}s{{/if}}{{/if}}{{if DirectoryCount > 0 && FileCount > 0}} &amp; {{/if}}{{if FileCount > 0}}${FileCount} file{{if FileCount != 1}}s{{/if}}{{/if}}</span>
 		</li>
 	</script>
@@ -43,7 +44,8 @@
 			<ul class="files">
 				{{each Files}}
 					<li>
-						<a href="#" class="file-name" data-details="${Name}|${Extension}|${Size}|${Path}|${FileDate}">{{html ChooseIcon(Extension)}} <span title="${Name}.${Extension}">${Name}</span></a>
+						<a href="#" class="file-name" title="${Name}.${Extension}" data-details="${Name}|${Extension}|${Size}|${Path}|${FileDate}">{{html ChooseIcon(Extension)}} ${Name}</a> 
+						{{if New}}<span class="label success">New</span>{{/if}}
 						<span class="file-info right"><b>Size:</b> ${Size}, <b>Loaded:</b> ${App.DateFromJson(FileDate).format('m/d/yyyy h:MM TT')}</span>
 					</li>
 				{{/each}}

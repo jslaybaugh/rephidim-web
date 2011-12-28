@@ -27,12 +27,14 @@ namespace Web.Controllers
 			return View("Browse", m);
 		}
 
+		// this remains open for good reader [Authorize]
 		public ActionResult Open(string path)
 		{
 			var m = GetData(path);
 			return File(m.Path, m.ContentType);
 		}
 
+		[Authorize]
 		public ActionResult Download(string path)
 		{
 			var m = GetData(path);

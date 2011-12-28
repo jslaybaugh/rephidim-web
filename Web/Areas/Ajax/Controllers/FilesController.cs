@@ -9,7 +9,8 @@ using Postal;
 
 namespace Web.Areas.Ajax.Controllers
 {
-    public class FilesController : Controller
+	[Authorize]
+	public class FilesController : Controller
 	{
 
 		public JsonResult Folders(string path)
@@ -26,6 +27,7 @@ namespace Web.Areas.Ajax.Controllers
 				Name = x.Name,
 				Path = x.FullName.Replace(root, "").Replace(@"\", "/"),
 				DirectoryCount = x.EnumerateDirectories().Count(),
+				New = x.LastWriteTime.Subtract(DateTime.Now).Duration().TotalDays < 8,
 				FileCount = x.EnumerateFiles().Count(y => !y.Extension.MatchesTrimmed(".ini") && !y.Extension.MatchesTrimmed(".db") && !y.Extension.MatchesTrimmed(".lnk"))
 			}).OrderBy(x => x.Name);
 
@@ -49,6 +51,7 @@ namespace Web.Areas.Ajax.Controllers
 				Path = x.FullName.Replace(root, "").Replace(@"\", "/"),
 				Size = PrintFileSize(x.Length),
 				FileDate = x.LastWriteTime,
+				New = x.LastWriteTime.Subtract(DateTime.Now).Duration().TotalDays < 8,
 				Extension = x.Extension.ToLower().Replace(".", "")
 			}).OrderBy(x => x.Name);
 
@@ -96,5 +99,5 @@ namespace Web.Areas.Ajax.Controllers
 
 		}
 
-    }
+	}
 }
