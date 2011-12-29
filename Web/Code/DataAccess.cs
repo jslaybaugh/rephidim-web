@@ -6,6 +6,8 @@ using Dapper;
 using System.Data.SqlServerCe;
 using System.Configuration;
 using Web.Models;
+using System.Collections;
+using System.Text.RegularExpressions;
 
 namespace Web.Code
 {
@@ -143,10 +145,7 @@ namespace Web.Code
 				{
 					cn.Open();
 
-					var p = new DynamicParameters();
-					p.Add("@query", query);
-
-					var res = cn.Query("SELECT TermId, Term, Definition, DateCreated, DateModified FROM GlossaryTerms WHERE Term LIKE '%' + @query + '%' OR convert(nvarchar(max),Definition) LIKE '%' + @query + '%' ORDER BY Term", p);
+					var res = cn.Query(CreateSearchQuery(query));
 
 					if (res == null) return null;
 
@@ -154,7 +153,7 @@ namespace Web.Code
 					{
 						Id = x.TermId,
 						Term = x.Term,
-						Definition = x.Definition,
+						Definition = SliceRelevantPart(x.Definition, query),
 						DateCreated = x.DateCreated,
 						DateModified = x.DateModified
 					});
@@ -165,15 +164,85 @@ namespace Web.Code
 				return null;
 			}
 		}
+
+		private static string CreateSearchQuery(string query)
+		{
+			//Clean it up
+			query = query.Replace("--", "").Replace("'", "");
+
+			string[] Parts = query.Split('"');
+
+			ArrayList BoldWords = new ArrayList();
+
+			string SqlString = "SELECT TermId, Term, Definition, DateCreated, DateModified FROM GlossaryTerms WHERE ";
+			if (Parts.Length % 2 == 1)
+			{
+				for (int i = 0; i <= Parts.Length - 1; i++)
+				{
+					if (!string.IsNullOrEmpty(Parts[i].ToString().Trim()))
+					{
+						if (i % 2 == 1)
+						{
+							// this is the part in quotes
+							SqlString += "(Term LIKE '%" + Parts[i].ToString().Trim() + "%' OR Definition LIKE '%" + Parts[i].ToString().Trim() + "%') AND ";
+							BoldWords.Add(Parts[i].ToString().Trim());
+						}
+						else
+						{
+							// this is the part not in quotes
+							string[] SmallerParts = Parts[i].ToString().Split(' ');
+
+							foreach (string smallpart in SmallerParts)
+							{
+								string tempSmallPart = smallpart;
+								//remove common words
+								string[] CommonWords = ConfigurationManager.AppSettings["CommonWords"].Split(',');
+
+								foreach (string commonword in CommonWords)
+								{
+									if (smallpart.ToUpper() == commonword.Trim().ToUpper())
+									{
+										tempSmallPart = "";
+									}
+								}
+
+								if (!string.IsNullOrEmpty(tempSmallPart.Trim()))
+								{
+									SqlString += "(Term LIKE '%" + tempSmallPart.Trim() + "%' OR Definition LIKE '%" + tempSmallPart.Trim() + "%') AND ";
+									BoldWords.Add(tempSmallPart.Trim());
+								}
+							}
+						}
+					}
+				}
+				// gotta get rid of the " OR "
+				if (SqlString.Trim().EndsWith("AND"))
+				{
+					SqlString = SqlString.Remove(SqlString.Length - 4, 4) + " ORDER BY Term";
+				}
+				else
+				{
+					SqlString = SqlString + "0=1";
+				}
+
+				return SqlString;
+			}
+			else
+			{
+				return "";
+			}
+		}
+
 		private static string SliceRelevantPart(string definition, string query)
 		{
 			var index = definition.IndexOf(query, StringComparison.OrdinalIgnoreCase);
 			int right = 125;
 			int left = 125;
-			if (definition.Length - index < right) right = definition.Length - index;
+			if (definition.Length - index < right) right = definition.Length - index - 1;
 			if (index < left) left = index;
 
-			return "..." + definition.Substring(index - left, index + right - index - left) + "...";
+			return Regex.Replace("..." + definition.Substring(index - left, index + right - (index - left)) + "...", @"<[^>]+>"," ");
+
 		}
 
 		public static GlossaryItem GetSingleTerm(string term)
