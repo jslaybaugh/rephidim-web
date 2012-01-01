@@ -17,3 +17,4 @@ knockout.bindings.js
 bootstrap-dropdown.js
 bootstrap-twipsy.js
 bootstrap-popover.js
+bootstrap-alerts.js

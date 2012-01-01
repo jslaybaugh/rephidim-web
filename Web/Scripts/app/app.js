@@ -64,6 +64,11 @@
 		{
 			if (jsonDate == null) return null;
 			return new Date(parseInt(jsonDate.substr(6)));
+		},
+
+		ShowAlert: function (msg, className)
+		{
+			$("#uxAlert").hide().removeClass("warning error success info").addClass(className).find("p").html(msg).end().fadeIn();
 		}
 
 	};

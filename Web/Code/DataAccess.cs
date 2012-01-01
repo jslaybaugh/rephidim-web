@@ -137,7 +137,7 @@ namespace Web.Code
 				return null;
 			}
 		}
-		public static IEnumerable<GlossaryItem> SearchTerms(string query)
+		public static IEnumerable<GlossaryItem> SearchTerms(string[] parts)
 		{
 			try
 			{
@@ -145,7 +145,7 @@ namespace Web.Code
 				{
 					cn.Open();
 
-					var res = cn.Query(CreateSearchQuery(query));
+					var res = cn.Query(CreateSearchQuery(parts));
 
 					if (res == null) return null;
 
@@ -153,7 +153,7 @@ namespace Web.Code
 					{
 						Id = x.TermId,
 						Term = x.Term,
-						Definition = SliceRelevantPart(x.Definition, query),
+						Definition = SliceRelevantChunk(x.Definition, parts),
 						DateCreated = x.DateCreated,
 						DateModified = x.DateModified
 					});
@@ -163,85 +163,56 @@ namespace Web.Code
 			{
 				return null;
 			}
-		}
+		}		
 
-		private static string CreateSearchQuery(string query)
+		private static string CreateSearchQuery(string[] parts)
 		{
-			//Clean it up
-			query = query.Replace("--", "").Replace("'", "");
-
-			string[] Parts = query.Split('"');
-
-			ArrayList BoldWords = new ArrayList();
 
 			string SqlString = "SELECT TermId, Term, Definition, DateCreated, DateModified FROM GlossaryTerms WHERE ";
-			if (Parts.Length % 2 == 1)
+
+			foreach (var part in parts)
 			{
-				for (int i = 0; i <= Parts.Length - 1; i++)
-				{
-					if (!string.IsNullOrEmpty(Parts[i].ToString().Trim()))
-					{
-						if (i % 2 == 1)
-						{
-							// this is the part in quotes
-							SqlString += "(Term LIKE '%" + Parts[i].ToString().Trim() + "%' OR Definition LIKE '%" + Parts[i].ToString().Trim() + "%') AND ";
-							BoldWords.Add(Parts[i].ToString().Trim());
-						}
-						else
-						{
-							// this is the part not in quotes
-							string[] SmallerParts = Parts[i].ToString().Split(' ');
-
-							foreach (string smallpart in SmallerParts)
-							{
-								string tempSmallPart = smallpart;
-								//remove common words
-								string[] CommonWords = ConfigurationManager.AppSettings["CommonWords"].Split(',');
-
-								foreach (string commonword in CommonWords)
-								{
-									if (smallpart.ToUpper() == commonword.Trim().ToUpper())
-									{
-										tempSmallPart = "";
-									}
-								}
-
-								if (!string.IsNullOrEmpty(tempSmallPart.Trim()))
-								{
-									SqlString += "(Term LIKE '%" + tempSmallPart.Trim() + "%' OR Definition LIKE '%" + tempSmallPart.Trim() + "%') AND ";
-									BoldWords.Add(tempSmallPart.Trim());
-								}
-							}
-						}
-					}
-				}
-				// gotta get rid of the " OR "
-				if (SqlString.Trim().EndsWith("AND"))
-				{
-					SqlString = SqlString.Remove(SqlString.Length - 4, 4) + " ORDER BY Term";
-				}
-				else
-				{
-					SqlString = SqlString + "0=1";
-				}
-
-				return SqlString;
+				SqlString += "(Term LIKE '%" + part.Trim() + "%' OR Definition LIKE '%" + part.Trim() + "%') AND ";
+			}
+			
+			// gotta get rid of the " AND "
+			if (SqlString.Trim().EndsWith("AND"))
+			{
+				SqlString = SqlString.Remove(SqlString.Length - 4, 4) + " ORDER BY Term";
 			}
 			else
 			{
-				return "";
+				SqlString = SqlString + "0=1";
 			}
+
+			return SqlString;
 		}
 
-		private static string SliceRelevantPart(string definition, string query)
+		private static string SliceRelevantChunk(string definition, string[] parts)
 		{
-			var index = definition.IndexOf(query, StringComparison.OrdinalIgnoreCase);
-			int right = 125;
-			int left = 125;
-			if (definition.Length - index < right) right = definition.Length - index - 1;
-			if (index < left) left = index;
+			definition = Regex.Replace(definition, @"<[^>]+>", " ");
+			string res = "";
+			int lastIndex = 0;
+			int left = 50;
+			int right = 75;
 
-			return Regex.Replace("..." + definition.Substring(index - left, index + right - (index - left)) + "...", @"<[^>]+>"," ");
+			foreach (var part in parts)
+			{
+				var index = definition.IndexOf(part, StringComparison.OrdinalIgnoreCase);
+				if (lastIndex == 0 || (index < lastIndex - left || index > lastIndex + right))
+				{
+					if (definition.Length - index < right) right = definition.Length - index - 1;
+					if (index < left) left = index;
+
+					res += "..." + Regex.Replace(definition.Substring(index - left, index + right - (index - left)), "(" + string.Join("|",parts) + ")", "<span class='hilite'>$1</span>", RegexOptions.IgnoreCase) + "... &nbsp;";
+					lastIndex = index;
+
+				}
+
+			}
+
+			return res;
+
 
 		}
 

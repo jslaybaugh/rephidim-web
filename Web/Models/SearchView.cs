@@ -10,5 +10,7 @@ namespace Web.Models
 	{
 		public IEnumerable<FileInfo> MatchingFiles { get; set; }
 		public IEnumerable<GlossaryItem> MatchingTerms { get; set; }
+		public string[] QueryParts { get; set; }
+		public string OriginalQuery { get; set; }
 	}
 }

@@ -75,6 +75,8 @@
 
 		var parts = details.split("|");
 
+		_path = parts[3];
+
 		var data = {
 			Device: iOS ? "iOS" : "Other",
 			Name: parts[0],
@@ -98,57 +100,17 @@
 
 	var domSetup = function (me)
 	{
-		//		if (Modernizr.history)
-		//		{
-		//			// the setTimeout is a sad workaround to make behavior consistent in chrome vs. firefox. more: http://code.google.com/p/chromium/issues/detail?id=63040
-		//			setTimeout(function ()
-		//			{
-		//				window.onpopstate = function (event)
-		//				{
-		//					if (event.state != null) me.LoadContents(event.state.Path, function (data)
-		//					{
-		//						var content = {};
-		//						content.Files = data;
-		//						$("#tmpContent").tmpl(content).appendTo($("#uxContents").empty());
-		//						//$("#uxContents").removeClass("hidden");
-
-		//						//if (file == null) return false;
-
-		//						//$("[data-file='" + file + "']").addClass("highlight");
-
-
-
-		//					});
-		//					//else getTerm(null, false);
-		//				};
-		//			}, 0);
-
-		//			history.replaceState({ Path: _path }, "", App.ResolveUrl("~/Files/Path/" + _path.substring(1)));
-		//		}
-
-		$(".file-email").live("click", function (evt)
+		$("#frmEmail").live("submit", function ()
 		{
-			$("#uxEmailSuccess").hide();
-			$("#uxEmailError").hide();
-			_path = $(this).data("path");
-
-			$(".popover").fadeOut();
-
-			$("#uxDialog").dialog(
+			if ($("#txtEmail").val() == "")
 			{
-				modal: true,
-				width: 500,
-				title: "Send in Email",
-				resizable: false
-			});
-			return false;
-		});
+				App.ShowAlert("You must type an email address!", "error");
+				return false;
+			}
 
-		$("#frmEmail").on("submit", function ()
-		{
-			$("#uxEmailSuccess").hide();
-			$("#uxEmailError").hide();
-			$("#uxEmailWait").show();
+			var origText = $("#btnEmail").val();
+
+			$("#btnEmail").attr("disabled", true).val("Please Wait");
 			$.ajax(
 			{
 				url: App.ResolveUrl("~/Ajax/Files/Email"),
@@ -156,20 +118,20 @@
 				data: { email: $("#txtEmail").val(), path: _path },
 				success: function (data)
 				{
-					$("#uxEmailWait").hide();
+					$("#btnEmail").attr("disabled", false).val(origText);
 					if (data)
 					{
-						$("#uxEmailSuccess").fadeIn();
+						App.ShowAlert("Email sent to " + $("#txtEmail").val() + "!", "success");
 					}
 					else
 					{
-						$("#uxEmailError").fadeIn();
+						App.ShowAlert("Error sending email! Please refresh and try again!", "error");
 					}
 				},
 				error: function (xhr)
 				{
-					$("#uxEmailWait").hide();
-					alert(xhr.responseText);
+					$("#btnEmail").attr("disabled", false).val(origText);
+					App.ShowAlert(xhr.responseText, "error");
 				}
 			});
 			return false;
@@ -306,8 +268,6 @@
 	{
 		init: function (path)
 		{
-			_path = "/" + path;
-
 			this.LoadFolders(_path, function (data)
 			{
 				$("#tmpFolders").tmpl(data).appendTo("#ulFolders");

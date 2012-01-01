@@ -66,14 +66,14 @@
 	<script id="tmpPopoverContent" type="text/html">
 		<div>
 			<ul class="files">
-				<li><a href="${App.ResolveUrl('~/Files/Open' + Path)}" target="_blank">@(Sprite.Image("~/App_Sprites/icon_open.png")) Open (new tab)</a></li>
+				<li><a href="${App.ResolveUrl('~/Files/Open' + Path)}" target="_blank">@(Sprite.Image("~/App_Sprites/icon_open.png")) Open (new window/tab)</a></li>
 				{{if Device == "iOS" && Extension == "pdf" }}
-					<li><a href="${App.ResolveUrl('~/Files/Open' + Path, 'ghttp')}" target="_blank">@(Sprite.Image("~/App_Sprites/icon_goodreader.png")) Open in GoodReader</a></li>
+					<li><a href="${App.ResolveUrl('~/Files/Open' + Path, 'ghttp')}" target="_blank">@(Sprite.Image("~/App_Sprites/icon_goodreader.png")) Open in GoodReader™</a></li>
 				{{/if}}
 				{{if Device != "iOS" }}
-					<li><a href="${App.ResolveUrl('~/Files/Download' + Path)}" target="_blank">@(Sprite.Image("~/App_Sprites/icon_usb.png")) Download</a></li>
+					<li><a href="${App.ResolveUrl('~/Files/Download' + Path)}" target="_blank">@(Sprite.Image("~/App_Sprites/icon_usb.png")) Download & Save</a></li>
 				{{/if}}
-				<li><a class="file-email" href="#" data-path="${Path}">@(Sprite.Image("~/App_Sprites/icon_email.png")) Send in Email</a></li>
+				<li><a>@(Sprite.Image("~/App_Sprites/icon_email.png")) Email </a><form id="frmEmail" style="display:inline;"><input type="text" id="txtEmail" value="@Model.Email" placeholder="Email Address" style="width:100px;" /> <input type="submit" id="btnEmail" value="Send Email" /></form></li>
 			</ul>
 		</div>
 	</script>

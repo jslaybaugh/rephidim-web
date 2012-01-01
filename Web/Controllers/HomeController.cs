@@ -7,6 +7,7 @@ using Web.Code;
 using Web.Models;
 using System.Configuration;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Web.Controllers
 {
@@ -32,8 +33,10 @@ namespace Web.Controllers
 			SearchFiles(root, query);
 
 			var m = new SearchView();
+			m.OriginalQuery = query;
 			m.MatchingFiles = matchingFiles;
-			m.MatchingTerms = DataAccess.SearchTerms(query);
+			m.QueryParts = GetSearchParts(query);
+			m.MatchingTerms = DataAccess.SearchTerms(m.QueryParts);
 
 			return View("Search", m);
 
@@ -57,6 +60,35 @@ namespace Web.Controllers
 					SearchFiles(subdir.FullName, query);
 				}
 			}
+		}
+
+		private string[] GetSearchParts(string query)
+		{
+			//Clean it up
+			query = query.Replace("--", "").Replace("'", "");
+			var quotes = query.Split(new char[] { '"' }, StringSplitOptions.None);
+			var res = new List<string>();
+
+			for (int i = 0; i < quotes.Length; i++)
+			{
+				if (i % 2 == 1)
+				{
+					res.Add(quotes[i].Trim());
+				}
+				else
+				{
+					string commonWords = ConfigurationManager.AppSettings["CommonWords"];
+
+					var words = quotes[i].Trim().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+					foreach (var word in words)
+					{
+						if (!Regex.IsMatch(word, commonWords, RegexOptions.IgnoreCase)) res.Add(word);
+					}
+				}
+			}
+
+			return res.ToArray();
 		}
 
 	}

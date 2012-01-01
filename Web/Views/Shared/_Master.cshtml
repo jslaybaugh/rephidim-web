@@ -50,7 +50,7 @@
 						<li @(ViewBag.NavChronology != null && ViewBag.NavChronology == true ? "class=active" : "")><a href="#">Tape List</a></li>
 					</ul>
 					<form id="frmNavSearch" method="get" class="pull-left" action="@(Url.Action<HomeController>(x=>x.Search(null)))">
-						<input type="text" placeholder="Global Search" name="query" />
+						<input type="text" placeholder="Search Files & Glossary" value="@ViewBag.SearchQuery" name="query" />
 						<span id="uxAppWait" class="waiter-light" style="display:none;"></span>
 					</form>
 					<ul class="nav secondary-nav">
@@ -74,7 +74,7 @@
 	<div class="container">
 		@RenderBody()
 	</div>
-
+	<div id="uxAlert" class="global-message alert-message fade in hide" data-alert="true"><a class="close" href="#">×</a><p></p></div>
 
 	@if (IsSectionDefined("templates"))
 	{

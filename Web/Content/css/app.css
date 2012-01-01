@@ -90,3 +90,8 @@ img {vertical-align:bottom;}
 
 .waiter-dark {height:16px;width:16px;display:inline-block;background:url("../img/ajax-loader-dark.gif") top center no-repeat;}
 .waiter-light {height:21px;width:56px;display:inline-block;background:url("../img/ajax-loader-light.gif") top center no-repeat;margin:-8px auto -8px 20px;}
+
+.global-message {position:fixed;z-index:1000;bottom:0px;left:20px;right:20px;text-align:center;}
+.global-message p {font-weight:bold;}
+
+.search .hilite {display:inline-block;background-color:#ffface;border:solid 1px #ddd;margin-left:1px;margin-right:1px;font-weight:bold;}
