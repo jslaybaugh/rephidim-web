@@ -36,6 +36,13 @@ namespace Web
 			);
 
 			routes.MapRoute(
+				"Static", // Route name
+				"Static/{*path}", // URL with parameters
+				new { controller = "Static", action = "Show", id = UrlParameter.Optional }, // Parameter defaults
+				new string[] { "Web.Controllers" }
+			);
+
+			routes.MapRoute(
 				"Default", // Route name
 				"{controller}/{action}/{id}", // URL with parameters
 				new { controller = "Home", action = "Index", id = UrlParameter.Optional }, // Parameter defaults

@@ -1,0 +1,13 @@
+﻿{{if Files != null && Files.length > 0}}
+	<ul class="files">
+		{{each Files}}
+			<li>
+				<a href="#" class="file-name" title="${Name}.${Extension}" data-details="${Name}|${Extension}|${Size}|${Path}|${FileDate}">{{html App.ChooseIcon(Extension)}} ${Name}</a> 
+				{{if New}}<span class="label success">New</span>{{/if}}
+				<span class="file-info right"><b>Size:</b> ${Size}, <b>Loaded:</b> ${App.DateFromJson(FileDate).format('m/d/yyyy h:MM TT')}</span>
+			</li>
+		{{/each}}
+	</ul>
+{{else}}
+	<div class='message'><div><span>There are no files in this directory.<br/><br/>Select a folder from the left.</span></div></div>
+{{/if}}

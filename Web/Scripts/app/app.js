@@ -2,7 +2,7 @@
 
 (function ()
 {
-	var _root, _format;
+	var _root, _format, _icons;
 	String.prototype.format = function ()
 	{
 		var s = this;
@@ -69,6 +69,16 @@
 		ShowAlert: function (msg, className)
 		{
 			$("#uxAlert").hide().removeClass("warning error success info").addClass(className).find("p").html(msg).end().fadeIn();
+		},
+
+		SetIconTable: function (data)
+		{
+			_icons = data;
+		},
+
+		ChooseIcon: function (key)
+		{
+			return _icons[key.toLowerCase()];
 		}
 
 	};

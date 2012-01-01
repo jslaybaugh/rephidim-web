@@ -30,6 +30,7 @@
 	@*<link rel="shortcut icon" href="@Href("~/content/img/favicon.ico")">
 	<link rel="apple-touch-icon" href="@Href("~/content/img/apple-touch-icon.png")">*@
 	@Bundles.RenderStylesheets("head")
+	@Sprite.ImportStylesheet("~/App_Sprites/")
 	@if (IsSectionDefined("styles"))
 	{
 		@RenderSection("styles")
@@ -41,15 +42,23 @@
 		<div class="topbar" data-dropdown="dropdown" >
 			<div class="topbar-inner">
 				<div class="container">
-					<h3><a href="@(Url.Action<HomeController>(x=>x.Index()))">Rephidim</a></h3>
+					<h3><a href="@(Url.Action<HomeController>(x => x.Index()))">Rephidim</a></h3>
 					<ul class="nav">
-						<li @(ViewBag.NavHome != null && ViewBag.NavHome == true ? "class=active" : "")><a href="@(Url.Action<HomeController>(x=>x.Index()))">Home</a></li>
-						<li @(ViewBag.NavGlossary != null && ViewBag.NavGlossary == true ? "class=active" : "")><a href="@(Url.Action<GlossaryController>(x=>x.Term(null)))">Glossary</a></li>
-						<li @(ViewBag.NavFiles != null && ViewBag.NavFiles == true ? "class=active" : "")><a href="@(Url.Action<FilesController>(x=>x.Browse(null)))">Files</a></li>
-						<li @(ViewBag.NavChronology != null && ViewBag.NavChronology == true ? "class=active" : "")><a href="#">Chronology</a></li>
-						<li @(ViewBag.NavChronology != null && ViewBag.NavChronology == true ? "class=active" : "")><a href="#">Tape List</a></li>
+						<li @(ViewBag.NavHome != null && ViewBag.NavHome == true ? "class=active" : "")><a href="@(Url.Action<HomeController>(x => x.Index()))">Home</a></li>
+						<li @(ViewBag.NavGlossary != null && ViewBag.NavGlossary == true ? "class=active" : "")><a href="@(Url.Action<GlossaryController>(x => x.Term(null)))">Glossary</a></li>
+						<li @(ViewBag.NavFiles != null && ViewBag.NavFiles == true ? "class=active" : "")><a href="@(Url.Action<FilesController>(x => x.Browse(null)))">Files</a></li>
+						<ul class="nav">
+							<li class="dropdown @(ViewBag.NavChronology != null && ViewBag.NavChronology == true ? "active" : "")">
+								<a href="#" class="dropdown-toggle">Chronology</a>
+								<ul class="dropdown-menu">
+									<li><a href="@(Url.Action<StaticController>(x => x.Show("chronology.html")))">Full Version</a></li>
+									<li><a href="@(Url.Action<StaticController>(x => x.Show("chrono.html")))">Compact Version</a></li>
+								</ul>
+							</li>
+						</ul>
+						<li @(ViewBag.NavTape != null && ViewBag.NavTape == true ? "class=active" : "")><a href="@(Url.Action<StaticController>(x => x.Show("tapelist.pdf")))">Tape List</a></li>
 					</ul>
-					<form id="frmNavSearch" method="get" class="pull-left" action="@(Url.Action<HomeController>(x=>x.Search(null)))">
+					<form id="frmNavSearch" method="get" class="pull-left" action="@(Url.Action<HomeController>(x => x.Search(null)))">
 						<input type="text" placeholder="Search Files & Glossary" value="@ViewBag.SearchQuery" name="query" />
 						<span id="uxAppWait" class="waiter-light" style="display:none;"></span>
 					</form>
@@ -62,7 +71,7 @@
 									<li><a href="#">Manage Messages</a></li>
 									<li class="divider"></li>
 								}
-								<li><a href="@(Url.Action<AccountsController>(x=>x.Logout()))">Logout</a></li>
+								<li><a href="@(Url.Action<AccountsController>(x => x.Logout()))">Logout</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -75,7 +84,6 @@
 		@RenderBody()
 	</div>
 	<div id="uxAlert" class="global-message alert-message fade in hide" data-alert="true"><a class="close" href="#">×</a><p></p></div>
-
 	@if (IsSectionDefined("templates"))
 	{
 		@RenderSection("templates")
@@ -84,6 +92,28 @@
 	<script type="text/javascript">
 		App.SetRoot("@appPath");
 		App.SetTitleFormat("@titleFormat");
+
+		App.SetIconTable(
+		{
+			"txt"			: '@Sprite.Image("~/App_Sprites/icon_text.png")',
+			"rtf"			: '@Sprite.Image("~/App_Sprites/icon_text.png")',
+			"pdf"			: '@Sprite.Image("~/App_Sprites/icon_pdf.png")',
+			"mp3"			: '@Sprite.Image("~/App_Sprites/icon_mp3.png")',
+			"exe"			: '@Sprite.Image("~/App_Sprites/icon_window.png")',
+			"jpg"			: '@Sprite.Image("~/App_Sprites/icon_jpg.png")',
+			"jpeg"			: '@Sprite.Image("~/App_Sprites/icon_jpg.png")',
+			"tif"			: '@Sprite.Image("~/App_Sprites/icon_tif.png")',
+			"tiff"			: '@Sprite.Image("~/App_Sprites/icon_tif.png")',
+			"gif"			: '@Sprite.Image("~/App_Sprites/icon_gif.png")',
+			"cdr"			: '@Sprite.Image("~/App_Sprites/icon_flow.png")',
+			"asd"			: '@Sprite.Image("~/App_Sprites/icon_flow.png")',
+			"unk"			: '@Sprite.Image("~/App_Sprites/icon_help.png")',
+			"open"			: '@(Sprite.Image("~/App_Sprites/icon_open.png"))',
+			"goodreader"	: '@(Sprite.Image("~/App_Sprites/icon_goodreader.png"))',
+			"usb"			: '@(Sprite.Image("~/App_Sprites/icon_usb.png"))',
+			"email"			: '@(Sprite.Image("~/App_Sprites/icon_email.png"))',
+			"folder"		: '@(Sprite.Image("~/App_Sprites/icon_folder.png"))'
+		});
 
 		$(function()
 		{

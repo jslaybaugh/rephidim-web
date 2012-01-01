@@ -1,0 +1,28 @@
+﻿@model StaticView
+
+@{
+	ViewBag.Title = Model.Path;
+
+	if (Model.Path.ToLowerInvariant().Contains("chrono"))
+	{
+		ViewBag.NavChronology = true;
+	}
+	else if (Model.Path.ToLowerInvariant().Contains("tape"))
+	{
+		ViewBag.NavTape = true;
+	}
+
+	
+}
+
+<iframe id="iframeContent" style="border:none;width:100%;" class="module" src="@Href("~/Content/static/" + @Model.Path)"></iframe>
+
+@section scripts
+{
+	<script type="text/javascript">
+		$(function ()
+		{
+			var static = new App.Static();
+		});
+	</script>
+}

@@ -28,10 +28,6 @@
 			$(window).resize();
 			setTimeout(function () { $("#uxDefinition a").switchClass("inactive-link", "active-link", "slow"); }, 0);
 
-			if (!!("ontouchstart" in window))
-			{
-				$(".scrollable").touchScroll("update");
-			}
 		}
 		else
 		{
@@ -78,7 +74,7 @@
 					if (event.state != null) getTerm(event.state.TermName, false);
 					else getTerm(null, false);
 				};
-			}, 0);
+			}, 100);
 		}
 
 		$(".term-link").live("click", function ()

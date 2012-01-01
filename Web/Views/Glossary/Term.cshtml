@@ -3,6 +3,7 @@
 @{
 	ViewBag.Title = Model.ActiveTerm != null ? Model.ActiveTerm.Term + " - Glossary" : "Glossary";
 	ViewBag.NavGlossary = true;
+	Bundles.Reference("content/templates/glossary");
 }
 
 <div class="row">
@@ -28,18 +29,7 @@
 
 @section templates
 {
-	<script id="tmpTermList" type="text/html">
-		<li><a class="term-link" name="${Id}" data-value="${Term}" href="#">${Term}</a></li>
-	</script>
-
-	<script id="tmpTermFull" type="text/html">
-		<h1 id="uxTermName">${Term}</h1>
-		<div id="uxDefinition" class="scrollable module">
-			<div style="margin:10px;">
-				{{html Definition}}
-			</div>
-		</div>
-	</script>
+	@Bundles.RenderHtmlTemplates()
 }
 
 @section scripts

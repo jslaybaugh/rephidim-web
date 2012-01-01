@@ -4,7 +4,7 @@
 (function ()
 {
 
-	var _path = "";
+	var _path = "", _email;
 
 	var displayDefinition = function (push)
 	{
@@ -34,6 +34,7 @@
 			$("#uxTerm").html("<div class='message'><div><span>Select a term from the left to get started.</span></div></div>");
 		}
 	};
+
 
 	var loadFolders = function (path, callback)
 	{
@@ -86,7 +87,6 @@
 			FileDate: parts[4]
 		};
 
-		log($("#tmpPopoverTitle").tmpl(data).html())
 
 		if (type.match(/title/i))
 		{
@@ -155,6 +155,7 @@
 			});
 
 			$(this).popover("show");
+			$("#txtEmail").val(_email);
 
 			return false;
 		});
@@ -266,8 +267,9 @@
 
 	this.App.Files = Class.extend(
 	{
-		init: function (path)
+		init: function (path, email)
 		{
+			_email = email;
 			this.LoadFolders(_path, function (data)
 			{
 				$("#tmpFolders").tmpl(data).appendTo("#ulFolders");

@@ -1,14 +1,9 @@
 ﻿@model SearchView
 @{
-    ViewBag.Title = "Search";
+	ViewBag.Title = "Search";
 	ViewBag.NavHome = true;
 	ViewBag.SearchQuery = Model.OriginalQuery;
-}
-@section styles
-{
-
-	@Sprite.ImportStylesheet("~/App_Sprites/")
-	
+	Bundles.Reference("content/templates/files");
 }
 
 @functions
@@ -66,6 +61,10 @@
 	</div>
 </div>
 
+@section templates
+{
+	@Bundles.RenderHtmlTemplates()
+}
 @section scripts
 {
 	<script type="text/javascript">

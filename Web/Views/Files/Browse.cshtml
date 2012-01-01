@@ -3,13 +3,7 @@
 @{
 	ViewBag.Title = "Files";
 	ViewBag.NavFiles = true;
-}
-
-@section styles
-{
-
-	@Sprite.ImportStylesheet("~/App_Sprites/")
-	
+	Bundles.Reference("content/templates/files");
 }
 
 <div class="row">
@@ -19,64 +13,10 @@
 	<div class="span9 module scrollable" id="uxContents">
 	</div>
 </div>
-<div class="none" id="uxDialog">
-	<p>This will attach the selected file to an email and send it immediately to the address you provide below.</p>
-	<form id="frmEmail"><p>Email Address: <input type="text" id="txtEmail" placeholder="Email address" value="@Model.Email" /> <input type="submit" value="Send" /> <span id="uxEmailWait" class="waiter-dark" style="display:none;"></span></p></form>
-	<span class="file-info">NOTE: Larger files may take a long time to send.</span>
-	<div id="uxEmailError" class="alert-message error none">Error sending email! Refresh and try again.</div>
-	<div id="uxEmailSuccess" class="alert-message success none">Email sent!</div>
-</div>
 
 @section templates
 {
-	<script id="tmpFolders" type="text/html">
-		<li>
-			<a class="folder-{{if DirectoryCount == 0}}no{{/if}}expand ui-icon {{if DirectoryCount > 0}}ui-icon-plus{{/if}}" href="#" data-path="${Path}">&nbsp;</a>
-			@(Sprite.Image("~/App_Sprites/icon_folder.png")) 
-			<a class="folder-view" href="#" data-path="${Path}">${Name}</a> 
-			{{if New}}<span class="label success">New</span>{{/if}}
-			<span class="file-info">{{if DirectoryCount > 0}}${DirectoryCount} folder{{if DirectoryCount != 1}}s{{/if}}{{/if}}{{if DirectoryCount > 0 && FileCount > 0}} &amp; {{/if}}{{if FileCount > 0}}${FileCount} file{{if FileCount != 1}}s{{/if}}{{/if}}</span>
-		</li>
-	</script>
-
-	<script id="tmpContent" type="text/html">
-		{{if Files != null && Files.length > 0}}
-			<ul class="files">
-				{{each Files}}
-					<li>
-						<a href="#" class="file-name" title="${Name}.${Extension}" data-details="${Name}|${Extension}|${Size}|${Path}|${FileDate}">{{html ChooseIcon(Extension)}} ${Name}</a> 
-						{{if New}}<span class="label success">New</span>{{/if}}
-						<span class="file-info right"><b>Size:</b> ${Size}, <b>Loaded:</b> ${App.DateFromJson(FileDate).format('m/d/yyyy h:MM TT')}</span>
-					</li>
-				{{/each}}
-			</ul>
-		{{else}}
-			<div class='message'><div><span>There are no files in this directory.<br/><br/>Select a folder from the left.</span></div></div>
-		{{/if}}
-	</script>
-
-	<script id="tmpPopoverTitle" type="text/html">
-		<div>
-			<a href="#" class="popover-close right"><span class="ui-icon ui-icon-closethick">close</span></a>
-			<span>${Name}</span><br/>
-			<span class="file-info"><b>Size:</b> ${Size}, <b>Loaded:</b> ${App.DateFromJson(FileDate).format('m/d/yyyy h:MM TT')}</span>
-		</div>
-	</script>
-
-	<script id="tmpPopoverContent" type="text/html">
-		<div>
-			<ul class="files">
-				<li><a href="${App.ResolveUrl('~/Files/Open' + Path)}" target="_blank">@(Sprite.Image("~/App_Sprites/icon_open.png")) Open (new window/tab)</a></li>
-				{{if Device == "iOS" && Extension == "pdf" }}
-					<li><a href="${App.ResolveUrl('~/Files/Open' + Path, 'ghttp')}" target="_blank">@(Sprite.Image("~/App_Sprites/icon_goodreader.png")) Open in GoodReader™</a></li>
-				{{/if}}
-				{{if Device != "iOS" }}
-					<li><a href="${App.ResolveUrl('~/Files/Download' + Path)}" target="_blank">@(Sprite.Image("~/App_Sprites/icon_usb.png")) Download & Save</a></li>
-				{{/if}}
-				<li><a>@(Sprite.Image("~/App_Sprites/icon_email.png")) Email </a><form id="frmEmail" style="display:inline;"><input type="text" id="txtEmail" value="@Model.Email" placeholder="Email Address" style="width:100px;" /> <input type="submit" id="btnEmail" value="Send Email" /></form></li>
-			</ul>
-		</div>
-	</script>
+	@Bundles.RenderHtmlTemplates()
 }
 
 @section scripts
@@ -84,25 +24,9 @@
 
 	<script type="text/javascript">
 
-		var ChooseIcon = function (ext)
-		{
-			switch (ext)
-			{
-				case "txt": case "rtf": return '@Sprite.Image("~/App_Sprites/icon_text.png")';
-				case "pdf": return '@Sprite.Image("~/App_Sprites/icon_pdf.png")';
-				case "mp3": return '@Sprite.Image("~/App_Sprites/icon_mp3.png")';
-				case "exe": return '@Sprite.Image("~/App_Sprites/icon_window.png")';
-				case "jpg": case "jpeg": return '@Sprite.Image("~/App_Sprites/icon_jpg.png")';
-				case "tif": case "tiff": return '@Sprite.Image("~/App_Sprites/icon_tif.png")';
-				case "gif": return '@Sprite.Image("~/App_Sprites/icon_gif.png")';
-				case "cdr": case "asd": return '@Sprite.Image("~/App_Sprites/icon_flow.png")';
-				default: return '@Sprite.Image("~/App_Sprites/icon_help.png")';
-			}
-		}
-
 		$(function ()
 		{
-			var Files = new App.Files(@Html.Raw(Json.Encode(Model.Path ?? "")));
+			var Files = new App.Files(@Html.Raw(Json.Encode(Model.Path ?? "")), @Html.Raw(Json.Encode(Model.Email)));
 		});
 		
 	</script>

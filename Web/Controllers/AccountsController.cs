@@ -52,7 +52,7 @@ namespace Web.Controllers
 			}
 			else
 			{
-				m.Error = true;
+				ModelState.AddModelError("Error", "Authentication Failed.");
 				return View(m);
 			}
 

@@ -14,6 +14,10 @@ body { background: #eee url(../img/bg2.png) repeat; padding-top:50px;}
 .login-contents {margin: 20px 0 0 10px;}
 .login-contents label {width:80px;color:#ddd;font-weight:bold;text-align:left;}
 
+.login-container .alert-message {width:440px;margin:auto;margin-bottom:10px;clear:both;}
+.field-validation-error.alert-message {display:block;}
+.field-validation-valid.alert-message {display:none;}
+
 #lnk-more:link, #lnk-more:active, #lnk-more:visited, #lnk-more:hover {position:absolute;bottom:5px;right:10px;color:#fff;}
 
 .left {float:left;}
