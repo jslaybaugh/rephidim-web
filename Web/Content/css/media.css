@@ -32,14 +32,18 @@
    Modify as content requires.
    ========================================================================== */
 
-@media only screen and (min-width: 480px) {
+@media only screen and (min-width: 240px) {
   /* Style adjustments for viewports 480px and over go here */
-
+	html, body, input, select, textarea {font-size:15px;line-height:20px;}
 }
 
 @media only screen and (min-width: 768px) {
   /* Style adjustments for viewports 768px and over go here */
+}
 
+@media only screen and (min-width: 1025px) {
+  /* Style adjustments for viewports 1024px and over go here */
+	html, body, input, select, textarea {font-size:13px;line-height:18px;}
 }
 
 

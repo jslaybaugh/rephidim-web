@@ -31,9 +31,17 @@
 	<title>@String.Format(titleFormat, ViewBag.Title)</title>
 	<meta name="description" content="Rephidim Web Site, Created 12/2011">
 	<meta name="author" content="Jorin Slaybaugh">
-	
-	<meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
-	<meta name="apple-mobile-web-app-capable" content="yes">
+	<script type="text/javascript">
+		if (window.screen.width < 768)
+		{
+			document.write('<meta name="viewport" content="width = 1000, user-scalable = yes" />');
+		}
+		else if (window.screen.width < 1024)
+		{
+			document.write('<meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0" />');
+		}
+	</script>
+	<meta name="format-detection" content="telephone=no" />
 	@*<link rel="shortcut icon" href="@Href("~/content/img/favicon.ico")">
 	<link rel="apple-touch-icon" href="@Href("~/content/img/apple-touch-icon.png")">*@
 	@Bundles.RenderStylesheets("head")
@@ -51,7 +59,7 @@
 				<div class="container">
 					<h3><a href="@(Url.Action<HomeController>(x => x.Index()))">Rephidim</a></h3>
 					<ul class="nav">
-						<li @(ViewBag.NavHome != null && ViewBag.NavHome == true ? "class=active" : "")><a href="@(Url.Action<HomeController>(x => x.Index()))">Home</a></li>
+						@*<li @(ViewBag.NavHome != null && ViewBag.NavHome == true ? "class=active" : "")><a href="@(Url.Action<HomeController>(x => x.Index()))">Home</a></li>*@
 						<li @(ViewBag.NavGlossary != null && ViewBag.NavGlossary == true ? "class=active" : "")><a href="@(Url.Action<GlossaryController>(x => x.Term(null)))">Glossary</a></li>
 						<li @(ViewBag.NavFiles != null && ViewBag.NavFiles == true ? "class=active" : "")><a href="@(Url.Action<FilesController>(x => x.Browse(null)))">Files</a></li>
 						<ul class="nav">
@@ -73,11 +81,12 @@
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle">User: <b>@User.Identity.Name</b></a>
 							<ul class="dropdown-menu">
-								@if (User.IsInRole("Edit"))
-								{
+								@*@if (User.IsInRole("Edit") || User.IsInRole("Dev") || User.IsInRole("Upload"))
+								{*@
 									<li><a href="#">Manage Messages</a></li>
+									<li><a id="lnkViewSource" href="#">View Source</a></li>
 									<li class="divider"></li>
-								}
+								@*}*@
 								<li><a href="@(Url.Action<AccountsController>(x => x.Logout()))">Logout</a></li>
 							</ul>
 						</li>
@@ -126,10 +135,21 @@
 		$(function()
 		{
 			$(".topbar-wrapper").dropdown();
+			$("#lnkViewSource").click(function()
+			{
+				var w = window.open('about:blank'), s = w.document;
+				s.write('<!DOCTYPE html><html><head><title>Source of ' + location.href + '</title><meta name="viewport" content="width=device-width" /></head><body></body></html>');
+				s.close();
+
+				var pre = s.body.appendChild(s.createElement("pre"));
+				pre.style.overflow = 'auto';
+				pre.style.whiteSpace = 'pre-wrap';
+				pre.appendChild(s.createTextNode(document.documentElement.innerHTML));
+			});
 		});
 	</script>
 	@if (IsSectionDefined("scripts"))
-	{ 
+ { 
 		@RenderSection("scripts")
 	}
 	<!--[if lt IE 8 ]>

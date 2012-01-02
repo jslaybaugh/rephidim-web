@@ -58,6 +58,7 @@ namespace Web.Controllers
 
 			var regexp = string.Join("", queryParts.Select(x => "(?=.*" + x + ")"));
 			var found = files
+				.ToList()
 				.Where(x => Regex.IsMatch(x.FullName.Replace(root, ""), regexp, RegexOptions.IgnoreCase) && !x.Extension.MatchesTrimmed(".ini") && !x.Extension.MatchesTrimmed(".db") && !x.Extension.MatchesTrimmed(".lnk"))
 				.Select(x => new FileInfoResult
 				{
@@ -68,8 +69,7 @@ namespace Web.Controllers
 					New = x.LastWriteTime.Subtract(DateTime.Now).Duration().TotalDays < 8,
 					Extension = x.Extension.ToLower().Replace(".", "")
 				})
-				.OrderBy(x => x.Name)
-				.ToList();
+				.OrderBy(x => x.Name);
 
 			_matchingFiles.AddRange(found);
 

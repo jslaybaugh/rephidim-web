@@ -15,7 +15,9 @@
 	
 }
 
-<iframe id="iframeContent" style="border:none;width:100%;" class="module" src="@Href("~/Content/static/" + @Model.Path)"></iframe>
+<div class="module">
+	<iframe id="iframeContent" style="border:none;width:100%;" src="@Href("~/Content/static/" + @Model.Path)"></iframe>
+</div>
 
 @section scripts
 {

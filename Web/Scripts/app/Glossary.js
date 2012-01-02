@@ -4,77 +4,101 @@
 
 (function ()
 {
-	var _terms, _activeTerm;
+	var _terms, _activeTerm, _firstLoad = true, _popFired = false;
+
+	var pad = function (currentLength)
+	{
+		var totalNeeded = 2000;
+		var s = " ";
+		for (var i = 0; i < totalNeeded - currentLength; i++)
+		{
+			s += "&zwnj;";
+		}
+
+		return s;
+	};
 
 	var displayDefinition = function (push)
 	{
-		if (_activeTerm != null)
-		{
-			$("#uxList").scrollTo("[name='" + _activeTerm.Id + "']", 1000, { easing: 'swing', axis: 'y' });
-			App.SetTitle(_activeTerm.Term + " - Glossary");
-			if (Modernizr.history && push)
-			{
-				history.pushState({ TermName: _activeTerm.Term }, _activeTerm.Term, App.ResolveUrl("~/Glossary/Term/" + _activeTerm.Id));
-			}
-
-			var terms = $.map(_terms, function (n) { return n.Term; }).join("|");
-			// \\b gets the word boundaries so we only get full words
-			// i gets case insensitive
-			// g makes it global and not just first
-			var regex = new RegExp("\\b(" + terms.replace(/(\^|\.|\*|\+|\?|\=|\!|\\|\/|\(|\)|\[|\]|\{|\})/ig, "\\$1") + ")\\b", "ig");
-			_activeTerm.Definition = _activeTerm.Definition.replace(regex, "<a class='term-link inactive-link' data-value='$1' href='#'>$1</a>");
-
-			$("#tmpTermFull").tmpl(_activeTerm).appendTo($("#uxTerm").empty());
-			$(window).resize();
-			setTimeout(function () { $("#uxDefinition a").switchClass("inactive-link", "active-link", "slow"); }, 0);
-
-		}
-		else
+		if (_activeTerm == null)
 		{
 			App.SetTitle("Glossary");
 			$("#uxTerm").html("<div class='message'><div><span>Select a term from the left to get started.</span></div></div>");
+			return;
 		}
+
+		$("#uxList").scrollTo("[name='" + _activeTerm.Id + "']", 1000, { easing: 'swing', axis: 'y' });
+		App.SetTitle(_activeTerm.Term + " - Glossary");
+
+		if (Modernizr.history && push)
+		{
+			history.pushState({ TermName: _activeTerm.Term }, _activeTerm.Term, App.ResolveUrl("~/Glossary/Term/" + _activeTerm.Id));
+		}
+
+		var terms = $.map(_terms, function (n) { return n.Term; }).join("|");
+		// \\b gets the word boundaries so we only get full words
+		// i gets case insensitive
+		// g makes it global and not just first
+		var regex = new RegExp("\\b(" + terms.replace(/(\^|\.|\*|\+|\?|\=|\!|\\|\/|\(|\)|\[|\]|\{|\})/ig, "\\$1") + ")\\b", "ig");
+		_activeTerm.Definition = _activeTerm.Definition.replace(regex, "<a class='term-link inactive-link' data-value='$1' href='#'>$1</a>")// + pad(0);
+
+		$("#tmpTermFull").tmpl(_activeTerm).appendTo($("#uxTerm").empty());
+		$(window).resize();
+		setTimeout(function () { $("#uxDefinition a").switchClass("inactive-link", "active-link", "slow"); }, 0);
+
 	};
 
 	var getTerm = function (termName, push)
 	{
-		if (termName != null)
+		$.ajax(
 		{
-			$.ajax(
+			url: App.ResolveUrl("~/Ajax/Glossary/Details"),
+			data: { term: termName },
+			success: function (data)
 			{
-				url: App.ResolveUrl("~/Ajax/Glossary/Details"),
-				data: { term: termName },
-				success: function (data)
-				{
-					_activeTerm = data;
-					displayDefinition(push);
-				},
-				error: function (xhr)
-				{
-					log(xhr);
-				}
-			});
-		}
-		else
-		{
-			_activeTerm = null;
-			displayDefinition(false);
-		}
+				_activeTerm = data;
+				displayDefinition(push);
+			},
+			error: function (xhr)
+			{
+				log(xhr);
+			}
+		});
 	};
 
 	var domSetup = function (me)
 	{
 		if (Modernizr.history)
 		{
-			// the setTimeout is a sad workaround to make behavior consistent in chrome vs. firefox. more: http://code.google.com/p/chromium/issues/detail?id=63040
-			setTimeout(function ()
+			window.onload = function ()
 			{
-				window.onpopstate = function (event)
+				_firstLoad = true;
+
+				if (_activeTerm != null)
+				{
+					history.replaceState({ TermName: _activeTerm.Term }, _activeTerm.Term, App.ResolveUrl("~/Glossary/Term/" + _activeTerm.Id));
+				}
+				displayDefinition(false);
+				setTimeout(function () { _firstLoad = false; }, 0);
+			};
+
+			window.onpopstate = function (event)
+			{
+				if (_firstLoad)
+				{
+					_firstLoad = false;
+				}
+				else
 				{
 					if (event.state != null) getTerm(event.state.TermName, false);
-					else getTerm(null, false);
-				};
-			}, 100);
+					else
+					{
+						_activeTerm = null;
+						displayDefinition(false);
+					}
+				}
+
+			};
 		}
 
 		$(".term-link").live("click", function ()
@@ -91,12 +115,6 @@
 		})).resize();
 
 		$("#tmpTermList").tmpl(_terms).appendTo("#ulTerms");
-
-		if (_activeTerm != null && Modernizr.history)
-		{
-			history.replaceState({ TermName: _activeTerm.Term }, _activeTerm.Term, App.ResolveUrl("~/Glossary/Term/" + _activeTerm.Id));
-		}
-		displayDefinition(false);
 
 	};
 

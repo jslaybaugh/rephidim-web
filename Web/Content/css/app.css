@@ -1,10 +1,8 @@
 ﻿/* ==|== primary styles =====================================================
    Author: Jorin Slaybaugh
    ========================================================================== */
-   
 
-
-html, body, input, select, textarea {font-family: 'Open Sans', sans-serif;font-size:14px/16px;}
+html, body, input, select, textarea {font-family: 'Open Sans', sans-serif;}
 body { background: #eee url(../img/bg2.png) repeat; padding-top:50px;}
 
 .church {font-family: 'Sorts Mill Goudy', Serif; font-size:44px;width:470px;margin:auto;margin-bottom:10px;text-align:center;font-weight:900;border-bottom:solid 1px black;padding-bottom:5px;}
@@ -32,12 +30,12 @@ body { background: #eee url(../img/bg2.png) repeat; padding-top:50px;}
 
 .bold {font-weight:bold;}
 
-.scrollable {overflow:auto;}
+.scrollable {overflow:scroll;-webkit-overflow-scrolling:touch;}
 .module {-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:10px;box-shadow:0 0 10px #444;background:#f3f3f3;}
 
 .message {display:table;height:100%;width:100%;vertical-align:middle;text-align:center;}
 .message div {display:table-cell;height:100%;width:100%;vertical-align:middle;text-align:center;}
-.message span {display:block;width:auto;margin-left:auto;margin-right:auto;text-align:center;font-weight:900;font-style:normal;font-size:20px;}
+.message span {display:block;width:auto;margin-left:auto;margin-right:auto;text-align:center;font-weight:900;font-style:normal;font-size:larger;}
 
 /* Glossary */
 
@@ -54,7 +52,7 @@ img {vertical-align:bottom;}
 .folder-noexpand {margin-left:-15px;display:inline-block;visibility:hidden;}
 .files { list-style-type: none;margin:5px; padding: 0px; }
 .files li {padding:3px 0px 3px 0px;border:none;border-bottom:solid 1px #ddd;width:100%;overflow:hidden;text-overflow:ellipsis;}
-.files a {font-size:14px;}
+.files a {font-size:larger;}
 .file-info {font-size:10px;color:#999;font-weight:normal;}
 .file-actions {font-size:10px;color:#666;font-weight:bold;text-transform:uppercase;float:right;}
 /*
@@ -84,6 +82,7 @@ img {vertical-align:bottom;}
 	border-left: 15px solid black;
 }
 .popover .content {padding:5px;}
+.popover .inner {width:300px;}
 .topbar {z-index:10;}
 
 .ui-widget-overlay {
