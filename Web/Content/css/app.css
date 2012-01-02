@@ -5,12 +5,6 @@
 html, body, input, select, textarea {font-family: 'Open Sans', sans-serif;}
 body { background: #eee url(../img/bg2.png) repeat; padding-top:50px;}
 
-.church {font-family: 'Sorts Mill Goudy', Serif; font-size:44px;width:470px;margin:auto;margin-bottom:10px;text-align:center;font-weight:900;border-bottom:solid 1px black;padding-bottom:5px;}
-.scripture {font-family: 'Sorts Mill Goudy', serif;font-size:18px;width:470px;margin:auto;margin-bottom:5px;text-align:justify;}
-.login-container {margin:10% auto 0 auto;}
-.login-bg {margin:auto;background:#333 url(../img/microphone.png) top left;width:470px;height:278px;position:relative;border:solid black 2px;}
-.login-contents {margin: 20px 0 0 10px;}
-.login-contents label {width:80px;color:#ddd;font-weight:bold;text-align:left;}
 
 .login-container .alert-message {width:440px;margin:auto;margin-bottom:10px;clear:both;}
 .field-validation-error.alert-message {display:block;}
@@ -63,6 +57,16 @@ img {vertical-align:bottom;}
 #uxContents .box-content {overflow:auto;}
 #uxContents .box-content li {white-space:nowrap;}
 */
+
+/* login stuff */
+
+
+.church {font-family: 'Acme', Serif; font-size:54px;width:500px;margin:auto;margin-bottom:10px;text-align:center;font-weight:900;border-bottom:solid 1px #444;padding-bottom:5px;line-height:50px;}
+.scripture {font-family: 'Acme', serif;font-size:18px;width:470px;margin:auto;margin-bottom:5px;text-align:justify;}
+.login-container {margin:5% auto 0 auto;}
+.login-bg {margin:auto;background:#333 url(../img/microphone.png) top left;width:470px;height:278px;position:relative;}
+.login-contents {margin: 20px 0 0 10px;}
+.login-contents label {width:80px;color:#ddd;font-weight:bold;text-align:left;}
 
 .popover.right .arrow {
 	top: 50%;

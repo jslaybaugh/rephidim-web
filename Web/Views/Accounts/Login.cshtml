@@ -14,7 +14,7 @@
 		@Html.ValidationMessageFor(m => m.UserName, "User Name is required.", new { @class = "alert-message error"})
 		@Html.ValidationMessageFor(m => m.Password, "Password is required.", new { @class = "alert-message error" })
 		@Html.ValidationMessageFor(m => m.Error, "Authentication Failed. Please try again.", new { @class = "alert-message error" })
-		<div class="login-bg clearfix">
+		<div class="login-bg module clearfix">
 			<div class="login-contents clearfix">
 				<div id="user-box" class="clearfix none">
 					<label for="UserName">User Name:</label> @Html.TextBoxFor(m => m.UserName)
