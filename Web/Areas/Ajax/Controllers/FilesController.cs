@@ -29,7 +29,10 @@ namespace Web.Areas.Ajax.Controllers
 				Name = x.Name,
 				Path = x.FullName.Replace(root, "").Replace(@"\", "/"),
 				DirectoryCount = x.EnumerateDirectories().Count(),
-				New = x.LastWriteTime.Subtract(DateTime.Now).Duration().TotalDays < 8,
+				DateModified = x.LastWriteTime,
+				DateCreated = x.CreationTime,
+				IsNew = x.CreationTime.Subtract(DateTime.Now).Duration().TotalDays < Convert.ToInt32(ConfigurationManager.AppSettings["days"]),
+				IsModified = x.LastWriteTime.Subtract(DateTime.Now).Duration().TotalDays < Convert.ToInt32(ConfigurationManager.AppSettings["days"]),
 				FileCount = x.EnumerateFiles().Count(y => !y.Extension.MatchesTrimmed(".ini") && !y.Extension.MatchesTrimmed(".db") && !y.Extension.MatchesTrimmed(".lnk"))
 			}).OrderBy(x => x.Name);
 
@@ -52,8 +55,10 @@ namespace Web.Areas.Ajax.Controllers
 					Name = x.Name.Substring(0, x.Name.LastIndexOf(".")),
 					Path = x.FullName.Replace(root, "").Replace(@"\", "/"),
 					Size = FileUtility.PrintFileSize(x.Length),
-					FileDate = x.LastWriteTime,
-					New = x.LastWriteTime.Subtract(DateTime.Now).Duration().TotalDays < 8,
+					DateModified = x.LastWriteTime,
+					DateCreated = x.CreationTime,
+					IsModified = x.LastWriteTime.Subtract(DateTime.Now).Duration().TotalDays < Convert.ToInt32(ConfigurationManager.AppSettings["days"]),
+					IsNew = x.CreationTime.Subtract(DateTime.Now).Duration().TotalDays < Convert.ToInt32(ConfigurationManager.AppSettings["days"]),
 					Extension = x.Extension.ToLower().Replace(".", "")
 				}).OrderBy(x => x.Name);
 

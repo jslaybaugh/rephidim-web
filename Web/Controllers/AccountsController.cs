@@ -48,7 +48,7 @@ namespace Web.Controllers
 				Response.SetCookie(authCookie);
 
 				if (!string.IsNullOrEmpty(m.ReturnUrl)) return Redirect(m.ReturnUrl);
-				else return this.RedirectToAction<HomeController>(x => x.Index()); ;
+				else return this.RedirectToAction<HomeController>(x => x.Home()); ;
 			}
 			else
 			{
@@ -70,7 +70,7 @@ namespace Web.Controllers
 					Response.SetCookie(authCookie);
 				}
 			}
-			return this.RedirectToAction<HomeController>(x => x.Index());
+			return this.RedirectToAction<HomeController>(x => x.Home());
 		}
 
 

@@ -2,9 +2,10 @@
 	<ul class="files">
 		{{each Files}}
 			<li>
-				<a href="#" class="file-name" title="${Name}.${Extension}" data-details="${Name}|${Extension}|${Size}|${Path}|${FileDate}">{{html App.ChooseIcon(Extension)}} {{html App.Highlight(Name)}}</a>
-				{{if New}}<span class="label success">New</span>{{/if}}<br />
-				<span class="file-info"><b>Path: </b> {{html App.Highlight(Path.replace(Name + "." + Extension, "")) }}<br /><b>Size:</b> ${Size}, <b>Loaded:</b> ${App.DateFromJson(FileDate).format('m/d/yyyy h:MM TT')}</span>
+				<a href="#" class="file-name" title="${Name}.${Extension}" data-details="${Name}|${Extension}|${Size}|${Path}|${DateModified}">{{html App.ChooseIcon(Extension)}} {{html App.Highlight(Name)}}</a>
+				{{if IsNew}}<span class="label success">New: ${App.DateFromJson(DateCreated).format('m/d h:MM TT')}</span>{{/if}}
+				{{if !IsNew && IsModified}}<span class="label notice">Modified: ${App.DateFromJson(DateModified).format('m/d h:MM TT')}</span>{{/if}}
+				<span class="file-info"><b>Path: </b> {{html App.Highlight(Path.replace(Name + "." + Extension, "")) }}<br /><b>Size:</b> ${Size}, <b>Loaded:</b> ${App.DateFromJson(FileDate).format('m/d/yy h:MM TT')}</span>
 			</li>
 		{{/each}}
 	</ul>

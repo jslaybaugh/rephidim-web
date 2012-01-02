@@ -145,6 +145,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GlossarySummaryMore.cs" />
     <Compile Include="Models\DirectoryInfoResult.cs" />
     <Compile Include="Models\FileInfoResult.cs" />
     <Compile Include="Models\StaticView.cs" />
@@ -215,11 +216,13 @@
     <Content Include="Content\img\login1.png" />
     <Content Include="Content\img\login2.png" />
     <Content Include="Content\img\microphone.png" />
+    <Content Include="Content\templates\files\tmpFileRecent.htm" />
     <Content Include="Content\templates\files\tmpFileSearch.htm" />
     <Content Include="Content\templates\files\tmpPopoverContent.htm" />
     <Content Include="Content\templates\files\tmpPopoverTitle.htm" />
     <Content Include="Content\templates\files\tmpContent.htm" />
     <Content Include="Content\templates\files\tmpFolders.htm" />
+    <Content Include="Content\templates\glossary\tmpTermRecent.htm" />
     <Content Include="Content\templates\glossary\tmpTermFull.htm" />
     <Content Include="Content\templates\glossary\tmpTermList.htm" />
     <Content Include="Content\templates\glossary\tmpTermSearch.htm" />
@@ -227,6 +230,7 @@
     <Content Include="humans.txt" />
     <Content Include="robots.txt" />
     <Content Include="Scripts\app\App.js" />
+    <Content Include="Scripts\app\Home.js" />
     <Content Include="Scripts\app\FileHelper.js" />
     <Content Include="Scripts\app\Static.js" />
     <Content Include="Scripts\app\Search.js" />
@@ -267,7 +271,7 @@
     <Content Include="Views\Accounts\Login.cshtml" />
     <Content Include="Views\Files\Browse.cshtml" />
     <Content Include="Views\Glossary\Term.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Home.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\NotFound.cshtml" />
     <Content Include="Views\Shared\_Master.cshtml" />

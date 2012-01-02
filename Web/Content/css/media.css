@@ -34,7 +34,8 @@
 
 @media only screen and (min-width: 240px) {
   /* Style adjustments for viewports 480px and over go here */
-	html, body, input, select, textarea {font-size:15px;line-height:20px;}
+	html, body, input, select, textarea {font-size:17px;line-height:20px;}
+	.waiter-light {margin:-8px auto -8px 0px;}
 }
 
 @media only screen and (min-width: 768px) {
@@ -44,6 +45,7 @@
 @media only screen and (min-width: 1025px) {
   /* Style adjustments for viewports 1024px and over go here */
 	html, body, input, select, textarea {font-size:13px;line-height:18px;}
+	.waiter-light {margin:-8px auto -8px 20px;}
 }
 
 

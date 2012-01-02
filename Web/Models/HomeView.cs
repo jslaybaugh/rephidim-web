@@ -9,5 +9,6 @@ namespace Web.Models
 	{
 		public IEnumerable<GlossaryItem> RecentTerms { get; set; }
 		public IEnumerable<MessageItem> Messages { get; set; }
+		public IEnumerable<FileInfoResult> RecentFiles { get; set; }
 	}
 }

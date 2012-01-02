@@ -122,7 +122,13 @@
 	{
 		init: function (terms, activeTerm)
 		{
-			_terms = terms;
+			_terms = $.map(terms, function (n)
+			{
+				if (n.IsNew == null) n.IsNew = false;
+				if (n.IsModified == null) n.IsModified = false;
+
+				return n;
+			});
 			_activeTerm = activeTerm;
 
 			domSetup(this);

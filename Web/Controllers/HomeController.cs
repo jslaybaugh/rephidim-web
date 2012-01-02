@@ -14,15 +14,34 @@ namespace Web.Controllers
 	[Authorize]
 	public class HomeController : Controller
 	{
-		private List<FileInfoResult> _matchingFiles;
+		private List<dynamic> _matchingFiles;
 		
-		public ActionResult Index()
+		public ActionResult Home()
 		{
-			var m = new HomeView();
-			m.RecentTerms = DataAccess.GetRecentTerms(7);
-			m.Messages = DataAccess.GetActiveHomeMesssages();
+			string root = ConfigurationManager.AppSettings["FilesRoot"];
+			root = root.Trim().EndsWith(@"\") ? root = root.Substring(0, root.Length - 1) : root;
+			
+			RecentFiles(root);
 
-			return View("Index", m);
+			var m = new HomeView();
+			m.RecentTerms = DataAccess.GetRecentTerms();
+			m.Messages = DataAccess.GetActiveHomeMesssages();
+			m.RecentFiles = _matchingFiles
+				.Select(x => new FileInfoResult
+				{
+					Name = x.Name.Substring(0, x.Name.LastIndexOf(".")),
+					Path = x.FullName.Replace(root, "").Replace(@"\", "/"),
+					Size = FileUtility.PrintFileSize(x.Length),
+					DateModified = x.LastWriteTime,
+					DateCreated = x.CreationTime,
+					IsNew = x.CreationTime.Subtract(DateTime.Now).Duration().TotalDays < Convert.ToInt32(ConfigurationManager.AppSettings["days"]),
+					IsModified = x.LastWriteTime.Subtract(DateTime.Now).Duration().TotalDays < Convert.ToInt32(ConfigurationManager.AppSettings["days"]),
+					Extension = x.Extension.ToLower().Replace(".", "")
+				})
+				.OrderBy(x => x.Name)
+				.Distinct(new PropertyComparer<FileInfoResult>("Name"));
+
+			return View("Home", m);
 		}
 
 		public ActionResult Search(string query)
@@ -39,7 +58,20 @@ namespace Web.Controllers
 
 			var m = new SearchView();
 			m.OriginalQuery = query;
-			m.MatchingFiles = _matchingFiles.Distinct(new PropertyComparer<FileInfoResult>("Name"));
+			m.MatchingFiles = _matchingFiles
+				.Select(x => new FileInfoResult
+				{
+					Name = x.Name.Substring(0, x.Name.LastIndexOf(".")),
+					Path = x.FullName.Replace(root, "").Replace(@"\", "/"),
+					Size = FileUtility.PrintFileSize(x.Length),
+					DateModified = x.LastWriteTime,
+					DateCreated = x.CreationTime,
+					IsModified = x.LastWriteTime.Subtract(DateTime.Now).Duration().TotalDays < Convert.ToInt32(ConfigurationManager.AppSettings["days"]),
+					IsNew =  x.CreationTime.Subtract(DateTime.Now).Duration().TotalDays < Convert.ToInt32(ConfigurationManager.AppSettings["days"]),
+					Extension = x.Extension.ToLower().Replace(".", "")
+				})
+				.OrderBy(x => x.Name)
+				.Distinct(new PropertyComparer<FileInfoResult>("Name"));
 			m.QueryParts = queryParts;
 			m.MatchingTerms = DataAccess.SearchTerms(queryParts);
 
@@ -47,11 +79,36 @@ namespace Web.Controllers
 
 		}
 
+		private void RecentFiles(string path)
+		{
+			var root = ConfigurationManager.AppSettings["FilesRoot"];
+			if (_matchingFiles == null) _matchingFiles = new List<dynamic>();
+
+			var dir = new DirectoryInfo(path);
+			var files = dir.GetFiles();
+
+			var found = files
+				.ToList()
+				.Where(x => x.LastWriteTime.Subtract(DateTime.Now).Duration().TotalDays < Convert.ToInt32(ConfigurationManager.AppSettings["days"]) || x.CreationTime.Subtract(DateTime.Now).Duration().TotalDays < Convert.ToInt32(ConfigurationManager.AppSettings["days"]));
+
+			_matchingFiles.AddRange(found);
+
+			var dirs = dir.GetDirectories();
+
+			if (dirs.Count() > 0)
+			{
+				foreach (var subdir in dirs)
+				{
+					RecentFiles(subdir.FullName);
+				}
+			}
+		}
+
 
 		private void SearchFiles(string path, string[] queryParts)
 		{
 			var root = ConfigurationManager.AppSettings["FilesRoot"];
-			if (_matchingFiles == null) _matchingFiles = new List<FileInfoResult>();
+			if (_matchingFiles == null) _matchingFiles = new List<dynamic>();
 
 			var dir = new DirectoryInfo(path);
 			var files = dir.GetFiles();
@@ -59,17 +116,7 @@ namespace Web.Controllers
 			var regexp = string.Join("", queryParts.Select(x => "(?=.*" + x + ")"));
 			var found = files
 				.ToList()
-				.Where(x => Regex.IsMatch(x.FullName.Replace(root, ""), regexp, RegexOptions.IgnoreCase) && !x.Extension.MatchesTrimmed(".ini") && !x.Extension.MatchesTrimmed(".db") && !x.Extension.MatchesTrimmed(".lnk"))
-				.Select(x => new FileInfoResult
-				{
-					Name = x.Name.Substring(0, x.Name.LastIndexOf(".")),
-					Path = x.FullName.Replace(root, "").Replace(@"\", "/"),
-					Size = FileUtility.PrintFileSize(x.Length),
-					FileDate = x.LastWriteTime,
-					New = x.LastWriteTime.Subtract(DateTime.Now).Duration().TotalDays < 8,
-					Extension = x.Extension.ToLower().Replace(".", "")
-				})
-				.OrderBy(x => x.Name);
+				.Where(x => Regex.IsMatch(x.FullName.Replace(root, ""), regexp, RegexOptions.IgnoreCase) && !x.Extension.MatchesTrimmed(".ini") && !x.Extension.MatchesTrimmed(".db") && !x.Extension.MatchesTrimmed(".lnk"));
 
 			_matchingFiles.AddRange(found);
 

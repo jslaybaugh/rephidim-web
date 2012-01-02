@@ -52,7 +52,7 @@ img {vertical-align:bottom;}
 .folder-noexpand {margin-left:-15px;display:inline-block;visibility:hidden;}
 .files { list-style-type: none;margin:5px; padding: 0px; }
 .files li {padding:3px 0px 3px 0px;border:none;border-bottom:solid 1px #ddd;width:100%;overflow:hidden;text-overflow:ellipsis;}
-.files a {font-size:larger;}
+/*.files a {font-size:larger;}*/
 .file-info {font-size:10px;color:#999;font-weight:normal;}
 .file-actions {font-size:10px;color:#666;font-weight:bold;text-transform:uppercase;float:right;}
 /*
@@ -92,7 +92,7 @@ img {vertical-align:bottom;}
 }
 
 .waiter-dark {height:16px;width:16px;display:inline-block;background:url("../img/ajax-loader-dark.gif") top center no-repeat;}
-.waiter-light {height:21px;width:56px;display:inline-block;background:url("../img/ajax-loader-light.gif") top center no-repeat;margin:-8px auto -8px 20px;}
+.waiter-light {height:21px;width:56px;display:inline-block;background:url("../img/ajax-loader-light.gif") top center no-repeat;}
 
 .global-message {position:fixed;z-index:1000;bottom:0px;left:20px;right:20px;text-align:center;}
 .global-message p {font-weight:bold;}

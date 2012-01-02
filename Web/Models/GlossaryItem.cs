@@ -12,5 +12,7 @@ namespace Web.Models
 		public string Definition { get; set; }
 		public DateTime DateCreated { get; set; }
 		public DateTime? DateModified { get; set; }
+		public bool IsNew { get; set; }
+		public bool IsModified { get; set; }
 	}
 }

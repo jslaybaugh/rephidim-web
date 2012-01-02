@@ -50,7 +50,7 @@ namespace Web.Code
 				return null;
 			}
 		}
-		public static IEnumerable<GlossaryItem> GetRecentTerms(int days)
+		public static IEnumerable<GlossaryItem> GetRecentTerms()
 		{
 			try
 			{
@@ -59,9 +59,9 @@ namespace Web.Code
 					cn.Open();
 
 					var p = new DynamicParameters();
-					p.Add("@days", days);
+					p.Add("@days", ConfigurationManager.AppSettings["days"]);
 
-					var res = cn.Query("SELECT TermId, Term, DateCreated, DateModified FROM GlossaryTerms WHERE GETDATE() < DATEADD(day,@days,DateModified) OR GETDATE() < DATEADD(day,@days,DateCreated)", p);
+					var res = cn.Query("SELECT TermId, Term, SUBSTRING(Definition,0, 125) + '...' as Definition, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew  FROM GlossaryTerms WHERE GETDATE() < DATEADD(day,@days,DateModified) OR GETDATE() < DATEADD(day,@days,DateCreated)", p);
 
 					if (res == null) return null;
 
@@ -69,9 +69,11 @@ namespace Web.Code
 						{
 							Id = x.TermId,
 							Term = x.Term,
-							//Definition = x.Definition,
+							Definition = x.Definition,
 							DateCreated = x.DateCreated,
-							DateModified = x.DateModified
+							DateModified = x.DateModified,
+							IsNew = x.IsNew,
+							IsModified = x.IsModified
 						});
 				}
 			}
@@ -90,16 +92,27 @@ namespace Web.Code
 					cn.Open();
 
 					var p = new DynamicParameters();
+					p.Add("@days", ConfigurationManager.AppSettings["days"]);
 
-					var res = cn.Query("SELECT TermId, Term FROM GlossaryTerms ORDER BY Term", p);
+					var res = cn.Query("SELECT TermId, Term, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew  FROM GlossaryTerms ORDER BY Term", p);
 
 					if (res == null) return null;
 
-					return res.Select(x => new GlossarySummary
-					{
-						Id = x.TermId,
-						Term = x.Term,
-					});
+					return res.Select(x => x.IsNew || x.IsModified
+						? new GlossarySummaryMore
+						{
+							Id = x.TermId,
+							Term = x.Term,
+							DateCreated = x.DateCreated,
+							DateModified = x.DateModified,
+							IsModified = x.IsModified,
+							IsNew = x.IsNew
+						}
+						: new GlossarySummary
+						{
+							Id = x.TermId,
+							Term = x.Term,
+						});
 				}
 			}
 			catch (Exception)
@@ -117,8 +130,9 @@ namespace Web.Code
 
 					var p = new DynamicParameters();
 					p.Add("@termid", id);
+					p.Add("@days", ConfigurationManager.AppSettings["days"]);
 
-					var res = cn.Query("SELECT TermId, Term, Definition, DateCreated, DateModified FROM GlossaryTerms WHERE TermId=@termid", p);
+					var res = cn.Query("SELECT TermId, Term, Definition, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew FROM GlossaryTerms WHERE TermId=@termid", p);
 
 					if (res == null) return null;
 
@@ -128,7 +142,9 @@ namespace Web.Code
 						Term = x.Term,
 						Definition = x.Definition,
 						DateCreated = x.DateCreated,
-						DateModified = x.DateModified
+						DateModified = x.DateModified,
+						IsModified = x.IsModified,
+						IsNew = x.IsNew
 					}).FirstOrDefault();
 				}
 			}
@@ -144,8 +160,10 @@ namespace Web.Code
 				using (var cn = new SqlCeConnection(ConnString))
 				{
 					cn.Open();
+					var p = new DynamicParameters();
+					p.Add("@days", ConfigurationManager.AppSettings["days"]);
 
-					var res = cn.Query(CreateSearchQuery(parts));
+					var res = cn.Query(CreateSearchQuery(parts), p);
 
 					if (res == null) return null;
 
@@ -155,7 +173,10 @@ namespace Web.Code
 						Term = x.Term,
 						Definition = SliceRelevantChunk(x.Definition, parts),
 						DateCreated = x.DateCreated,
-						DateModified = x.DateModified
+						DateModified = x.DateModified,
+						IsNew = x.IsNew,
+						IsModified = x.IsModified
+
 					});
 				}
 			}
@@ -168,7 +189,7 @@ namespace Web.Code
 		private static string CreateSearchQuery(string[] parts)
 		{
 
-			string SqlString = "SELECT TermId, Term, Definition, DateCreated, DateModified FROM GlossaryTerms WHERE ";
+			string SqlString = "SELECT TermId, Term, Definition, DateCreated, DateModified, , CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew FROM GlossaryTerms WHERE ";
 
 			foreach (var part in parts)
 			{
@@ -226,8 +247,9 @@ namespace Web.Code
 
 					var p = new DynamicParameters();
 					p.Add("@term", term);
+					p.Add("@days", ConfigurationManager.AppSettings["days"]);
 
-					var res = cn.Query("SELECT TermId, Term, Definition, DateCreated, DateModified FROM GlossaryTerms WHERE Term=@term", p);
+					var res = cn.Query("SELECT TermId, Term, Definition, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew FROM GlossaryTerms WHERE Term=@term", p);
 
 					if (res == null) return null;
 
@@ -237,7 +259,9 @@ namespace Web.Code
 						Term = x.Term,
 						Definition = x.Definition,
 						DateCreated = x.DateCreated,
-						DateModified = x.DateModified
+						DateModified = x.DateModified,
+						IsNew = x.IsNew,
+						IsModified = x.IsModified
 					}).FirstOrDefault();
 				}
 			}

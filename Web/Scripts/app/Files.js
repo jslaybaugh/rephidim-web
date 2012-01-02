@@ -90,8 +90,10 @@
 			me.LoadContents(path, function (data)
 			{
 				var content = {};
+				content.Path = path;
 				content.Files = data;
 				$("#tmpContent").tmpl(content).appendTo($("#uxContents").empty());
+				$(window).resize();
 
 			});
 
@@ -102,6 +104,7 @@
 		{
 			$("#uxFolders").height($(window).height() - 60);
 			$("#uxContents").height($(window).height() - 60);
+			$("#uxFiles").height($(window).height() - $("#uxPath").outerHeight(true) - 60);
 
 		})).resize();
 

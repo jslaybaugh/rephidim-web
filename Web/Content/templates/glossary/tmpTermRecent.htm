@@ -1,0 +1,14 @@
+﻿{{if Terms != null && Terms.length > 0}}
+	<ul class="unstyled">
+		{{each Terms}}
+			<li>
+				<a title="Go to full definition for ${Term}" href="${ App.ResolveUrl('~/Glossary/Term/' + Id) }">${Term}</a>
+				{{if IsNew}}<span class="label success">New: ${App.DateFromJson(DateCreated).format('m/d h:MM TT')}</span>{{/if}}
+				{{if !IsNew && IsModified}}<span class="label notice">Modified: ${App.DateFromJson(DateModified).format('m/d h:MM TT')}</span>{{/if}}<br /><br />
+				{{html Definition}}<br /><br />
+			</li>
+		{{/each}}
+	</ul>
+{{else}}
+	<div class='message'><div><span>No recently added/modified terms found.</span></div></div>
+{{/if}}
