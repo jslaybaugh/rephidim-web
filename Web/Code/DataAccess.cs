@@ -204,7 +204,7 @@ namespace Web.Code
 					if (definition.Length - index < right) right = definition.Length - index - 1;
 					if (index < left) left = index;
 
-					res += "..." + Regex.Replace(definition.Substring(index - left, index + right - (index - left)), "(" + string.Join("|",parts) + ")", "<span class='hilite'>$1</span>", RegexOptions.IgnoreCase) + "... &nbsp;";
+					res += "..." + definition.Substring(index - left, index + right - (index - left)) + "... &nbsp;";
 					lastIndex = index;
 
 				}

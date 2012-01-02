@@ -1,10 +1,9 @@
 ﻿/// <reference path="app.js" />
+/// <reference path="filehelper.js" />
 /// <reference path="../libs/Class.js" />
 
 (function ()
 {
-
-	
 
 	var domSetup = function (me)
 	{
@@ -20,9 +19,16 @@
 
 	this.App.Search = Class.extend(
 	{
-		init: function (query)
+		init: function (queryParts, termResults, fileResults)
 		{
+			App.SetQueryParts(queryParts);
+
 			domSetup(this);
+
+			$("#tmpTermSearch").tmpl({ Terms: termResults }).appendTo($("#uxGlossary").empty());
+			$("#tmpFileSearch").tmpl({ Files: fileResults }).appendTo($("#uxFiles").empty());
+
+			App.FileHelper.ReadyPopover();
 		}
 
 	});

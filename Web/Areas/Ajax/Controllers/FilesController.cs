@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using System.Configuration;
 using System.IO;
 using Postal;
+using Web.Code;
+using Web.Models;
 
 namespace Web.Areas.Ajax.Controllers
 {
@@ -22,7 +24,7 @@ namespace Web.Areas.Ajax.Controllers
 
 			var dir = new DirectoryInfo(path);
 
-			var dirs = dir.EnumerateDirectories().Select(x => new
+			var dirs = dir.EnumerateDirectories().Select(x => new DirectoryInfoResult
 			{
 				Name = x.Name,
 				Path = x.FullName.Replace(root, "").Replace(@"\", "/"),
@@ -45,15 +47,15 @@ namespace Web.Areas.Ajax.Controllers
 
 			var files = dir.EnumerateFiles()
 				.Where(y => !y.Extension.MatchesTrimmed(".ini") && !y.Extension.MatchesTrimmed(".db") && !y.Extension.MatchesTrimmed(".lnk"))
-				.Select(x => new
-			{
-				Name = x.Name.Substring(0, x.Name.LastIndexOf(".")),
-				Path = x.FullName.Replace(root, "").Replace(@"\", "/"),
-				Size = PrintFileSize(x.Length),
-				FileDate = x.LastWriteTime,
-				New = x.LastWriteTime.Subtract(DateTime.Now).Duration().TotalDays < 8,
-				Extension = x.Extension.ToLower().Replace(".", "")
-			}).OrderBy(x => x.Name);
+				.Select(x => new FileInfoResult
+				{
+					Name = x.Name.Substring(0, x.Name.LastIndexOf(".")),
+					Path = x.FullName.Replace(root, "").Replace(@"\", "/"),
+					Size = FileUtility.PrintFileSize(x.Length),
+					FileDate = x.LastWriteTime,
+					New = x.LastWriteTime.Subtract(DateTime.Now).Duration().TotalDays < 8,
+					Extension = x.Extension.ToLower().Replace(".", "")
+				}).OrderBy(x => x.Name);
 
 			return Json(files, JsonRequestBehavior.AllowGet);
 		}
@@ -89,14 +91,6 @@ namespace Web.Areas.Ajax.Controllers
 			{
 				return Json(false);
 			}
-		}
-
-		private string PrintFileSize(Int64 size)
-		{
-			if (size < 1024) return "< 1 KB";
-			else if (size < 1024 * 1000) return string.Format("{0} KB", Math.Ceiling(size / 1000.0));
-			else return string.Format("{0:N1} MB", size / (1000.0 * 1024));
-
 		}
 
 	}

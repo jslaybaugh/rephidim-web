@@ -1,11 +1,11 @@
 ﻿<div>
 	<ul class="files">
-		<li><a href="${App.ResolveUrl('~/Files/Open' + Path)}" target="_blank">{{html App.ChooseIcon("open")}} Open (new window/tab)</a></li>
+		<li><a href="${App.ResolveUrl('~/Files/Open/' + Path)}" target="_blank">{{html App.ChooseIcon("open")}} Open (new window/tab)</a></li>
 		{{if Device == "iOS" && Extension == "pdf" }}
-			<li><a href="${App.ResolveUrl('~/Files/Open' + Path, 'ghttp')}" target="_blank">{{html App.ChooseIcon("goodreader")}} Open in GoodReader™</a></li>
+			<li><a href="${App.ResolveUrl('~/Files/Open/' + Path, 'ghttp')}" target="_blank">{{html App.ChooseIcon("goodreader")}} Open in GoodReader™</a></li>
 		{{/if}}
 		{{if Device != "iOS" }}
-			<li><a href="${App.ResolveUrl('~/Files/Download' + Path)}" target="_blank">{{html App.ChooseIcon("usb")}} Download & Save</a></li>
+			<li><a href="${App.ResolveUrl('~/Files/Download/' + Path)}" target="_blank">{{html App.ChooseIcon("usb")}} Download & Save</a></li>
 		{{/if}}
 		<li><a>{{html App.ChooseIcon("email")}} Email </a><form id="frmEmail" style="display:inline;"><input type="text" id="txtEmail" placeholder="Email Address" style="width:100px;" /> <input type="submit" id="btnEmail" value="Send Email" /></form></li>
 	</ul>

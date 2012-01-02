@@ -134,6 +134,8 @@
     <Compile Include="Code\Extensions\Strings.cs" />
     <Compile Include="Code\Extensions\StringValidations.cs" />
     <Compile Include="Code\Extensions\Url.cs" />
+    <Compile Include="Code\FileUtility.cs" />
+    <Compile Include="Code\PropertyComparer.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\StaticController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
@@ -143,6 +145,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DirectoryInfoResult.cs" />
+    <Compile Include="Models\FileInfoResult.cs" />
     <Compile Include="Models\StaticView.cs" />
     <Compile Include="Models\SearchView.cs" />
     <Compile Include="Models\FileView.cs" />
@@ -211,16 +215,19 @@
     <Content Include="Content\img\login1.png" />
     <Content Include="Content\img\login2.png" />
     <Content Include="Content\img\microphone.png" />
+    <Content Include="Content\templates\files\tmpFileSearch.htm" />
     <Content Include="Content\templates\files\tmpPopoverContent.htm" />
     <Content Include="Content\templates\files\tmpPopoverTitle.htm" />
     <Content Include="Content\templates\files\tmpContent.htm" />
     <Content Include="Content\templates\files\tmpFolders.htm" />
     <Content Include="Content\templates\glossary\tmpTermFull.htm" />
     <Content Include="Content\templates\glossary\tmpTermList.htm" />
+    <Content Include="Content\templates\glossary\tmpTermSearch.htm" />
     <Content Include="Global.asax" />
     <Content Include="humans.txt" />
     <Content Include="robots.txt" />
     <Content Include="Scripts\app\App.js" />
+    <Content Include="Scripts\app\FileHelper.js" />
     <Content Include="Scripts\app\Static.js" />
     <Content Include="Scripts\app\Search.js" />
     <Content Include="Scripts\app\Files.js" />

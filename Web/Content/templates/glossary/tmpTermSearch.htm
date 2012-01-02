@@ -1,0 +1,9 @@
+﻿{{if Terms != null && Terms.length > 0}}
+	<ul class="unstyled">
+		{{each Terms}}
+			<li><a title="Go to full definition for ${Term}" href="${ App.ResolveUrl('~/Glossary/Term/' + Id) }">{{html App.Highlight(Term) }}</a><br />{{html App.Highlight(Definition) }}<br /><br /></li>
+		{{/each}}
+	</ul>
+{{else}}
+	<div class='message'><div><span>No terms match the search terms.</span></div></div>
+{{/if}}

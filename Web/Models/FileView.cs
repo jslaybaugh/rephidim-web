@@ -8,6 +8,5 @@ namespace Web.Models
 	public class FileView
 	{
 		public string Path { get; set; }
-		public string Email {get;set;}
 	}
 }

@@ -17,12 +17,6 @@ namespace Web.Controllers
 		{
 			var m = new FileView();
 			m.Path = path;
-
-			var cookie = Request.Cookies["rephidim"];
-			if (cookie != null)
-			{
-				m.Email = cookie["email"];
-			}
 			
 			return View("Browse", m);
 		}

@@ -10,6 +10,13 @@
 	string titleFormat = "{0} : Rephidim Church";
 	
 	string appPath = Request.ApplicationPath + (Request.ApplicationPath.EndsWith("/") ? "" : "/");
+
+	var cookie = Request.Cookies["rephidim"];
+	string lastEmail = "";
+	if (cookie != null)
+	{
+		lastEmail = cookie["email"];
+	}
 }
 
 <!DOCTYPE html>
@@ -90,30 +97,31 @@
 	}
 	@Bundles.RenderScripts()
 	<script type="text/javascript">
-		App.SetRoot("@appPath");
-		App.SetTitleFormat("@titleFormat");
-
-		App.SetIconTable(
-		{
-			"txt"			: '@Sprite.Image("~/App_Sprites/icon_text.png")',
-			"rtf"			: '@Sprite.Image("~/App_Sprites/icon_text.png")',
-			"pdf"			: '@Sprite.Image("~/App_Sprites/icon_pdf.png")',
-			"mp3"			: '@Sprite.Image("~/App_Sprites/icon_mp3.png")',
-			"exe"			: '@Sprite.Image("~/App_Sprites/icon_window.png")',
-			"jpg"			: '@Sprite.Image("~/App_Sprites/icon_jpg.png")',
-			"jpeg"			: '@Sprite.Image("~/App_Sprites/icon_jpg.png")',
-			"tif"			: '@Sprite.Image("~/App_Sprites/icon_tif.png")',
-			"tiff"			: '@Sprite.Image("~/App_Sprites/icon_tif.png")',
-			"gif"			: '@Sprite.Image("~/App_Sprites/icon_gif.png")',
-			"cdr"			: '@Sprite.Image("~/App_Sprites/icon_flow.png")',
-			"asd"			: '@Sprite.Image("~/App_Sprites/icon_flow.png")',
-			"unk"			: '@Sprite.Image("~/App_Sprites/icon_help.png")',
-			"open"			: '@(Sprite.Image("~/App_Sprites/icon_open.png"))',
-			"goodreader"	: '@(Sprite.Image("~/App_Sprites/icon_goodreader.png"))',
-			"usb"			: '@(Sprite.Image("~/App_Sprites/icon_usb.png"))',
-			"email"			: '@(Sprite.Image("~/App_Sprites/icon_email.png"))',
-			"folder"		: '@(Sprite.Image("~/App_Sprites/icon_folder.png"))'
-		});
+		window._LastUsedEmail = "@lastEmail";
+		App.Startup(
+			"@appPath", 
+			"@titleFormat",
+			{
+				"txt"			: '@Sprite.Image("~/App_Sprites/icon_text.png")',
+				"rtf"			: '@Sprite.Image("~/App_Sprites/icon_text.png")',
+				"pdf"			: '@Sprite.Image("~/App_Sprites/icon_pdf.png")',
+				"mp3"			: '@Sprite.Image("~/App_Sprites/icon_mp3.png")',
+				"exe"			: '@Sprite.Image("~/App_Sprites/icon_window.png")',
+				"jpg"			: '@Sprite.Image("~/App_Sprites/icon_jpg.png")',
+				"jpeg"			: '@Sprite.Image("~/App_Sprites/icon_jpg.png")',
+				"tif"			: '@Sprite.Image("~/App_Sprites/icon_tif.png")',
+				"tiff"			: '@Sprite.Image("~/App_Sprites/icon_tif.png")',
+				"gif"			: '@Sprite.Image("~/App_Sprites/icon_gif.png")',
+				"cdr"			: '@Sprite.Image("~/App_Sprites/icon_flow.png")',
+				"asd"			: '@Sprite.Image("~/App_Sprites/icon_flow.png")',
+				"unk"			: '@Sprite.Image("~/App_Sprites/icon_help.png")',
+				"open"			: '@(Sprite.Image("~/App_Sprites/icon_open.png"))',
+				"goodreader"	: '@(Sprite.Image("~/App_Sprites/icon_goodreader.png"))',
+				"usb"			: '@(Sprite.Image("~/App_Sprites/icon_usb.png"))',
+				"email"			: '@(Sprite.Image("~/App_Sprites/icon_email.png"))',
+				"folder"		: '@(Sprite.Image("~/App_Sprites/icon_folder.png"))'
+			}
+		);
 
 		$(function()
 		{

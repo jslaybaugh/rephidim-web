@@ -1,0 +1,13 @@
+﻿{{if Files != null && Files.length > 0}}
+	<ul class="files">
+		{{each Files}}
+			<li>
+				<a href="#" class="file-name" title="${Name}.${Extension}" data-details="${Name}|${Extension}|${Size}|${Path}|${FileDate}">{{html App.ChooseIcon(Extension)}} {{html App.Highlight(Name)}}</a>
+				{{if New}}<span class="label success">New</span>{{/if}}<br />
+				<span class="file-info"><b>Path: </b> {{html App.Highlight(Path.replace(Name + "." + Extension, "")) }}<br /><b>Size:</b> ${Size}, <b>Loaded:</b> ${App.DateFromJson(FileDate).format('m/d/yyyy h:MM TT')}</span>
+			</li>
+		{{/each}}
+	</ul>
+{{else}}
+	<div class='message'><div><span>No files match the search terms.</span></div></div>
+{{/if}}

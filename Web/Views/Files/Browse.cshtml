@@ -26,7 +26,7 @@
 
 		$(function ()
 		{
-			var Files = new App.Files(@Html.Raw(Json.Encode(Model.Path ?? "")), @Html.Raw(Json.Encode(Model.Email)));
+			var Files = new App.Files(@Html.Raw(Json.Encode(Model.Path ?? "")));
 		});
 		
 	</script>

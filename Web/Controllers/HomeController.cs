@@ -14,7 +14,7 @@ namespace Web.Controllers
 	[Authorize]
 	public class HomeController : Controller
 	{
-		private List<FileInfo> matchingFiles;
+		private List<FileInfoResult> _matchingFiles;
 		
 		public ActionResult Index()
 		{
@@ -27,37 +27,59 @@ namespace Web.Controllers
 
 		public ActionResult Search(string query)
 		{
+			if (string.IsNullOrEmpty(query))
+			{
+				return View("Search", new SearchView { OriginalQuery = "" });
+			}
 			string root = ConfigurationManager.AppSettings["FilesRoot"];
 			root = root.Trim().EndsWith(@"\") ? root = root.Substring(0, root.Length - 1) : root;
 
-			SearchFiles(root, query);
+			var queryParts = GetSearchParts(query);
+			SearchFiles(root, queryParts);
 
 			var m = new SearchView();
 			m.OriginalQuery = query;
-			m.MatchingFiles = matchingFiles;
-			m.QueryParts = GetSearchParts(query);
-			m.MatchingTerms = DataAccess.SearchTerms(m.QueryParts);
+			m.MatchingFiles = _matchingFiles.Distinct(new PropertyComparer<FileInfoResult>("Name"));
+			m.QueryParts = queryParts;
+			m.MatchingTerms = DataAccess.SearchTerms(queryParts);
 
 			return View("Search", m);
 
 		}
 
 
-		private void SearchFiles(string path, string query)
+		private void SearchFiles(string path, string[] queryParts)
 		{
-			if (matchingFiles == null) matchingFiles = new List<FileInfo>();
+			var root = ConfigurationManager.AppSettings["FilesRoot"];
+			if (_matchingFiles == null) _matchingFiles = new List<FileInfoResult>();
 
 			var dir = new DirectoryInfo(path);
 			var files = dir.GetFiles();
 
-			matchingFiles.AddRange(files.Where(x => x.Name.ToLower().Contains(query.ToLower())));
+			var regexp = string.Join("", queryParts.Select(x => "(?=.*" + x + ")"));
+			var found = files
+				.Where(x => Regex.IsMatch(x.FullName.Replace(root, ""), regexp, RegexOptions.IgnoreCase) && !x.Extension.MatchesTrimmed(".ini") && !x.Extension.MatchesTrimmed(".db") && !x.Extension.MatchesTrimmed(".lnk"))
+				.Select(x => new FileInfoResult
+				{
+					Name = x.Name.Substring(0, x.Name.LastIndexOf(".")),
+					Path = x.FullName.Replace(root, "").Replace(@"\", "/"),
+					Size = FileUtility.PrintFileSize(x.Length),
+					FileDate = x.LastWriteTime,
+					New = x.LastWriteTime.Subtract(DateTime.Now).Duration().TotalDays < 8,
+					Extension = x.Extension.ToLower().Replace(".", "")
+				})
+				.OrderBy(x => x.Name)
+				.ToList();
+
+			_matchingFiles.AddRange(found);
+
 			var dirs = dir.GetDirectories();
 
 			if (dirs.Count() > 0)
 			{
 				foreach (var subdir in dirs)
 				{
-					SearchFiles(subdir.FullName, query);
+					SearchFiles(subdir.FullName, queryParts);
 				}
 			}
 		}

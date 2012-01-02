@@ -2,7 +2,7 @@
 
 (function ()
 {
-	var _root, _format, _icons;
+	var _root, _titleFormat, _icons, _queryParts;
 	String.prototype.format = function ()
 	{
 		var s = this;
@@ -17,15 +17,11 @@
 
 	this.App = {
 
-
-		ShowPopup: function (relativeUrl, windowName)
-		{
-			return window.open(this.ResolveUrl(relativeUrl), windowName, 'status=yes,toolbars=no,scrollbars=yes,resizable=yes,width=900,height=800').focus(); void 0;
-		},
-
-		SetRoot: function (root)
+		Startup: function (root, titleFormat, icons)
 		{
 			_root = root;
+			_titleFormat = titleFormat;
+			_icons = icons;
 
 			$("#uxAppWait").ajaxStart(function ()
 			{
@@ -50,14 +46,9 @@
 			return resolved;
 		},
 
-		SetTitleFormat: function (format)
-		{
-			_format = format;
-		},
-
 		SetTitle: function (custompart)
 		{
-			document.title = _format.format(custompart);
+			document.title = _titleFormat.format(custompart);
 		},
 
 		DateFromJson: function (jsonDate)
@@ -71,14 +62,20 @@
 			$("#uxAlert").hide().removeClass("warning error success info").addClass(className).find("p").html(msg).end().fadeIn();
 		},
 
-		SetIconTable: function (data)
-		{
-			_icons = data;
-		},
-
 		ChooseIcon: function (key)
 		{
 			return _icons[key.toLowerCase()];
+		},
+
+		SetQueryParts: function (queryParts)
+		{
+			_queryParts = queryParts;
+		},
+
+		Highlight: function (text)
+		{
+			var reg = new RegExp("(" + _queryParts.join("|") + ")", "ig");
+			return text.replace(reg, "<span class='hilite'>$1</span>");
 		}
 
 	};
