@@ -2,9 +2,10 @@
    Author: Jorin Slaybaugh
    ========================================================================== */
 
-html, body, input, select, textarea {font-family: 'Open Sans', sans-serif;}
+html, body, input, select, textarea {font-family: 'Open Sans', sans-serif; color:#222;}
 body { background: #eee url(../img/bg2.png) repeat; padding-top:50px;}
 
+input[type=submit] {background:#efefef;}
 
 .login-container .alert-message {width:440px;margin:auto;margin-bottom:10px;clear:both;}
 .field-validation-error.alert-message {display:block;}
