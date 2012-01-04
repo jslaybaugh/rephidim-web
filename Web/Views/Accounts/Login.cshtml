@@ -3,6 +3,15 @@
 	ViewBag.Title = "Login";
 	Layout = "~/Views/Shared/_NoAuth.cshtml";
 }
+
+@if (Model.Messages != null && Model.Messages.Count() > 0)
+{ 
+	foreach (var msg in Model.Messages)
+	{
+		<div class="alert-message @msg.Style.ToLowerInvariant()">@Html.Raw(msg.Value)</div>
+	}
+}
+
 <div class="login-container">
 	<p class="church">REPHIDIM CHURCH</p>
 	<p class="scripture">Do not give what is holy to dogs, and do not cast your pearls before swine, lest they trample them under their feet, and turn to tear you to pieces.</p>

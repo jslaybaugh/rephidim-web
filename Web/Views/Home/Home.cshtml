@@ -7,28 +7,19 @@
 }
 
 <div class="row" id="uxHeader">
-	<div class="span16 module">
-		<h2 style="margin:10px;">Recent Messages</h2>
+	<div class="span16">
 		@if (Model.Messages != null && Model.Messages.Count() > 0)
 		{ 
-			<ul>
-				@foreach (var msg in Model.Messages)
-				{
-					<li>@msg.Value</li>
-				}
-			</ul>
-		}
-		else
-		{
-			<div class="message"><div><span>No new messages.</span></div></div>
+			foreach (var msg in Model.Messages)
+			{
+				<div class="alert-message @msg.Style.ToLowerInvariant()">@Html.Raw(msg.Value)</div>
+			}
 		}
 	</div>
-	<h2 class="span8">Recently Added/Modified Terms (@(Model.RecentTerms != null ? Model.RecentTerms.Count() : 0))</h2>
-	<h2 class="span8">Recently Added/Modified Files (@(Model.RecentFiles != null ? Model.RecentFiles.Count() : 0))</h2>
 </div>
 <div class="row">
-	<div class="span8 module scrollable" id="uxGlossary"></div>
-	<div class="span8 module scrollable" id="uxFiles"></div>
+	<div class="span8 module" id="uxGlossary"></div>
+	<div class="span8 module" id="uxFiles"></div>
 </div>
 
 

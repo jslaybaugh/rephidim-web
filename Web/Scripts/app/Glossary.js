@@ -27,7 +27,7 @@
 			return;
 		}
 
-		$("#uxList").scrollTo("[name='" + _activeTerm.Id + "']", 1000, { easing: 'swing', axis: 'y' });
+		$("#uxList .scrollable").scrollTo("[name='" + _activeTerm.Id + "']", 1000, { easing: 'swing', axis: 'y' });
 		App.SetTitle(_activeTerm.Term + " - Glossary");
 
 		if (Modernizr.history && push)
@@ -109,9 +109,8 @@
 
 		$(window).resize($.throttle(250, function ()
 		{
-			$("#uxList").height($(window).height() - $("#uxFooter").outerHeight(true) - 60);
+			$("#uxList").height($(window).height() - 60);
 			$("#uxTerm").height($(window).height() - 60);
-			$("#uxDefinition").height($(window).height() - $("#uxTermName").outerHeight(true) - 60);
 		})).resize();
 
 		$("#tmpTermList").tmpl(_terms).appendTo("#ulTerms");

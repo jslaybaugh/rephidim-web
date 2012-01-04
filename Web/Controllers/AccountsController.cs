@@ -26,6 +26,7 @@ namespace Web.Controllers
 			var m = new LoginView();
 			m.UserName = "rephidim";
 			m.ReturnUrl = returnUrl;
+			m.Messages = DataAccess.GetActiveLoginMesssages();
 			
 			return View("Login", m);
 		}
@@ -33,6 +34,7 @@ namespace Web.Controllers
 		[HttpPost]
 		public ActionResult Login(LoginView m)
 		{
+			m.Messages = DataAccess.GetActiveLoginMesssages();
 			if (!ModelState.IsValid) return View(m);
 
 			var user = DataAccess.Authenticate(m.UserName, m.Password);

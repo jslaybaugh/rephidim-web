@@ -2,17 +2,7 @@
 
 @{
 	ViewBag.Title = Model.Path;
-
-	if (Model.Path.ToLowerInvariant().Contains("chrono"))
-	{
-		ViewBag.NavChronology = true;
-	}
-	else if (Model.Path.ToLowerInvariant().Contains("tape"))
-	{
-		ViewBag.NavTape = true;
-	}
-
-	
+	ViewBag.NavOther = true;	
 }
 
 <div class="module">

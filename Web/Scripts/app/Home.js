@@ -11,10 +11,7 @@
 		{
 			$("#uxFiles").height($(window).height() - $("#uxHeader").outerHeight(true) - 60);
 			$("#uxGlossary").height($(window).height() - $("#uxHeader").outerHeight(true) - 60);
-
 		})).resize();
-
-
 	};
 
 	this.App.Home = Class.extend(

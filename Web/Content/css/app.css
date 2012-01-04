@@ -2,7 +2,7 @@
    Author: Jorin Slaybaugh
    ========================================================================== */
 
-html, body, input, select, textarea {font-family: 'Open Sans', sans-serif; color:#222;}
+html, body, input, select, textarea {font-family: 'Open Sans', sans-serif; color:#222;font-size:13px;line-height:18px;}
 body { background: #eee url(../img/bg2.png) repeat; padding-top:50px;}
 
 input[type=submit] {background:#efefef;}
@@ -26,7 +26,12 @@ input[type=submit] {background:#efefef;}
 .bold {font-weight:bold;}
 
 .scrollable {overflow:scroll;-webkit-overflow-scrolling:touch;}
-.module {-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:10px;box-shadow:0 0 10px #444;background:#f3f3f3;}
+.module {-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;box-shadow:0 0 10px #444;background:#f3f3f3;overflow:hidden;}
+
+.module h1 {clear:both;-webkit-border-top-left-radius:5px;-moz-border-top-left-radius:5px;border-top-left-radius:5px;-webkit-border-top-right-radius:5px;-moz-border-top-right-radius:5px;border-top-right-radius:5px;margin:0px;display:block;padding:8px;color:#eee;font-size:18px;line-height:20px;background: #222;font-weight:normal;}
+.cssgradients .module h1 {filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333', endColorstr='#222');  background: -webkit-gradient(linear, left top, left bottom, from(#333), to(#222)); background: -moz-linear-gradient(top,  #333,  #222);}
+.no-cssgradients .module h1 {background: #222;}
+.module > div {padding:5px;box-sizing:border-box;}
 
 .message {display:table;height:100%;width:100%;vertical-align:middle;text-align:center;}
 .message div {display:table-cell;height:100%;width:100%;vertical-align:middle;text-align:center;}
@@ -34,7 +39,7 @@ input[type=submit] {background:#efefef;}
 
 /* Glossary */
 
-#ulTerms li {white-space:nowrap;margin-left:5px;border-bottom:#fff solid 1px;}
+#ulTerms li {white-space:nowrap;border-bottom:#fff solid 1px;}
 
 .inactive-link {color:#404040;text-decoration:none;}
 .active-link {color:#0069D6;text-decoration:underline;}
@@ -45,7 +50,7 @@ img {vertical-align:bottom;}
 .folders li { margin: 0px;padding:0px;white-space:nowrap; }
 .folder-expand {margin-left:-15px;display:inline-block;}
 .folder-noexpand {margin-left:-15px;display:inline-block;visibility:hidden;}
-.files { list-style-type: none;margin:5px; padding: 0px; }
+.files { list-style-type: none;margin:0px;padding:0px;}
 .files li {padding:3px 0px 3px 0px;border:none;border-bottom:solid 1px #ddd;width:100%;overflow:hidden;text-overflow:ellipsis;}
 /*.files a {font-size:larger;}*/
 .file-info {font-size:10px;color:#999;font-weight:normal;}
@@ -64,7 +69,7 @@ img {vertical-align:bottom;}
 
 .church {font-family: 'Acme', Serif; font-size:54px;width:500px;margin:auto;margin-bottom:10px;text-align:center;font-weight:900;border-bottom:solid 1px #444;padding-bottom:5px;line-height:50px;}
 .scripture {font-family: 'Acme', serif;font-size:18px;width:470px;margin:auto;margin-bottom:5px;text-align:justify;}
-.login-container {margin:5% auto 0 auto;}
+.login-container {margin:30px auto 0px auto;}
 .login-bg {margin:auto;background:#333 url(../img/microphone.png) top left;width:470px;height:278px;position:relative;}
 .login-contents {margin: 20px 0 0 10px;}
 .login-contents label {width:80px;color:#ddd;font-weight:bold;text-align:left;}
@@ -87,8 +92,9 @@ img {vertical-align:bottom;}
 	border-left: 15px solid black;
 }
 .popover .content {padding:5px;}
-.popover .inner {width:300px;}
+.popover .inner {width:350px;}
 .topbar {z-index:10;}
+.topbar h3 a, .topbar .brand {padding-right:8px;padding-left:8px;margin-left:0px;}
 
 .ui-widget-overlay {
 	background: #111;
@@ -96,8 +102,11 @@ img {vertical-align:bottom;}
 	filter: Alpha(Opacity=80);
 }
 
+.dropdown-menu li {white-space:nowrap;}
+.dropdown-menu {max-width:300px;}
+
 .waiter-dark {height:16px;width:16px;display:inline-block;background:url("../img/ajax-loader-dark.gif") top center no-repeat;}
-.waiter-light {height:21px;width:56px;display:inline-block;background:url("../img/ajax-loader-light.gif") top center no-repeat;}
+.waiter-light {height:21px;width:56px;display:inline-block;background:url("../img/ajax-loader-light.gif") top center no-repeat;margin:-8px auto -8px 20px;}
 
 .global-message {position:fixed;z-index:1000;bottom:0px;left:20px;right:20px;text-align:center;}
 .global-message p {font-weight:bold;}

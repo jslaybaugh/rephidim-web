@@ -12,5 +12,6 @@ namespace Web.Models
 		public bool OnLoginPage { get; set; }
 		public bool OnHomePage { get; set; }
 		public bool IsActive { get; set; }
+		public string Style { get; set; }
 	}
 }

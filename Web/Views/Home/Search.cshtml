@@ -14,15 +14,15 @@
 else
 { 
 	<div class="row search" id="uxHeader">
-		<div class="span16 module">
-			<h2 style="margin:10px;">Search for @Html.Raw(string.Join(" and ", Model.QueryParts.Select(x => "<span class='hilite'>" + x + "</span>")))</h2>
+		<div class="span16">
+			<div class="alert-message">
+				Search results for @Html.Raw(string.Join(" and ", Model.QueryParts.Select(x => "<span class='hilite'>" + x + "</span>")))
+			</div>
 		</div>
-		<h2 class="span8">Glossary Results (@(Model.MatchingTerms != null ? Model.MatchingTerms.Count() : 0))</h2>
-		<h2 class="span8">File Results (@(Model.MatchingFiles != null ? Model.MatchingFiles.Count() : 0))</h2>
 	</div>
 	<div class="row search">
-		<div class="span8 module scrollable" id="uxGlossary"></div>
-		<div class="span8 module scrollable" id="uxFiles"></div>
+		<div class="span8 module" id="uxGlossary"></div>
+		<div class="span8 module" id="uxFiles"></div>
 	</div>
 }
 

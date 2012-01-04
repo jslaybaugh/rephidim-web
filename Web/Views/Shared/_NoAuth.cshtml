@@ -17,9 +17,18 @@
 	
 	<title>@ViewBag.Title</title>
 	<meta name="description" content="Rephidim Web Site, Created 12/2011">
-	<meta name="author" content="Jorin Slaybaugh">
-	
-	<meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
+	<meta name="author" content="Jorin Slaybaugh -- see humans.txt">
+	<script type="text/javascript">
+		if (window.screen.width < 768)
+		{
+			document.write('<meta name="viewport" content="width = 1000, user-scalable = yes" />');
+		}
+		else if (window.screen.width < 1024)
+		{
+			document.write('<meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0" />');
+		}
+	</script>
+	<meta name="format-detection" content="telephone=no" />
 	@*<link rel="shortcut icon" href="@Href("~/content/img/favicon.ico")">
 	<link rel="apple-touch-icon" href="@Href("~/content/img/apple-touch-icon.png")">*@
 	@Bundles.RenderStylesheets("head")
@@ -29,7 +38,7 @@
 	}
 	@Bundles.RenderScripts("head")
 </head>
-<body>
+<body style="padding:5px;">
 	
 	<div class="container">
 		@RenderBody()

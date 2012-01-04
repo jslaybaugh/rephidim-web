@@ -14,5 +14,6 @@ namespace Web.Models
 		public string Password {get;set;}
 		public bool Error { get; set; }
 		public string ReturnUrl { get; set; }
+		public IEnumerable<MessageItem> Messages { get; set; }
 	}
 }

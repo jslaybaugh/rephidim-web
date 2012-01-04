@@ -30,7 +30,7 @@
 	
 	<title>@String.Format(titleFormat, ViewBag.Title)</title>
 	<meta name="description" content="Rephidim Web Site, Created 12/2011">
-	<meta name="author" content="Jorin Slaybaugh">
+	<meta name="author" content="Jorin Slaybaugh -- see humans.txt">
 	<script type="text/javascript">
 		if (window.screen.width < 768)
 		{
@@ -59,22 +59,20 @@
 				<div class="container">
 					<h3><a href="@(Url.Action<HomeController>(x => x.Home()))">Rephidim</a></h3>
 					<ul class="nav">
-						@*<li @(ViewBag.NavHome != null && ViewBag.NavHome == true ? "class=active" : "")><a href="@(Url.Action<HomeController>(x => x.Index()))">Home</a></li>*@
+						<li @(ViewBag.NavHome != null && ViewBag.NavHome == true ? "class=active" : "")><a href="@(Url.Action<HomeController>(x => x.Home()))">Home</a></li>
 						<li @(ViewBag.NavGlossary != null && ViewBag.NavGlossary == true ? "class=active" : "")><a href="@(Url.Action<GlossaryController>(x => x.Term(null)))">Glossary</a></li>
 						<li @(ViewBag.NavFiles != null && ViewBag.NavFiles == true ? "class=active" : "")><a href="@(Url.Action<FilesController>(x => x.Browse(null)))">Files</a></li>
-						<ul class="nav">
-							<li class="dropdown @(ViewBag.NavChronology != null && ViewBag.NavChronology == true ? "active" : "")">
-								<a href="#" class="dropdown-toggle">Chronology</a>
-								<ul class="dropdown-menu">
-									<li><a href="@(Url.Action<StaticController>(x => x.Show("chronology.html")))">Full Version</a></li>
-									<li><a href="@(Url.Action<StaticController>(x => x.Show("chrono.html")))">Compact Version</a></li>
-								</ul>
-							</li>
-						</ul>
-						<li @(ViewBag.NavTape != null && ViewBag.NavTape == true ? "class=active" : "")><a href="@(Url.Action<StaticController>(x => x.Show("tapelist.pdf")))">Tape List</a></li>
+						<li class="dropdown @(ViewBag.NavOther != null && ViewBag.NavOther == true ? "active" : "")">
+							<a href="#" class="dropdown-toggle">Other Resources</a>
+							<ul class="dropdown-menu">
+								<li><a href="@(Url.Action<StaticController>(x => x.Show("chronology.html")))">Chronology (Full Version)</a></li>
+								<li><a href="@(Url.Action<StaticController>(x => x.Show("chrono.html")))">Chronology (Compact Version)</a></li>
+								<li><a href="@(Url.Action<StaticController>(x => x.Show("tapelist.pdf")))">Tape List PDF</a></li>
+							</ul>
+						</li>
 					</ul>
 					<form id="frmNavSearch" method="get" class="pull-left" action="@(Url.Action<HomeController>(x => x.Search(null)))">
-						<input type="text" placeholder="Search Files & Glossary" value="@ViewBag.SearchQuery" name="query" />
+						<input type="text" class="span2" placeholder="Search" value="@ViewBag.SearchQuery" name="query" />
 						<span id="uxAppWait" class="waiter-light" style="display:none;"></span>
 					</form>
 					<ul class="nav secondary-nav">
@@ -132,21 +130,33 @@
 			}
 		);
 
-		$(function()
-		{
-			$(".topbar-wrapper").dropdown();
-			$("#lnkViewSource").click(function()
+			$(function ()
 			{
-				var w = window.open('about:blank'), s = w.document;
-				s.write('<!DOCTYPE html><html><head><title>Source of ' + location.href + '</title><meta name="viewport" content="width=device-width" /></head><body></body></html>');
-				s.close();
+				$(".topbar-wrapper").dropdown();
+				$("#lnkViewSource").click(function ()
+				{
+					var w = window.open('about:blank'), s = w.document;
+					s.write('<!DOCTYPE html><html><head><title>Source of ' + location.href + '</title><meta name="viewport" content="width=device-width" /></head><body></body></html>');
+					s.close();
 
-				var pre = s.body.appendChild(s.createElement("pre"));
-				pre.style.overflow = 'auto';
-				pre.style.whiteSpace = 'pre-wrap';
-				pre.appendChild(s.createTextNode(document.documentElement.innerHTML));
+					var pre = s.body.appendChild(s.createElement("pre"));
+					pre.style.overflow = 'auto';
+					pre.style.whiteSpace = 'pre-wrap';
+					pre.appendChild(s.createTextNode(document.documentElement.innerHTML));
+				});
+
+
+				$(window).resize($.throttle(250, function ()
+				{
+					setTimeout(function ()
+					{
+						$(".module > .scrollable").each(function (i, n)
+						{
+							$(this).height($(this).parent(".module").height() - $(this).prev("h1").outerHeight(true));
+						});
+					}, 0);
+				}));
 			});
-		});
 	</script>
 	@if (IsSectionDefined("scripts"))
  { 

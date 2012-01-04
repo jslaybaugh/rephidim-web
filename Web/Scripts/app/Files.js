@@ -104,7 +104,6 @@
 		{
 			$("#uxFolders").height($(window).height() - 60);
 			$("#uxContents").height($(window).height() - 60);
-			$("#uxFiles").height($(window).height() - $("#uxPath").outerHeight(true) - 60);
 
 		})).resize();
 

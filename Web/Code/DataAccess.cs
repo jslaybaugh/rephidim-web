@@ -189,7 +189,7 @@ namespace Web.Code
 		private static string CreateSearchQuery(string[] parts)
 		{
 
-			string SqlString = "SELECT TermId, Term, Definition, DateCreated, DateModified, , CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew FROM GlossaryTerms WHERE ";
+			string SqlString = "SELECT TermId, Term, Definition, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew FROM GlossaryTerms WHERE ";
 
 			foreach (var part in parts)
 			{
@@ -300,7 +300,7 @@ namespace Web.Code
 			}
 		}
 
-		public static IEnumerable<MessageItem> GetActiveHomeMesssages()
+		public static IEnumerable<MessageItem> GetActiveHomeMessages()
 		{
 			try
 			{
@@ -310,7 +310,7 @@ namespace Web.Code
 
 					var p = new DynamicParameters();
 
-					var res = cn.Query("SELECT MessageId, MessageValue, OnLoginPage, OnHomePage, IsActive FROM Messages WHERE IsActive=1 AND OnHomePage=1", p);
+					var res = cn.Query("SELECT MessageId, MessageValue, OnLoginPage, OnHomePage, IsActive, Style FROM Messages WHERE IsActive=1 AND OnHomePage=1", p);
 
 					if (res == null) return null;
 
@@ -320,7 +320,39 @@ namespace Web.Code
 						Value = x.MessageValue,
 						OnLoginPage = x.OnLoginPage,
 						OnHomePage = x.OnHomePage,
-						IsActive = x.IsActive
+						IsActive = x.IsActive,
+						Style = x.Style
+					});
+				}
+			}
+			catch (Exception)
+			{
+				return null;
+			}
+		}
+
+		public static IEnumerable<MessageItem> GetActiveLoginMesssages()
+		{
+			try
+			{
+				using (var cn = new SqlCeConnection(ConnString))
+				{
+					cn.Open();
+
+					var p = new DynamicParameters();
+
+					var res = cn.Query("SELECT MessageId, MessageValue, OnLoginPage, OnHomePage, IsActive, Style FROM Messages WHERE IsActive=1 AND OnLoginPage=1", p);
+
+					if (res == null) return null;
+
+					return res.Select(x => new MessageItem
+					{
+						Id = x.MessageId,
+						Value = x.MessageValue,
+						OnLoginPage = x.OnLoginPage,
+						OnHomePage = x.OnHomePage,
+						IsActive = x.IsActive,
+						Style = x.Style
 					});
 				}
 			}

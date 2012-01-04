@@ -1,20 +1,20 @@
-﻿<div class="right">
-	{{if IsNew}}
-		<span class="label success">New: ${App.DateFromJson(DateCreated).format('m/d h:MM TT')}</span>
-	{{else}}
-		<span class="label">Created: ${App.DateFromJson(DateCreated).format('m/d/yyyy h:MM TT')}</span>
-	{{/if}}
-	{{if DateModified != DateCreated}}
-		{{if IsModified}}
-			<br /><span class="label notice">Modified: ${App.DateFromJson(DateModified).format('m/d h:MM TT')}</span>
+﻿<h1 id="uxTermName">
+	<div class="right">
+		{{if IsNew}}
+			<span class="label success">New: ${App.DateFromJson(DateCreated).format('m/d h:MM TT')}</span>
 		{{else}}
-			<br /><span class="label">Last Modified: ${App.DateFromJson(DateModified).format('m/d/yyyy h:MM TT')}</span>
+			<span class="label">Created: ${App.DateFromJson(DateCreated).format('m/d/yyyy h:MM TT')}</span>
 		{{/if}}
-	{{/if}}
-</div>
-<h2 id="uxTermName">${Term}</h2>
-<div id="uxDefinition" class="scrollable module" style="clear:both;">
-	<div style="margin:10px;">
-		{{html Definition}}
+		{{if DateModified != DateCreated}}
+			{{if IsModified}}
+				<span class="label warning">Modified: ${App.DateFromJson(DateModified).format('m/d h:MM TT')}</span>
+			{{else}}
+				<span class="label">Last Modified: ${App.DateFromJson(DateModified).format('m/d/yyyy h:MM TT')}</span>
+			{{/if}}
+		{{/if}}
 	</div>
+	Term: ${Term}
+</h1>
+<div id="uxDefinition" class="scrollable">
+	{{html Definition}}
 </div>
