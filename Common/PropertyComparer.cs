@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Reflection;
 
-namespace Web.Code
+namespace Common
 {
 	public class PropertyComparer<T> : IEqualityComparer<T>
 	{

@@ -5,11 +5,11 @@ using System.Web;
 using Dapper;
 using System.Data.SqlServerCe;
 using System.Configuration;
-using Web.Models;
+using Common.Models;
 using System.Collections;
 using System.Text.RegularExpressions;
 
-namespace Web.Code
+namespace Common
 {
 	public static class DataAccess
 	{
@@ -74,6 +74,39 @@ namespace Web.Code
 							DateModified = x.DateModified,
 							IsNew = x.IsNew,
 							IsModified = x.IsModified
+						});
+				}
+			}
+			catch (Exception)
+			{
+				return null;
+			}
+		}
+
+		public static IEnumerable<GlossaryItem> GetAllTermsFull()
+		{
+			try
+			{
+				using (var cn = new SqlCeConnection(ConnString))
+				{
+					cn.Open();
+
+					var p = new DynamicParameters();
+					p.Add("@days", ConfigurationManager.AppSettings["days"]);
+
+					var res = cn.Query("SELECT TermId, Term, Definition, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew  FROM GlossaryTerms ORDER BY Term", p);
+
+					if (res == null) return null;
+
+					return res.Select(x => new GlossaryItem
+						{
+							Id = x.TermId,
+							Term = x.Term,
+							Definition = x.Definition,
+							DateCreated = x.DateCreated,
+							DateModified = x.DateModified,
+							IsModified = x.IsModified,
+							IsNew = x.IsNew
 						});
 				}
 			}
@@ -153,6 +186,92 @@ namespace Web.Code
 				return null;
 			}
 		}
+
+		public static GlossaryItem UpsertTerm(int id, string term, string definition, bool? updateDate)
+		{
+			try
+			{
+				using (var cn = new SqlCeConnection(ConnString))
+				{
+					cn.Open();
+
+					var p = new DynamicParameters();
+					p.Add("@termid", id);
+					p.Add("@term", term.Trim().ToUpperInvariant());
+					p.Add("@definition", Regex.Replace(definition.Trim(), "(\r|\n)", "<br/>", RegexOptions.IgnoreCase));
+					p.Add("@datemodified", DateTime.Now);
+					p.Add("@days", ConfigurationManager.AppSettings["days"]);
+
+					string lastPart = "";
+					string firstquery = "";
+					string secondquery = "";
+					if (id > 0)
+					{
+						// edit
+						if (updateDate.HasValue && updateDate.Value)
+						{
+							firstquery = "UPDATE GlossaryTerms SET Term=@Term, Definition=@Definition, DateModified=@DateModified WHERE TermID=@termid; ";
+						}
+						else
+						{
+							firstquery = "UPDATE GlossaryTerms SET Term=@Term, Definition=@Definition WHERE TermID=@termid; ";
+						}
+						lastPart = "@termid";
+					}
+					else
+					{
+						// insert
+						firstquery = "INSERT GlossaryTerms(Term, Definition) VALUES (@Term, @Definition);";
+						lastPart = "@@IDENTITY";
+					}
+
+					secondquery = "SELECT TermId, Term, Definition, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew FROM GlossaryTerms WHERE TermId=" + lastPart;
+
+					var exec = cn.Execute(firstquery, p);
+					var res = cn.Query(secondquery, p);
+
+					if (res == null) return null;
+
+					return res.Select(x => new GlossaryItem
+					{
+						Id = x.TermId,
+						Term = x.Term,
+						Definition = x.Definition,
+						DateCreated = x.DateCreated,
+						DateModified = x.DateModified,
+						IsModified = x.IsModified,
+						IsNew = x.IsNew
+					}).FirstOrDefault();
+				}
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
+
+		public static int DeleteTerm(int id)
+		{
+			try
+			{
+				using (var cn = new SqlCeConnection(ConnString))
+				{
+					cn.Open();
+
+					var p = new DynamicParameters();
+					p.Add("@termid", id);
+					
+					var exec = cn.Execute("DELETE FROM GLossaryTerms WHERE TermId=@termid", p);
+
+					return exec;
+				}
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
+
 		public static IEnumerable<GlossaryItem> SearchTerms(string[] parts)
 		{
 			try
@@ -271,7 +390,7 @@ namespace Web.Code
 			}
 		}
 
-		public static VersionItem GetSingleVersion(int id)
+		public static KeyValuePair<string,string> GetKeyValue(string key)
 		{
 			try
 			{
@@ -280,23 +399,46 @@ namespace Web.Code
 					cn.Open();
 
 					var p = new DynamicParameters();
-					p.Add("@id", id);
+					p.Add("@key", key);
 
-					var res = cn.Query("SELECT VersionId, AppName, Number FROM Versions WHERE VersionId=@id", p);
+					var res = cn.Query("SELECT KeyName, ValueString FROM KeysTable WHERE KeyName=@key", p);
 
-					if (res == null) return null;
+					if (res == null)
+						return new KeyValuePair<string, string>(key, "");
 
-					return res.Select(x => new VersionItem
-					{
-						Id = x.VersionId,
-						AppName = x.AppName,
-						Number = x.Number
-					}).FirstOrDefault();
+					return res.Select(x => new KeyValuePair<string,string>(x.KeyName,x.ValueString)).FirstOrDefault();
 				}
 			}
 			catch (Exception)
 			{
-				return null;
+				return new KeyValuePair<string,string>(key,"");
+			}
+		}
+
+		public static KeyValuePair<string, string> UpdateKeyValue(string key, string value)
+		{
+			try
+			{
+				using (var cn = new SqlCeConnection(ConnString))
+				{
+					cn.Open();
+
+					var p = new DynamicParameters();
+					p.Add("@key", key);
+					p.Add("@value", value);
+
+					var res = cn.Execute("UPDATE KeysTable SET ValueString=@Value WHERE KeyName=@key", p);
+
+					if (res == 1)
+						return new KeyValuePair<string, string>(key, value);
+					else
+						throw new Exception("");
+
+				}
+			}
+			catch (Exception)
+			{
+				throw;
 			}
 		}
 

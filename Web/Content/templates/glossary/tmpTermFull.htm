@@ -1,20 +1,29 @@
 ﻿<h1 id="uxTermName">
-	<div class="right">
-		{{if IsNew}}
-			<span class="label success">New: ${App.DateFromJson(DateCreated).format('m/d h:MM TT')}</span>
-		{{else}}
-			<span class="label">Created: ${App.DateFromJson(DateCreated).format('m/d/yyyy h:MM TT')}</span>
+	<ul class="toolbar">
+		{{if EditRights}}
+		<li><a href="#" id="btnDelete" data-id="${Id}" title="Delete Term">{{html App.ChooseIcon("delete")}}</a></li>
+		<li><a href="#" id="btnAdd" title="Add New Term">{{html App.ChooseIcon("new")}}</a></li>
+		<li><a href="#" id="btnEdit" data-id="${Id}" title="Edit Term">{{html App.ChooseIcon("edit")}}</a></li>
 		{{/if}}
-		{{if DateModified != DateCreated}}
-			{{if IsModified}}
-				<span class="label warning">Modified: ${App.DateFromJson(DateModified).format('m/d h:MM TT')}</span>
-			{{else}}
-				<span class="label">Last Modified: ${App.DateFromJson(DateModified).format('m/d/yyyy h:MM TT')}</span>
-			{{/if}}
-		{{/if}}
-	</div>
+		<li><a href="${App.ResolveUrl('~/Glossary/Print/' + Id)}" target="_blank" title="Print This Term">{{html App.ChooseIcon("pdf")}}</a></li>
+		<li><a href="${App.ResolveUrl('~/Glossary/Print/')}" target="_blank" title="Print All Terms">{{html App.ChooseIcon("pdfmulti")}}</a></li>
+	</ul>
 	Term: ${Term}
 </h1>
 <div id="uxDefinition" class="scrollable">
+	<div class="right">
+		{{if IsNew}}
+			<span class="label success right">New: ${App.DateFromJson(DateCreated).format('m/d h:MM TT')}</span>
+		{{else}}
+			<span class="label right">Created: ${App.DateFromJson(DateCreated).format('m/d/yyyy h:MM TT')}</span>
+		{{/if}}
+		{{if DateModified != DateCreated}}
+			{{if IsModified}}
+				<br /><span class="label warning right">Modified: ${App.DateFromJson(DateModified).format('m/d h:MM TT')}</span>
+			{{else}}
+				<br /><span class="label right">Last Modified: ${App.DateFromJson(DateModified).format('m/d/yyyy h:MM TT')}</span>
+			{{/if}}
+		{{/if}}
+	</div>
 	{{html Definition}}
 </div>

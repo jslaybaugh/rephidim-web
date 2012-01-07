@@ -9,13 +9,13 @@
 <div class="row">
 	<div class="span5 module" id="uxList">
 		<h1>
-			@if (User.IsInRole("Edit")) 
+			@if (User.IsInRole("Glossary")) 
 			{ 
-				<a href="#" id="lnkVersion" class="right">v.@Model.Version.Number</a>  
+				<a href="#" id="btnVersion" data-id="@Model.Version.Value" class="right">v.@Model.Version.Value</a>  
 			}
 			else 
 			{ 
-				<span class="right">v.@Model.Version.Number</span>  
+				<span class="right">v.@Model.Version.Value</span>  
 			}
 			@Model.Terms.Count() Terms
 		</h1>
@@ -25,7 +25,7 @@
 	</div>
 	<div class="span11 module" id="uxTerm"></div>
 </div>
-
+<div id="uxTermsDialog" class="none"></div>
 @section templates
 {
 	@Bundles.RenderHtmlTemplates()
@@ -38,7 +38,7 @@
 		{
 			var terms = @Html.Raw(Json.Encode(Model.Terms));
 			var activeTerm = @Html.Raw(Json.Encode(Model.ActiveTerm));
-			window.Glossary = new App.Glossary(terms, activeTerm);
+			window.Glossary = new App.Glossary(terms, activeTerm, @Html.Raw(Json.Encode(User.IsInRole("Glossary"))));
 		});
 	</script>
 

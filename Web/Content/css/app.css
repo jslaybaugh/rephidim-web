@@ -2,7 +2,7 @@
    Author: Jorin Slaybaugh
    ========================================================================== */
 
-html, body, input, select, textarea {font-family: 'Open Sans', sans-serif; color:#222;font-size:13px;line-height:18px;}
+html, body, input, select, textarea, input[type="text"], input[type="password"], .ui-autocomplete-input, .uneditable-input {font-family: 'Open Sans', sans-serif; color:#222;font-size:13px;line-height:18px;}
 body { background: #eee url(../img/bg2.png) repeat; padding-top:50px;}
 
 input[type=submit] {background:#efefef;}
@@ -15,6 +15,7 @@ input[type=submit] {background:#efefef;}
 
 .left {float:left;}
 .right {float:right;}
+.clear {clear:both;}
 
 .center-align {text-align:center;}
 
@@ -31,6 +32,7 @@ input[type=submit] {background:#efefef;}
 .module h1 {clear:both;-webkit-border-top-left-radius:5px;-moz-border-top-left-radius:5px;border-top-left-radius:5px;-webkit-border-top-right-radius:5px;-moz-border-top-right-radius:5px;border-top-right-radius:5px;margin:0px;display:block;padding:8px;color:#eee;font-size:18px;line-height:20px;background: #222;font-weight:normal;}
 .cssgradients .module h1 {filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333', endColorstr='#222');  background: -webkit-gradient(linear, left top, left bottom, from(#333), to(#222)); background: -moz-linear-gradient(top,  #333,  #222);}
 .no-cssgradients .module h1 {background: #222;}
+.module h1 a,.module h1 a:link,.module h1 a:visited,.module h1 a:hover,.module h1 a:active {color:#eee;text-decoration:underline;}
 .module > div {padding:5px;box-sizing:border-box;}
 
 .message {display:table;height:100%;width:100%;vertical-align:middle;text-align:center;}
@@ -112,3 +114,29 @@ img {vertical-align:bottom;}
 .global-message p {font-weight:bold;}
 
 .search .hilite {display:inline-block;background-color:#ffface;border:solid 1px #ddd;margin-left:1px;margin-right:1px;font-weight:bold;}
+
+
+
+.toolbar {float:right;margin:-2px 0px 0px 0px;list-style:none;}
+.toolbar li {float:left;margin-right:5px;}
+
+
+.ui-dialog .ui-dialog-titlebar {
+  color: #ffffff;
+  background-color: #0064cd;
+  background-repeat: repeat-x;
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#abcced), to(#0064cd));
+  background-image: -moz-linear-gradient(top, #abcced, #0064cd);
+  background-image: -ms-linear-gradient(top, #abcced, #0064cd);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #abcced), color-stop(100%, #0064cd));
+  background-image: -webkit-linear-gradient(top, #abcced, #0064cd);
+  background-image: -o-linear-gradient(top, #abcced, #0064cd);
+  background-image: linear-gradient(top, #abcced, #0064cd);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#abcced', endColorstr='#0064cd', GradientType=0);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  border-color: #0064cd #0064cd #003f81;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+
+.ui-dialog .ui-dialog-title { color:#fff;}
+.form-stacked {padding:0px;}

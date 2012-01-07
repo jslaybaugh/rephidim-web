@@ -19,7 +19,7 @@
 			},
 			error: function (xhr)
 			{
-				alert(xhr.statusText);
+				App.HandleError(xhr);
 			}
 		});
 	}
@@ -36,7 +36,7 @@
 			},
 			error: function (xhr)
 			{
-				alert(xhr.statusText);
+				App.HandleError(xhr);
 			}
 		});
 	}

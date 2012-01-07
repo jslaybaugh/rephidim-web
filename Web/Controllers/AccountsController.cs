@@ -6,9 +6,9 @@ using System.Web.Mvc;
 using MvcContrib;
 using Web.Models;
 using System.Data.SqlClient;
-using Dapper;
 using Web.Code;
 using System.Web.Security;
+using Common;
 
 namespace Web.Controllers
 {

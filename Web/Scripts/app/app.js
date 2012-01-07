@@ -60,6 +60,28 @@
 		ShowAlert: function (msg, className)
 		{
 			$("#uxAlert").hide().removeClass("warning error success info").addClass(className).find("p").html(msg).end().fadeIn();
+
+			if (className.toUpperCase() == "SUCCESS" || className.toUpperCase() == "INFO")
+			{
+				_timeout = setTimeout(function () { $("#uxAlert").fadeOut() }, 7000);
+			}
+
+			if (Modernizr.history)
+			{
+				var keys = ["SUCCESS", "ERROR", "WARNING", "INFO"];
+				var oldQueries = location.search.substring(1).split("&");
+				var newQueries = [];
+
+				for (var i = 0; i < oldQueries.length; i++)
+				{
+					if (!(oldQueries[i].indexOf("=") >= 0 && keys.indexOf(oldQueries[i].split("=")[0].toUpperCase()) >= 0))
+					{
+						newQueries.push(oldQueries[i]);
+					}
+				}
+
+				history.replaceState(null, null, "?" + newQueries.join("&"));
+			}
 		},
 
 		ChooseIcon: function (key)
@@ -76,6 +98,18 @@
 		{
 			var reg = new RegExp("(" + _queryParts.join("|") + ")", "ig");
 			return text.replace(reg, "<span class='hilite'>$1</span>");
+		},
+
+		HandleError: function (xhr, el)
+		{
+			if (!el)
+				App.ShowAlert(xhr.responseText, "error");
+			else
+				$(el).html(xhr.responseText).fadeIn();
+
+			// for good measure
+
+			log(xhr);
 		}
 
 	};

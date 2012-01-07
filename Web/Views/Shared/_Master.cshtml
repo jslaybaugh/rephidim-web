@@ -126,40 +126,49 @@
 				"goodreader"	: '@(Sprite.Image("~/App_Sprites/icon_goodreader.png"))',
 				"usb"			: '@(Sprite.Image("~/App_Sprites/icon_usb.png"))',
 				"email"			: '@(Sprite.Image("~/App_Sprites/icon_email.png"))',
-				"folder"		: '@(Sprite.Image("~/App_Sprites/icon_folder.png"))'
+				"folder"		: '@(Sprite.Image("~/App_Sprites/icon_folder.png"))',
+				"edit"			: '@(Sprite.Image("~/App_Sprites/icon_pen.png"))',
+				"new"			: '@(Sprite.Image("~/App_Sprites/icon_plus.png"))',
+				"pdfmulti"		: '@(Sprite.Image("~/App_Sprites/icon_pdfmulti.png"))',
+				"delete"		: '@(Sprite.Image("~/App_Sprites/icon_delete.png"))'
 			}
 		);
 
-			$(function ()
+		$(function ()
+		{
+			$(".topbar-wrapper").dropdown();
+			$("#lnkViewSource").click(function ()
 			{
-				$(".topbar-wrapper").dropdown();
-				$("#lnkViewSource").click(function ()
-				{
-					var w = window.open('about:blank'), s = w.document;
-					s.write('<!DOCTYPE html><html><head><title>Source of ' + location.href + '</title><meta name="viewport" content="width=device-width" /></head><body></body></html>');
-					s.close();
+				var w = window.open('about:blank'), s = w.document;
+				s.write('<!DOCTYPE html><html><head><title>Source of ' + location.href + '</title><meta name="viewport" content="width=device-width" /></head><body></body></html>');
+				s.close();
 
-					var pre = s.body.appendChild(s.createElement("pre"));
-					pre.style.overflow = 'auto';
-					pre.style.whiteSpace = 'pre-wrap';
-					pre.appendChild(s.createTextNode(document.documentElement.innerHTML));
-				});
-
-
-				$(window).resize($.throttle(250, function ()
-				{
-					setTimeout(function ()
-					{
-						$(".module > .scrollable").each(function (i, n)
-						{
-							$(this).height($(this).parent(".module").height() - $(this).prev("h1").outerHeight(true));
-						});
-					}, 0);
-				}));
+				var pre = s.body.appendChild(s.createElement("pre"));
+				pre.style.overflow = 'auto';
+				pre.style.whiteSpace = 'pre-wrap';
+				pre.appendChild(s.createTextNode(document.documentElement.innerHTML));
 			});
+
+
+			$(window).resize($.throttle(250, function ()
+			{
+				setTimeout(function ()
+				{
+					$(".module > .scrollable").each(function (i, n)
+					{
+						$(this).height($(this).parent(".module").height() - $(this).prev("h1").outerHeight(true));
+					});
+				}, 0);
+			}));
+
+			@if (!string.IsNullOrEmpty(Request["success"])) { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["success"])),"success");</text> }
+			@if (!string.IsNullOrEmpty(Request["error"])) { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["error"])),"error");</text> }
+			@if (!string.IsNullOrEmpty(Request["warning"])) { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["warning"])),"warning");</text> }
+			@if (!string.IsNullOrEmpty(Request["info"])) { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["info"])),"info");</text> }
+		});
 	</script>
 	@if (IsSectionDefined("scripts"))
- { 
+	{ 
 		@RenderSection("scripts")
 	}
 	<!--[if lt IE 8 ]>

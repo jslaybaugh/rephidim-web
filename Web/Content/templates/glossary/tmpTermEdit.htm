@@ -1,0 +1,21 @@
+﻿<div id="uxTermsDialogError" class="alert-message error none"></div>
+<form id="frmTermEdit" class="form-stacked">
+	<div class="clearfix">
+		<label for="txtTermEditTerm">Term</label>
+		<div class="input">
+			<input id="txtTermEditTerm" class="span13" type="text" value="${Term}" />
+			<input type="hidden" id="hdnTermEditId" value="${Id}" />
+		</div>
+	</div>
+	<div class="clearfix">
+		<label for="txtTermEditDefinition">Definition</label>
+		<div class="input">
+			<textarea id="txtTermEditDefinition" class="span13" rows="13">${Definition.replace(new RegExp("<br/>", "ig"),"\r")}</textarea>
+		</div>
+	</div>
+	<div class="clearfix">
+		<div class="input">
+			<label><input type="checkbox" id="chkTermEditModify" checked="checked" /> Update Modified Date</label>
+		</div>
+	</div>
+</form>

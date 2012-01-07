@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.Security;
+using System.Security.Principal;
 
 namespace Web
 {
@@ -57,6 +59,15 @@ namespace Web
 
 			RegisterGlobalFilters(GlobalFilters.Filters);
 			RegisterRoutes(RouteTable.Routes);
+		}
+
+		protected void Application_AuthenticateRequest()
+		{
+			if (HttpContext.Current.Request.IsAuthenticated)
+			{
+				var roles = (HttpContext.Current.User.Identity as FormsIdentity).Ticket.UserData.Split('|');
+				HttpContext.Current.User = new GenericPrincipal(HttpContext.Current.User.Identity, roles);
+			}
 		}
 	}
 }
