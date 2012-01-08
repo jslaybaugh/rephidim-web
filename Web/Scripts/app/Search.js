@@ -25,8 +25,8 @@
 
 			domSetup(this);
 
-			$("#tmpTermSearch").tmpl({ Terms: termResults }).appendTo($("#uxGlossary").empty());
-			$("#tmpFileSearch").tmpl({ Files: fileResults }).appendTo($("#uxFiles").empty());
+			$("#tmpTermResults").tmpl({ Title: "Glossary Results", Terms: termResults }).appendTo($("#uxGlossary").empty());
+			$("#tmpFileResults").tmpl({ Title: "File Results", Files: fileResults }).appendTo($("#uxFiles").empty());
 
 			App.FileHelper.ReadyPopover();
 		}

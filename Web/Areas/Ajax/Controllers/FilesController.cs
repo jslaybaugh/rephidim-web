@@ -24,8 +24,6 @@ namespace Web.Areas.Ajax.Controllers
 
 		public JsonResult Contents(string path)
 		{
-					
-
 			return Json(FileUtility.GetFiles(path), JsonRequestBehavior.AllowGet);
 		}
 

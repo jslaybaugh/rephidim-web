@@ -6,6 +6,8 @@
 
 	Bundles.Reference("scripts/pre", "head");
 	Bundles.Reference("scripts/app/app.js");
+	
+	Bundles.Reference("content/templates/global");
 
 	string titleFormat = "{0} : Rephidim Church";
 	
@@ -98,6 +100,7 @@
 		@RenderBody()
 	</div>
 	<div id="uxAlert" class="global-message alert-message fade in hide" data-alert="true"><a class="close" href="#">×</a><p></p></div>
+	@Bundles.RenderHtmlTemplates()
 	@if (IsSectionDefined("templates"))
 	{
 		@RenderSection("templates")

@@ -11,18 +11,34 @@ namespace Common
 {
 	public static class FileUtility
 	{
+		private static string Root
+		{
+			get
+			{
+				string root = ConfigurationManager.AppSettings["FilesRoot"];
+				root = root.Trim().EndsWith(@"\") ? root : root + @"\";
+
+				return root;
+			}
+		}
+
+		private static string MakeFullLocal(string path)
+		{
+			if (path.StartsWith("/")) path = path.Substring(1);
+
+			return string.Format(@"{0}{1}", Root, path.Replace("/", "\\"));
+		}
 
 		public static IEnumerable<DirectoryInfoResult> GetFolders(string path)
 		{
-			string root = GetRoot();
-			path = string.Format(@"{0}{1}", ConfigurationManager.AppSettings["FilesRoot"], path.Replace("/", "\\"));
+			string localPath = MakeFullLocal(path);
 
-			var dir = new DirectoryInfo(path);
+			var dir = new DirectoryInfo(localPath);
 
 			var dirs = dir.EnumerateDirectories().Select(x => new DirectoryInfoResult
 			{
 				Name = x.Name,
-				Path = x.FullName.Replace(root, "").Replace(@"\", "/"),
+				Path = x.FullName.Replace(Root, "").Replace(@"\", "/"),
 				DirectoryCount = x.EnumerateDirectories().Count(),
 				DateModified = x.LastWriteTime,
 				DateCreated = x.CreationTime,
@@ -36,17 +52,16 @@ namespace Common
 
 		public static IEnumerable<FileInfoResult> GetFiles(string path)
 		{
-			string root = GetRoot();
-			path = string.Format(@"{0}{1}", ConfigurationManager.AppSettings["FilesRoot"], path.Replace("/", "\\"));
+			string localPath = MakeFullLocal(path);
 
-			var dir = new DirectoryInfo(path);
+			var dir = new DirectoryInfo(localPath);
 
 			var files = dir.EnumerateFiles()
 				.Where(y => !y.Extension.MatchesTrimmed(".ini") && !y.Extension.MatchesTrimmed(".db") && !y.Extension.MatchesTrimmed(".lnk"))
 				.Select(x => new FileInfoResult
 				{
 					Name = x.Name.Substring(0, x.Name.LastIndexOf(".")),
-					Path = x.FullName.Replace(root, "").Replace(@"\", "/"),
+					Path = x.FullName.Replace(Root, "").Replace(@"\", "/"),
 					Size = PrintFileSize(x.Length),
 					DateModified = x.LastWriteTime,
 					DateCreated = x.CreationTime,
@@ -60,14 +75,13 @@ namespace Common
 
 		public static IEnumerable<FileInfoResult> Search(string[] queryparts)
 		{
-			string root = GetRoot();
 			var matchingFiles = new List<FileInfo>();
-			SearchFiles(root, queryparts, ref matchingFiles);
+			SearchFiles(Root, queryparts, ref matchingFiles);
 			return matchingFiles
 				.Select(x => new FileInfoResult
 				{
 					Name = x.Name.Substring(0, x.Name.LastIndexOf(".")),
-					Path = x.FullName.Replace(root, "").Replace(@"\", "/"),
+					Path = x.FullName.Replace(Root, "").Replace(@"\", "/"),
 					Size = FileUtility.PrintFileSize(x.Length),
 					DateModified = x.LastWriteTime,
 					DateCreated = x.CreationTime,
@@ -81,15 +95,14 @@ namespace Common
 
 		public static IEnumerable<FileInfoResult> GetRecentFiles()
 		{
-			string root = GetRoot();
 			var matchingFiles = new List<FileInfo>();
-			RecentFiles(root, ref matchingFiles);
+			RecentFiles(Root, ref matchingFiles);
 
 			return matchingFiles
 				.Select(x => new FileInfoResult
 				{
 					Name = x.Name.Substring(0, x.Name.LastIndexOf(".")),
-					Path = x.FullName.Replace(root, "").Replace(@"\", "/"),
+					Path = x.FullName.Replace(Root, "").Replace(@"\", "/"),
 					Size = FileUtility.PrintFileSize(x.Length),
 					DateModified = x.LastWriteTime,
 					DateCreated = x.CreationTime,
@@ -128,7 +141,6 @@ namespace Common
 
 		private static void SearchFiles(string path, string[] queryParts, ref List<FileInfo> matchingFiles)
 		{
-			string root = GetRoot();
 
 			var dir = new DirectoryInfo(path);
 			var files = dir.GetFiles();
@@ -136,7 +148,7 @@ namespace Common
 			var regexp = string.Join("", queryParts.Select(x => "(?=.*" + x + ")"));
 			var found = files
 				.ToList()
-				.Where(x => Regex.IsMatch(x.FullName.Replace(root, ""), regexp, RegexOptions.IgnoreCase) && !x.Extension.MatchesTrimmed(".ini") && !x.Extension.MatchesTrimmed(".db") && !x.Extension.MatchesTrimmed(".lnk"));
+				.Where(x => Regex.IsMatch(x.FullName.Replace(Root, ""), regexp, RegexOptions.IgnoreCase) && !x.Extension.MatchesTrimmed(".ini") && !x.Extension.MatchesTrimmed(".db") && !x.Extension.MatchesTrimmed(".lnk"));
 
 			matchingFiles.AddRange(found);
 
@@ -149,13 +161,6 @@ namespace Common
 					SearchFiles(subdir.FullName, queryParts, ref matchingFiles);
 				}
 			}
-		}
-		private static string GetRoot()
-		{
-			string root = ConfigurationManager.AppSettings["FilesRoot"];
-			root = root.Trim().EndsWith(@"\") ? root = root.Substring(0, root.Length - 1) : root;
-
-			return root;
 		}
 
 		private static string PrintFileSize(Int64 size)

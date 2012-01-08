@@ -47,7 +47,7 @@ input[type=submit] {background:#efefef;}
 .active-link {color:#0069D6;text-decoration:underline;}
 
 /* Files */
-img {vertical-align:bottom;}
+img {vertical-align:text-bottom;}
 .folders { list-style-type: none;margin-left:15px; padding: 0px; }
 .folders li { margin: 0px;padding:0px;white-space:nowrap; }
 .folder-expand {margin-left:-15px;display:inline-block;}
@@ -115,10 +115,10 @@ img {vertical-align:bottom;}
 
 .search .hilite {display:inline-block;background-color:#ffface;border:solid 1px #ddd;margin-left:1px;margin-right:1px;font-weight:bold;}
 
-
+a img {margin:0px 5px 0px 0px;}
 
 .toolbar {float:right;margin:-2px 0px 0px 0px;list-style:none;}
-.toolbar li {float:left;margin-right:5px;}
+.toolbar li {float:left;margin:0px;}
 
 
 .ui-dialog .ui-dialog-titlebar {

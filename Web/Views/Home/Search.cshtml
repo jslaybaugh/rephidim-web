@@ -3,8 +3,7 @@
 	ViewBag.Title = "Search";
 	ViewBag.NavHome = true;
 	ViewBag.SearchQuery = Model.OriginalQuery;
-	Bundles.Reference("content/templates/glossary");
-	Bundles.Reference("content/templates/files");
+	Bundles.Reference("content/templates/results");
 }
 
 @if (string.IsNullOrEmpty(Model.OriginalQuery))

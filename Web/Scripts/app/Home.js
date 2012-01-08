@@ -20,8 +20,8 @@
 		{
 			domSetup(this);
 
-			$("#tmpTermRecent").tmpl({ Terms: termResults }).appendTo($("#uxGlossary").empty());
-			$("#tmpFileRecent").tmpl({ Files: fileResults }).appendTo($("#uxFiles").empty());
+			$("#tmpTermResults").tmpl({ Title: "Recently Added/Modified Terms", Terms: termResults }).appendTo($("#uxGlossary").empty());
+			$("#tmpFileResults").tmpl({ Title: "Recently Added/Modified Files", Files: fileResults }).appendTo($("#uxFiles").empty());
 
 			App.FileHelper.ReadyPopover();
 		}

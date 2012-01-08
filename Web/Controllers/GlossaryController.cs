@@ -34,16 +34,19 @@ namespace Web.Controllers
 		public FileResult Print(int? id)
 		{
 			var terms = new List<GlossaryItem>();
+			string name = "Glossary.pdf";
 			if (id.HasValue)
 			{
-				terms.Add(DataAccess.GetSingleTerm(id.Value));
+				var term = DataAccess.GetSingleTerm(id.Value);
+				name = string.Format("{0}.pdf", term.Term);
+				terms.Add(term);
 			}
 			else
 			{
 				terms = DataAccess.GetAllTermsFull().ToList();
 			}
 			var m = PrintTerms(terms);
-			return File(m, "application/pdf");//, "glossary.pdf");
+			return File(m, "application/pdf", name);
 		}
 
 		private MemoryStream PrintTerms(IEnumerable<GlossaryItem> terms)

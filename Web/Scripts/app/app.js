@@ -96,8 +96,12 @@
 
 		Highlight: function (text)
 		{
-			var reg = new RegExp("(" + _queryParts.join("|") + ")", "ig");
-			return text.replace(reg, "<span class='hilite'>$1</span>");
+			if (_queryParts != null && _queryParts.length > 0)
+			{
+				var reg = new RegExp("(" + _queryParts.join("|") + ")", "ig");
+				return text.replace(reg, "<span class='hilite'>$1</span>");
+			}
+			return text;
 		},
 
 		HandleError: function (xhr, el)

@@ -20,14 +20,16 @@
 
 	var displayDefinition = function (push)
 	{
+		var data = {};
+		data.ActiveTerm = _activeTerm;
+		data.EditRights = _editRights;
+
 		if (_activeTerm == null)
 		{
 			App.SetTitle("Glossary");
-			$("#uxTerm").html("<div class='message'><div><span>Select a term from the left to get started.</span></div></div>");
+			$("#tmpTermFull").tmpl(data).appendTo($("#uxTerm").empty());
 			return;
 		}
-
-		_activeTerm.EditRights = _editRights;
 
 		if ($("[name='" + _activeTerm.Id + "']").length > 0)
 			$("#uxList .scrollable").scrollTo("[name='" + _activeTerm.Id + "']", 1000, { easing: 'swing', axis: 'y' });
@@ -44,9 +46,9 @@
 		// i gets case insensitive
 		// g makes it global and not just first
 		var regex = new RegExp("\\b(" + terms.replace(/(\^|\.|\*|\+|\?|\=|\!|\\|\/|\(|\)|\[|\]|\{|\})/ig, "\\$1") + ")\\b", "ig");
-		_activeTerm.Definition = _activeTerm.Definition.replace(regex, "<a class='term-link inactive-link' data-value='$1' href='#'>$1</a>")// + pad(0);
+		data.ActiveTerm.Definition = _activeTerm.Definition.replace(regex, "<a class='term-link inactive-link' data-value='$1' href='#'>$1</a>")// + pad(0);
 
-		$("#tmpTermFull").tmpl(_activeTerm).appendTo($("#uxTerm").empty());
+		$("#tmpTermFull").tmpl(data).appendTo($("#uxTerm").empty());
 		$(window).resize();
 		setTimeout(function () { $("#uxDefinition a").switchClass("inactive-link", "active-link", "slow"); }, 0);
 
@@ -117,6 +119,7 @@
 			height: 500,
 			title: data.Term == "" ? "New Term" : data.Term,
 			modal: true,
+			resizable: false,
 			buttons: [
 				{
 					text: "Save",
@@ -225,6 +228,7 @@
 				height: 200,
 				title: "Update Version",
 				modal: true,
+				resizable: false,
 				buttons: [
 					{
 						text: "Save",
@@ -249,6 +253,7 @@
 				height: 200,
 				title: "DELETE?!?!?!?!?!",
 				modal: true,
+				resizable: false,
 				buttons: [
 					{
 						text: "DELETE",
@@ -263,7 +268,7 @@
 			return false;
 		});
 
-		$("#btnAdd").live("click", function ()
+		$(".term-add").live("click", function ()
 		{
 			editTerm();
 			return false;

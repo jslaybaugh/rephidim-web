@@ -5,7 +5,7 @@
 (function ()
 {
 
-	var _path = "";
+	var _firstLoad = true, _browsePath = "";
 
 	var loadFolders = function (path, callback)
 	{
@@ -24,7 +24,7 @@
 		});
 	}
 
-	var loadContents = function (path, callback)
+	var loadContents = function (path, push)
 	{
 		$.ajax(
 		{
@@ -32,7 +32,13 @@
 			data: { path: path },
 			success: function (data)
 			{
-				if (callback) callback(data);
+				var content = {};
+				content.Path = path;
+				content.Files = data;
+				$("#tmpFolderContent").tmpl(content).appendTo($("#uxContents").empty());
+				$(window).resize();
+
+				if (push) history.pushState({ Path: path }, path, App.ResolveUrl("~/Files/Browse/" + path));
 			},
 			error: function (xhr)
 			{
@@ -43,6 +49,43 @@
 
 	var domSetup = function (me)
 	{
+		if (Modernizr.history)
+		{
+			window.onload = function ()
+			{
+				_firstLoad = true;
+
+				if (_browsePath != "")
+				{
+					history.replaceState({ Path: _browsePath }, _browsePath, App.ResolveUrl("~/Files/Browse/" + _browsePath));
+				}
+				
+				loadContents(_browsePath, false);
+				setTimeout(function () { _firstLoad = false; }, 0);
+			};
+
+			window.onpopstate = function (event)
+			{
+				if (_firstLoad)
+				{
+					_firstLoad = false;
+				}
+				else
+				{
+					if (event.state != null)
+					{
+						loadContents(event.state.Path, false);
+					}
+					else
+					{
+						loadContents("", false);
+					}
+				}
+
+			};
+		}
+
+
 		$(".folder-expand").live("click", function ()
 		{
 			$(".popover").fadeOut();
@@ -50,7 +93,7 @@
 
 			if (a.hasClass("ui-icon-plus"))
 			{
-				me.LoadFolders(a.data("path"), function (data)
+				loadFolders(a.data("path"), function (data)
 				{
 					a.removeClass("ui-icon-plus").addClass("ui-icon-minus");
 					$("#tmpFolders").tmpl(data).appendTo($("<ul class='folders'></ul>").appendTo(a.parent("li")));
@@ -74,7 +117,7 @@
 
 			if (a.siblings(".folder-expand").hasClass("ui-icon-plus"))
 			{
-				me.LoadFolders(path, function (data)
+				loadFolders(path, function (data)
 				{
 					a.siblings(".folder-expand").removeClass("ui-icon-plus").addClass("ui-icon-minus");
 					$("#tmpFolders").tmpl(data).appendTo($("<ul class='folders'></ul>").appendTo(a.parent("li")));
@@ -86,16 +129,7 @@
 				a.siblings(".folder-expand").removeClass("ui-icon-minus").addClass("ui-icon-plus");
 			}
 
-
-			me.LoadContents(path, function (data)
-			{
-				var content = {};
-				content.Path = path;
-				content.Files = data;
-				$("#tmpContent").tmpl(content).appendTo($("#uxContents").empty());
-				$(window).resize();
-
-			});
+			loadContents(path, true);
 
 			return false;
 		});
@@ -112,9 +146,11 @@
 
 	this.App.Files = Class.extend(
 	{
-		init: function (path)
+		init: function (browsePath)
 		{
-			this.LoadFolders(_path, function (data)
+			_browsePath = browsePath;
+			
+			loadFolders("", function (data)
 			{
 				$("#tmpFolders").tmpl(data).appendTo("#ulFolders");
 			});
@@ -122,11 +158,7 @@
 			App.FileHelper.ReadyPopover();
 
 			domSetup(this);
-		},
-
-		LoadFolders: loadFolders,
-
-		LoadContents: loadContents
+		}
 
 	});
 
