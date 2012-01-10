@@ -5,9 +5,16 @@
 	ViewBag.NavOther = true;	
 }
 
-<div class="module">
-	<iframe id="iframeContent" style="border:none;width:100%;" src="@Href("~/Content/static/" + @Model.Path)"></iframe>
-</div>
+@if (System.Text.RegularExpressions.Regex.IsMatch(Request.UserAgent, @"(ipad|ipod|iphone)", System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+{ 
+	@* iOS device with stupid scrolling iframe *@
+	@* we also hardcode the height of 30000 px if it is a pdf because thats how long the PDF is and thats the only PDF we're showing here. *@
+	<iframe class="module" style="width:100%;border:none 0;@(Model.Path.ToUpperInvariant().Contains("PDF") ? "height:30000px;" : "")" src="@Href("~/Content/static/" + @Model.Path)"></iframe>
+}
+else
+{ 
+	<iframe id="uxContent" class="module" style="width:100%;border:none 0;" src="@Href("~/Content/static/" + @Model.Path)"></iframe>
+}
 
 @section scripts
 {

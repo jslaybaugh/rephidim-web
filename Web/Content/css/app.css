@@ -27,8 +27,8 @@ input[type=range] {padding:0px;}
 
 .bold {font-weight:bold;}
 
-.scrollable {overflow:scroll;-webkit-overflow-scrolling:touch;}
-.module {-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;box-shadow:0 0 10px #444;background:#f3f3f3;overflow:hidden;}
+.scrollable {overflow:auto;-webkit-overflow-scrolling:touch;}
+.module {-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;box-shadow:0 0 10px #444;background:#f3f3f3;}
 
 .module h1 {clear:both;-webkit-border-top-left-radius:5px;-moz-border-top-left-radius:5px;border-top-left-radius:5px;-webkit-border-top-right-radius:5px;-moz-border-top-right-radius:5px;border-top-right-radius:5px;margin:0px;display:block;padding:8px;color:#eee;font-size:18px;line-height:20px;background: #222;font-weight:normal;}
 .cssgradients .module h1 {filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333', endColorstr='#222');  background: -webkit-gradient(linear, left top, left bottom, from(#333), to(#222)); background: -moz-linear-gradient(top,  #333,  #222);}

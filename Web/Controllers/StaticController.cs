@@ -7,6 +7,7 @@ using Web.Models;
 
 namespace Web.Controllers
 {
+	[Authorize]
 	public class StaticController : Controller
 	{
 

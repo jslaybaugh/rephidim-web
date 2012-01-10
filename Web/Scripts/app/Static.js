@@ -8,12 +8,8 @@
 	{
 		$(window).resize($.throttle(250, function ()
 		{
-			$("#iframeContent").height($(window).height() - 60);
-			//$("#iframeContent").width($(window).width() - 100);
-
+			$("#uxContent").height($(window).height() - 60);
 		})).resize();
-
-
 	};
 
 	this.App.Static = Class.extend(

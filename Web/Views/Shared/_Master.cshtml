@@ -33,25 +33,32 @@
 	<title>@String.Format(titleFormat, ViewBag.Title)</title>
 	<meta name="description" content="Rephidim Web Site, Created 12/2011">
 	<meta name="author" content="Jorin Slaybaugh -- see humans.txt">
-	<script type="text/javascript">
-		if (window.screen.width < 768)
-		{
-			document.write('<meta name="viewport" content="width = 1000, user-scalable = yes" />');
-		}
-		else if (window.screen.width < 1024)
-		{
-			document.write('<meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0" />');
-		}
-	</script>
+@*	@if (ViewBag.NavOther != null && ViewBag.NavOther == true)
+	{
+		<meta name="viewport" content="initial-scale = 1.0, user-scalable = yes" />
+	}
+	else
+	{*@
+		<script type="text/javascript">
+			if (window.screen.width < 768)
+			{
+				document.write('<meta name="viewport" content="width = 1000, user-scalable = yes" />');
+			}
+			else if (window.screen.width < 1024)
+			{
+				document.write('<meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0" />');
+			}
+		</script>
+@*	}*@
 	<meta name="format-detection" content="telephone=no" />
 	@*<link rel="shortcut icon" href="@Href("~/content/img/favicon.ico")">
 	<link rel="apple-touch-icon" href="@Href("~/content/img/apple-touch-icon.png")">*@
 	@Bundles.RenderStylesheets("head")
 	@Sprite.ImportStylesheet("~/App_Sprites/")
 	@if (IsSectionDefined("styles"))
-	{
+ {
 		@RenderSection("styles")
-	}
+ }
 	@Bundles.RenderScripts("head")
 </head>
 <body>
@@ -64,11 +71,11 @@
 						<li @(ViewBag.NavHome != null && ViewBag.NavHome == true ? "class=active" : "")><a href="@(Url.Action<HomeController>(x => x.Home()))">Home</a></li>
 						<li @(ViewBag.NavGlossary != null && ViewBag.NavGlossary == true ? "class=active" : "")><a href="@(Url.Action<GlossaryController>(x => x.Term(null)))">Glossary</a></li>
 						<li @(ViewBag.NavFiles != null && ViewBag.NavFiles == true ? "class=active" : "")><a href="@(Url.Action<FilesController>(x => x.Browse(null)))">Files</a></li>
-						<li @(ViewBag.NavScripture != null && ViewBag.NavScripture == true ? "class=active" : "")><a href="@(Url.Action<ScriptureController>(x => x.Index(null,null,null)))">Scripture</a></li>
+						<li @(ViewBag.NavScripture != null && ViewBag.NavScripture == true ? "class=active" : "")><a href="@(Url.Action<ScriptureController>(x => x.Index(null, null, null)))">Scripture</a></li>
 						<li class="dropdown @(ViewBag.NavOther != null && ViewBag.NavOther == true ? "active" : "")">
 							<a href="#" class="dropdown-toggle">Other Resources</a>
 							<ul class="dropdown-menu">
-								<li><a href="@(Url.Action<StaticController>(x => x.Show("chronology.html")))">Chronology (Full Version)</a></li>
+								<li><a class="link-large" href="@(Url.Action<StaticController>(x => x.Show("chronology.html")))">Chronology (Full Version)</a></li>
 								<li><a href="@(Url.Action<StaticController>(x => x.Show("chrono.html")))">Chronology (Compact Version)</a></li>
 								<li><a href="@(Url.Action<StaticController>(x => x.Show("tapelist.pdf")))">Tape List PDF</a></li>
 							</ul>
@@ -103,9 +110,9 @@
 	<div id="uxAlert" class="global-message alert-message fade in hide" data-alert="true"><a class="close" href="#">×</a><p></p></div>
 	@Bundles.RenderHtmlTemplates()
 	@if (IsSectionDefined("templates"))
-	{
+ {
 		@RenderSection("templates")
-	}
+ }
 	@Bundles.RenderScripts()
 	<script type="text/javascript">
 		window._LastUsedEmail = "@lastEmail";
@@ -153,6 +160,11 @@
 				pre.appendChild(s.createTextNode(document.documentElement.innerHTML));
 			});
 
+			$(".link-large").live("click", function()
+			{
+				alert("This is a very large file and may take a while to load. If you encounter issues, please try the compact version.");
+			});
+
 
 			$(window).resize($.throttle(250, function ()
 			{
@@ -165,14 +177,18 @@
 				}, 0);
 			}));
 
-			@if (!string.IsNullOrEmpty(Request["success"])) { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["success"])),"success");</text> }
-			@if (!string.IsNullOrEmpty(Request["error"])) { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["error"])),"error");</text> }
-			@if (!string.IsNullOrEmpty(Request["warning"])) { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["warning"])),"warning");</text> }
-			@if (!string.IsNullOrEmpty(Request["info"])) { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["info"])),"info");</text> }
+			@if (!string.IsNullOrEmpty(Request["success"]))
+   { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["success"])),"success");</text> }
+			@if (!string.IsNullOrEmpty(Request["error"]))
+   { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["error"])),"error");</text> }
+			@if (!string.IsNullOrEmpty(Request["warning"]))
+   { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["warning"])),"warning");</text> }
+			@if (!string.IsNullOrEmpty(Request["info"]))
+   { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["info"])),"info");</text> }
 		});
 	</script>
 	@if (IsSectionDefined("scripts"))
-	{ 
+ { 
 		@RenderSection("scripts")
 	}
 	<!--[if lt IE 8 ]>
