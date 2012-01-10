@@ -6,6 +6,7 @@ html, body, input, select, textarea, input[type="text"], input[type="password"],
 body { background: #eee url(../img/bg2.png) repeat; padding-top:50px;}
 
 input[type=submit] {background:#efefef;}
+input[type=range] {padding:0px;}
 
 .login-container .alert-message {width:440px;margin:auto;margin-bottom:10px;clear:both;}
 .field-validation-error.alert-message {display:block;}

@@ -29,12 +29,14 @@
 					var all = {
 						EditRights: true,
 						ActiveBook: book,
+						ActiveChapter: 1,
 						Verses: data
 					};
 
 					$("#tmpBookContent").tmpl(all).appendTo($("#uxContents").empty());
 
 					$(window).resize();
+					$("#rangeChapter").change();
 
 					// \\b gets the word boundaries so we only get full words
 					// i gets case insensitive
@@ -49,6 +51,12 @@
 					App.HandleError(xhr);
 				}
 			});
+		});
+
+		$("#rangeChapter").live("change", function ()
+		{
+			var rng = $(this);
+			$("#uxChapter").text(rng.val());
 		});
 
 		//		if (Modernizr.history)

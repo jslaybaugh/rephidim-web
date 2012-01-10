@@ -1,6 +1,6 @@
 ﻿{{if ActiveBook != null}}
 	<h1>
-		<span class="right">Chapter: </span>
+		<span class="right">Chapter: <span id="uxChapter"></span> <input id="rangeChapter" type="range" value="${ActiveChapter}" min="1" max="${ActiveBook.Chapters}" class="span6" /></span>
 		Book: ${ActiveBook.Name}
 	</h1>
 	<div id="uxVerses" class="scrollable">
