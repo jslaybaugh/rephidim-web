@@ -1,0 +1,26 @@
+﻿{{if ActiveBook != null}}
+	<h1>
+		<span class="right">Chapter: </span>
+		Book: ${ActiveBook.Name}
+	</h1>
+	<div id="uxVerses" class="scrollable">
+		<ul class="unstyled">
+			{{each Verses}}
+				<li>
+					<b>${Book.Name} ${Chapter}:${Verse}</b><br />
+					${Text}<br /><br />
+				</li>
+			{{/each}}
+		</ul>
+	</div>
+{{else}}
+	<div class='message'><div>
+		<span>Select a term from the left to get started.<br/><br/>
+			-or-<br/><br/>
+			{{if EditRights}}
+				<a href="#" class="term-add">{{html App.ChooseIcon("new")}}Add New Term</a><br />
+			{{/if}}
+			<a href="${App.ResolveUrl('~/Glossary/Print/')}" target="_blank" title="Print All Terms">{{html App.ChooseIcon("pdfmulti")}}View/Print PDF of All Terms</a>
+		</span>
+	</div></div>
+{{/if}}

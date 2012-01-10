@@ -56,12 +56,14 @@
     <Compile Include="Extensions\StringValidations.cs" />
     <Compile Include="Extensions\Url.cs" />
     <Compile Include="FileUtility.cs" />
+    <Compile Include="Models\BookItem.cs" />
     <Compile Include="Models\DirectoryInfoResult.cs" />
     <Compile Include="Models\FileInfoResult.cs" />
     <Compile Include="Models\GlossaryItem.cs" />
     <Compile Include="Models\GlossarySummary.cs" />
     <Compile Include="Models\GlossarySummaryMore.cs" />
     <Compile Include="Models\MessageItem.cs" />
+    <Compile Include="Models\ScriptureItem.cs" />
     <Compile Include="Models\UserItem.cs" />
     <Compile Include="Models\VersionItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

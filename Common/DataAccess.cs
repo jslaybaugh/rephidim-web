@@ -83,6 +83,72 @@ namespace Common
 			}
 		}
 
+		public static IEnumerable<BookItem> GetBooks()
+		{
+			try
+			{
+				using (var cn = new SqlCeConnection(ConnString))
+				{
+					cn.Open();
+
+					var p = new DynamicParameters();
+
+					var res = cn.Query("SELECT BookId, BookName, Chapters FROM Books ORDER BY BookId", p);
+
+					if (res == null) return null;
+
+					return res.Select(x => new BookItem
+					{
+						Id = x.BookId,
+						Name = x.BookName,
+						Chapters = x.Chapters
+					});
+				}
+			}
+			catch (Exception)
+			{
+				return null;
+			}
+		}
+
+		public static IEnumerable<ScriptureItem> GetVerses(int bookId, int chapterNum)
+		{
+			try
+			{
+				using (var cn = new SqlCeConnection(ConnString))
+				{
+					cn.Open();
+
+					var p = new DynamicParameters();
+					p.Add("@days", ConfigurationManager.AppSettings["days"]);
+					p.Add("@bookId", bookId);
+					p.Add("@chapterNum", chapterNum);
+
+					var res = cn.Query("SELECT ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, VerseText, Notes, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE Scriptures.BookId=@bookId AND ChapterNum=@chapterNum ORDER BY Books.BookId, ChapterNum, VerseNum", p);
+
+					if (res == null) return null;
+
+					return res.Select(x => new ScriptureItem
+					{
+						Id = x.ScriptureId,
+						Book = new BookItem {Id = x.BookId, Name =x.BookName, Chapters = x.Chapters},
+						Chapter = x.ChapterNum,
+						Verse = x.VerseNum,
+						Text = x.VerseText,
+						Notes = x.Notes,
+						IsNew = x.IsNew,
+						IsModified = x.IsModified,
+						DateCreated = x.DateCreated,
+						DateModified = x.DateModified
+					});
+				}
+			}
+			catch (Exception)
+			{
+				return null;
+			}
+		}
+
 		public static IEnumerable<GlossaryItem> GetAllTermsFull()
 		{
 			try

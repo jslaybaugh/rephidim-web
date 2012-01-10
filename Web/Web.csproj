@@ -125,9 +125,11 @@
     <Compile Include="Areas\Ajax\AjaxAreaRegistration.cs" />
     <Compile Include="Areas\Ajax\Controllers\FilesController.cs" />
     <Compile Include="Areas\Ajax\Controllers\GlossaryController.cs" />
+    <Compile Include="Areas\Ajax\Controllers\ScriptureController.cs" />
     <Compile Include="CassetteConfiguration.cs" />
     <Compile Include="Code\AjaxHandleErrorAttribute.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\ScriptureController.cs" />
     <Compile Include="Controllers\StaticController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\GlossaryController.cs" />
@@ -135,6 +137,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ScriptureView.cs" />
     <Compile Include="Models\StaticView.cs" />
     <Compile Include="Models\SearchView.cs" />
     <Compile Include="Models\FileView.cs" />
@@ -199,6 +202,8 @@
     <Content Include="Content\img\login2.png" />
     <Content Include="Content\img\microphone.png" />
     <Content Include="Content\img\ui-icons_f6cf3b_256x240.png" />
+    <Content Include="Content\templates\scripture\tmpBookContent.htm" />
+    <Content Include="Content\templates\scripture\tmpBookList.htm" />
     <Content Include="Content\templates\results\tmpFileResults.htm" />
     <Content Include="Content\templates\global\tmpPopoverContent.htm" />
     <Content Include="Content\templates\global\tmpPopoverTitle.htm" />
@@ -213,6 +218,7 @@
     <Content Include="humans.txt" />
     <Content Include="robots.txt" />
     <Content Include="Scripts\app\App.js" />
+    <Content Include="Scripts\app\Scripture.js" />
     <Content Include="Scripts\app\Home.js" />
     <Content Include="Scripts\app\FileHelper.js" />
     <Content Include="Scripts\app\Static.js" />
@@ -284,6 +290,9 @@
       <Project>{6B7337A0-1201-41B4-BA51-08BFEAA37E37}</Project>
       <Name>Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Scripture\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

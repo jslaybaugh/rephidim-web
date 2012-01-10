@@ -28,6 +28,13 @@ namespace Web
 				"Glossary/{action}/{id}", // URL with parameters
 				new { controller = "Glossary", action = "Term", id = UrlParameter.Optional }, // Parameter defaults
 				new string[] { "Web.Controllers" }
+			);
+
+			routes.MapRoute(
+				"Scripture", // Route name
+				"CorrectedTranslation/{book}/{chapter}/{verse}", // URL with parameters
+				new { controller = "Scripture", action = "Index", book = UrlParameter.Optional, chapter = UrlParameter.Optional, verse = UrlParameter.Optional }, // Parameter defaults
+				new string[] { "Web.Controllers" }
 			); 
 
 			routes.MapRoute(

@@ -1,0 +1,36 @@
+﻿@model Web.Models.ScriptureView
+
+@{
+	ViewBag.Title = "Corrected Translation";
+	ViewBag.NavScripture = true;
+	Bundles.Reference("content/templates/scripture");
+}
+
+<div class="row">
+	<div class="span4 module" id="uxBooks">
+		<h1>All Books</h1>
+		<div class="scrollable">
+			<ul id="ulBooks" class="unstyled"></ul>
+		</div>
+	</div>
+	<div class="span12 module" id="uxContents"></div>
+</div>
+
+@section templates
+{
+	@Bundles.RenderHtmlTemplates()
+}
+
+@section scripts
+{
+
+	<script type="text/javascript">
+
+		$(function ()
+		{
+			var Files = new App.Scripture(@Html.Raw(Json.Encode(Model.Books)));
+		});
+		
+	</script>
+
+}

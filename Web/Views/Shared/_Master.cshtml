@@ -64,6 +64,7 @@
 						<li @(ViewBag.NavHome != null && ViewBag.NavHome == true ? "class=active" : "")><a href="@(Url.Action<HomeController>(x => x.Home()))">Home</a></li>
 						<li @(ViewBag.NavGlossary != null && ViewBag.NavGlossary == true ? "class=active" : "")><a href="@(Url.Action<GlossaryController>(x => x.Term(null)))">Glossary</a></li>
 						<li @(ViewBag.NavFiles != null && ViewBag.NavFiles == true ? "class=active" : "")><a href="@(Url.Action<FilesController>(x => x.Browse(null)))">Files</a></li>
+						<li @(ViewBag.NavScripture != null && ViewBag.NavScripture == true ? "class=active" : "")><a href="@(Url.Action<ScriptureController>(x => x.Index(null,null,null)))">Scripture</a></li>
 						<li class="dropdown @(ViewBag.NavOther != null && ViewBag.NavOther == true ? "active" : "")">
 							<a href="#" class="dropdown-toggle">Other Resources</a>
 							<ul class="dropdown-menu">

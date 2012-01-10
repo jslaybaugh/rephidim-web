@@ -12,6 +12,13 @@ namespace Web.Areas.Ajax.Controllers
 	[AjaxHandleError]
     public class GlossaryController : Controller
 	{
+		[HttpGet]
+		public JsonResult List()
+		{
+			return Json(DataAccess.GetAllTerms(), JsonRequestBehavior.AllowGet);
+		}
+
+		[HttpGet]
 		public JsonResult Details(string term)
 		{
 			return Json(DataAccess.GetSingleTerm(term), JsonRequestBehavior.AllowGet);
