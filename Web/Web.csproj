@@ -37,17 +37,17 @@
     <Reference Include="AjaxMin">
       <HintPath>..\packages\AjaxMin.4.37.4345.34101\lib\net20\AjaxMin.dll</HintPath>
     </Reference>
-    <Reference Include="Cassette, Version=1.0.0.21170, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Cassette, Version=1.0.1.20976, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Cassette.1.0.0\lib\net40-Client\Cassette.dll</HintPath>
+      <HintPath>..\packages\Cassette.1.0.1\lib\net40-Client\Cassette.dll</HintPath>
     </Reference>
-    <Reference Include="Cassette.Views, Version=1.0.0.21171, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Cassette.Views, Version=1.0.1.20978, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Cassette.Views.1.0.0\lib\net40\Cassette.Views.dll</HintPath>
+      <HintPath>..\packages\Cassette.Views.1.0.1\lib\net40\Cassette.Views.dll</HintPath>
     </Reference>
-    <Reference Include="Cassette.Web, Version=1.0.0.21172, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Cassette.Web, Version=1.0.1.20979, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Cassette.Web.1.0.0\lib\net40\Cassette.Web.dll</HintPath>
+      <HintPath>..\packages\Cassette.Web.1.0.1\lib\net40\Cassette.Web.dll</HintPath>
     </Reference>
     <Reference Include="Elmah">
       <HintPath>..\packages\elmah.corelibrary.1.2.1\lib\Elmah.dll</HintPath>
@@ -129,6 +129,7 @@
     <Compile Include="CassetteConfiguration.cs" />
     <Compile Include="Code\AjaxHandleErrorAttribute.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ScriptureController.cs" />
     <Compile Include="Controllers\StaticController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminParseView.cs" />
     <Compile Include="Models\ScriptureView.cs" />
     <Compile Include="Models\StaticView.cs" />
     <Compile Include="Models\SearchView.cs" />
@@ -293,6 +295,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Scripture\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Admin\Parse.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

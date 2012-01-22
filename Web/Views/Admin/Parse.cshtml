@@ -1,0 +1,25 @@
+﻿@model AdminParseView
+@{
+	ViewBag.Title = "Parse";
+}
+<div class="row">
+	<div class="module span16">
+		<h1>File Parsing Utility</h1>
+		<div>
+			@using (Html.BeginForm("Parse", "Admin", FormMethod.Post))
+			{
+				<div>Expression @Html.TextBoxFor(m => m.Expression, new { @class = "span7" }) Replace @Html.TextBoxFor(m => m.Replace, new { @class = "span3" })<input type="submit" value="Parse" /></div>
+				
+				@Html.TextAreaFor(m => m.Source, new { @class = "span15", rows = "30" })
+			}
+		</div>
+		<div>@Model.EndResult</div>
+	</div>
+</div>
+
+
+@section scripts
+{
+	<script type="text/javascript">
+	</script>
+}</div>

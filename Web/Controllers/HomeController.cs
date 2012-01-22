@@ -21,7 +21,7 @@ namespace Web.Controllers
 			var m = new HomeView();
 			m.RecentTerms = DataAccess.GetRecentTerms();
 			m.Messages = DataAccess.GetActiveHomeMessages();
-			m.RecentFiles = FileUtility.GetRecentFiles();
+			m.RecentFiles = FileUtility.Recent();
 
 			return View("Home", m);
 		}
@@ -37,9 +37,13 @@ namespace Web.Controllers
 
 			var m = new SearchView();
 			m.OriginalQuery = query;
+			var start = DateTime.UtcNow;
 			m.MatchingFiles = FileUtility.Search(queryParts);
 			m.QueryParts = queryParts;
 			m.MatchingTerms = DataAccess.SearchTerms(queryParts);
+			var end = DateTime.UtcNow;
+
+			ViewBag.Duration = end.Subtract(start).TotalSeconds;
 
 			return View("Search", m);
 

@@ -60,7 +60,7 @@ namespace Common
 				.Where(y => !y.Extension.MatchesTrimmed(".ini") && !y.Extension.MatchesTrimmed(".db") && !y.Extension.MatchesTrimmed(".lnk"))
 				.Select(x => new FileInfoResult
 				{
-					Name = x.Name.Substring(0, x.Name.LastIndexOf(".")),
+					Name = x.Name.Substring(0, x.Name.LastIndexOf(".") < 0 ? 0 : x.Name.LastIndexOf(".")),
 					Path = x.FullName.Replace(Root, "").Replace(@"\", "/"),
 					Size = PrintFileSize(x.Length),
 					DateModified = x.LastWriteTime,
@@ -75,12 +75,11 @@ namespace Common
 
 		public static IEnumerable<FileInfoResult> Search(string[] queryparts)
 		{
-			var matchingFiles = new List<FileInfo>();
-			SearchFiles(Root, queryparts, ref matchingFiles);
+			var matchingFiles = SearchFiles(new Regex(string.Join("", queryparts.Select(x => "(?=.*" + x + ")")), RegexOptions.IgnoreCase));
 			return matchingFiles
 				.Select(x => new FileInfoResult
 				{
-					Name = x.Name.Substring(0, x.Name.LastIndexOf(".")),
+					Name = x.Name.Substring(0, x.Name.LastIndexOf(".") < 0 ? 0 : x.Name.LastIndexOf(".")),
 					Path = x.FullName.Replace(Root, "").Replace(@"\", "/"),
 					Size = FileUtility.PrintFileSize(x.Length),
 					DateModified = x.LastWriteTime,
@@ -93,15 +92,13 @@ namespace Common
 				.Distinct(new PropertyComparer<FileInfoResult>("Name"));
 		}
 
-		public static IEnumerable<FileInfoResult> GetRecentFiles()
+		public static IEnumerable<FileInfoResult> Recent()
 		{
-			var matchingFiles = new List<FileInfo>();
-			RecentFiles(Root, ref matchingFiles);
-
+			var matchingFiles = RecentFiles();
 			return matchingFiles
 				.Select(x => new FileInfoResult
 				{
-					Name = x.Name.Substring(0, x.Name.LastIndexOf(".")),
+					Name = x.Name.Substring(0, x.Name.LastIndexOf(".") < 0 ? 0 : x.Name.LastIndexOf(".")),
 					Path = x.FullName.Replace(Root, "").Replace(@"\", "/"),
 					Size = FileUtility.PrintFileSize(x.Length),
 					DateModified = x.LastWriteTime,
@@ -116,51 +113,19 @@ namespace Common
 
 
 
-		private static void RecentFiles(string path, ref List<FileInfo> matchingFiles)
+		private static IEnumerable<FileInfo> RecentFiles()
 		{
-			var dir = new DirectoryInfo(path);
-			var files = dir.GetFiles();
-
-			var found = files
-				.ToList()
-				.Where(x => x.LastWriteTime.Subtract(DateTime.Now).Duration().TotalDays < Convert.ToInt32(ConfigurationManager.AppSettings["days"]) || x.CreationTime.Subtract(DateTime.Now).Duration().TotalDays < Convert.ToInt32(ConfigurationManager.AppSettings["days"]));
-
-			matchingFiles.AddRange(found);
-
-			var dirs = dir.GetDirectories();
-
-			if (dirs.Count() > 0)
-			{
-				foreach (var subdir in dirs)
-				{
-					RecentFiles(subdir.FullName, ref matchingFiles);
-				}
-			}
+			var dir = new DirectoryInfo(Root);
+			return dir.EnumerateFiles("*", SearchOption.AllDirectories)
+				.Where(x => x.LastWriteTime.Subtract(DateTime.Now).Duration().TotalDays < Convert.ToInt32(ConfigurationManager.AppSettings["days"]) 
+					|| x.CreationTime.Subtract(DateTime.Now).Duration().TotalDays < Convert.ToInt32(ConfigurationManager.AppSettings["days"]));
 		}
 
-
-		private static void SearchFiles(string path, string[] queryParts, ref List<FileInfo> matchingFiles)
+		private static IEnumerable<FileInfo> SearchFiles(Regex reg)
 		{
-
-			var dir = new DirectoryInfo(path);
-			var files = dir.GetFiles();
-
-			var regexp = string.Join("", queryParts.Select(x => "(?=.*" + x + ")"));
-			var found = files
-				.ToList()
-				.Where(x => Regex.IsMatch(x.FullName.Replace(Root, ""), regexp, RegexOptions.IgnoreCase) && !x.Extension.MatchesTrimmed(".ini") && !x.Extension.MatchesTrimmed(".db") && !x.Extension.MatchesTrimmed(".lnk"));
-
-			matchingFiles.AddRange(found);
-
-			var dirs = dir.GetDirectories();
-
-			if (dirs.Count() > 0)
-			{
-				foreach (var subdir in dirs)
-				{
-					SearchFiles(subdir.FullName, queryParts, ref matchingFiles);
-				}
-			}
+			var dir = new DirectoryInfo(Root);
+			return dir.EnumerateFiles("*", SearchOption.AllDirectories)
+				.Where(x => reg.IsMatch(x.FullName.Replace(Root, "")));
 		}
 
 		private static string PrintFileSize(Int64 size)

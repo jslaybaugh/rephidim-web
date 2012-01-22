@@ -1,4 +1,4 @@
-﻿<h1>Glossary Results (${Terms != null ? Terms.length : 0})</h1>
+﻿<h1>${Title} (${Terms != null ? Terms.length : 0})</h1>
 <div class="scrollable">
 	{{if Terms != null && Terms.length > 0}}
 		<ul class="unstyled">
@@ -12,6 +12,6 @@
 			{{/each}}
 		</ul>
 	{{else}}
-		<div class='message'><div><span>No terms match the search terms.</span></div></div>
+		<div class='message'><div><span>No terms.</span></div></div>
 	{{/if}}
 </div>
