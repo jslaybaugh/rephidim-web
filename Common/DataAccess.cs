@@ -570,5 +570,82 @@ namespace Common
 			}
 		}
 
+
+
+
+		public static int InsertBook(int id, string name)
+		{
+			try
+			{
+				using (var cn = new SqlCeConnection(ConnString))
+				{
+					cn.Open();
+
+					var p = new DynamicParameters();
+					p.Add("@BookId", id);
+					p.Add("@Name", name);
+
+					var exec = cn.Execute("INSERT nasb_Books(BookId, Name) VALUES(@Bookid, @name);", p);
+
+					return exec;
+				}
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
+
+
+		public static int InsertChapter(int id, int name, int bookId)
+		{
+			try
+			{
+				using (var cn = new SqlCeConnection(ConnString))
+				{
+					cn.Open();
+
+					var p = new DynamicParameters();
+					p.Add("@BookId", bookId);
+					p.Add("@chapterId", id);
+					p.Add("@name", name);
+
+					var exec = cn.Execute("INSERT nasb_Chapters(ChapterId, [Name], BookId) VALUES(@ChapterId, @name, @Bookid);", p);
+
+					return exec;
+				}
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
+
+
+		public static int InsertVerse(int id, int chapterId, string text, int name)
+		{
+			try
+			{
+				using (var cn = new SqlCeConnection(ConnString))
+				{
+					cn.Open();
+
+					var p = new DynamicParameters();
+					p.Add("@VerseId", id);
+					p.Add("@name", name);
+					p.Add("@chapterId", chapterId);
+					p.Add("@verseText", text);
+
+					var exec = cn.Execute("INSERT nasb_Verses(VerseId, [Name], ChapterId, VerseText) VALUES(@VerseId, @Name, @ChapterId, @versetext);", p);
+
+					return exec;
+				}
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
+
 	}
 }
