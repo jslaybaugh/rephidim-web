@@ -11,3 +11,4 @@ bootstrap-dropdown.js
 bootstrap-twipsy.js
 bootstrap-popover.js
 bootstrap-alerts.js
+knockout-2.0.0.js

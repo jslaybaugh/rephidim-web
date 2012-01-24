@@ -76,8 +76,9 @@
     <Reference Include="MvcContrib">
       <HintPath>..\packages\MvcContrib.Mvc3-ci.3.0.92.0\lib\MvcContrib.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.0.5\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=4.0.7.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.4.0.7\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NotFoundMvc">
       <HintPath>..\packages\NotFoundMvc.0.2.0\lib\net40\NotFoundMvc.dll</HintPath>
@@ -240,6 +241,7 @@
     <Content Include="Scripts\libs\jquery.form.js" />
     <Content Include="Scripts\libs\jquery.scrollTo-1.4.2.js" />
     <Content Include="Scripts\libs\jquery.tmpl.js" />
+    <Content Include="Scripts\libs\knockout-2.0.0.js" />
     <Content Include="Scripts\libs\module.txt" />
     <Content Include="Scripts\pre\modernizr-2.0.min.js" />
     <Content Include="Scripts\pre\respond.js" />
