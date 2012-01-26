@@ -1,17 +1,16 @@
 ﻿{{if ActiveBook != null}}
 	<h1>
-		<span class="right">Chapter: <span id="uxChapter"></span> <input id="rangeChapter" type="range" value="${ActiveChapter}" min="1" max="${ActiveBook.Chapters}" class="span6" /></span>
-		Book: ${ActiveBook.Name}
+		<span class="right range">1 <input id="rangeChapter" type="range" value="${ActiveChapter}" min="1" max="${ActiveBook.Chapters}" class="span5" style="height:10px;" /> ${ActiveBook.Chapters}</span>
+		<span class="right no-range">
+			<select id="cmbChapter" class="span2">
+				{{each Chapters}}
+					<option value="${Chapter}" {{if ActiveChapter == Chapter}}selected="selected"{{/if}}>Chapter ${Chapter}</option>
+				{{/each}}
+			</select>
+		</span>
+		${ActiveBook.Name} Chapter <span id="uxChapter"></span>
 	</h1>
 	<div id="uxVerses" class="scrollable">
-		<ul class="unstyled">
-			{{each Verses}}
-				<li>
-					<b>${Book.Name} ${Chapter}:${Verse}</b><br />
-					${Text}<br /><br />
-				</li>
-			{{/each}}
-		</ul>
 	</div>
 {{else}}
 	<div class='message'><div>

@@ -8,6 +8,15 @@ body { background: #eee url(../img/bg2.png) repeat; padding-top:50px;}
 input[type=submit] {background:#efefef;}
 input[type=range] {padding:0px;}
 
+/* Modernizr HTML5 Controls */
+
+.input-range span.range {display:inline;}
+.input-range span.no-range {display:none;}
+.no-input-range span.range {display:none;}
+.no-input-range span.no-range {display:inline;}
+
+/*  */
+
 .login-container .alert-message {width:440px;margin:auto;margin-bottom:10px;clear:both;}
 .field-validation-error.alert-message {display:block;}
 .field-validation-valid.alert-message {display:none;}
@@ -66,6 +75,9 @@ img {vertical-align:text-bottom;}
 #uxContents .box-content {overflow:auto;}
 #uxContents .box-content li {white-space:nowrap;}
 */
+
+.verses { list-style-type: none;margin:0px;padding:0px;}
+.verses li {padding:3px 0px 3px 0px;border:none;border-bottom:solid 1px #ddd;width:100%;overflow:hidden;text-overflow:ellipsis;}
 
 /* login stuff */
 

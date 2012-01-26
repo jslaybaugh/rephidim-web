@@ -1,10 +1,11 @@
 ﻿/// <reference path="app.js" />
+/// <reference path="GlossaryHelper.js" />
 /// <reference path="../libs/Class.js" />
 /// <reference path="../libs/jquery.ba-throttle-debounce.min.js" />
 
 (function ()
 {
-	var _terms, _activeTerm, _firstLoad = true, _editRights = false;
+	var _activeTerm, _firstLoad = true, _editRights = false;
 
 	var pad = function (currentLength)
 	{
@@ -41,16 +42,11 @@
 			history.pushState({ TermName: _activeTerm.Term }, _activeTerm.Term, App.ResolveUrl("~/Glossary/Term/" + _activeTerm.Id));
 		}
 
-		var terms = $.map(_terms, function (n) { return n.Term; }).join("|");
-		// \\b gets the word boundaries so we only get full words
-		// i gets case insensitive
-		// g makes it global and not just first
-		var regex = new RegExp("\\b(" + terms.replace(/(\^|\.|\*|\+|\?|\=|\!|\\|\/|\(|\)|\[|\]|\{|\})/ig, "\\$1") + ")\\b", "ig");
-		data.ActiveTerm.Definition = _activeTerm.Definition.replace(regex, "<a class='term-link inactive-link' data-value='$1' href='#'>$1</a>")// + pad(0);
-
 		$("#tmpTermFull").tmpl(data).appendTo($("#uxTerm").empty());
 		$(window).resize();
-		setTimeout(function () { $("#uxDefinition a").switchClass("inactive-link", "active-link", "slow"); }, 0);
+
+		App.GlossaryHelper.HighlightTerms("#uxDefinition");
+
 
 	};
 
@@ -296,24 +292,29 @@
 			$("#uxTerm").height($(window).height() - 60);
 		})).resize();
 
-		$("#tmpTermList").tmpl(_terms).appendTo("#ulTerms");
 
 	};
 
 	this.App.Glossary = Class.extend(
 	{
-		init: function (terms, activeTerm, editRights)
+		init: function (activeTerm, version, editRights)
 		{
-			_terms = $.map(terms, function (n)
-			{
-				if (n.IsNew == null) n.IsNew = false;
-				if (n.IsModified == null) n.IsModified = false;
-
-				return n;
-			});
-
 			_activeTerm = activeTerm;
 			_editRights = editRights;
+
+			var list = { EditRights: editRights, Version: version };
+			App.GlossaryHelper.LoadTerms(function (terms)
+			{
+				list.Terms = $.map(terms, function (n)
+				{
+					if (n.IsNew == null) n.IsNew = false;
+					if (n.IsModified == null) n.IsModified = false;
+
+					return n;
+				});
+
+				$("#tmpTermList").tmpl(list).appendTo($("#uxList").empty());
+			});
 
 			domSetup(this);
 		}

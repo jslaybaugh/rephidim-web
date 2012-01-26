@@ -9,7 +9,7 @@
 	
 	Bundles.Reference("content/templates/global");
 
-	string titleFormat = "{0} : Rephidim Church";
+	string titleFormat = "{0} • Rephidim Church";
 	
 	string appPath = Request.ApplicationPath + (Request.ApplicationPath.EndsWith("/") ? "" : "/");
 
@@ -49,10 +49,16 @@
 	@Bundles.RenderStylesheets("head")
 	@Sprite.ImportStylesheet("~/App_Sprites/")
 	@if (IsSectionDefined("styles"))
- {
+	{
 		@RenderSection("styles")
- }
+	}
 	@Bundles.RenderScripts("head")
+	<script>
+		// manually add add'l modernizr classes
+		h = document.getElementsByTagName('html')[0];
+		h.className += Modernizr.inputtypes['range'] ? ' input-range' : ' no-input-range';
+		h.className += Modernizr.inputtypes['color'] ? ' input-color' : ' no-input-color';
+	</script>
 </head>
 <body>
 	<div class="topbar-wrapper" style="z-index: 5;">
@@ -64,13 +70,22 @@
 						<li @(ViewBag.NavHome != null && ViewBag.NavHome == true ? "class=active" : "")><a href="@(Url.Action<HomeController>(x => x.Home()))">Home</a></li>
 						<li @(ViewBag.NavGlossary != null && ViewBag.NavGlossary == true ? "class=active" : "")><a href="@(Url.Action<GlossaryController>(x => x.Term(null)))">Glossary</a></li>
 						<li @(ViewBag.NavFiles != null && ViewBag.NavFiles == true ? "class=active" : "")><a href="@(Url.Action<FilesController>(x => x.Browse(null)))">Files</a></li>
-						<li @(ViewBag.NavScripture != null && ViewBag.NavScripture == true ? "class=active" : "")><a href="@(Url.Action<ScriptureController>(x => x.Index(null, null, null)))">Scripture</a></li>
+						<li @(ViewBag.NavScripture != null && ViewBag.NavScripture == true ? "class=active" : "")><a href="@(Url.Action<ScriptureController>(x => x.Index(null, null, null)))">Bible</a></li>
 						<li class="dropdown @(ViewBag.NavOther != null && ViewBag.NavOther == true ? "active" : "")">
-							<a href="#" class="dropdown-toggle">Other Resources</a>
+							<a href="#" class="dropdown-toggle">Resources</a>
 							<ul class="dropdown-menu">
+								<li><a href="@(Url.Action<StaticController>(x => x.Show("tapelist.pdf")))">Tape List</a></li>
+								<li class="divider"></li>
 								<li><a class="link-large" href="@(Url.Action<StaticController>(x => x.Show("chronology.html")))">Chronology (Full Version)</a></li>
 								<li><a href="@(Url.Action<StaticController>(x => x.Show("chrono.html")))">Chronology (Compact Version)</a></li>
-								<li><a href="@(Url.Action<StaticController>(x => x.Show("tapelist.pdf")))">Tape List PDF</a></li>
+								<li class="divider"></li>
+								<li><a href="@(Url.Action<StaticController>(x => x.Show("Atlas_Front.pdf")))">Atlas (Introduction)</a></li>
+								<li><a href="@(Url.Action<StaticController>(x => x.Show("Atlas_Chapter1.pdf")))">Atlas (Ch 1 - L/G/H Interpretation)</a></li>
+								<li><a href="@(Url.Action<StaticController>(x => x.Show("Atlas_Chapter2.pdf")))">Atlas (Ch 2 - Reliability)</a></li>
+								<li><a href="@(Url.Action<StaticController>(x => x.Show("Atlas_Chapter3.pdf")))">Atlas (Ch 3 - Canonicity)</a></li>
+								<li><a href="@(Url.Action<StaticController>(x => x.Show("Atlas_Chapter4.pdf")))">Atlas (Ch 4 - Divine Revelation)</a></li>
+								<li><a href="@(Url.Action<StaticController>(x => x.Show("Atlas_Chapter5.pdf")))">Atlas (Ch 5 - Attributes of God)</a></li>
+								<li><a href="@(Url.Action<StaticController>(x => x.Show("Atlas_Addendums.pdf")))">Atlas (Addenda)</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -103,9 +118,9 @@
 	<div id="uxAlert" class="global-message alert-message fade in hide" data-alert="true"><a class="close" href="#">×</a><p></p></div>
 	@Bundles.RenderHtmlTemplates()
 	@if (IsSectionDefined("templates"))
- {
+	{
 		@RenderSection("templates")
- }
+	}
 	@Bundles.RenderScripts()
 	<script type="text/javascript">
 		window._LastUsedEmail = "@lastEmail";
@@ -170,18 +185,14 @@
 				}, 0);
 			}));
 
-			@if (!string.IsNullOrEmpty(Request["success"]))
-   { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["success"])),"success");</text> }
-			@if (!string.IsNullOrEmpty(Request["error"]))
-   { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["error"])),"error");</text> }
-			@if (!string.IsNullOrEmpty(Request["warning"]))
-   { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["warning"])),"warning");</text> }
-			@if (!string.IsNullOrEmpty(Request["info"]))
-   { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["info"])),"info");</text> }
+			@if (!string.IsNullOrEmpty(Request["success"])) { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["success"])),"success");</text> }
+			@if (!string.IsNullOrEmpty(Request["error"])) { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["error"])),"error");</text> }
+			@if (!string.IsNullOrEmpty(Request["warning"])) { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["warning"])),"warning");</text> }
+			@if (!string.IsNullOrEmpty(Request["info"])) { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["info"])),"info");</text> }
 		});
 	</script>
 	@if (IsSectionDefined("scripts"))
- { 
+	{ 
 		@RenderSection("scripts")
 	}
 	<!--[if lt IE 8 ]>

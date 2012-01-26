@@ -21,7 +21,7 @@ namespace Web.Controllers
         {
 			var m = new GlossaryView();
 
-			m.Terms = DataAccess.GetAllTerms();
+			//m.Terms = DataAccess.GetAllTerms();
 			if (id.HasValue)
 			{
 				m.ActiveTerm = DataAccess.GetSingleTerm(id.Value);

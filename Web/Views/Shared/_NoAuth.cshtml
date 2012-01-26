@@ -4,6 +4,10 @@
 
 	Bundles.Reference("scripts/pre", "head");
 	Bundles.Reference("scripts/app/app.js");
+
+	string titleFormat = "{0} • Rephidim Church";
+
+	string appPath = Request.ApplicationPath + (Request.ApplicationPath.EndsWith("/") ? "" : "/");
 }
 
 <!DOCTYPE html>
@@ -51,7 +55,7 @@
 	}
 	@Bundles.RenderScripts()
 	<script type="text/javascript">
-		App.SetRoot("@Href("~/")");
+		App.Startup("@appPath", "@titleFormat", {});
 	</script>
 	@if (IsSectionDefined("scripts"))
 	{ 

@@ -1,9 +1,6 @@
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\Web.dll
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\Web.pdb
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\AjaxMin.dll
-C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\Cassette.dll
-C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\Cassette.Views.dll
-C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\Cassette.Web.dll
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\Common.dll
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\Elmah.dll
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\EntityFramework.dll

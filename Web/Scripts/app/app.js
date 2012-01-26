@@ -2,7 +2,8 @@
 
 (function ()
 {
-	var _root, _titleFormat, _icons, _queryParts;
+	var _root, _titleFormat, _icons, _queryParts, _terms, _termString;
+
 	String.prototype.format = function ()
 	{
 		var s = this;

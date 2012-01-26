@@ -1,11 +1,34 @@
 ﻿/// <reference path="app.js" />
-/// <reference path="filehelper.js" />
+/// <reference path="glossaryhelper.js" />
 /// <reference path="../libs/Class.js" />
 
 (function ()
 {
 
-	var _firstLoad = true, _books, _terms;
+	var _firstLoad = true, _books, _terms, _book;
+
+	var loadChapter = function (chapterNum)
+	{
+		$.ajax(
+		{
+			url: App.ResolveUrl("~/Ajax/Scripture/Verses"),
+			data: { bookId: _book.Id, chapterNum: chapterNum },
+			success: function (data)
+			{
+				$("#uxChapter").text(chapterNum);
+
+				$("#tmpChapterContent").tmpl({ Verses: data }).appendTo($("#uxVerses").empty());
+
+				$(window).resize();
+
+				App.GlossaryHelper.HighlightTerms("#uxVerses");
+			},
+			error: function (xhr)
+			{
+				App.HandleError(xhr);
+			}
+		});
+	};
 
 	var domSetup = function (me)
 	{
@@ -14,50 +37,36 @@
 			var lnk = $(this);
 			var details = lnk.data("details").split("|");
 
-			var book = {
+			_book = {
 				Id: details[0],
 				Name: details[1],
 				Chapters: details[2]
 			};
 
-			$.ajax(
+
+			var chapters = [];
+			for (var i = 0; i < _book.Chapters; i++)
 			{
-				url: App.ResolveUrl("~/Ajax/Scripture/Verses"),
-				data: { bookId: book.Id, chapterNum: 1 },
-				success: function (data)
-				{
-					var all = {
-						EditRights: true,
-						ActiveBook: book,
-						ActiveChapter: 1,
-						Verses: data
-					};
+				chapters.push({ Chapter: i + 1 });
+			}
 
-					$("#tmpBookContent").tmpl(all).appendTo($("#uxContents").empty());
+			var all = {
+				EditRights: true,
+				ActiveBook: _book,
+				ActiveChapter: 1,
+				Chapters: chapters
+			};
 
-					$(window).resize();
-					$("#rangeChapter").change();
+			$("#tmpBookContent").tmpl(all).appendTo($("#uxContents").empty());
 
-					// \\b gets the word boundaries so we only get full words
-					// i gets case insensitive
-					// g makes it global and not just first
-					var regex = new RegExp("\\b(" + _terms.replace(/(\^|\.|\*|\+|\?|\=|\!|\\|\/|\(|\)|\[|\]|\{|\})/ig, "\\$1") + ")\\b", "ig");
-					$("#uxVerses").html($("#uxVerses").html().replace(regex, "<a class='term-link inactive-link' data-value='$1' href='#'>$1</a>")); // + pad(0);
-
-					setTimeout(function () { $("#uxVerses a").switchClass("inactive-link", "active-link", "slow"); }, 0);
-				},
-				error: function (xhr)
-				{
-					App.HandleError(xhr);
-				}
-			});
+			loadChapter(1);
 		});
 
-		$("#rangeChapter").live("change", function ()
+		$("#rangeChapter, #cmbChapter").live("change", $.debounce(750, function ()
 		{
 			var rng = $(this);
-			$("#uxChapter").text(rng.val());
-		});
+			loadChapter(rng.val());
+		}));
 
 		//		if (Modernizr.history)
 		//		{
@@ -172,19 +181,6 @@
 			//			App.FileHelper.ReadyPopover();
 
 			domSetup(this);
-
-			$.ajax(
-			{
-				url: App.ResolveUrl("~/Ajax/Glossary/List"),
-				success: function (data)
-				{
-					_terms = $.map(data, function (n) { return n.Term; }).join("|");
-				},
-				error: function (xhr)
-				{
-					log(xhr)
-				}
-			});
 		}
 
 	});
