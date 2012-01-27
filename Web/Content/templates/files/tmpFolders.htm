@@ -3,5 +3,5 @@
 	<a class="folder-view" href="#" data-path="${Path}">{{html App.ChooseIcon("folder")}}${Name}</a> 
 	{{if IsNew}}<span class="label success">New: ${App.DateFromJson(DateCreated).format('m/d h:MM TT')}</span>{{/if}}
 	{{if !IsNew && IsModified}}<span class="label warning">Modified: ${App.DateFromJson(DateModified).format('m/d h:MM TT')}</span>{{/if}}
-	<span class="file-info">{{if DirectoryCount > 0}}${DirectoryCount} folder{{if DirectoryCount != 1}}s{{/if}}{{/if}}{{if DirectoryCount > 0 && FileCount > 0}} &amp; {{/if}}{{if FileCount > 0}}${FileCount} file{{if FileCount != 1}}s{{/if}}{{/if}}</span>
+	<span class="small-info">{{if DirectoryCount > 0}}${DirectoryCount} folder{{if DirectoryCount != 1}}s{{/if}}{{/if}}{{if DirectoryCount > 0 && FileCount > 0}} &amp; {{/if}}{{if FileCount > 0}}${FileCount} file{{if FileCount != 1}}s{{/if}}{{/if}}</span>
 </li>

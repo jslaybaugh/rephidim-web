@@ -61,7 +61,7 @@ namespace Common
 					var p = new DynamicParameters();
 					p.Add("@days", ConfigurationManager.AppSettings["days"]);
 
-					var res = cn.Query("SELECT TermId, Term, SUBSTRING(Definition,0, 125) + '...' as Definition, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew  FROM GlossaryTerms WHERE GETDATE() < DATEADD(day,@days,DateModified) OR GETDATE() < DATEADD(day,@days,DateCreated)", p);
+					var res = cn.Query("SELECT TermId, Term, SUBSTRING(Definition,0, 125) + '...' as Definition, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew  FROM GlossaryTerms WHERE GETDATE() < DATEADD(day,@days,DateModified) OR GETDATE() < DATEADD(day,@days,DateCreated) ORDER BY Term", p);
 
 					if (res == null) return null;
 
@@ -124,7 +124,7 @@ namespace Common
 					p.Add("@bookId", bookId);
 					p.Add("@chapterNum", chapterNum);
 
-					var res = cn.Query("SELECT ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, VerseText, Notes, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE Scriptures.BookId=@bookId AND ChapterNum=@chapterNum ORDER BY Books.BookId, ChapterNum, VerseNum", p);
+					var res = cn.Query("SELECT ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, VerseText, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE Scriptures.BookId=@bookId AND ChapterNum=@chapterNum ORDER BY Books.BookId, ChapterNum, VerseNum", p);
 
 					if (res == null) return null;
 
@@ -134,8 +134,8 @@ namespace Common
 						Book = new BookItem {Id = x.BookId, Name =x.BookName, Chapters = x.Chapters},
 						Chapter = x.ChapterNum,
 						Verse = x.VerseNum,
-						Text = x.VerseText,
-						Notes = x.Notes,
+						Text = x.VerseText.ToUpper(),
+						TranslationId = x.TranslationId,
 						IsNew = x.IsNew,
 						IsModified = x.IsModified,
 						DateCreated = x.DateCreated,
@@ -146,6 +146,140 @@ namespace Common
 			catch (Exception)
 			{
 				return null;
+			}
+		}
+
+		public static IEnumerable<ScriptureItem> GetRecentVerses()
+		{
+			try
+			{
+				using (var cn = new SqlCeConnection(ConnString))
+				{
+					cn.Open();
+
+					var p = new DynamicParameters();
+					p.Add("@days", ConfigurationManager.AppSettings["days"]);
+					
+					var res = cn.Query("SELECT TOP 200 ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, VerseText, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE GETDATE() < DATEADD(day,@days,DateModified) OR GETDATE() < DATEADD(day,@days,DateCreated) ORDER BY Books.BookId, ChapterNum, VerseNum", p);
+
+					if (res == null) return null;
+
+					return res.Select(x => new ScriptureItem
+					{
+						Id = x.ScriptureId,
+						Book = new BookItem { Id = x.BookId, Name = x.BookName, Chapters = x.Chapters },
+						Chapter = x.ChapterNum,
+						Verse = x.VerseNum,
+						Text = x.VerseText,
+						TranslationId = x.TranslationId,
+						IsNew = x.IsNew,
+						IsModified = x.IsModified,
+						DateCreated = x.DateCreated,
+						DateModified = x.DateModified
+					});
+				}
+			}
+			catch (Exception)
+			{
+				return null;
+			}
+		}
+
+		public static ScriptureItem GetSingleVerse(int id)
+		{
+			try
+			{
+				using (var cn = new SqlCeConnection(ConnString))
+				{
+					cn.Open();
+
+					var p = new DynamicParameters();
+					p.Add("@scriptureId", id);
+					p.Add("@days", ConfigurationManager.AppSettings["days"]);
+
+					var res = cn.Query("SELECT ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, Notes, VerseText, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE ScriptureId=@scriptureId", p);
+
+					if (res == null) return null;
+
+					return res.Select(x => new ScriptureItem
+					{
+						Id = x.ScriptureId,
+						Book = new BookItem { Id = x.BookId, Name = x.BookName, Chapters = x.Chapters },
+						Chapter = x.ChapterNum,
+						Verse = x.VerseNum,
+						Text = x.VerseText,
+						Notes = x.Notes,
+						TranslationId = x.TranslationId,
+						IsNew = x.IsNew,
+						IsModified = x.IsModified,
+						DateCreated = x.DateCreated,
+						DateModified = x.DateModified
+					}).FirstOrDefault();
+				}
+			}
+			catch (Exception)
+			{
+				return null;
+			}
+		}
+
+		public static ScriptureItem UpdateVerse(int id, string text, string notes, string translationId, bool? updateDate)
+		{
+			try
+			{
+				using (var cn = new SqlCeConnection(ConnString))
+				{
+					cn.Open();
+
+					var p = new DynamicParameters();
+					p.Add("@scriptureId", id);
+					p.Add("@text", text);
+					p.Add("@notes", notes);
+					p.Add("@translationId", translationId.ToUpperInvariant());
+					p.Add("@datemodified", DateTime.Now);
+					p.Add("@days", ConfigurationManager.AppSettings["days"]);
+
+					string firstquery = "";
+					string secondquery = "";
+					if (id > 0)
+					{
+						// edit
+						if (updateDate.HasValue && updateDate.Value)
+						{
+							firstquery = "UPDATE Scriptures SET VerseText=@text, Notes=@notes, TranslationId=@translationId, DateModified=@DateModified WHERE ScriptureId=@scriptureId; ";
+						}
+						else
+						{
+							firstquery = "UPDATE Scriptures SET VerseText=@text, Notes=@notes, TranslationId=@translationId WHERE ScriptureId=@scriptureId; ";
+						}
+					}
+					
+					secondquery = "SELECT ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, Notes, VerseText, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE ScriptureId=@scriptureId";
+
+					var exec = cn.Execute(firstquery, p);
+					var res = cn.Query(secondquery, p);
+
+					if (res == null) return null;
+
+					return res.Select(x => new ScriptureItem
+					{
+						Id = x.ScriptureId,
+						Book = new BookItem { Id = x.BookId, Name = x.BookName, Chapters = x.Chapters },
+						Chapter = x.ChapterNum,
+						Verse = x.VerseNum,
+						Text = x.VerseText,
+						Notes = x.Notes,
+						TranslationId = x.TranslationId,
+						IsNew = x.IsNew,
+						IsModified = x.IsModified,
+						DateCreated = x.DateCreated,
+						DateModified = x.DateModified
+					}).FirstOrDefault();
+				}
+			}
+			catch (Exception ex)
+			{
+				throw ex;
 			}
 		}
 
@@ -219,6 +353,7 @@ namespace Common
 				return null;
 			}
 		}
+
 		public static GlossaryItem GetSingleTerm(int id)
 		{
 			try
@@ -348,7 +483,7 @@ namespace Common
 					var p = new DynamicParameters();
 					p.Add("@days", ConfigurationManager.AppSettings["days"]);
 
-					var res = cn.Query(CreateSearchQuery(parts), p);
+					var res = cn.Query(CreateTermSearchQuery(parts), p);
 
 					if (res == null) return null;
 
@@ -369,9 +504,68 @@ namespace Common
 			{
 				return null;
 			}
-		}		
+		}
 
-		private static string CreateSearchQuery(string[] parts)
+
+		public static IEnumerable<ScriptureItem> SearchVerses(string[] parts)
+		{
+			try
+			{
+				using (var cn = new SqlCeConnection(ConnString))
+				{
+					cn.Open();
+					var p = new DynamicParameters();
+					p.Add("@days", ConfigurationManager.AppSettings["days"]);
+
+					var res = cn.Query(CreateVerseSearchQuery(parts), p);
+
+					if (res == null) return null;
+
+					return res.Select(x => new ScriptureItem
+					{
+						Id = x.ScriptureId,
+						Book = new BookItem { Id = x.BookId, Name = x.BookName, Chapters = x.Chapters },
+						Chapter = x.ChapterNum,
+						Verse = x.VerseNum,
+						Text = x.VerseText,
+						TranslationId = x.TranslationId,
+						IsNew = x.IsNew,
+						IsModified = x.IsModified,
+						DateCreated = x.DateCreated,
+						DateModified = x.DateModified
+					});
+				}
+			}
+			catch (Exception)
+			{
+				return null;
+			}
+		}
+
+		private static string CreateVerseSearchQuery(string[] parts)
+		{
+
+			string SqlString = "SELECT TOP 200 ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, VerseText, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE ";
+
+			foreach (var part in parts)
+			{
+				SqlString += "(VerseText LIKE '%" + part.Trim() + "%') AND ";
+			}
+
+			// gotta get rid of the " AND "
+			if (SqlString.Trim().EndsWith("AND"))
+			{
+				SqlString = SqlString.Remove(SqlString.Length - 4, 4) + " ORDER BY Books.BookId, ChapterNum, VerseNum";
+			}
+			else
+			{
+				SqlString = SqlString + "0=1";
+			}
+
+			return SqlString;
+		}
+
+		private static string CreateTermSearchQuery(string[] parts)
 		{
 
 			string SqlString = "SELECT TermId, Term, Definition, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew FROM GlossaryTerms WHERE ";

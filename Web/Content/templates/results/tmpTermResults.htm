@@ -1,13 +1,13 @@
 ﻿<h1>${Title} (${Terms != null ? Terms.length : 0})</h1>
 <div class="scrollable">
 	{{if Terms != null && Terms.length > 0}}
-		<ul class="unstyled">
+		<ul class="unstyled lines">
 			{{each Terms}}
 				<li>
 					<a title="Go to full definition for ${Term}" href="${ App.ResolveUrl('~/Glossary/Term/' + Id) }">{{html App.Highlight(Term) }}</a>
 					{{if IsNew}}<span class="label success">New: ${App.DateFromJson(DateCreated).format('m/d h:MM TT')}</span>{{/if}}
 					{{if !IsNew && IsModified}}<span class="label warning">Modified: ${App.DateFromJson(DateModified).format('m/d h:MM TT')}</span>{{/if}}<br />
-					{{html App.Highlight(Definition) }}<br /><br />
+					{{html App.Highlight(Definition) }}
 				</li>
 			{{/each}}
 		</ul>

@@ -7,21 +7,18 @@
 
 	var domSetup = function (me)
 	{
-		$(window).resize($.throttle(250, function ()
-		{
-			$("#uxFiles").height($(window).height() - $("#uxHeader").outerHeight(true) - 60);
-			$("#uxGlossary").height($(window).height() - $("#uxHeader").outerHeight(true) - 60);
-		})).resize();
+
 	};
 
 	this.App.Home = Class.extend(
 	{
-		init: function (termResults, fileResults)
+		init: function (termResults, fileResults, verseResults)
 		{
 			domSetup(this);
 
-			$("#tmpTermResults").tmpl({ Title: "Recently Added/Modified Terms", Terms: termResults }).appendTo($("#uxGlossary").empty());
-			$("#tmpFileResults").tmpl({ Title: "Recently Added/Modified Files", Files: fileResults }).appendTo($("#uxFiles").empty());
+			$("#tmpVerseResults").tmpl({ Title: "Recent Verses", Verses: verseResults }).appendTo($("#uxVerses").empty());
+			$("#tmpTermResults").tmpl({ Title: "Recent Terms", Terms: termResults }).appendTo($("#uxGlossary").empty());
+			$("#tmpFileResults").tmpl({ Title: "Recent Files", Files: fileResults }).appendTo($("#uxFiles").empty());
 
 			App.FileHelper.ReadyPopover();
 		}

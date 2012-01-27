@@ -134,14 +134,6 @@
 			return false;
 		});
 
-		$(window).resize($.throttle(250, function ()
-		{
-			$("#uxFolders").height($(window).height() - 60);
-			$("#uxContents").height($(window).height() - 60);
-
-		})).resize();
-
-
 	};
 
 	this.App.Files = Class.extend(

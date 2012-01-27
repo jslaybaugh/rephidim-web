@@ -1,5 +1,5 @@
 ﻿<div>
-	<ul class="files">
+	<ul class="unstyled lines">
 		<li><a href="${App.ResolveUrl('~/Files/Open/' + Path)}" target="_blank">{{html App.ChooseIcon("open")}}Open (new window/tab)</a></li>
 		{{if Device == "iOS" && Extension == "pdf" }}
 			<li><a href="${App.ResolveUrl('~/Files/Open/' + Path, 'ghttp')}" target="_blank">{{html App.ChooseIcon("goodreader")}}Open in GoodReader™</a></li>

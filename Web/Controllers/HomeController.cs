@@ -19,6 +19,7 @@ namespace Web.Controllers
 		public ActionResult Home()
 		{			
 			var m = new HomeView();
+			m.RecentVerses = DataAccess.GetRecentVerses();
 			m.RecentTerms = DataAccess.GetRecentTerms();
 			m.Messages = DataAccess.GetActiveHomeMessages();
 			m.RecentFiles = FileUtility.Recent();
@@ -40,6 +41,7 @@ namespace Web.Controllers
 			var start = DateTime.UtcNow;
 			m.MatchingFiles = FileUtility.Search(queryParts);
 			m.QueryParts = queryParts;
+			m.MatchingVerses = DataAccess.SearchVerses(queryParts);
 			m.MatchingTerms = DataAccess.SearchTerms(queryParts);
 			var end = DateTime.UtcNow;
 

@@ -17,8 +17,9 @@
 	</div>
 </div>
 <div class="row">
-	<div class="span8 module" id="uxGlossary"></div>
-	<div class="span8 module" id="uxFiles"></div>
+	<div class="span5 module" id="uxVerses"></div>
+	<div class="span6 module" id="uxGlossary"></div>
+	<div class="span5 module" id="uxFiles"></div>
 </div>
 
 @section scripts
@@ -26,7 +27,7 @@
 	<script type="text/javascript">
 		$(function ()
 		{
-			var Home = new App.Home(@Html.Raw(Json.Encode(Model.RecentTerms)), @Html.Raw(Json.Encode(Model.RecentFiles)));
+			var Home = new App.Home(@Html.Raw(Json.Encode(Model.RecentTerms)), @Html.Raw(Json.Encode(Model.RecentFiles)), @Html.Raw(Json.Encode(Model.RecentVerses)));
 		});
 	</script>
 }

@@ -1,0 +1,22 @@
+﻿<div id="uxVerseDialogError" class="alert-message error none"></div>
+<form id="frmVerseEdit" class="form-stacked">
+	<div class="clearfix">
+		<label for="txtVerseEditText">Verse</label>
+		<div class="input">
+			<textarea id="txtVerseEditText" class="span13" rows="4">${Text}</textarea>
+			<input type="hidden" id="hdnVerseEditId" value="${Id}" />
+		</div>
+	</div>
+	<div class="clearfix">
+		<label for="txtVerseEditNotes">Notes (if any)</label>
+		<div class="input">
+			<textarea id="txtVerseEditNotes" class="span13" rows="10">${Notes}</textarea>
+		</div>
+	</div>
+	<div class="clearfix">
+		<div class="input">
+			<label style="display:inline;">Translation <input id="txtVerseEditTranslation" class="span2" type="text" value="${TranslationId}" maxlength="5" /></label>
+			<label style="display:inline;"><input type="checkbox" id="chkVerseEditModify" checked="checked" /> Update Modified Date</label>
+		</div>
+	</div>
+</form>

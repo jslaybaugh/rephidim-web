@@ -11,6 +11,7 @@ using System.IO;
 using iTextSharp.text.pdf;
 using Common;
 using Common.Models;
+using System.Text.RegularExpressions;
 
 namespace Web.Controllers
 {
@@ -156,7 +157,7 @@ namespace Web.Controllers
 
 				foreach (var term in terms) {
 					ct.AddText(new Phrase(term.Term.Trim() + Environment.NewLine, fntTerm));
-					ct.AddText(new Phrase(term.Definition.Trim().Replace("<br/>", "\r") + Environment.NewLine + Environment.NewLine, fntDefinition));
+					ct.AddText(new Phrase(Regex.Replace(term.Definition.Trim().Replace("<br/>", "\r"), @"<[^>]+>", "") + Environment.NewLine + Environment.NewLine, fntDefinition));
 				}
 
 				int status = 0;

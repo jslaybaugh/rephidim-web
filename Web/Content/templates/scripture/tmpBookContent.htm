@@ -10,16 +10,9 @@
 		</span>
 		${ActiveBook.Name} Chapter <span id="uxChapter"></span>
 	</h1>
-	<div id="uxVerses" class="scrollable">
-	</div>
+	<div id="uxVerses" class="scrollable"></div>
 {{else}}
 	<div class='message'><div>
-		<span>Select a term from the left to get started.<br/><br/>
-			-or-<br/><br/>
-			{{if EditRights}}
-				<a href="#" class="term-add">{{html App.ChooseIcon("new")}}Add New Term</a><br />
-			{{/if}}
-			<a href="${App.ResolveUrl('~/Glossary/Print/')}" target="_blank" title="Print All Terms">{{html App.ChooseIcon("pdfmulti")}}View/Print PDF of All Terms</a>
-		</span>
+		<span>Select a book from the left to get started.</span>
 	</div></div>
 {{/if}}

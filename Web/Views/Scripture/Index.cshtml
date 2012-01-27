@@ -1,20 +1,16 @@
 ﻿@model Web.Models.ScriptureView
 
 @{
-	ViewBag.Title = "Corrected Translation";
+	ViewBag.Title = "Bible";
 	ViewBag.NavScripture = true;
 	Bundles.Reference("content/templates/scripture");
 }
 
 <div class="row">
-	<div class="span4 module" id="uxBooks">
-		<h1>All Books</h1>
-		<div class="scrollable">
-			<ul id="ulBooks" class="unstyled"></ul>
-		</div>
-	</div>
+	<div class="span4 module" id="uxBooks"></div>
 	<div class="span12 module" id="uxContents"></div>
 </div>
+<div id="uxVerseDialog" class="none"></div>
 
 @section scripts
 {
@@ -23,7 +19,7 @@
 
 		$(function ()
 		{
-			var Files = new App.Scripture(@Html.Raw(Json.Encode(Model.Books)));
+			var Scripture = new App.Scripture(@Html.Raw(Json.Encode(Model.Book)), @Html.Raw(Json.Encode(Model.Chapter)), @Html.Raw(Json.Encode(Model.Verse)));
 		});
 		
 	</script>

@@ -6,10 +6,7 @@
 
 	var domSetup = function (me)
 	{
-		$(window).resize($.throttle(250, function ()
-		{
-			$("#uxContent").height($(window).height() - 60);
-		})).resize();
+
 	};
 
 	this.App.Static = Class.extend(

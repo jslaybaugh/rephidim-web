@@ -14,7 +14,9 @@ namespace Web.Controllers
 		public ActionResult Index(string book, int? chapter, int? verse)
 		{
 			var m = new ScriptureView();
-			m.Books = DataAccess.GetBooks();
+			m.Book = book;
+			m.Chapter = chapter;
+			m.Verse = verse;
 
 			return View("Index", m);
 		}
