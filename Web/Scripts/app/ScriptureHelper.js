@@ -34,7 +34,7 @@
 				_books = data;
 				if (Modernizr.localstorage)
 				{
-					var obj = { Timestamp: new Date(), Books: _books };
+					var obj = { "Timestamp": new Date(), "Books": _books }; // properties need quotes to be properly serialized
 					localStorage.setItem("books", JSON.stringify(obj));
 				}
 

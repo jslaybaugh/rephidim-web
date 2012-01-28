@@ -1356,8 +1356,8 @@ table .headerSortUp.purple, table .headerSortDown.purple {
   background-color: #444;
   background-color: rgba(255, 255, 255, 0.3);
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: normal;
-  font-weight: 13px;
+  font-weight: normal;
+  font-size: 13px;
   line-height: 1;
   padding: 4px 9px;
   color: #ffffff;

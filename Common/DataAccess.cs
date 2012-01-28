@@ -702,6 +702,37 @@ namespace Common
 			}
 		}
 
+		public static IEnumerable<MessageItem> GetAllMessages()
+		{
+			try
+			{
+				using (var cn = new SqlCeConnection(ConnString))
+				{
+					cn.Open();
+
+					var p = new DynamicParameters();
+
+					var res = cn.Query("SELECT MessageId, MessageValue, OnLoginPage, OnHomePage, IsActive, Style FROM Messages ORDER BY MessageId DESC", p);
+
+					if (res == null) return null;
+
+					return res.Select(x => new MessageItem
+					{
+						Id = x.MessageId,
+						Value = x.MessageValue,
+						OnLoginPage = x.OnLoginPage,
+						OnHomePage = x.OnHomePage,
+						IsActive = x.IsActive,
+						Style = x.Style
+					});
+				}
+			}
+			catch (Exception)
+			{
+				return null;
+			}
+		}
+
 		public static IEnumerable<MessageItem> GetActiveHomeMessages()
 		{
 			try

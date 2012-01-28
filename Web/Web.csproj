@@ -130,7 +130,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AdminParseView.cs" />
+    <Compile Include="Models\AdminMessagesView.cs" />
     <Compile Include="Models\ScriptureView.cs" />
     <Compile Include="Models\StaticView.cs" />
     <Compile Include="Models\SearchView.cs" />
@@ -173,7 +173,6 @@
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\fonts.css" />
     <Content Include="Content\css\jquery-ui-1.8.16.custom.css" />
-    <Content Include="Content\css\media.css" />
     <Content Include="Content\css\module.txt" />
     <Content Include="Content\img\ajax-loader-light.gif" />
     <Content Include="Content\img\ajax-loader-dark.gif" />
@@ -242,8 +241,8 @@
     <Content Include="Scripts\libs\knockout-2.0.0.js" />
     <Content Include="Scripts\libs\module.txt" />
     <Content Include="Scripts\pre\modernizr-2.0.min.js" />
-    <Content Include="Scripts\pre\respond.js" />
     <Content Include="Content\static\Chronology.html" />
+    <Content Include="Scripts\pre\syze.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -310,6 +309,8 @@
     <None Include="Content\static\Atlas_Chapter5.pdf" />
     <None Include="Content\static\Atlas_Front.pdf" />
     <None Include="Content\static\TapeList.pdf" />
+    <Content Include="Views\Shared\_Master.cshtml" />
+    <Content Include="Views\Admin\Messages.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

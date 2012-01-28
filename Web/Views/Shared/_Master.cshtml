@@ -1,0 +1,160 @@
+﻿@using Cassette.Views;
+@using MvcContrib;
+@using Web.Controllers;
+@{	
+	Bundles.Reference("content/css/app.css", "head");
+
+	Bundles.Reference("scripts/pre", "head");
+	Bundles.Reference("scripts/app/app.js");
+	
+	Bundles.Reference("content/templates/global");
+
+	string titleFormat = "{0} • Rephidim Church";
+	
+	string appPath = Request.ApplicationPath + (Request.ApplicationPath.EndsWith("/") ? "" : "/");
+
+	var cookie = Request.Cookies["rephidim"];
+	string lastEmail = "";
+	if (cookie != null)
+	{
+		lastEmail = cookie["email"];
+	}
+}
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	
+	<title>@String.Format(titleFormat, ViewBag.Title)</title>
+	<meta name="description" content="Rephidim Web Site, Created 12/2011">
+	<meta name="author" content="Jorin Slaybaugh -- see humans.txt">
+	@if (Request.IsAuthenticated)
+	{
+		<script type="text/javascript">
+			if (window.screen.width < 768)
+			{
+				document.write('<meta name="viewport" content="width = 1000, user-scalable = yes" />');
+			}
+			else if (window.screen.width < 1024)
+			{
+				document.write('<meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0" />');
+			}
+		</script>
+	}
+	<meta name="format-detection" content="telephone=no" />
+	@*<link rel="shortcut icon" href="@Href("~/content/img/favicon.ico")">
+	<link rel="apple-touch-icon" href="@Href("~/content/img/apple-touch-icon.png")">*@
+	@Bundles.RenderStylesheets("head")
+	@Sprite.ImportStylesheet("~/App_Sprites/")
+	@if (IsSectionDefined("styles"))
+	{
+		@RenderSection("styles")
+	}
+	@if (User.IsInRole("Scripture"))
+	{
+		<style type="text/css">.edit-rights {display:inline-block;}</style>
+	}
+	@Bundles.RenderScripts("head")
+	<script>
+		// manually add add'l modernizr classes
+		h = document.getElementsByTagName('html')[0];
+		h.className += Modernizr.inputtypes['range'] ? ' input-range' : ' no-input-range';
+		h.className += Modernizr.inputtypes['color'] ? ' input-color' : ' no-input-color';
+
+		// initialize syze
+		syze.sizes(0,1025).debounceRate(1000).names({ 0: 'Mobile', 1025: 'Monitor' });
+	</script>
+</head>
+<body>
+	@RenderBody()
+	<div id="uxAlert" class="global-message alert-message fade in hide" data-alert="true"><a class="close" href="#">×</a><p></p></div>
+	@Bundles.RenderHtmlTemplates()
+	@if (IsSectionDefined("templates"))
+	{
+		@RenderSection("templates")
+	}
+	@Bundles.RenderScripts()
+	<script type="text/javascript">
+		window._LastUsedEmail = "@lastEmail";
+		App.Startup(
+			"@appPath", 
+			"@titleFormat",
+			{
+				"txt"			: '@Sprite.Image("~/App_Sprites/icon_text.png")',
+				"rtf"			: '@Sprite.Image("~/App_Sprites/icon_text.png")',
+				"pdf"			: '@Sprite.Image("~/App_Sprites/icon_pdf.png")',
+				"mp3"			: '@Sprite.Image("~/App_Sprites/icon_mp3.png")',
+				"exe"			: '@Sprite.Image("~/App_Sprites/icon_window.png")',
+				"jpg"			: '@Sprite.Image("~/App_Sprites/icon_jpg.png")',
+				"jpeg"			: '@Sprite.Image("~/App_Sprites/icon_jpg.png")',
+				"tif"			: '@Sprite.Image("~/App_Sprites/icon_tif.png")',
+				"tiff"			: '@Sprite.Image("~/App_Sprites/icon_tif.png")',
+				"gif"			: '@Sprite.Image("~/App_Sprites/icon_gif.png")',
+				"cdr"			: '@Sprite.Image("~/App_Sprites/icon_flow.png")',
+				"asd"			: '@Sprite.Image("~/App_Sprites/icon_flow.png")',
+				"unk"			: '@Sprite.Image("~/App_Sprites/icon_help.png")',
+				"open"			: '@(Sprite.Image("~/App_Sprites/icon_open.png"))',
+				"goodreader"	: '@(Sprite.Image("~/App_Sprites/icon_goodreader.png"))',
+				"usb"			: '@(Sprite.Image("~/App_Sprites/icon_usb.png"))',
+				"email"			: '@(Sprite.Image("~/App_Sprites/icon_email.png"))',
+				"folder"		: '@(Sprite.Image("~/App_Sprites/icon_folder.png"))',
+				"edit"			: '@(Sprite.Image("~/App_Sprites/icon_pen.png"))',
+				"new"			: '@(Sprite.Image("~/App_Sprites/icon_plus.png"))',
+				"pdfmulti"		: '@(Sprite.Image("~/App_Sprites/icon_pdfmulti.png"))',
+				"delete"		: '@(Sprite.Image("~/App_Sprites/icon_delete.png"))'
+			}
+		);
+
+		$(function ()
+		{
+			$(".topbar-wrapper").dropdown();
+			$("#lnkViewSource").click(function ()
+			{
+				var w = window.open('about:blank'), s = w.document;
+				s.write('<!DOCTYPE html><html><head><title>Source of ' + location.href + '</title><meta name="viewport" content="width=device-width" /></head><body></body></html>');
+				s.close();
+
+				var pre = s.body.appendChild(s.createElement("pre"));
+				pre.style.overflow = 'auto';
+				pre.style.whiteSpace = 'pre-wrap';
+				pre.appendChild(s.createTextNode(document.documentElement.innerHTML));
+			});
+
+			$(".link-large").live("click", function()
+			{
+				alert("This is a very large file and may take a while to load. If you encounter issues, please try the compact version.");
+			});
+
+			$(window).resize($.throttle(500, function ()
+			{
+				$(".primary-content").height($(window).height() - $(".header-content").outerHeight(true) - 60);
+				setTimeout(function ()
+				{
+					$(".primary-content > .scrollable").each(function (i, n)
+					{
+						$(this).height($(this).parent(".primary-content").height() - $(this).prev("h1").outerHeight(true));
+					});
+				}, 100);
+			})).resize();
+
+			@if (!string.IsNullOrEmpty(Request["success"])) { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["success"])),"success");</text> }
+			@if (!string.IsNullOrEmpty(Request["error"])) { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["error"])),"error");</text> }
+			@if (!string.IsNullOrEmpty(Request["warning"])) { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["warning"])),"warning");</text> }
+			@if (!string.IsNullOrEmpty(Request["info"])) { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["info"])),"info");</text> }
+		});
+	</script>
+	@if (IsSectionDefined("scripts"))
+	{ 
+		@RenderSection("scripts")
+	}
+	<!--[if lt IE 8 ]>
+		<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
+		<script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
+	<![endif]-->
+
+</body>
+</html>

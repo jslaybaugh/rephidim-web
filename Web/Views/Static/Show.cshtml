@@ -26,11 +26,11 @@
 { 
 	@* iOS device with stupid scrolling iframe *@
 	@* we also hardcode the height of 30000 px if it is a pdf because thats how long the PDF is and thats the only PDF we're showing here. *@
-	<iframe class="module" style="width:100%;border:none 0;height:@(height);" src="@Href("~/Content/static/" + @Model.Path)"></iframe>
+	<iframe class="module primary-content" style="width:100%;border:none 0;height:@(height);" src="@Href("~/Content/static/" + @Model.Path)"></iframe>
 }
 else
 { 
-	<iframe id="uxContent" class="module" style="width:100%;border:none 0;" src="@Href("~/Content/static/" + @Model.Path)"></iframe>
+	<iframe id="uxContent" class="module primary-content" style="width:100%;border:none 0;" src="@Href("~/Content/static/" + @Model.Path)"></iframe>
 }
 
 @section scripts

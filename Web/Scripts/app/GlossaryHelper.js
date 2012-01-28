@@ -45,7 +45,7 @@
 				_terms = data;
 				if (Modernizr.localstorage)
 				{
-					var obj = { Timestamp: new Date(), Terms: _terms };
+					var obj = { "Timestamp": new Date(), "Terms": _terms }; // properties need quotes to be properly serialized
 					localStorage.setItem("terms", JSON.stringify(obj));
 				}
 
@@ -71,9 +71,10 @@
 				// g makes it global and not just first
 				var regex = new RegExp("\\b(" + termString.replace(/(\^|\.|\*|\+|\?|\=|\!|\\|\/|\(|\)|\[|\]|\{|\})/ig, "\\$1") + ")\\b", "ig");
 
-				$(container).html($(container).html().replace(regex, "<a class='term-link inactive-link' data-value='$1' href='#'>$1</a>"));
+				$(container).html($(container).html().replace(regex, "<a class='term-link' data-value='$1' href='#'>$1</a>"));
 
-				setTimeout(function () { $(container).find("a").switchClass("inactive-link", "active-link", "slow"); }, 0);
+				/*.inactive-link { color: #404040; text-decoration: none; }
+				.active-link { color: #0069D6; text-decoration: underline; }*/
 			});
 		},
 

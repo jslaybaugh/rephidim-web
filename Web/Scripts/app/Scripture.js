@@ -171,15 +171,7 @@
 			});
 			return false;
 
-		}).on("mouseenter", ".lines li", function ()
-		{
-			$(this).find(".edit-btn").show();
-
-		}).on("mouseleave", ".lines li", function ()
-		{
-			$(this).find(".edit-btn").hide();
-
-		}).on("click", ".edit-btn", function ()
+		}).on("click", ".scripture-edit", function ()
 		{
 			var lnk = $(this);
 			var id = lnk.data("id");

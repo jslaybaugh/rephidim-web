@@ -2,11 +2,11 @@
 	{{each Verses}}
 		<li>
 			<b class="${Verse}">${Book.Name} ${Chapter}:${Verse}</b>
-			<span class="translation label notice">${TranslationId}</span>
+			<span class="edit-rights label notice">${TranslationId}</span>
 			{{if IsNew}}<span class="label success">New: ${App.DateFromJson(DateCreated).format('m/d h:MM TT')}</span>{{/if}}
 			{{if !IsNew && IsModified}}<span class="label warning">Modified: ${App.DateFromJson(DateModified).format('m/d h:MM TT')}</span>{{/if}}
 			<div class="verse-text">${Text}</div>
-			<a href="#" style="position:absolute;top:0;right:0;" class="edit-btn none" data-id="${Id}" title="Edit Verse">{{html App.ChooseIcon("edit")}}</a>
+			<a href="#" class="edit-rights scripture-edit" data-id="${Id}" title="Edit Verse">{{html App.ChooseIcon("edit")}}</a>
 		</li>
 	{{/each}}
 </ul>

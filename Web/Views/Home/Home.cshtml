@@ -5,7 +5,7 @@
 	Bundles.Reference("content/templates/results");
 }
 
-<div class="row" id="uxHeader">
+<div class="row header-content">
 	<div class="span16">
 		@if (Model.Messages != null && Model.Messages.Count() > 0)
 		{ 
@@ -17,9 +17,9 @@
 	</div>
 </div>
 <div class="row">
-	<div class="span5 module" id="uxVerses"></div>
-	<div class="span6 module" id="uxGlossary"></div>
-	<div class="span5 module" id="uxFiles"></div>
+	<div class="span5 module primary-content" id="uxVerses"></div>
+	<div class="span6 module primary-content" id="uxGlossary"></div>
+	<div class="span5 module primary-content" id="uxFiles"></div>
 </div>
 
 @section scripts
