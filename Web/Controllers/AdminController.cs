@@ -29,5 +29,15 @@ namespace Web.Controllers
 			return View("Messages", m);
 		}
 
+		[HttpGet]
+		public ActionResult Emails()
+		{
+			var m = new AdminEmailsView();
+			m.IsAdmin = User.IsInRole("Emails");
+			m.Emails = DataAccess.GetEmails();
+
+			return View("Emails", m);
+		}
+
     }
 }

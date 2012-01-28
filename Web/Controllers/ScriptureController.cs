@@ -11,14 +11,14 @@ namespace Web.Controllers
 	[Authorize]
     public class ScriptureController : Controller
 	{
-		public ActionResult Index(string book, int? chapter, int? verse)
+		public ActionResult Read(string book, int? chapter, int? verse)
 		{
 			var m = new ScriptureView();
 			m.Book = book;
 			m.Chapter = chapter;
 			m.Verse = verse;
 
-			return View("Index", m);
+			return View("Read", m);
 		}
 
 

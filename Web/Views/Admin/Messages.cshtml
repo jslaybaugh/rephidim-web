@@ -1,7 +1,8 @@
 ﻿@model Web.Models.AdminMessagesView
 
 @{
-    ViewBag.Title = "Messages";
+	ViewBag.Title = "Messages";
+	Bundles.Reference("content/templates/messages");
 }
 
 <div class="row header-content">
@@ -37,14 +38,14 @@
 		</table>
 	</div>
 </div>
-<div id="uxDialog" class="none"></div>
+<div id="uxMessageDialog" class="none"></div>
 
 @section scripts
 {
 	<script type="text/javascript">
 		$(function ()
 		{
-			
+			var Messages = new App.Messages();
 		});
 	</script>
 }

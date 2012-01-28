@@ -50,6 +50,30 @@ namespace Common
 				return null;
 			}
 		}
+
+		public static IEnumerable<string> GetEmails()
+		{
+			try
+			{
+				using (var cn = new SqlCeConnection(ConnString))
+				{
+					cn.Open();
+
+					var p = new DynamicParameters();
+
+					var res = cn.Query("SELECT Email FROM Emails ORDER BY Email", p);
+
+					if (res == null) return null;
+
+					return res.Select(x => x.Email as string);
+				}
+			}
+			catch (Exception)
+			{
+				return null;
+			}
+		}
+
 		public static IEnumerable<GlossaryItem> GetRecentTerms()
 		{
 			try
@@ -388,6 +412,82 @@ namespace Common
 			}
 		}
 
+		public static int DeleteMessage(int id)
+		{
+			try
+			{
+				using (var cn = new SqlCeConnection(ConnString))
+				{
+					cn.Open();
+					var p = new DynamicParameters();
+					p.Add("@messageId", id);
+					var exec = cn.Execute("DELETE FROM MESSAGES WHERE MessageId=@MessageID", p);
+
+					return exec;
+				}
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
+
+		public static MessageItem UpsertMessage(int id, string text, string style, bool isActive, bool onHomePage, bool onLoginPage)
+		{
+			try
+			{
+				using (var cn = new SqlCeConnection(ConnString))
+				{
+					cn.Open();
+
+					var p = new DynamicParameters();
+					p.Add("@messageId", id);
+					p.Add("@messagevalue", text);
+					p.Add("@style", style);
+					p.Add("@isActive", isActive);
+					p.Add("@onLoginPage", onLoginPage);
+					p.Add("@onHomePage", onHomePage);
+
+					string lastPart = "";
+					string firstquery = "";
+					string secondquery = "";
+					if (id > 0)
+					{
+						// edit
+						firstquery = "UPDATE Messages SET MessageValue=@messagevalue, style=@style, isActive=@isActive, onLoginPage=@onloginpage, onhomepage=@onhomepage WHERE MessageId=@MessageId; ";
+						lastPart = "@messageid";
+					}
+					else
+					{
+						// insert
+						firstquery = "INSERT Messages(MessageValue, Style, IsActive, OnLoginPage, OnHomePage) VALUES (@MessageValue, @Style, @IsActive, @OnLoginPage, @OnHomePage);";
+						lastPart = "@@IDENTITY";
+					}
+
+					secondquery = "SELECT MessageId, MessageValue, OnLoginPage, OnHomePage, IsActive, Style FROM Messages WHERE MessageId=" + lastPart;
+
+					var exec = cn.Execute(firstquery, p);
+					var res = cn.Query(secondquery, p);
+
+					if (res == null) return null;
+
+					return res.Select(x => new MessageItem
+					{
+						Id = x.MessageId,
+						Value = x.MessageValue,
+						OnLoginPage = x.OnLoginPage,
+						OnHomePage = x.OnHomePage,
+						IsActive = x.IsActive,
+						Style = x.Style
+					}).FirstOrDefault();
+				}
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
+
 		public static GlossaryItem UpsertTerm(int id, string term, string definition, bool? updateDate)
 		{
 			try
@@ -699,6 +799,38 @@ namespace Common
 			catch (Exception)
 			{
 				throw;
+			}
+		}
+
+		public static MessageItem GetSingleMessage(int id)
+		{
+			try
+			{
+				using (var cn = new SqlCeConnection(ConnString))
+				{
+					cn.Open();
+
+					var p = new DynamicParameters();
+					p.Add("@messageId", id);
+
+					var res = cn.Query("SELECT MessageId, MessageValue, OnLoginPage, OnHomePage, IsActive, Style FROM Messages WHERE MessageId=@MessageId", p);
+
+					if (res == null) return null;
+
+					return res.Select(x => new MessageItem
+					{
+						Id = x.MessageId,
+						Value = x.MessageValue,
+						OnLoginPage = x.OnLoginPage,
+						OnHomePage = x.OnHomePage,
+						IsActive = x.IsActive,
+						Style = x.Style
+					}).FirstOrDefault();
+				}
+			}
+			catch (Exception)
+			{
+				return null;
 			}
 		}
 
