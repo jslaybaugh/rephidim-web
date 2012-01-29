@@ -17,19 +17,16 @@
 			Layout = "~/Views/Shared/_NoAuth.cshtml";
 		}
 
-		<div class="clearfix">
-			<div class="warning">
-				<h2>Sorry, an error occurred while processing your request.</h2>
-				<p class="centered">
-					Please <a href="@HttpContext.Current.Request.RawUrl">try loading the page again</a>.
-				</p>
-			</div>
-			<div id="uxException" class="none module">
-				<hr />
-				<pre>@Model.Exception.Message</pre>
-				<hr />
-				<pre style="overflow:auto;white-space:nowrap;">@Html.Raw(Model.Exception.StackTrace.Replace("\n", "<br/>"))</pre>
-			</div>
+		<div class="center-align">
+			<h1>Uh-oh... Something kinda bad happened.</h1>
+			<p>If there's a problem, we'll get it fixed.  For for now, you can <a href="@HttpContext.Current.Request.RawUrl">try loading the page again</a> to see if it was just a temporary thing.</p>
+		</div>
+		<div class="module error-img"></div>
+		<div id="uxException" class="none module">
+			<hr />
+			<pre>@Model.Exception.Message</pre>
+			<hr />
+			<pre style="overflow:auto;white-space:nowrap;">@Html.Raw(Model.Exception.StackTrace.Replace("\n", "<br/>"))</pre>
 		</div>
 	}
 }
@@ -37,7 +34,7 @@
 @section scripts
 {
 	@if (!Request.IsAjaxRequest())
-	{
+ {
 		<script type="text/javascript">
 			(function ()
 			{

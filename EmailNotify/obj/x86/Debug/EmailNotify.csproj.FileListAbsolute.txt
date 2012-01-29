@@ -1,0 +1,11 @@
+C:\Side Work\Rephidim Church\Rephidim Web 2011\EmailNotify\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Side Work\Rephidim Church\Rephidim Web 2011\EmailNotify\bin\Debug\EmailNotify.exe
+C:\Side Work\Rephidim Church\Rephidim Web 2011\EmailNotify\bin\Debug\EmailNotify.pdb
+C:\Side Work\Rephidim Church\Rephidim Web 2011\EmailNotify\obj\x86\Debug\EmailNotify.exe
+C:\Side Work\Rephidim Church\Rephidim Web 2011\EmailNotify\obj\x86\Debug\EmailNotify.pdb
+C:\Side Work\Rephidim Church\Rephidim Web 2011\EmailNotify\bin\Debug\EmailNotify.exe.config
+C:\Side Work\Rephidim Church\Rephidim Web 2011\EmailNotify\bin\Debug\Common.dll
+C:\Side Work\Rephidim Church\Rephidim Web 2011\EmailNotify\bin\Debug\Common.pdb
+C:\Side Work\Rephidim Church\Rephidim Web 2011\EmailNotify\bin\Debug\Postal.dll
+C:\Side Work\Rephidim Church\Rephidim Web 2011\EmailNotify\bin\Debug\RazorEngine.dll
+C:\Side Work\Rephidim Church\Rephidim Web 2011\EmailNotify\bin\Debug\System.Web.Razor.dll

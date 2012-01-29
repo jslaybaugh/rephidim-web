@@ -118,7 +118,7 @@ namespace Common
 			}
 		}
 
-		public static IEnumerable<GlossaryItem> GetRecentTerms()
+		public static IEnumerable<GlossaryItem> GetRecentTerms(DateTime? lastDate = null)
 		{
 			try
 			{
@@ -127,9 +127,12 @@ namespace Common
 					cn.Open();
 
 					var p = new DynamicParameters();
-					p.Add("@days", ConfigurationManager.AppSettings["days"]);
+					if (lastDate.HasValue)
+						p.Add("@lastDate", lastDate.Value);
+					else
+						p.Add("@lastDate", DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"])));
 
-					var res = cn.Query("SELECT TermId, Term, SUBSTRING(Definition,0, 125) + '...' as Definition, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew  FROM GlossaryTerms WHERE GETDATE() < DATEADD(day,@days,DateModified) OR GETDATE() < DATEADD(day,@days,DateCreated) ORDER BY Term", p);
+					var res = cn.Query("SELECT TermId, Term, SUBSTRING(Definition,0, 125) + '...' as Definition, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew  FROM GlossaryTerms WHERE DateModified > @lastDate OR DateCreated > @lastDate ORDER BY Term", p);
 
 					if (res == null) return null;
 
@@ -188,11 +191,11 @@ namespace Common
 					cn.Open();
 
 					var p = new DynamicParameters();
-					p.Add("@days", ConfigurationManager.AppSettings["days"]);
+					p.Add("@lastDate", DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"])));
 					p.Add("@bookId", bookId);
 					p.Add("@chapterNum", chapterNum);
 
-					var res = cn.Query("SELECT ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, VerseText, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE Scriptures.BookId=@bookId AND ChapterNum=@chapterNum ORDER BY Books.BookId, ChapterNum, VerseNum", p);
+					var res = cn.Query("SELECT ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, VerseText, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE Scriptures.BookId=@bookId AND ChapterNum=@chapterNum ORDER BY Books.BookId, ChapterNum, VerseNum", p);
 
 					if (res == null) return null;
 
@@ -217,7 +220,7 @@ namespace Common
 			}
 		}
 
-		public static IEnumerable<ScriptureItem> GetRecentVerses()
+		public static IEnumerable<ScriptureItem> GetRecentVerses(DateTime? lastDate = null)
 		{
 			try
 			{
@@ -226,9 +229,12 @@ namespace Common
 					cn.Open();
 
 					var p = new DynamicParameters();
-					p.Add("@days", ConfigurationManager.AppSettings["days"]);
-					
-					var res = cn.Query("SELECT TOP 200 ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, VerseText, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE GETDATE() < DATEADD(day,@days,DateModified) OR GETDATE() < DATEADD(day,@days,DateCreated) ORDER BY Books.BookId, ChapterNum, VerseNum", p);
+					if (lastDate.HasValue)
+						p.Add("@lastDate", lastDate.Value);
+					else
+						p.Add("@lastDate", DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"])));
+
+					var res = cn.Query("SELECT TOP 200 ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, VerseText, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE DateModified > @lastDate OR DateCreated > @lastDate ORDER BY Books.BookId, ChapterNum, VerseNum", p);
 
 					if (res == null) return null;
 
@@ -263,9 +269,9 @@ namespace Common
 
 					var p = new DynamicParameters();
 					p.Add("@scriptureId", id);
-					p.Add("@days", ConfigurationManager.AppSettings["days"]);
+					p.Add("@lastDate", DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"])));
 
-					var res = cn.Query("SELECT ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, Notes, VerseText, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE ScriptureId=@scriptureId", p);
+					var res = cn.Query("SELECT ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, Notes, VerseText, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE ScriptureId=@scriptureId", p);
 
 					if (res == null) return null;
 
@@ -305,7 +311,7 @@ namespace Common
 					p.Add("@notes", notes);
 					p.Add("@translationId", translationId.ToUpperInvariant());
 					p.Add("@datemodified", DateTime.Now);
-					p.Add("@days", ConfigurationManager.AppSettings["days"]);
+					p.Add("@lastDate", DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"])));
 
 					string firstquery = "";
 					string secondquery = "";
@@ -321,8 +327,8 @@ namespace Common
 							firstquery = "UPDATE Scriptures SET VerseText=@text, Notes=@notes, TranslationId=@translationId WHERE ScriptureId=@scriptureId; ";
 						}
 					}
-					
-					secondquery = "SELECT ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, Notes, VerseText, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE ScriptureId=@scriptureId";
+
+					secondquery = "SELECT ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, Notes, VerseText, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE ScriptureId=@scriptureId";
 
 					var exec = cn.Execute(firstquery, p);
 					var res = cn.Query(secondquery, p);
@@ -360,9 +366,9 @@ namespace Common
 					cn.Open();
 
 					var p = new DynamicParameters();
-					p.Add("@days", ConfigurationManager.AppSettings["days"]);
+					p.Add("@lastDate", DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"])));
 
-					var res = cn.Query("SELECT TermId, Term, Definition, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew  FROM GlossaryTerms ORDER BY Term", p);
+					var res = cn.Query("SELECT TermId, Term, Definition, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew  FROM GlossaryTerms ORDER BY Term", p);
 
 					if (res == null) return null;
 
@@ -393,9 +399,9 @@ namespace Common
 					cn.Open();
 
 					var p = new DynamicParameters();
-					p.Add("@days", ConfigurationManager.AppSettings["days"]);
+					p.Add("@lastDate", DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"])));
 
-					var res = cn.Query("SELECT TermId, Term, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew  FROM GlossaryTerms ORDER BY Term", p);
+					var res = cn.Query("SELECT TermId, Term, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew  FROM GlossaryTerms ORDER BY Term", p);
 
 					if (res == null) return null;
 
@@ -432,9 +438,9 @@ namespace Common
 
 					var p = new DynamicParameters();
 					p.Add("@termid", id);
-					p.Add("@days", ConfigurationManager.AppSettings["days"]);
+					p.Add("@lastDate", DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"])));
 
-					var res = cn.Query("SELECT TermId, Term, Definition, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew FROM GlossaryTerms WHERE TermId=@termid", p);
+					var res = cn.Query("SELECT TermId, Term, Definition, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew FROM GlossaryTerms WHERE TermId=@termid", p);
 
 					if (res == null) return null;
 
@@ -545,7 +551,7 @@ namespace Common
 					p.Add("@term", term.Trim().ToUpperInvariant());
 					p.Add("@definition", Regex.Replace(definition.Trim(), "(\r|\n)", "<br/>", RegexOptions.IgnoreCase));
 					p.Add("@datemodified", DateTime.Now);
-					p.Add("@days", ConfigurationManager.AppSettings["days"]);
+					p.Add("@lastDate", DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"])));
 
 					string lastPart = "";
 					string firstquery = "";
@@ -570,7 +576,7 @@ namespace Common
 						lastPart = "@@IDENTITY";
 					}
 
-					secondquery = "SELECT TermId, Term, Definition, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew FROM GlossaryTerms WHERE TermId=" + lastPart;
+					secondquery = "SELECT TermId, Term, Definition, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew FROM GlossaryTerms WHERE TermId=" + lastPart;
 
 					var exec = cn.Execute(firstquery, p);
 					var res = cn.Query(secondquery, p);
@@ -625,7 +631,7 @@ namespace Common
 				{
 					cn.Open();
 					var p = new DynamicParameters();
-					p.Add("@days", ConfigurationManager.AppSettings["days"]);
+					p.Add("@lastDate", DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"])));
 
 					var res = cn.Query(CreateTermSearchQuery(parts), p);
 
@@ -659,7 +665,7 @@ namespace Common
 				{
 					cn.Open();
 					var p = new DynamicParameters();
-					p.Add("@days", ConfigurationManager.AppSettings["days"]);
+					p.Add("@lastDate", DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"])));
 
 					var res = cn.Query(CreateVerseSearchQuery(parts), p);
 
@@ -689,7 +695,7 @@ namespace Common
 		private static string CreateVerseSearchQuery(string[] parts)
 		{
 
-			string SqlString = "SELECT TOP 200 ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, VerseText, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE ";
+			string SqlString = "SELECT TOP 200 ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, VerseText, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE ";
 
 			foreach (var part in parts)
 			{
@@ -712,7 +718,7 @@ namespace Common
 		private static string CreateTermSearchQuery(string[] parts)
 		{
 
-			string SqlString = "SELECT TermId, Term, Definition, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew FROM GlossaryTerms WHERE ";
+			string SqlString = "SELECT TermId, Term, Definition, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew FROM GlossaryTerms WHERE ";
 
 			foreach (var part in parts)
 			{
@@ -770,9 +776,9 @@ namespace Common
 
 					var p = new DynamicParameters();
 					p.Add("@term", term);
-					p.Add("@days", ConfigurationManager.AppSettings["days"]);
+					p.Add("@lastDate", DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"])));
 
-					var res = cn.Query("SELECT TermId, Term, Definition, DateCreated, DateModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateModified) THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN GETDATE() < DATEADD(day,@days,DateCreated) THEN 1 ELSE 0 END) AS IsNew FROM GlossaryTerms WHERE Term=@term", p);
+					var res = cn.Query("SELECT TermId, Term, Definition, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew FROM GlossaryTerms WHERE Term=@term", p);
 
 					if (res == null) return null;
 

@@ -29,8 +29,10 @@ namespace Common
 			return string.Format(@"{0}{1}", Root, path.Replace("/", "\\"));
 		}
 
-		public static IEnumerable<DirectoryInfoResult> GetFolders(string path)
+		public static IEnumerable<DirectoryInfoResult> GetFolders(string path, DateTime? lastDate = null)
 		{
+			if (lastDate == null) lastDate = DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"]));
+
 			string localPath = MakeFullLocal(path);
 
 			var dir = new DirectoryInfo(localPath);
@@ -42,16 +44,17 @@ namespace Common
 				DirectoryCount = x.EnumerateDirectories().Count(),
 				DateModified = x.LastWriteTime,
 				DateCreated = x.CreationTime,
-				IsNew = x.LastWriteTime.Subtract(x.CreationTime).TotalMinutes < 31 && x.CreationTime.Subtract(DateTime.Now).Duration().TotalDays < Convert.ToInt32(ConfigurationManager.AppSettings["days"]),
-				IsModified = x.LastWriteTime.Subtract(x.CreationTime).TotalMinutes > 30 && x.LastWriteTime.Subtract(DateTime.Now).Duration().TotalDays < Convert.ToInt32(ConfigurationManager.AppSettings["days"]),
+				IsNew = x.LastWriteTime.Subtract(x.CreationTime).TotalMinutes < 31 && x.CreationTime > lastDate.Value,
+				IsModified = x.LastWriteTime.Subtract(x.CreationTime).TotalMinutes > 30 && x.LastWriteTime > lastDate.Value,
 				FileCount = x.EnumerateFiles().Count(y => !y.Extension.MatchesTrimmed(".ini") && !y.Extension.MatchesTrimmed(".db") && !y.Extension.MatchesTrimmed(".lnk"))
 			}).OrderBy(x => x.Name);
 
 			return dirs;
 		}
 
-		public static IEnumerable<FileInfoResult> GetFiles(string path)
+		public static IEnumerable<FileInfoResult> GetFiles(string path, DateTime? lastDate = null)
 		{
+			if (lastDate == null) lastDate = DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"]));
 			string localPath = MakeFullLocal(path);
 
 			var dir = new DirectoryInfo(localPath);
@@ -63,18 +66,20 @@ namespace Common
 					Name = x.Name.Substring(0, x.Name.LastIndexOf(".") < 0 ? 0 : x.Name.LastIndexOf(".")),
 					Path = x.FullName.Replace(Root, "").Replace(@"\", "/"),
 					Size = PrintFileSize(x.Length),
+					Length = x.Length,
 					DateModified = x.LastWriteTime,
 					DateCreated = x.CreationTime,
-					IsNew = x.LastWriteTime.Subtract(x.CreationTime).TotalMinutes < 31 && x.CreationTime.Subtract(DateTime.Now).Duration().TotalDays < Convert.ToInt32(ConfigurationManager.AppSettings["days"]),
-					IsModified = x.LastWriteTime.Subtract(x.CreationTime).TotalMinutes > 30 && x.LastWriteTime.Subtract(DateTime.Now).Duration().TotalDays < Convert.ToInt32(ConfigurationManager.AppSettings["days"]),
+					IsNew = x.LastWriteTime.Subtract(x.CreationTime).TotalMinutes < 31 && x.CreationTime > lastDate.Value,
+					IsModified = x.LastWriteTime.Subtract(x.CreationTime).TotalMinutes > 30 && x.LastWriteTime > lastDate.Value,
 					Extension = x.Extension.ToLower().Replace(".", "")
 				}).OrderBy(x => x.Name);
 
 			return files;
 		}
 
-		public static IEnumerable<FileInfoResult> Search(string[] queryparts)
+		public static IEnumerable<FileInfoResult> Search(string[] queryparts, DateTime? lastDate = null)
 		{
+			if (lastDate == null) lastDate = DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"]));
 			var matchingFiles = SearchFiles(new Regex(string.Join("", queryparts.Select(x => "(?=.*" + x + ")")), RegexOptions.IgnoreCase));
 			return matchingFiles
 				.Select(x => new FileInfoResult
@@ -82,18 +87,20 @@ namespace Common
 					Name = x.Name.Substring(0, x.Name.LastIndexOf(".") < 0 ? 0 : x.Name.LastIndexOf(".")),
 					Path = x.FullName.Replace(Root, "").Replace(@"\", "/"),
 					Size = FileUtility.PrintFileSize(x.Length),
+					Length = x.Length,
 					DateModified = x.LastWriteTime,
 					DateCreated = x.CreationTime,
-					IsNew = x.LastWriteTime.Subtract(x.CreationTime).TotalMinutes < 31 && x.CreationTime.Subtract(DateTime.Now).Duration().TotalDays < Convert.ToInt32(ConfigurationManager.AppSettings["days"]),
-					IsModified = x.LastWriteTime.Subtract(x.CreationTime).TotalMinutes > 30 && x.LastWriteTime.Subtract(DateTime.Now).Duration().TotalDays < Convert.ToInt32(ConfigurationManager.AppSettings["days"]),
+					IsNew = x.LastWriteTime.Subtract(x.CreationTime).TotalMinutes < 31 && x.CreationTime > lastDate.Value,
+					IsModified = x.LastWriteTime.Subtract(x.CreationTime).TotalMinutes > 30 && x.LastWriteTime > lastDate.Value,
 					Extension = x.Extension.ToLower().Replace(".", "")
 				})
 				.OrderBy(x => x.Name)
 				.Distinct(new PropertyComparer<FileInfoResult>("Name"));
 		}
 
-		public static IEnumerable<FileInfoResult> Recent()
+		public static IEnumerable<FileInfoResult> Recent(DateTime? lastDate = null)
 		{
+			if (lastDate == null) lastDate = DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"]));
 			var matchingFiles = RecentFiles();
 			return matchingFiles
 				.Select(x => new FileInfoResult
@@ -101,10 +108,11 @@ namespace Common
 					Name = x.Name.Substring(0, x.Name.LastIndexOf(".") < 0 ? 0 : x.Name.LastIndexOf(".")),
 					Path = x.FullName.Replace(Root, "").Replace(@"\", "/"),
 					Size = FileUtility.PrintFileSize(x.Length),
+					Length = x.Length,
 					DateModified = x.LastWriteTime,
 					DateCreated = x.CreationTime,
-					IsNew = x.LastWriteTime.Subtract(x.CreationTime).TotalMinutes < 31 && x.CreationTime.Subtract(DateTime.Now).Duration().TotalDays < Convert.ToInt32(ConfigurationManager.AppSettings["days"]),
-					IsModified = x.LastWriteTime.Subtract(x.CreationTime).TotalMinutes > 30 && x.LastWriteTime.Subtract(DateTime.Now).Duration().TotalDays < Convert.ToInt32(ConfigurationManager.AppSettings["days"]),
+					IsNew = x.LastWriteTime.Subtract(x.CreationTime).TotalMinutes < 31 && x.CreationTime > lastDate.Value,
+					IsModified = x.LastWriteTime.Subtract(x.CreationTime).TotalMinutes > 30 && x.LastWriteTime > lastDate.Value,
 					Extension = x.Extension.ToLower().Replace(".", "")
 				})
 				.OrderBy(x => x.Name)
@@ -113,12 +121,12 @@ namespace Common
 
 
 
-		private static IEnumerable<FileInfo> RecentFiles()
+		private static IEnumerable<FileInfo> RecentFiles(DateTime? lastDate = null)
 		{
+			if (lastDate == null) lastDate = DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"]));
 			var dir = new DirectoryInfo(Root);
 			return dir.EnumerateFiles("*", SearchOption.AllDirectories)
-				.Where(x => x.LastWriteTime.Subtract(DateTime.Now).Duration().TotalDays < Convert.ToInt32(ConfigurationManager.AppSettings["days"]) 
-					|| x.CreationTime.Subtract(DateTime.Now).Duration().TotalDays < Convert.ToInt32(ConfigurationManager.AppSettings["days"]));
+				.Where(x => x.LastWriteTime > lastDate.Value || x.CreationTime > lastDate.Value);
 		}
 
 		private static IEnumerable<FileInfo> SearchFiles(Regex reg)

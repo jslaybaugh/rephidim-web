@@ -101,12 +101,14 @@
 	.church { font-family: 'Acme' , Serif; font-size: 54px; width: 500px; margin: auto; margin-bottom: 10px; text-align: center; font-weight: 900; border-bottom: solid 1px #444; padding-bottom: 5px; line-height: 50px; }
 	.scripture { font-family: 'Acme' , serif; font-size: 16px; width: 470px; margin: auto; margin-bottom: 5px; text-align: justify; line-height:16px;}
 	.login-container { margin: 30px auto 0px auto; }
-	.login-bg { margin: auto; background: #333 url(../img/microphone.png) top left; width: 470px; height: 278px; position: relative; }
+	.boxshadow .login-bg, .no-boxshadow .error-img { margin: auto; background: #333 url(../img/microphone.png) top left; width: 470px; height: 278px; position: relative; }
 	.login-contents { margin: 20px 0 0 10px; }
 	.login-contents label { width: 100px; color: #ddd; font-weight: bold; text-align: left; }
 	.login-container .alert-message { width: 440px; margin: auto; margin-bottom: 10px; clear: both; }
 
 	#lnk-more:link, #lnk-more:active, #lnk-more:visited, #lnk-more:hover { position: absolute; bottom: 5px; right: 10px; color: #fff; }
+	
+	.boxshadow .error-img, .no-boxshadow .error-img { margin:auto;background-color:#333;background-image: url(../img/mosquito-elephant.jpg);width:800px;height:613px; position:relative;}
 
 
 /* SYZE OVERRIDES OF MY STYLES */

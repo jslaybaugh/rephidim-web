@@ -181,6 +181,7 @@
     <Content Include="Content\img\ajax-loader-dark.gif" />
     <Content Include="Content\img\bg1.png" />
     <Content Include="Content\img\bg2.png" />
+    <Content Include="Content\img\mosquito-elephant.jpg" />
     <Content Include="Content\img\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\img\ui-bg_glass_55_fbf9ee_1x400.png" />
     <Content Include="Content\img\ui-bg_glass_65_ffffff_1x400.png" />
@@ -318,6 +319,7 @@
     <Content Include="Views\Shared\_Master.cshtml" />
     <Content Include="Views\Admin\Messages.cshtml" />
     <Content Include="Views\Admin\Emails.cshtml" />
+    <Content Include="Views\Emails\Notification.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
