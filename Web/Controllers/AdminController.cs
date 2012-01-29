@@ -32,9 +32,18 @@ namespace Web.Controllers
 		[HttpGet]
 		public ActionResult Emails()
 		{
+
+			var cookie = Request.Cookies["rephidim"];
+			string lastEmail = "";
+			if (cookie != null)
+			{
+				lastEmail = cookie["email"];
+			}
+
 			var m = new AdminEmailsView();
 			m.IsAdmin = User.IsInRole("Emails");
 			m.Emails = DataAccess.GetEmails();
+			m.Email = lastEmail;
 
 			return View("Emails", m);
 		}

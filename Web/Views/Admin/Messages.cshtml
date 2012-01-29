@@ -5,37 +5,38 @@
 	Bundles.Reference("content/templates/messages");
 }
 
-<div class="row header-content">
-	<div class="span16">
-		<h1>Manage System Messages</h1>
-	</div>
-</div>
 <div class="row">
 	<div class="span16 module primary-content">
-		<table cellspacing="5">
-			<tr>
-				<th>Edit</th>
-				<th>Message Content (as it will be displayed)</th>
-				<th>Active</th>
-				<th>Home Page</th>
-				<th>Login Page</th>
-				<th>Delete</th>
-			</tr>
-		@if (Model.Messages != null && Model.Messages.Count() > 0)
-		{ 
-			foreach (var msg in Model.Messages)
-			{
+		<h1>
+			<ul class="toolbar">
+				<li><a href="#" class="add-btn" title="Add New Message">@(Sprite.Image("~/App_Sprites/icon_plus.png"))</a></li>
+			</ul>
+			Manage System Messages		
+		</h1>
+		<div class="scrollable">
+			<table cellspacing="5">
 				<tr>
-					<td><input class="edit-btn" data-id="@msg.Id" type="button" value="Edit"></td>
-					<td><div class="alert-message @msg.Style.ToLowerInvariant()">@Html.Raw(msg.Value)</div></td>
-					<td><div class="label @(msg.IsActive ? "success" : "important")">@msg.IsActive</div></td>
-					<td><div class="label @(msg.OnHomePage ? "success" : "important")">@msg.OnHomePage</div></td>
-					<td><div class="label @(msg.OnLoginPage ? "success" : "important")">@msg.OnLoginPage</div></td>
-					<td><input class="delete-btn" data-id="@msg.Id" type="button" value="Delete"></td>
+					<th>Message Content (as it will be displayed)</th>
+					<th>Active</th>
+					<th>Home Page</th>
+					<th>Login Page</th>
+					<th>Actions</th>
 				</tr>
+			@if (Model.Messages != null && Model.Messages.Count() > 0)
+			{ 
+				foreach (var msg in Model.Messages)
+				{
+					<tr>
+						<td><div class="alert-message @msg.Style.ToLowerInvariant()">@Html.Raw(msg.Value)</div></td>
+						<td><div class="label @(msg.IsActive ? "success" : "important")">@msg.IsActive</div></td>
+						<td><div class="label @(msg.OnHomePage ? "success" : "important")">@msg.OnHomePage</div></td>
+						<td><div class="label @(msg.OnLoginPage ? "success" : "important")">@msg.OnLoginPage</div></td>
+						<td style="white-space:nowrap;"><a class="edit-btn" data-id="@msg.Id" href="#" title="Edit">@(Sprite.Image("~/App_Sprites/icon_pen.png"))</a><a class="delete-btn" data-id="@msg.Id" href="#" title="Delete">@(Sprite.Image("~/App_Sprites/icon_delete.png"))</a></td>
+					</tr>
+				}
 			}
-		}
-		</table>
+			</table>
+		</div>
 	</div>
 </div>
 <div id="uxMessageDialog" class="none"></div>

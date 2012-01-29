@@ -35,9 +35,11 @@
 					<span id="uxAppWait" class="wait-light" style="display:none;"></span>
 				</form>
 				<ul class="nav secondary-nav">
+					<li><a href="#" class="help" style="padding:0px;margin-top:7px;" title="Get help">@Sprite.Image("~/App_Sprites/icon_help.png")</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle">User: <b>@User.Identity.Name</b></a>
 						<ul class="dropdown-menu">
+							<li><a href="@(Url.Action<AdminController>(x => x.Emails()))">Email Notifications</a></li>
 							@if (User.IsInRole("Messages"))	{ <li><a href="@(Url.Action<AdminController>(x=>x.Messages()))">Manage Messages</a></li> }
 							@if (User.IsInRole("Dev"))	{ <li><a id="lnkViewSource" href="#">View Source</a></li> }
 							<li class="divider"></li>
@@ -52,7 +54,16 @@
 <div class="container">
 	@RenderBody()
 </div>
-	
+<div id="uxHelpDialog" class="none">
+	<div class="help-tabs">
+		<ul>
+			<li><a href="#help">Help</a></li>
+			<li><a href="#report">Report an issue</a></li>
+		</ul>
+		<div id="help"></div>
+		<div id="report"></div>
+	</div>
+</div>
 
 @section styles 
 {
@@ -68,6 +79,32 @@
 	{
 		@RenderSection("scripts")
 	}
+	<script type="text/javascript">
+		$(function ()
+		{
+			$(".help").click(function ()
+			{
+				$("#uxHelpDialog").dialog(
+				{
+					width: 800,
+					height: 500,
+					title: "System Help",
+					modal: true,
+					resizable: false,
+					buttons: [
+						{
+							text: "Close",
+							click: function () { $(this).dialog("close"); }
+						}
+					],
+					open: function ()
+					{
+						$(".help-tabs").tabs();
+					}
+				});
+			});
+		});
+	</script>
 }
 
 @section templates 

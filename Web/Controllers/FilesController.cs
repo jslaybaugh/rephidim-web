@@ -69,44 +69,6 @@ namespace Web.Controllers
 			return new { Path = path, ContentType = contentType, Name = f.Name };
 		}
 
-		//int dirCounter = 0;
-		//int fileCounter = 0;
-		//int queryCount = 0;
-		//string query = "";
-		//List<string> extensions = new List<string>();
-
-		//public ActionResult Index()
-		//{
-
-		//    var startTime = DateTime.Now;
-
-		//    WalkDirectories(@"F:\Jorin\");
-
-		//    var endTime = DateTime.Now;
-
-		//    ViewBag.Summary = string.Format("Done. {0} seconds, {1} directories, {2} files, {3} matches for '{4}'.", (endTime - startTime).TotalSeconds, dirCounter, fileCounter, queryCount, query);
-		//    ViewBag.Extensions = "Extensions: " + string.Join(", ", extensions.Distinct().ToArray());
-			
-		//    return View();
-		//}
-
-		//private void WalkDirectories(string path)
-		//{
-		//    var dir = new DirectoryInfo(path);
-		//    Console.WriteLine(dir.FullName);
-		//    var files = dir.GetFiles();
-		//    extensions.AddRange(files.Select(x => x.Extension).Distinct().ToList<string>());
-
-		//    var matches = files.Where(x => x.Name.ToLower().Contains(query.ToLower())).Count();
-		//    var dirs = dir.GetDirectories();
-		//    fileCounter += files.Count();
-		//    dirCounter += dirs.Count();
-		//    queryCount += matches;
-		//    foreach (var item in dirs)
-		//    {
-		//        WalkDirectories(item.FullName);
-		//    }
-		//}
 
 	}
 }

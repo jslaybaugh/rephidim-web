@@ -74,6 +74,8 @@
 					App.HandleError(xhr);
 				}
 			});
+
+			return false;
 		});
 
 		$(".edit-btn").click(function ()
@@ -91,6 +93,15 @@
 					App.HandleError(xhr);
 				}
 			});
+
+			return false;
+		});
+
+		$(".add-btn").click(function ()
+		{
+			editMessage({ Id: 0, Value: "", Style: "info", IsActive: true, OnHomePage: true, OnLoginPage: true });
+
+			return false;
 		});
 	};
 

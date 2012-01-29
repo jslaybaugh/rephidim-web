@@ -38,7 +38,8 @@
 				$("#tmpFolderContent").tmpl(content).appendTo($("#uxContents").empty());
 				$(window).resize();
 
-				if (push) history.pushState({ Path: path }, path, App.ResolveUrl("~/Files/Browse/" + path));
+				App.SetTitle(path + " - Files");
+				if (Modernizr.history && push) history.pushState({ Path: path }, path, App.ResolveUrl("~/Files/Browse/" + path));
 			},
 			error: function (xhr)
 			{
@@ -49,22 +50,22 @@
 
 	var domSetup = function (me)
 	{
+		window.onload = function ()
+		{
+			_firstLoad = true;
+
+			if (_browsePath != "")
+			{
+				if (Modernizr.history)  history.replaceState({ Path: _browsePath }, _browsePath, App.ResolveUrl("~/Files/Browse/" + _browsePath));
+			}
+
+			loadContents(_browsePath, false);
+			setTimeout(function () { _firstLoad = false; }, 0);
+		};
+
 		if (Modernizr.history)
 		{
-			window.onload = function ()
-			{
-				_firstLoad = true;
-
-				if (_browsePath != "")
-				{
-					history.replaceState({ Path: _browsePath }, _browsePath, App.ResolveUrl("~/Files/Browse/" + _browsePath));
-				}
-				
-				loadContents(_browsePath, false);
-				setTimeout(function () { _firstLoad = false; }, 0);
-			};
-
-			window.onpopstate = function (event)
+					window.onpopstate = function (event)
 			{
 				if (_firstLoad)
 				{

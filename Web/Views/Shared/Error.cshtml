@@ -1,15 +1,61 @@
-﻿@{
-    Layout = null;
-}
+﻿@model HandleErrorInfo
+@{
+	ViewBag.Title = "System Error";
+	if (Request.IsAjaxRequest())
+	{
+		Layout = null;
+		<text>@Model.Exception.Message</text>
+	}
+	else
+	{
+		if (Request.IsAuthenticated)
+		{
+			Layout = "~/Views/Shared/_Auth.cshtml";
+		}
+		else
+		{
+			Layout = "~/Views/Shared/_NoAuth.cshtml";
+		}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Error</title>
-</head>
-<body>
-    <h2>
-        Sorry, an error occurred while processing your requestaroo.
-    </h2>
-</body>
-</html>
+		<div class="clearfix">
+			<div class="warning">
+				<h2>Sorry, an error occurred while processing your request.</h2>
+				<p class="centered">
+					Please <a href="@HttpContext.Current.Request.RawUrl">try loading the page again</a>.
+				</p>
+			</div>
+			<div id="uxException" class="none module">
+				<hr />
+				<pre>@Model.Exception.Message</pre>
+				<hr />
+				<pre style="overflow:auto;white-space:nowrap;">@Html.Raw(Model.Exception.StackTrace.Replace("\n", "<br/>"))</pre>
+			</div>
+		</div>
+	}
+}
+	
+@section scripts
+{
+	@if (!Request.IsAjaxRequest())
+	{
+		<script type="text/javascript">
+			(function ()
+			{
+				var first, second = false;
+
+				$(function ()
+				{
+					//s = 115
+					//e = 101
+
+					$(document).on("keypress", function (event)
+					{
+						if (event.which == 115) first = true;
+
+						if (first && event.which == 101) $("#uxException").show();
+					});
+				});
+			}).call(this);
+		</script>
+	}
+}

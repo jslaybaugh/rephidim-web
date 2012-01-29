@@ -6,7 +6,7 @@
 			{{if IsNew}}<span class="label success">New: ${App.DateFromJson(DateCreated).format('m/d h:MM TT')}</span>{{/if}}
 			{{if !IsNew && IsModified}}<span class="label warning">Modified: ${App.DateFromJson(DateModified).format('m/d h:MM TT')}</span>{{/if}}
 			<div class="verse-text">${Text}</div>
-			<a href="#" class="edit-rights scripture-edit" data-id="${Id}" title="Edit Verse">{{html App.ChooseIcon("edit")}}</a>
+			<a href="#" class="edit-rights verse-edit" data-id="${Id}" title="Edit Verse">{{html App.ChooseIcon("edit")}}</a>
 		</li>
 	{{/each}}
 </ul>

@@ -174,19 +174,20 @@
 
 	var domSetup = function (me)
 	{
+		window.onload = function ()
+		{
+			_firstLoad = true;
+
+			if (_activeTerm != null)
+			{
+				if (Modernizr.history) history.replaceState({ TermName: _activeTerm.Term }, _activeTerm.Term, App.ResolveUrl("~/Glossary/Term/" + _activeTerm.Id));
+			}
+			displayDefinition(false);
+			setTimeout(function () { _firstLoad = false; }, 0);
+		};
+
 		if (Modernizr.history)
 		{
-			window.onload = function ()
-			{
-				_firstLoad = true;
-
-				if (_activeTerm != null)
-				{
-					history.replaceState({ TermName: _activeTerm.Term }, _activeTerm.Term, App.ResolveUrl("~/Glossary/Term/" + _activeTerm.Id));
-				}
-				displayDefinition(false);
-				setTimeout(function () { _firstLoad = false; }, 0);
-			};
 
 			window.onpopstate = function (event)
 			{

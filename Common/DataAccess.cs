@@ -51,6 +51,50 @@ namespace Common
 			}
 		}
 
+		public static string InsertEmail(string email)
+		{
+			try
+			{
+				using (var cn = new SqlCeConnection(ConnString))
+				{
+					cn.Open();
+
+					var p = new DynamicParameters();
+					p.Add("@email", email);
+
+					var res = cn.Execute("INSERT Emails (email) Values (@email)", p);
+
+					return email;
+				}
+			}
+			catch (Exception)
+			{
+				return null;
+			}
+		}
+
+		public static int DeleteEmail(string email)
+		{
+			try
+			{
+				using (var cn = new SqlCeConnection(ConnString))
+				{
+					cn.Open();
+
+					var p = new DynamicParameters();
+					p.Add("@email", email);
+
+					var res = cn.Execute("DELETE FROM Emails WHERE email=@email", p);
+
+					return res;
+				}
+			}
+			catch (Exception)
+			{
+				return 0;
+			}
+		}
+
 		public static IEnumerable<string> GetEmails()
 		{
 			try
@@ -158,7 +202,7 @@ namespace Common
 						Book = new BookItem {Id = x.BookId, Name =x.BookName, Chapters = x.Chapters},
 						Chapter = x.ChapterNum,
 						Verse = x.VerseNum,
-						Text = x.VerseText.ToUpper(),
+						Text = x.VerseText,
 						TranslationId = x.TranslationId,
 						IsNew = x.IsNew,
 						IsModified = x.IsModified,

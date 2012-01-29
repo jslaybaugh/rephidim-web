@@ -10,5 +10,6 @@ namespace Web.Models
 	{
 		public bool IsAdmin { get; set; }
 		public IEnumerable<string> Emails { get; set; }
+		public string Email { get; set; }
 	}
 }

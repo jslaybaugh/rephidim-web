@@ -115,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\Ajax\AjaxAreaRegistration.cs" />
+    <Compile Include="Areas\Ajax\Controllers\EmailsController.cs" />
     <Compile Include="Areas\Ajax\Controllers\MessagesController.cs" />
     <Compile Include="Areas\Ajax\Controllers\FilesController.cs" />
     <Compile Include="Areas\Ajax\Controllers\GlossaryController.cs" />
@@ -218,6 +219,7 @@
     <Content Include="humans.txt" />
     <Content Include="robots.txt" />
     <Content Include="Scripts\app\App.js" />
+    <Content Include="Scripts\app\Emails.js" />
     <Content Include="Scripts\app\Messages.js" />
     <Content Include="Scripts\app\ScriptureHelper.js" />
     <Content Include="Scripts\app\GlossaryHelper.js" />

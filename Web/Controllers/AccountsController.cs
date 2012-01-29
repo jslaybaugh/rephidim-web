@@ -23,8 +23,15 @@ namespace Web.Controllers
 		[HttpGet]
 		public ActionResult Login(string returnUrl)
 		{
+			var cookie = Request.Cookies["rephidim_user"];
+			string lastUser = "rephidim";
+			if (cookie != null)
+			{
+				lastUser = cookie["rephidim_user"];
+			}
+
 			var m = new LoginView();
-			m.UserName = "rephidim";
+			m.UserName = lastUser;
 			m.ReturnUrl = returnUrl;
 			m.Messages = DataAccess.GetActiveLoginMesssages();
 			
@@ -41,6 +48,15 @@ namespace Web.Controllers
 
 			if (user != null)
 			{
+
+				var cookie = Request.Cookies["rephidim_user"];
+				if (cookie == null)
+				{
+					cookie = new HttpCookie("rephidim_user");
+				}
+				cookie["rephidim_user"] = m.UserName;
+				cookie.Expires = DateTime.Now.AddMonths(12);
+				Response.Cookies.Add(cookie);
 
 				var ticket = new FormsAuthenticationTicket(1, user.Name, DateTime.Now, DateTime.Now.AddDays(30), false, user.Rights);
 				var encTicket = FormsAuthentication.Encrypt(ticket);

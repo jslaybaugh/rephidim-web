@@ -10,6 +10,8 @@
 
 	var loadChapter = function (chapterNum, verseNum, push)
 	{
+		chapterNum = chapterNum || 1;
+		verseNum = verseNum || 1;
 		$.ajax(
 		{
 			url: App.ResolveUrl("~/Ajax/Scripture/Verses"),
@@ -23,20 +25,11 @@
 				if (verseNum != null && verseNum != 1)
 					setTimeout(function () { $("#uxVerses").scrollTo("." + verseNum, 1000, { easing: 'swing', axis: 'y' }); }, 1000);
 
-				if (Modernizr.history && push)
+				if (_book != null)
 				{
-					if (_book != null && chapterNum != null && verseNum != null)
-					{
+					App.SetTitle(_book.Name + " " + chapterNum + ":" + verseNum);
+					if (Modernizr.history && push)
 						history.pushState({ Book: _book.Name, Chapter: chapterNum, Verse: verseNum }, _book.Name + " " + chapterNum + ":" + verseNum, App.ResolveUrl("~/Scripture/" + _book.Name + "/" + chapterNum + "/" + verseNum));
-					}
-					else if (_bookName != null && _chapter != null)
-					{
-						history.pushState({ Book: _book.Name, Chapter: chapterNum, Verse: verseNum }, _book.Name + " " + chapterNum, App.ResolveUrl("~/Scripture/" + _book.Name + "/" + chapterNum));
-					}
-					else if (_bookName != null)
-					{
-						history.pushState({ Book: _book.Name, Chapter: chapterNum, Verse: verseNum }, _book.Name, App.ResolveUrl("~/Scripture/" + _book.Name));
-					}
 				}
 			},
 			error: function (xhr)
@@ -134,6 +127,67 @@
 
 	var domSetup = function (me)
 	{
+
+		window.onload = function ()
+		{
+			_firstLoad = true;
+			_bookName = _bookName || "Genesis";
+			_chapter = _chapter || 1;
+			_verse = _verse || 1;
+			
+			if (Modernizr.history) history.replaceState({ Book: _bookName, Chapter: _chapter, Verse: _verse }, _bookName + " " + _chapter + ":" + _verse, App.ResolveUrl("~/Scripture/" + _bookName + "/" + _chapter + "/" + _verse));
+			
+			App.ScriptureHelper.LoadBooks(function (books)
+			{
+				if (_bookName != null)
+				{
+					var matches = $.grep(books, function (n) { return n.Name.toUpperCase() == _bookName.toUpperCase(); });
+					if (matches.length > 0)
+					{
+						_book = matches[0];
+					}
+				}
+				loadBook(_chapter, _verse, false);
+			});
+
+			setTimeout(function () { _firstLoad = false; }, 0);
+		};
+
+		if (Modernizr.history)
+		{
+			window.onpopstate = function (event)
+			{
+				if (_firstLoad)
+				{
+					_firstLoad = false;
+				}
+				else
+				{
+					if (event.state != null)
+					{
+						App.ScriptureHelper.LoadBooks(function (books)
+						{
+							if (event.state.Book != null)
+							{
+								var matches = $.grep(books, function (n) { return n.Name.toUpperCase() == event.state.Book.toUpperCase(); });
+								if (matches.length > 0)
+								{
+									_book = matches[0];
+								}
+							}
+
+							loadBook(event.state.Chapter, event.state.Verse, false);
+
+						});
+					}
+					else
+					{
+						loadBook(null, null, false);
+					}
+				}
+			};
+		}
+
 		$(".book-link").live("click", function ()
 		{
 			var lnk = $(this);
@@ -171,7 +225,7 @@
 			});
 			return false;
 
-		}).on("click", ".scripture-edit", function ()
+		}).on("click", ".verse-edit", function ()
 		{
 			var lnk = $(this);
 			var id = lnk.data("id");
@@ -190,77 +244,6 @@
 
 			return false;
 		});
-
-
-		if (Modernizr.history)
-		{
-			window.onload = function ()
-			{
-				_firstLoad = true;
-
-				if (_bookName != null && _chapter != null && _verse != null)
-				{
-					history.replaceState({ Book: _bookName, Chapter: _chapter, Verse: _verse }, _bookName + " " + _chapter + ":" + _verse, App.ResolveUrl("~/Scripture/" + _bookName + "/" + _chapter + "/" + _verse));
-				}
-				else if (_bookName != null && _chapter != null)
-				{
-					history.replaceState({ Book: _bookName, Chapter: _chapter, Verse: _verse }, _bookName + " " + _chapter, App.ResolveUrl("~/Scripture/" + _bookName + "/" + _chapter));
-				}
-				else if (_bookName != null)
-				{
-					history.replaceState({ Book: _bookName, Chapter: _chapter, Verse: _verse }, _bookName, App.ResolveUrl("~/Scripture/" + _bookName));
-				}
-
-				App.ScriptureHelper.LoadBooks(function (books)
-				{
-					if (_bookName != null)
-					{
-						var matches = $.grep(books, function (n) { return n.Name.toUpperCase() == _bookName.toUpperCase(); });
-						if (matches.length > 0)
-						{
-							_book = matches[0];
-						}
-					}
-					loadBook(_chapter, _verse, false);
-
-				});
-
-				setTimeout(function () { _firstLoad = false; }, 0);
-			};
-
-			window.onpopstate = function (event)
-			{
-				if (_firstLoad)
-				{
-					_firstLoad = false;
-				}
-				else
-				{
-					if (event.state != null)
-					{
-						App.ScriptureHelper.LoadBooks(function (books)
-						{
-							if (event.state.Book != null)
-							{
-								var matches = $.grep(books, function (n) { return n.Name.toUpperCase() == event.state.Book.toUpperCase(); });
-								if (matches.length > 0)
-								{
-									_book = matches[0];
-								}
-							}
-
-							loadBook(event.state.Chapter, event.state.Verse, false);
-
-						});
-					}
-					else
-					{
-						loadBook(null, null, false);
-					}
-				}
-
-			};
-		}
 
 	};
 
