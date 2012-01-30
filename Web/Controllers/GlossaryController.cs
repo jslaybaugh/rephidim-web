@@ -18,7 +18,7 @@ namespace Web.Controllers
 	[Authorize]
     public class GlossaryController : Controller
     {
-        public ActionResult Term(int? id)
+        public ActionResult Term(int? id, string term)
         {
 			var m = new GlossaryView();
 
@@ -27,6 +27,11 @@ namespace Web.Controllers
 			{
 				m.ActiveTerm = DataAccess.GetSingleTerm(id.Value);
 			}
+			else if (!string.IsNullOrEmpty(term))
+			{
+				m.ActiveTerm = DataAccess.GetSingleTerm(term);
+			}
+
 			m.Version = DataAccess.GetKeyValue("GlossaryVersion");
 
             return View("Term",m);

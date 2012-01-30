@@ -9,9 +9,9 @@
 				<h3><a href="@(Url.Action<HomeController>(x => x.Home()))">Rephidim</a></h3>
 				<ul class="nav">
 					<li @(ViewBag.NavHome != null && ViewBag.NavHome == true ? "class=active" : "")><a href="@(Url.Action<HomeController>(x => x.Home()))">Home</a></li>
-					<li @(ViewBag.NavGlossary != null && ViewBag.NavGlossary == true ? "class=active" : "")><a href="@(Url.Action<GlossaryController>(x => x.Term(null)))">Glossary</a></li>
+					<li @(ViewBag.NavGlossary != null && ViewBag.NavGlossary == true ? "class=active" : "")><a href="@(Url.Action<GlossaryController>(x => x.Term(null, null)))">Glossary</a></li>
 					<li @(ViewBag.NavFiles != null && ViewBag.NavFiles == true ? "class=active" : "")><a href="@(Url.Action<FilesController>(x => x.Browse(null)))">Files</a></li>
-					<li @(ViewBag.NavScripture != null && ViewBag.NavScripture == true ? "class=active" : "")><a href="@(Url.Action<ScriptureController>(x => x.Read(null, null, null)))">Bible</a></li>
+					<li @(ViewBag.NavScripture != null && ViewBag.NavScripture == true ? "class=active" : "")><a href="@(Url.Action<ScriptureController>(x => x.Read("Genesis", 1, 1)))">Bible</a></li>
 					<li class="dropdown @(ViewBag.NavOther != null && ViewBag.NavOther == true ? "active" : "")">
 						<a href="#" class="dropdown-toggle">Resources</a>
 						<ul class="dropdown-menu">
@@ -26,7 +26,7 @@
 							<li><a href="@(Url.Action<StaticController>(x => x.Show("Atlas_Chapter3.pdf")))">Atlas (Ch 3 - Canonicity)</a></li>
 							<li><a href="@(Url.Action<StaticController>(x => x.Show("Atlas_Chapter4.pdf")))">Atlas (Ch 4 - Divine Revelation)</a></li>
 							<li><a href="@(Url.Action<StaticController>(x => x.Show("Atlas_Chapter5.pdf")))">Atlas (Ch 5 - Attributes of God)</a></li>
-							<li><a href="@(Url.Action<StaticController>(x => x.Show("Atlas_Addendums.pdf")))">Atlas (Addenda)</a></li>
+							<li><a href="@(Url.Action<StaticController>(x => x.Show("Atlas_Addenda.pdf")))">Atlas (Addenda)</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -41,6 +41,7 @@
 						<ul class="dropdown-menu">
 							<li><a href="@(Url.Action<AdminController>(x => x.Emails()))">Email Notifications</a></li>
 							@if (User.IsInRole("Messages"))	{ <li><a href="@(Url.Action<AdminController>(x=>x.Messages()))">Manage Messages</a></li> }
+							@if (User.IsInRole("Dev"))	{ <li><a href="@(Url.Action<AdminController>(x=>x.Parse()))">Parsing Utility</a></li> }
 							@if (User.IsInRole("Dev"))	{ <li><a id="lnkViewSource" href="#">View Source</a></li> }
 							<li class="divider"></li>
 							<li><a href="@(Url.Action<AccountsController>(x => x.Logout()))">Logout</a></li>

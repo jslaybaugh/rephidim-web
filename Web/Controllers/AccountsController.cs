@@ -23,7 +23,6 @@ namespace Web.Controllers
 		[HttpGet]
 		public ActionResult Login(string returnUrl)
 		{
-			throw new Exception("jorin");
 			var cookie = Request.Cookies["rephidim_user"];
 			string lastUser = "rephidim";
 			if (cookie != null)

@@ -7,18 +7,6 @@
 {
 	var _activeTerm, _firstLoad = true, _editRights = false;
 
-	var pad = function (currentLength)
-	{
-		var totalNeeded = 2000;
-		var s = " ";
-		for (var i = 0; i < totalNeeded - currentLength; i++)
-		{
-			s += "&zwnj;";
-		}
-
-		return s;
-	};
-
 	var displayDefinition = function (push)
 	{
 		var data = {};
@@ -35,7 +23,7 @@
 		if ($("[name='" + _activeTerm.Id + "']").length > 0)
 			setTimeout(function () { $("#uxList .scrollable").scrollTo("[name='" + _activeTerm.Id + "']", 1000, { easing: 'swing', axis: 'y' }); }, 1000);
 
-		App.SetTitle(_activeTerm.Term + " - Glossary");
+		App.SetTitle(_activeTerm.Term);
 
 		if (Modernizr.history && push)
 		{
@@ -46,6 +34,7 @@
 		$(window).resize();
 
 		App.GlossaryHelper.HighlightTerms("#uxDefinition");
+		App.ScriptureHelper.HighlightVerses("#uxDefinition");
 
 
 	};

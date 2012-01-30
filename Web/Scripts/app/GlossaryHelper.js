@@ -71,7 +71,7 @@
 				// g makes it global and not just first
 				var regex = new RegExp("\\b(" + termString.replace(/(\^|\.|\*|\+|\?|\=|\!|\\|\/|\(|\)|\[|\]|\{|\})/ig, "\\$1") + ")\\b", "ig");
 
-				$(container).html($(container).html().replace(regex, "<a class='term-link' data-value='$1' href='#'>$1</a>"));
+				$(container).html($(container).html().replace(regex, "<a class='term-link' data-value='$1' href='" + App.ResolveUrl("~/Glossary/$1") + "'>$1</a>"));
 
 				/*.inactive-link { color: #404040; text-decoration: none; }
 				.active-link { color: #0069D6; text-decoration: underline; }*/

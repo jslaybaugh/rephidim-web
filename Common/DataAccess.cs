@@ -164,7 +164,7 @@ namespace Common
 
 					var p = new DynamicParameters();
 
-					var res = cn.Query("SELECT BookId, BookName, Chapters FROM Books ORDER BY BookId", p);
+					var res = cn.Query("SELECT BookId, BookName, Chapters, Aliases FROM Books ORDER BY BookId", p);
 
 					if (res == null) return null;
 
@@ -172,7 +172,8 @@ namespace Common
 					{
 						Id = x.BookId,
 						Name = x.BookName,
-						Chapters = x.Chapters
+						Chapters = x.Chapters,
+						Aliases = x.Aliases
 					});
 				}
 			}

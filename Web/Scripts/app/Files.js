@@ -38,7 +38,7 @@
 				$("#tmpFolderContent").tmpl(content).appendTo($("#uxContents").empty());
 				$(window).resize();
 
-				App.SetTitle(path + " - Files");
+				App.SetTitle(path || "Home Directory");
 				if (Modernizr.history && push) history.pushState({ Path: path }, path, App.ResolveUrl("~/Files/Browse/" + path));
 			},
 			error: function (xhr)

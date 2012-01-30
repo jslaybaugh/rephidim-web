@@ -60,6 +60,7 @@
 	.module > div { padding: 5px; box-sizing: border-box; }
 
 	.term-link { color: #0069D6; text-decoration: underline; }
+	.verse-link { color: #080; text-decoration: underline; }
 
 	.field-validation-error.alert-message { display: block; }
 	.field-validation-valid.alert-message { display: none; }
@@ -101,7 +102,7 @@
 	.church { font-family: 'Acme' , Serif; font-size: 54px; width: 500px; margin: auto; margin-bottom: 10px; text-align: center; font-weight: 900; border-bottom: solid 1px #444; padding-bottom: 5px; line-height: 50px; }
 	.scripture { font-family: 'Acme' , serif; font-size: 16px; width: 470px; margin: auto; margin-bottom: 5px; text-align: justify; line-height:16px;}
 	.login-container { margin: 30px auto 0px auto; }
-	.boxshadow .login-bg, .no-boxshadow .error-img { margin: auto; background: #333 url(../img/microphone.png) top left; width: 470px; height: 278px; position: relative; }
+	.boxshadow .login-bg, .no-boxshadow .error-img { margin: auto auto 10px auto; background: #333 url(../img/microphone.png) top left; width: 470px; height: 278px; position: relative; }
 	.login-contents { margin: 20px 0 0 10px; }
 	.login-contents label { width: 100px; color: #ddd; font-weight: bold; text-align: left; }
 	.login-container .alert-message { width: 440px; margin: auto; margin-bottom: 10px; clear: both; }
@@ -125,9 +126,10 @@
 	.ltMonitor .uneditable-input,
 	.ltMonitor label,
 	.ltMonitor table,
+	.ltMonitor p,
 	.ltMonitor .topbar input,
 	.ltMonitor ul
-	 { font-size: 16px; line-height: 21px; }
+			{ font-size: 16px; line-height: 21px; }
  
 	.ltMonitor h1 {font-size:36px; line-height: 42px;}
 	.ltMonitor h2 {font-size:30px; line-height: 36px;}
@@ -140,6 +142,8 @@
 
 	.ltMonitor .module h1 {font-size:22px;line-height:24px;}
 	.ltMonitor .small-info {font-size:13px;line-height:18px;}
+	.ltMonitor p.church {font-size: 54px;line-height:50px;}
+	.ltMonitor p.scripture {font-size: 16px;line-height:16px;}
 
 /* PRINT STYLES */
 

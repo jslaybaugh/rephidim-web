@@ -141,7 +141,7 @@
 			{
 				if (_bookName != null)
 				{
-					var matches = $.grep(books, function (n) { return n.Name.toUpperCase() == _bookName.toUpperCase(); });
+					var matches = $.grep(books, function (n) { return n.Name.toUpperCase() == _bookName.toUpperCase() || ("|" + n.Aliases.toUpperCase() + "|").indexOf("|" + _bookName.toUpperCase() + "|") >= 0; });
 					if (matches.length > 0)
 					{
 						_book = matches[0];
@@ -169,7 +169,7 @@
 						{
 							if (event.state.Book != null)
 							{
-								var matches = $.grep(books, function (n) { return n.Name.toUpperCase() == event.state.Book.toUpperCase(); });
+								var matches = $.grep(books, function (n) { return n.Name.toUpperCase() == event.state.Book.toUpperCase() || ("|" + n.Aliases.toUpperCase() + "|").indexOf("|" + _bookName.toUpperCase() + "|") >= 0; });
 								if (matches.length > 0)
 								{
 									_book = matches[0];
@@ -209,23 +209,7 @@
 			loadChapter($(this).val(), null, true);
 		}));
 
-		$(document).on("click", ".term-link", function ()
-		{
-			var termName = $(this).data("value");
-			App.GlossaryHelper.LoadTerms(function (terms)
-			{
-				log(terms, termName);
-				var matchingTerms = $.grep(terms, function (n) { return n.Term.toUpperCase() == termName.toUpperCase(); });
-				if (matchingTerms.length > 0)
-				{
-					location = App.ResolveUrl("~/Glossary/Term/" + matchingTerms[0].Id);
-				}
-				else
-					location = App.ResolveUrl("~/Glossary");
-			});
-			return false;
-
-		}).on("click", ".verse-edit", function ()
+		$(document).on("click", ".verse-edit", function ()
 		{
 			var lnk = $(this);
 			var id = lnk.data("id");

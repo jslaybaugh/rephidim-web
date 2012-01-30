@@ -23,10 +23,32 @@ namespace Web
 		{
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+			//routes.MapRoute(
+			//    "Glossary", // Route name
+			//    "Glossary/{action}/{id}", // URL with parameters
+			//    new { controller = "Glossary", action = "Term", id = UrlParameter.Optional }, // Parameter defaults
+			//    new string[] { "Web.Controllers" }
+			//);
+
+
 			routes.MapRoute(
-				"Glossary", // Route name
-				"Glossary/{action}/{id}", // URL with parameters
+				"Glossary Print", // Route name
+				"Glossary/Print/{id}", // URL with parameters
+				new { controller = "Glossary", action = "Print", id = UrlParameter.Optional }, // Parameter defaults
+				new string[] { "Web.Controllers" }
+			);
+
+			routes.MapRoute(
+				"Glossary Term by Id", // Route name
+				"Glossary/Term/{id}", // URL with parameters
 				new { controller = "Glossary", action = "Term", id = UrlParameter.Optional }, // Parameter defaults
+				new string[] { "Web.Controllers" }
+			);
+
+			routes.MapRoute(
+				"Glossary Term by Name", // Route name
+				"Glossary/{term}", // URL with parameters
+				new { controller = "Glossary", action = "Term", term = UrlParameter.Optional}, // Parameter defaults
 				new string[] { "Web.Controllers" }
 			);
 

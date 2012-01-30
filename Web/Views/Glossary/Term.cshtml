@@ -1,7 +1,7 @@
 ﻿@model Web.Models.GlossaryView
 
 @{
-	ViewBag.Title = Model.ActiveTerm != null ? Model.ActiveTerm.Term + " - Glossary" : "Glossary";
+	ViewBag.Title = Model.ActiveTerm != null ? Model.ActiveTerm.Term : "Glossary";
 	ViewBag.NavGlossary = true;
 	Bundles.Reference("content/templates/glossary");
 }

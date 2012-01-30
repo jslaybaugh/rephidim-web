@@ -19,10 +19,20 @@
 			var data = localStorage.getItem("books");
 			if (data != null)
 			{
-				var data = JSON.parse(data);
-				_books = data.Books;
-				callback(_books);
-				return;
+				data = JSON.parse(data);
+				var timestamp = new Date(data.Timestamp);
+				var expiryDate = new Date(timestamp.setDate(timestamp.getDate() + 7)) // one week
+				if (new Date() > expiryDate)
+				{
+					// it is too old, we need to get a new one
+					localStorage.removeItem("books")
+				}
+				else
+				{
+					_books = data.Books;
+					callback(_books);
+					return;
+				}
 			}
 		}
 
@@ -49,22 +59,16 @@
 
 	this.App.ScriptureHelper = {
 
-		//		HighlightTerms: function (container)
-		//		{
-		//			getTerms(function (terms)
-		//			{
-		//				var termString = $.map(terms, function (n) { return n.Term; }).join("|");
-
-		//				// \\b gets the word boundaries so we only get full words
-		//				// i gets case insensitive
-		//				// g makes it global and not just first
-		//				var regex = new RegExp("\\b(" + termString.replace(/(\^|\.|\*|\+|\?|\=|\!|\\|\/|\(|\)|\[|\]|\{|\})/ig, "\\$1") + ")\\b", "ig");
-
-		//				$(container).html($(container).html().replace(regex, "<a class='term-link inactive-link' data-value='$1' href='#'>$1</a>"));
-
-		//				setTimeout(function () { $(container).find("a").switchClass("inactive-link", "active-link", "slow"); }, 0);
-		//			});
-		//		},
+		HighlightVerses: function (container)
+		{
+			getBooks(function (books)
+			{
+				var booklist = $.makeArray($.map(books, function (n) { return n.Name + (n.Aliases != "" ? "|" + n.Aliases : ""); })).join("|");
+				var regex = new RegExp("\\b(" + booklist + ")[.,]?[ ]*(\\d{1,3})[:;]?(\\d{1,3})?", "ig")
+				
+				$(container).html($(container).html().replace(regex, "<a class='verse-link' href='" + App.ResolveUrl("~/Scripture/$1/$2/$3") + "'>$1 $2:$3</a>"));
+			});
+		},
 
 		LoadBooks: function (callback)
 		{

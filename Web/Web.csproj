@@ -179,8 +179,10 @@
     <Content Include="Content\css\module.txt" />
     <Content Include="Content\img\ajax-loader-light.gif" />
     <Content Include="Content\img\ajax-loader-dark.gif" />
+    <Content Include="Content\img\arcs.png" />
     <Content Include="Content\img\bg1.png" />
     <Content Include="Content\img\bg2.png" />
+    <Content Include="Content\img\favicon.ico" />
     <Content Include="Content\img\mosquito-elephant.jpg" />
     <Content Include="Content\img\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\img\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -308,7 +310,7 @@
     <Content Include="Views\Admin\Parse.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\static\Atlas_Addendums.pdf" />
+    <None Include="Content\static\Atlas_Addenda.pdf" />
     <None Include="Content\static\Atlas_Chapter1.pdf" />
     <None Include="Content\static\Atlas_Chapter2.pdf" />
     <None Include="Content\static\Atlas_Chapter3.pdf" />
