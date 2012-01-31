@@ -73,7 +73,7 @@ namespace EmailNotify
 
 				NotifyEmail email = new NotifyEmail("Notification");
 				email.AbsoluteRoot = ConfigurationManager.AppSettings["AbsoluteRoot"];
-				email.To = string.Join(", ", emails.ToArray());
+				email.To = string.Join(", ", emails.Select(x=>x.Email).ToArray());
 				email.Verses = verses;
 				email.Terms = terms;
 				email.Files = files;

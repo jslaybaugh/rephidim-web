@@ -208,38 +208,45 @@ height:24px;
 background-image:url(sprite0.png);
 background-position:-725px 0px;
 }
-.icon_usb\.png
+.icon_unsub\.png
 {
 width:24px;
 height:24px;
 background-image:url(sprite0.png);
 background-position:-750px 0px;
 }
-.icon_window\.png
+.icon_usb\.png
 {
 width:24px;
 height:24px;
 background-image:url(sprite0.png);
 background-position:-775px 0px;
 }
-.icon_windows\.png
+.icon_window\.png
 {
 width:24px;
 height:24px;
 background-image:url(sprite0.png);
 background-position:-800px 0px;
 }
-.icon_zip\.png
+.icon_windows\.png
 {
 width:24px;
 height:24px;
 background-image:url(sprite0.png);
 background-position:-825px 0px;
 }
-.icon_zoom\.png
+.icon_zip\.png
 {
 width:24px;
 height:24px;
 background-image:url(sprite0.png);
 background-position:-850px 0px;
+}
+.icon_zoom\.png
+{
+width:24px;
+height:24px;
+background-image:url(sprite0.png);
+background-position:-875px 0px;
 }

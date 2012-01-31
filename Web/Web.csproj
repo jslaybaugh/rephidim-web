@@ -222,6 +222,7 @@
     <Content Include="humans.txt" />
     <Content Include="robots.txt" />
     <Content Include="Scripts\app\App.js" />
+    <Content Include="Scripts\app\Master.js" />
     <Content Include="Scripts\app\Emails.js" />
     <Content Include="Scripts\app\Messages.js" />
     <Content Include="Scripts\app\ScriptureHelper.js" />
@@ -322,6 +323,10 @@
     <Content Include="Views\Admin\Messages.cshtml" />
     <Content Include="Views\Admin\Emails.cshtml" />
     <Content Include="Views\Emails\Notification.cshtml" />
+    <Content Include="Views\Emails\Issue.cshtml" />
+    <Content Include="Views\Emails\Unsubscribe.cshtml" />
+    <Content Include="Views\Admin\Unsubscribe.cshtml" />
+    <Content Include="Views\Admin\Upload.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dapper\SqlMapper.cs" />
     <Compile Include="DataAccess.cs" />
     <Compile Include="Extensions\Cookies.cs" />
     <Compile Include="Extensions\Dates.cs" />
@@ -58,6 +57,7 @@
     <Compile Include="FileUtility.cs" />
     <Compile Include="Models\BookItem.cs" />
     <Compile Include="Models\DirectoryInfoResult.cs" />
+    <Compile Include="Models\EmailItem.cs" />
     <Compile Include="Models\FileInfoResult.cs" />
     <Compile Include="Models\GlossaryItem.cs" />
     <Compile Include="Models\GlossarySummary.cs" />
@@ -68,9 +68,7 @@
     <Compile Include="Models\VersionItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyComparer.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <Compile Include="SqlMapper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

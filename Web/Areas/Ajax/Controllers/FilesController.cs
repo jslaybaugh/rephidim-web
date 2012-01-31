@@ -30,34 +30,27 @@ namespace Web.Areas.Ajax.Controllers
 		[HttpPost]
 		public JsonResult Email(string email, string path)
 		{
-			try
+			string root = ConfigurationManager.AppSettings["FilesRoot"];
+			root = root.Trim().EndsWith(@"\") ? root = root.Substring(0, root.Length - 2) : root;
+
+			var fullpath = string.Format(@"{0}{1}", ConfigurationManager.AppSettings["FilesRoot"], path.Replace("/", "\\"));
+
+			var cookie = Request.Cookies["rephidim"];
+			if (cookie == null)
 			{
-				string root = ConfigurationManager.AppSettings["FilesRoot"];
-				root = root.Trim().EndsWith(@"\") ? root = root.Substring(0, root.Length - 2) : root;
-
-				var fullpath = string.Format(@"{0}{1}", ConfigurationManager.AppSettings["FilesRoot"], path.Replace("/", "\\"));
-
-				var cookie = Request.Cookies["rephidim"];
-				if (cookie == null)
-				{
-					cookie = new HttpCookie("rephidim");
-				}
-				cookie["email"] = email;
-				cookie.Expires = DateTime.Now.AddMonths(12);
-				Response.Cookies.Add(cookie);
-
-				dynamic msg = new Email("FileAttach");
-				msg.To = email;
-				msg.Path = path;
-				msg.Attach(new System.Net.Mail.Attachment(fullpath));
-				msg.Send();
-
-				return Json(true);
+				cookie = new HttpCookie("rephidim");
 			}
-			catch (Exception)
-			{
-				return Json(false);
-			}
+			cookie["email"] = email;
+			cookie.Expires = DateTime.Now.AddMonths(12);
+			Response.Cookies.Add(cookie);
+
+			dynamic msg = new Email("FileAttach");
+			msg.To = email;
+			msg.Path = path;
+			msg.Attach(new System.Net.Mail.Attachment(fullpath));
+			msg.Send();
+
+			return Json(true);
 		}
 
 	}

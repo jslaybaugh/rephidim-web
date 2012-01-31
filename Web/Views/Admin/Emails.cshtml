@@ -21,18 +21,18 @@
 			List of Current Emails
 		</h1>
 		<div class="scrollable">
-			<p>If your name is on the list below, you will receive the automated email. To have your email address changed/removed, please email <a href="mailto:rci@wfbiz.rr.com">rci@wfbiz.rr.com</a>.</p>
+			<p>If your name is on the list below, you will receive the automated email. To unsubscribe, simply click the unsubscribe icon next to your email address.<br />To verify you are unsubscribing your own email, you will receive an email with a confirmation link.</p>
 			<ul class="unstyled list-lines">
 				@if (Model.Emails != null && Model.Emails.Count() > 0)
 				{
 					foreach (var item in Model.Emails)
 					{
-						<li><h4>@if (Model.IsAdmin) { <a class="delete-btn" href="#" data-id="@item" title="Remove from list">@(Sprite.Image("~/App_Sprites/icon_delete.png"))</a> }@item</h4></li>
+						<li><h4><a class="delete-btn" href="#" data-id="@item.Email" title="Remove from list">@(Sprite.Image("~/App_Sprites/icon_unsub.png"))</a> @item.Email</h4></li>
 					}
 				}
 				else
 				{
-					<li>No emails!</li>
+					<li><h4>No emails!</h4></li>
 				}
 			</ul>
 		</div>

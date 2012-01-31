@@ -2,6 +2,7 @@
 /* AUTHOR: JORIN SLAYBAUGH */
 /* PRIMARY STYLES */
 
+	html {overflow-y:hidden;}
 	html, body, input, select, textarea, input[type="text"], input[type="password"], .ui-autocomplete-input, .uneditable-input { font-family: 'Open Sans' , sans-serif; color: #333; font-size: 13px; line-height: 18px; }
 	label, li { color: #333; }
 	body { background: #eee url(../img/bg2.png) repeat; padding-top: 50px; }
@@ -73,7 +74,7 @@
 	.wait-dark { height: 16px; width: 16px; display: inline-block; background: url("../img/ajax-loader-dark.gif") top center no-repeat; }
 	.wait-light { height: 21px; width: 56px; display: inline-block; background: url("../img/ajax-loader-light.gif") top center no-repeat; margin: -8px auto -8px 20px; }
 
-	.global-message { position: fixed; z-index: 1000; bottom: 0px; left: 20px; right: 20px; text-align: center; }
+	.global-message { position: fixed; z-index: 10000; bottom: 0px; left: 20px; right: 20px; text-align: center; }
 	.global-message p { font-weight: bold; }
 
 	.search .hilite { display: inline-block; background-color: #ffface; border: solid 1px #ddd; margin-left: 1px; margin-right: 1px; font-weight: bold; }
@@ -81,6 +82,8 @@
 	.message { display: table; height: 100%; width: 100%; vertical-align: middle; text-align: center; }
 	.message div { display: table-cell; height: 100%; width: 100%; vertical-align: middle; text-align: center; }
 	.message span { display: block; width: auto; margin-left: auto; margin-right: auto; text-align: center; font-weight: 900; font-style: normal; font-size: larger; }
+	
+	#help div { border:solid #aaa 1px; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; padding:10px; margin:0px 0px 10px 0px;background:#eee;}
 
 /* LISTS */
 

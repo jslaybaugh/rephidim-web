@@ -7,7 +7,7 @@
 	{
 		$(".delete-btn").click(function ()
 		{
-			if (!confirm("Are you sure you want to permanently delete this email?")) return false;
+			if (!confirm("Are you sure you want to unsubcribe this email address?")) return false;
 			var btn = $(this);
 			var id = btn.data("id");
 
@@ -18,7 +18,7 @@
 				data: { email: id },
 				success: function (data)
 				{
-					location = location;
+					location = App.ResolveUrl("~/Admin/Emails?success=" + data);
 				},
 				error: function (xhr)
 				{
@@ -33,7 +33,7 @@
 		{
 			var email = $("#txtEmail").val();
 
-			if ($.trim(email) == "" || !email.match(/^([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$/))
+			if ($.trim(email) == "" || !email.match(App.Regex.EMAIL))
 			{
 				App.ShowAlert("A valid email is required.", "error");
 				return false;

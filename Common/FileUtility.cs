@@ -80,7 +80,8 @@ namespace Common
 		public static IEnumerable<FileInfoResult> Search(string[] queryparts, DateTime? lastDate = null)
 		{
 			if (lastDate == null) lastDate = DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"]));
-			var matchingFiles = SearchFiles(new Regex(string.Join("", queryparts.Select(x => "(?=.*" + x + ")")), RegexOptions.IgnoreCase));
+			//var matchingFiles = SearchFiles(new Regex(string.Join("", queryparts.Select(x => "(?=.*" + x + ")")), RegexOptions.IgnoreCase));
+			var matchingFiles = SearchFiles(queryparts);
 			return matchingFiles
 				.Select(x => new FileInfoResult
 				{
@@ -126,14 +127,28 @@ namespace Common
 			if (lastDate == null) lastDate = DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"]));
 			var dir = new DirectoryInfo(Root);
 			return dir.EnumerateFiles("*", SearchOption.AllDirectories)
-				.Where(x => x.LastWriteTime > lastDate.Value || x.CreationTime > lastDate.Value);
+				.Where(x => x.LastWriteTime > lastDate.Value || x.CreationTime > lastDate.Value)
+				.ToList();
 		}
 
-		private static IEnumerable<FileInfo> SearchFiles(Regex reg)
+		//private static IEnumerable<FileInfo> SearchFiles(Regex reg)
+		//{
+		//    var dir = new DirectoryInfo(Root);
+		//    return dir.EnumerateFiles("*", SearchOption.AllDirectories)
+		//        .Where(x => reg.IsMatch(x.FullName)).ToList();
+		//}
+
+		private static IEnumerable<FileInfo> SearchFiles(string[] queryParts)
 		{
 			var dir = new DirectoryInfo(Root);
-			return dir.EnumerateFiles("*", SearchOption.AllDirectories)
-				.Where(x => reg.IsMatch(x.FullName.Replace(Root, "")));
+
+			var results = dir.EnumerateFiles("*" + queryParts[0] + "*", SearchOption.AllDirectories);
+			for (int i = 1; i < queryParts.Length; i++)
+			{
+				var nextResult = dir.EnumerateFiles("*" + queryParts[i] + "*", SearchOption.AllDirectories);
+				results = results.Intersect(nextResult, new PropertyComparer<FileInfo>("FullName"));
+			}
+			return results.ToList();
 		}
 
 		private static string PrintFileSize(Int64 size)

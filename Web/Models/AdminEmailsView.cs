@@ -9,7 +9,7 @@ namespace Web.Models
 	public class AdminEmailsView
 	{
 		public bool IsAdmin { get; set; }
-		public IEnumerable<string> Emails { get; set; }
+		public IEnumerable<EmailItem> Emails { get; set; }
 		public string Email { get; set; }
 	}
 }

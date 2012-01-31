@@ -9,6 +9,7 @@ using System.Configuration;
 using System.IO;
 using System.Text.RegularExpressions;
 using Common;
+using Common.Models;
 
 namespace Web.Controllers
 {
@@ -41,7 +42,7 @@ namespace Web.Controllers
 			var start = DateTime.UtcNow;
 			m.MatchingFiles = FileUtility.Search(queryParts);
 			m.QueryParts = queryParts;
-			m.MatchingVerses = DataAccess.SearchVerses(queryParts);
+			m.MatchingVerses =  DataAccess.SearchVerses(queryParts);
 			m.MatchingTerms = DataAccess.SearchTerms(queryParts);
 			var end = DateTime.UtcNow;
 

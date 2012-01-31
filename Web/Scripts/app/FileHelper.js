@@ -38,9 +38,11 @@
 		{
 			$("#frmEmail").live("submit", function ()
 			{
-				if ($("#txtEmail").val() == "")
+				var email = $("#txtEmail").val();
+
+				if ($.trim(email) == "" || !email.match(App.Regex.EMAIL))
 				{
-					App.ShowAlert("You must type an email address!", "error");
+					App.ShowAlert("A valid email is required.", "error");
 					return false;
 				}
 

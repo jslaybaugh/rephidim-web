@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Web.Code;
 using Common;
+using Postal;
+using System.Configuration;
 
 namespace Web.Areas.Ajax.Controllers
 {
@@ -22,9 +24,24 @@ namespace Web.Areas.Ajax.Controllers
 		public JsonResult Delete(string email)
 		{
 			if (User.IsInRole("Emails"))
-				return Json(DataAccess.DeleteEmail(email), JsonRequestBehavior.AllowGet);
+			{
+				DataAccess.DeleteEmail(email);
+				return Json("Email removed!", JsonRequestBehavior.AllowGet);
+			}
 			else
-				throw new Exception("Access Denied");
+			{
+				var em = DataAccess.GetEmails().FirstOrDefault(x => x.Email.MatchesTrimmed(email));
+
+				if (em == null) throw new Exception("Email address not found!");
+
+				dynamic msg = new Email("Unsubscribe");
+				msg.To = email;
+				msg.AbsoluteRoot = ConfigurationManager.AppSettings["AbsoluteRoot"];
+				msg.VerifyCode = em.VerifyCode;
+				msg.Send();
+
+				return Json("Verification email sent!");
+			}
 		}
 
 		[HttpPost]
@@ -40,6 +57,28 @@ namespace Web.Areas.Ajax.Controllers
 			Response.Cookies.Add(cookie);
 
 			return Json(DataAccess.InsertEmail(email), JsonRequestBehavior.AllowGet);
+		}
+
+		[HttpPost]
+		public JsonResult SubmitIssue(string type, string email, string content, string url)
+		{
+			var cookie = Request.Cookies["rephidim"];
+			if (cookie == null)
+			{
+				cookie = new HttpCookie("rephidim");
+			}
+			cookie["email"] = email;
+			cookie.Expires = DateTime.Now.AddMonths(12);
+			Response.Cookies.Add(cookie);
+
+			dynamic msg = new Email("Issue");
+			msg.To = type.MatchesTrimmed("content") ? "bob.causey@sbcglobal.net" : "jslaybaugh@gmail.com";
+			msg.From = email;
+			msg.Content = content;
+			msg.Url = url;
+			msg.Send();
+
+			return Json(true);
 		}
 
     }

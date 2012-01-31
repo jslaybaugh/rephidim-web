@@ -6,7 +6,7 @@
 (function ()
 {
 
-	var _firstLoad = true, _bookName, _book, _chapter, _verse;
+	var _firstLoad = true, _bookName, _book, _chapter, _verse, _timer;
 
 	var loadChapter = function (chapterNum, verseNum, push)
 	{
@@ -114,12 +114,12 @@
 			resizable: false,
 			buttons: [
 				{
-					text: "Save",
-					click: saveVerse
-				},
-				{
 					text: "Cancel",
 					click: function () { $(this).dialog("close"); }
+				},
+				{
+					text: "Save",
+					click: saveVerse
 				}
 			]
 		});
@@ -134,9 +134,9 @@
 			_bookName = _bookName || "Genesis";
 			_chapter = _chapter || 1;
 			_verse = _verse || 1;
-			
+
 			if (Modernizr.history) history.replaceState({ Book: _bookName, Chapter: _chapter, Verse: _verse }, _bookName + " " + _chapter + ":" + _verse, App.ResolveUrl("~/Scripture/" + _bookName + "/" + _chapter + "/" + _verse));
-			
+
 			App.ScriptureHelper.LoadBooks(function (books)
 			{
 				if (_bookName != null)
@@ -204,10 +204,16 @@
 			return false;
 		});
 
-		$("#rangeChapter, #cmbChapter").live("change", $.debounce(750, function ()
+		$("#rangeChapter, #cmbChapter").live("change", function ()
 		{
-			loadChapter($(this).val(), null, true);
-		}));
+			var chapter = $(this).val();
+			$("#uxChapter").text(chapter);
+			clearTimeout(_timer);
+			_timer = setTimeout(function ()
+			{
+				loadChapter(chapter, null, true);
+			}, 750);
+		});
 
 		$(document).on("click", ".verse-edit", function ()
 		{

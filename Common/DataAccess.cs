@@ -8,6 +8,7 @@ using System.Configuration;
 using Common.Models;
 using System.Collections;
 using System.Text.RegularExpressions;
+using System.Data;
 
 namespace Common
 {
@@ -61,8 +62,9 @@ namespace Common
 
 					var p = new DynamicParameters();
 					p.Add("@email", email);
+					p.Add("@verifycode", Guid.NewGuid().ToString());
 
-					var res = cn.Execute("INSERT Emails (email) Values (@email)", p);
+					var res = cn.Execute("INSERT Emails (email, verifycode) Values (@email, @verifycode)", p);
 
 					return email;
 				}
@@ -70,6 +72,29 @@ namespace Common
 			catch (Exception)
 			{
 				return null;
+			}
+		}
+
+		public static int DeleteEmail(string email, string verifyCode)
+		{
+			try
+			{
+				using (var cn = new SqlCeConnection(ConnString))
+				{
+					cn.Open();
+
+					var p = new DynamicParameters();
+					p.Add("@email", email);
+					p.Add("@verifycode", verifyCode);
+
+					var res = cn.Execute("DELETE FROM Emails WHERE email=@email and verifycode=@verifycode", p);
+
+					return res;
+				}
+			}
+			catch (Exception)
+			{
+				return 0;
 			}
 		}
 
@@ -95,7 +120,7 @@ namespace Common
 			}
 		}
 
-		public static IEnumerable<string> GetEmails()
+		public static IEnumerable<EmailItem> GetEmails()
 		{
 			try
 			{
@@ -105,11 +130,15 @@ namespace Common
 
 					var p = new DynamicParameters();
 
-					var res = cn.Query("SELECT Email FROM Emails ORDER BY Email", p);
+					var res = cn.Query("SELECT Email, VerifyCode FROM Emails ORDER BY Email", p);
 
 					if (res == null) return null;
 
-					return res.Select(x => x.Email as string);
+					return res.Select(x => new EmailItem
+					{
+						Email = x.Email,
+						VerifyCode = x.VerifyCode
+					});
 				}
 			}
 			catch (Exception)
@@ -196,7 +225,7 @@ namespace Common
 					p.Add("@bookId", bookId);
 					p.Add("@chapterNum", chapterNum);
 
-					var res = cn.Query("SELECT ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, VerseText, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE Scriptures.BookId=@bookId AND ChapterNum=@chapterNum ORDER BY Books.BookId, ChapterNum, VerseNum", p);
+					var res = cn.Query("SELECT ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, VerseContent, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE Scriptures.BookId=@bookId AND ChapterNum=@chapterNum ORDER BY Books.BookId, ChapterNum, VerseNum", p);
 
 					if (res == null) return null;
 
@@ -206,7 +235,7 @@ namespace Common
 						Book = new BookItem {Id = x.BookId, Name =x.BookName, Chapters = x.Chapters},
 						Chapter = x.ChapterNum,
 						Verse = x.VerseNum,
-						Text = x.VerseText,
+						Text = x.VerseContent,
 						TranslationId = x.TranslationId,
 						IsNew = x.IsNew,
 						IsModified = x.IsModified,
@@ -235,7 +264,7 @@ namespace Common
 					else
 						p.Add("@lastDate", DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"])));
 
-					var res = cn.Query("SELECT TOP 200 ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, VerseText, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE DateModified > @lastDate OR DateCreated > @lastDate ORDER BY Books.BookId, ChapterNum, VerseNum", p);
+					var res = cn.Query("SELECT TOP 200 ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, VerseContent, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE DateModified > @lastDate OR DateCreated > @lastDate ORDER BY Books.BookId, ChapterNum, VerseNum", p);
 
 					if (res == null) return null;
 
@@ -245,7 +274,7 @@ namespace Common
 						Book = new BookItem { Id = x.BookId, Name = x.BookName, Chapters = x.Chapters },
 						Chapter = x.ChapterNum,
 						Verse = x.VerseNum,
-						Text = x.VerseText,
+						Text = x.VerseContent,
 						TranslationId = x.TranslationId,
 						IsNew = x.IsNew,
 						IsModified = x.IsModified,
@@ -272,7 +301,7 @@ namespace Common
 					p.Add("@scriptureId", id);
 					p.Add("@lastDate", DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"])));
 
-					var res = cn.Query("SELECT ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, Notes, VerseText, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE ScriptureId=@scriptureId", p);
+					var res = cn.Query("SELECT ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, Notes, VerseContent, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE ScriptureId=@scriptureId", p);
 
 					if (res == null) return null;
 
@@ -282,7 +311,7 @@ namespace Common
 						Book = new BookItem { Id = x.BookId, Name = x.BookName, Chapters = x.Chapters },
 						Chapter = x.ChapterNum,
 						Verse = x.VerseNum,
-						Text = x.VerseText,
+						Text = x.VerseContent,
 						Notes = x.Notes,
 						TranslationId = x.TranslationId,
 						IsNew = x.IsNew,
@@ -295,6 +324,65 @@ namespace Common
 			catch (Exception)
 			{
 				return null;
+			}
+		}
+
+		public static ScriptureItem UpdateVerse(string text, string notes, string translationId, int book, int chapter, int verse, bool? updateDate)
+		{
+			try
+			{
+				using (var cn = new SqlCeConnection(ConnString))
+				{
+					cn.Open();
+
+					var p = new DynamicParameters();
+					p.Add("@bookid", book);
+					p.Add("@chapterNum", chapter);
+					p.Add("@verseNum", verse);
+					p.Add("@text", text);
+					p.Add("@notes", notes);
+					p.Add("@translationId", translationId.ToUpperInvariant());
+					p.Add("@datemodified", DateTime.Now);
+					p.Add("@lastDate", DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"])));
+
+					string firstquery = "";
+					string secondquery = "";
+
+					if (updateDate.HasValue && updateDate.Value)
+					{
+						firstquery = "UPDATE Scriptures SET VerseContent=@text, Notes=@notes, TranslationId=@translationId, DateModified=@DateModified WHERE Scriptures.BookId=@bookid AND ChapterNum=@chapterNum AND verseNum=@verseNum; ";
+					}
+					else
+					{
+						firstquery = "UPDATE Scriptures SET VerseContent=@text, Notes=@notes, TranslationId=@translationId WHERE Scriptures.BookId=@bookid AND ChapterNum=@chapterNum AND verseNum=@verseNum; ";
+					}
+
+					secondquery = "SELECT ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, Notes, VerseContent, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE Scriptures.BookId=@bookid AND ChapterNum=@chapterNum AND verseNum=@verseNum";
+
+					var exec = cn.Execute(firstquery, p);
+					var res = cn.Query(secondquery, p);
+
+					if (res == null) return null;
+
+					return res.Select(x => new ScriptureItem
+					{
+						Id = x.ScriptureId,
+						Book = new BookItem { Id = x.BookId, Name = x.BookName, Chapters = x.Chapters },
+						Chapter = x.ChapterNum,
+						Verse = x.VerseNum,
+						Text = x.VerseContent,
+						Notes = x.Notes,
+						TranslationId = x.TranslationId,
+						IsNew = x.IsNew,
+						IsModified = x.IsModified,
+						DateCreated = x.DateCreated,
+						DateModified = x.DateModified
+					}).FirstOrDefault();
+				}
+			}
+			catch (Exception ex)
+			{
+				throw ex;
 			}
 		}
 
@@ -316,20 +404,17 @@ namespace Common
 
 					string firstquery = "";
 					string secondquery = "";
-					if (id > 0)
+			
+					if (updateDate.HasValue && updateDate.Value)
 					{
-						// edit
-						if (updateDate.HasValue && updateDate.Value)
-						{
-							firstquery = "UPDATE Scriptures SET VerseText=@text, Notes=@notes, TranslationId=@translationId, DateModified=@DateModified WHERE ScriptureId=@scriptureId; ";
-						}
-						else
-						{
-							firstquery = "UPDATE Scriptures SET VerseText=@text, Notes=@notes, TranslationId=@translationId WHERE ScriptureId=@scriptureId; ";
-						}
+						firstquery = "UPDATE Scriptures SET VerseContent=@text, Notes=@notes, TranslationId=@translationId, DateModified=@DateModified WHERE ScriptureId=@scriptureId; ";
+					}
+					else
+					{
+						firstquery = "UPDATE Scriptures SET VerseContent=@text, Notes=@notes, TranslationId=@translationId WHERE ScriptureId=@scriptureId; ";
 					}
 
-					secondquery = "SELECT ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, Notes, VerseText, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE ScriptureId=@scriptureId";
+					secondquery = "SELECT ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, Notes, VerseContent, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE ScriptureId=@scriptureId";
 
 					var exec = cn.Execute(firstquery, p);
 					var res = cn.Query(secondquery, p);
@@ -342,7 +427,7 @@ namespace Common
 						Book = new BookItem { Id = x.BookId, Name = x.BookName, Chapters = x.Chapters },
 						Chapter = x.ChapterNum,
 						Verse = x.VerseNum,
-						Text = x.VerseText,
+						Text = x.VerseContent,
 						Notes = x.Notes,
 						TranslationId = x.TranslationId,
 						IsNew = x.IsNew,
@@ -633,6 +718,10 @@ namespace Common
 					cn.Open();
 					var p = new DynamicParameters();
 					p.Add("@lastDate", DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"])));
+					for (int i = 0; i < parts.Length; i++)
+					{
+						p.Add("@query" + i, "%" + parts[i] + "%");
+					}
 
 					var res = cn.Query(CreateTermSearchQuery(parts), p);
 
@@ -667,8 +756,13 @@ namespace Common
 					cn.Open();
 					var p = new DynamicParameters();
 					p.Add("@lastDate", DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"])));
+					for (int i = 0; i < parts.Length; i++)
+					{
+						p.Add("@query" + i, "%" + parts[i] + "%");
+					}
 
-					var res = cn.Query(CreateVerseSearchQuery(parts), p);
+					var query = CreateVerseSearchQuery(parts);
+					var res = cn.Query(query, p);
 
 					if (res == null) return null;
 
@@ -678,7 +772,7 @@ namespace Common
 						Book = new BookItem { Id = x.BookId, Name = x.BookName, Chapters = x.Chapters },
 						Chapter = x.ChapterNum,
 						Verse = x.VerseNum,
-						Text = x.VerseText,
+						Text = x.VerseContent,
 						TranslationId = x.TranslationId,
 						IsNew = x.IsNew,
 						IsModified = x.IsModified,
@@ -696,17 +790,17 @@ namespace Common
 		private static string CreateVerseSearchQuery(string[] parts)
 		{
 
-			string SqlString = "SELECT TOP 200 ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, VerseText, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE ";
+			string SqlString = "SELECT TOP 200 ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, VerseContent, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE ";
 
-			foreach (var part in parts)
+			for (int i = 0; i < parts.Length; i++)
 			{
-				SqlString += "(VerseText LIKE '%" + part.Trim() + "%') AND ";
+				SqlString += "(VerseContent LIKE @query" + i + ") AND ";
 			}
 
 			// gotta get rid of the " AND "
 			if (SqlString.Trim().EndsWith("AND"))
 			{
-				SqlString = SqlString.Remove(SqlString.Length - 4, 4) + " ORDER BY Books.BookId, ChapterNum, VerseNum";
+				SqlString = SqlString.Remove(SqlString.Length - 4, 4);// +" ORDER BY Books.BookId, ChapterNum, VerseNum";
 			}
 			else
 			{
@@ -721,9 +815,9 @@ namespace Common
 
 			string SqlString = "SELECT TermId, Term, Definition, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew FROM GlossaryTerms WHERE ";
 
-			foreach (var part in parts)
+			for (int i = 0; i < parts.Length; i++)
 			{
-				SqlString += "(Term LIKE '%" + part.Trim() + "%' OR Definition LIKE '%" + part.Trim() + "%') AND ";
+				SqlString += "(Term LIKE @query" + i + " OR Definition LIKE @query" + i + ") AND ";
 			}
 			
 			// gotta get rid of the " AND "

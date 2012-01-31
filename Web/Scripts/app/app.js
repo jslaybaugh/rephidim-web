@@ -18,6 +18,10 @@
 
 	this.App = {
 
+		Regex: {
+			EMAIL: /^([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$/
+		},
+
 		Startup: function (root, titleFormat, icons)
 		{
 			_root = root;
@@ -60,11 +64,11 @@
 
 		ShowAlert: function (msg, className)
 		{
-			$("#uxAlert").hide().removeClass("warning error success info").addClass(className).find("p").html(msg).end().fadeIn();
+			$("#uxAlert").hide().removeClass("warning error success info").addClass(className).find("p").html(msg).end().fadeIn("fast");
 
 			if (className.toUpperCase() == "SUCCESS" || className.toUpperCase() == "INFO")
 			{
-				_timeout = setTimeout(function () { $("#uxAlert").fadeOut() }, 7000);
+				_timeout = setTimeout(function () { $("#uxAlert").fadeOut("fast") }, 7000);
 			}
 
 			if (Modernizr.history)
