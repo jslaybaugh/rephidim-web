@@ -72,6 +72,7 @@ namespace Web.Controllers
 		[HttpGet]
 		public ActionResult Upload()
 		{
+			if (!User.IsInRole("Dev")) return Redirect(Url.Action<HomeController>(x => x.Home()) + "?warning=Access Denied.");
 			ViewBag.Message = "";
 			return View("Upload");
 		}
@@ -80,7 +81,7 @@ namespace Web.Controllers
 		public ActionResult Upload(HttpPostedFileBase file)
 		{
 			if (file == null) throw new Exception("File not supplied.");
-			if (!User.IsInRole("Dev")) Redirect(Url.Action<HomeController>(x => x.Home()) + "?warning=Access Denied.");
+			if (!User.IsInRole("Dev")) return Redirect(Url.Action<HomeController>(x => x.Home()) + "?warning=Access Denied.");
 
 			List<string[]> parsedData = new List<string[]>();
 			List<ScriptureItem> results = new List<ScriptureItem>();

@@ -30,11 +30,16 @@
 		</div>
 	}
 }
+
+@section styles
+{
+	<style type="text/css">html {overflow-y:scroll;}</style>
+}
 	
 @section scripts
 {
 	@if (!Request.IsAjaxRequest())
- {
+	{
 		<script type="text/javascript">
 			(function ()
 			{
