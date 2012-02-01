@@ -83,6 +83,7 @@ namespace Common
 			//var matchingFiles = SearchFiles(new Regex(string.Join("", queryparts.Select(x => "(?=.*" + x + ")")), RegexOptions.IgnoreCase));
 			var matchingFiles = SearchFiles(queryparts);
 			return matchingFiles
+				.Where(y => !y.Extension.MatchesTrimmed(".ini") && !y.Extension.MatchesTrimmed(".db") && !y.Extension.MatchesTrimmed(".lnk"))
 				.Select(x => new FileInfoResult
 				{
 					Name = x.Name.Substring(0, x.Name.LastIndexOf(".") < 0 ? 0 : x.Name.LastIndexOf(".")),
@@ -104,6 +105,7 @@ namespace Common
 			if (lastDate == null) lastDate = DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"]));
 			var matchingFiles = RecentFiles();
 			return matchingFiles
+				.Where(y => !y.Extension.MatchesTrimmed(".ini") && !y.Extension.MatchesTrimmed(".db") && !y.Extension.MatchesTrimmed(".lnk"))
 				.Select(x => new FileInfoResult
 				{
 					Name = x.Name.Substring(0, x.Name.LastIndexOf(".") < 0 ? 0 : x.Name.LastIndexOf(".")),
@@ -142,12 +144,23 @@ namespace Common
 		{
 			var dir = new DirectoryInfo(Root);
 
-			var results = dir.EnumerateFiles("*" + queryParts[0] + "*", SearchOption.AllDirectories);
-			for (int i = 1; i < queryParts.Length; i++)
-			{
-				var nextResult = dir.EnumerateFiles("*" + queryParts[i] + "*", SearchOption.AllDirectories);
-				results = results.Intersect(nextResult, new PropertyComparer<FileInfo>("FullName"));
+			//var results = dir.EnumerateFiles("*" + queryParts[0] + "*", SearchOption.AllDirectories);
+			//for (int i = 1; i < queryParts.Length; i++)
+			//{
+			//    var nextResult = dir.EnumerateFiles("*" + queryParts[i] + "*", SearchOption.AllDirectories);
+			//    results = results.Intersect(nextResult, new PropertyComparer<FileInfo>("FullName"));
+			//}
+
+			var results = dir.EnumerateFiles("*", SearchOption.AllDirectories).Where(x => x.FullName.ToUpperInvariant().Contains(queryParts[0].ToUpperInvariant()));
+			if (queryParts.Length > 1)
+			{ 
+				for (int i = 1; i < queryParts.Length; i++)
+				{
+					var nextResult = dir.EnumerateFiles("*", SearchOption.AllDirectories).Where(x => x.FullName.ToUpperInvariant().Contains(queryParts[i].ToUpperInvariant())).ToList();
+					results = results.Intersect(nextResult, new PropertyComparer<FileInfo>("FullName"));
+				}
 			}
+
 			return results.ToList();
 		}
 

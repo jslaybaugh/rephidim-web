@@ -783,7 +783,7 @@ namespace Common
 			}
 			catch (Exception)
 			{
-				return null;
+				return new List<ScriptureItem>();
 			}
 		}
 

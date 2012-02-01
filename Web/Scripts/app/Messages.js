@@ -41,12 +41,12 @@
 			resizable: false,
 			buttons: [
 				{
-					text: "Cancel",
-					click: function () { $(this).dialog("close"); }
-				},
-				{
 					text: "Save",
 					click: saveMessage
+				},
+				{
+					text: "Cancel",
+					click: function () { $(this).dialog("close"); }
 				}
 			]
 		});

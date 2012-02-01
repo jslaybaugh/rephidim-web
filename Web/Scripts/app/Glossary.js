@@ -107,12 +107,12 @@
 			resizable: false,
 			buttons: [
 				{
-					text: "Cancel",
-					click: function () { $(this).dialog("close"); }
-				},
-				{
 					text: "Save",
 					click: saveTerm
+				},
+				{
+					text: "Cancel",
+					click: function () { $(this).dialog("close"); }
 				}
 			]
 		});
@@ -217,12 +217,12 @@
 				resizable: false,
 				buttons: [
 					{
-						text: "Cancel",
-						click: function () { $(this).dialog("close"); }
-					},
-					{
 						text: "Save",
 						click: updateVersion
+					},
+					{
+						text: "Cancel",
+						click: function () { $(this).dialog("close"); }
 					}
 				]
 			});
@@ -242,12 +242,12 @@
 				resizable: false,
 				buttons: [
 					{
-						text: "Cancel",
-						click: function () { $(this).dialog("close"); }
-					},
-					{
 						text: "DELETE",
 						click: function () { deleteTerm(id); }
+					},
+					{
+						text: "Cancel",
+						click: function () { $(this).dialog("close"); }
 					}
 				]
 			});

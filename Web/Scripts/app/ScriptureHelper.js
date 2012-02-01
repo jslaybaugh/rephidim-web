@@ -66,7 +66,7 @@
 				var booklist = $.makeArray($.map(books, function (n) { return n.Name + (n.Aliases != "" ? "|" + n.Aliases : ""); })).join("|");
 				var regex = new RegExp("\\b(" + booklist + ")[.,]?[ ]*(\\d{1,3})[:;]?(\\d{1,3})?", "ig")
 				
-				$(container).html($(container).html().replace(regex, "<a class='verse-link' href='" + App.ResolveUrl("~/Scripture/$1/$2/$3") + "'>$1 $2:$3</a>"));
+				$(container).html($(container).html().replace(regex, "<a class='verse-link' href='" + App.ResolveUrl("~/Scripture/$1/$2/$3") + "'>$1 $2:$3</a>").replace(/:</ig, "<"));
 			});
 		},
 

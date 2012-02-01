@@ -42,7 +42,11 @@ namespace Web.Controllers
 			var start = DateTime.UtcNow;
 			m.MatchingFiles = FileUtility.Search(queryParts);
 			m.QueryParts = queryParts;
-			m.MatchingVerses =  DataAccess.SearchVerses(queryParts);
+			m.MatchingVerses = new List<ScriptureItem>();
+
+			if (!Regex.IsMatch(query, @"[A-Za-z]?[ -]?\d{1,3}"))
+				m.MatchingVerses =  DataAccess.SearchVerses(queryParts);
+
 			m.MatchingTerms = DataAccess.SearchTerms(queryParts);
 			var end = DateTime.UtcNow;
 

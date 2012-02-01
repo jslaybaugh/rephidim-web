@@ -124,8 +124,23 @@
 		@RenderSection("scripts")
 	}
 	<!--[if lt IE 8 ]>
-		<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
-		<script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
+	<script>
+		if (!navigator.userAgent.match(/chromeframe/i))
+		{
+			$("body").html('' +
+				'<div style="background:#fffacd;margin:20px;border:solid 3px #333;padding:20px;text-align:left;">' +
+				'<p style="font-size:48px;line-height:20px;color:red;font-weight:bold;">WHOA! Hold on just a second...<br/><br/></p>' +
+				'<p style="font-weight:bold;font-size:20px;">It appears that you are using a browser that is too old to use the advanced features of this system.</p>' +
+				'<p>You have two options if you wish to continue:</p>' +
+				'<ul>' +
+				'	<li>You can <a href="http://www.google.com/chrome/" target="_blank">install Google Chrome</a> and enjoy the best features of this site as well the fastest browsing experience available for the entire web! <b>(Recommended)</b><br/><br/></li>' +
+				'	<li>You can <a href="http://www.google.com/chromeframe/" target="_blank">install Google Chrome Frame</a> which will allow you to continue using your outdated version of Internet Explorer, but take advantage of the enhanced features of this site (and others who support Chrome Frame).</li>' +
+				'</ul>' +
+				'<p>You can <a href="">reload this page</a> when you\'re done.</p>' + 
+				'</div>'
+			);
+		}
+	</script>
 	<![endif]-->
 
 </body>

@@ -114,12 +114,12 @@
 			resizable: false,
 			buttons: [
 				{
-					text: "Cancel",
-					click: function () { $(this).dialog("close"); }
-				},
-				{
 					text: "Save",
 					click: saveVerse
+				},
+				{
+					text: "Cancel",
+					click: function () { $(this).dialog("close"); }
 				}
 			]
 		});
