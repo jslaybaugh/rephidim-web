@@ -794,7 +794,7 @@ namespace Common
 
 			for (int i = 0; i < parts.Length; i++)
 			{
-				SqlString += "(VerseContent LIKE @query" + i + ") AND ";
+				SqlString += "(VerseContent LIKE @query" + i + " OR BookName + ' ' + CONVERT(nvarchar,ChapterNum) + ':' + convert(nvarchar,VerseNum) LIKE @query" + i + ") AND ";
 			}
 
 			// gotta get rid of the " AND "

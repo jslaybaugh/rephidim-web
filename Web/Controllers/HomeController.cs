@@ -44,7 +44,7 @@ namespace Web.Controllers
 			m.QueryParts = queryParts;
 			m.MatchingVerses = new List<ScriptureItem>();
 
-			if (!Regex.IsMatch(query, @"[A-Za-z]?[ -]?\d{1,3}"))
+			if (!Regex.IsMatch(query, @"^[A-Za-z]{1}[ -]?\d{1,3}$"))
 				m.MatchingVerses =  DataAccess.SearchVerses(queryParts);
 
 			m.MatchingTerms = DataAccess.SearchTerms(queryParts);
@@ -58,6 +58,10 @@ namespace Web.Controllers
 
 		private string[] GetSearchParts(string query)
 		{
+			var books = DataAccess.GetBooks();
+			var booklist = string.Join("|", books.Select(x=>x.Name + (x.Aliases != "" ? "|" + x.Aliases : "")).ToArray());
+			query = Regex.Replace(query, "(\\b(?:" + booklist + ")[.,]?[ ]*(?:\\d{1,3})[:;]?(?:\\d{1,3})?)", @"""$1""");
+				
 			//Clean it up
 			query = query.Replace("--", "").Replace("'", "");
 			var quotes = query.Split(new char[] { '"' }, StringSplitOptions.None);
