@@ -46,7 +46,7 @@ namespace Common
 				DateCreated = x.CreationTime,
 				IsNew = x.LastWriteTime.Subtract(x.CreationTime).TotalMinutes < 31 && x.CreationTime > lastDate.Value,
 				IsModified = x.LastWriteTime.Subtract(x.CreationTime).TotalMinutes > 30 && x.LastWriteTime > lastDate.Value,
-				FileCount = x.EnumerateFiles().Count(y => !y.Extension.MatchesTrimmed(".ini") && !y.Extension.MatchesTrimmed(".db") && !y.Extension.MatchesTrimmed(".lnk"))
+				FileCount = x.EnumerateFiles().Count(y => !y.Attributes.HasFlag(FileAttributes.System | FileAttributes.Hidden) && !y.Extension.MatchesTrimmed(".ini") && !y.Extension.MatchesTrimmed(".db") && !y.Extension.MatchesTrimmed(".lnk"))
 			}).OrderBy(x => x.Name);
 
 			return dirs;
@@ -60,6 +60,7 @@ namespace Common
 			var dir = new DirectoryInfo(localPath);
 
 			var files = dir.EnumerateFiles()
+				.Where(y=> !y.Attributes.HasFlag(FileAttributes.System | FileAttributes.Hidden))
 				.Where(y => !y.Extension.MatchesTrimmed(".ini") && !y.Extension.MatchesTrimmed(".db") && !y.Extension.MatchesTrimmed(".lnk"))
 				.Select(x => new FileInfoResult
 				{
@@ -83,6 +84,7 @@ namespace Common
 			//var matchingFiles = SearchFiles(new Regex(string.Join("", queryparts.Select(x => "(?=.*" + x + ")")), RegexOptions.IgnoreCase));
 			var matchingFiles = SearchFiles(queryparts);
 			return matchingFiles
+				.Where(y => !y.Attributes.HasFlag(FileAttributes.System | FileAttributes.Hidden))
 				.Where(y => !y.Extension.MatchesTrimmed(".ini") && !y.Extension.MatchesTrimmed(".db") && !y.Extension.MatchesTrimmed(".lnk"))
 				.Select(x => new FileInfoResult
 				{
@@ -105,6 +107,7 @@ namespace Common
 			if (lastDate == null) lastDate = DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"]));
 			var matchingFiles = RecentFiles();
 			return matchingFiles
+				.Where(y => !y.Attributes.HasFlag(FileAttributes.System | FileAttributes.Hidden))
 				.Where(y => !y.Extension.MatchesTrimmed(".ini") && !y.Extension.MatchesTrimmed(".db") && !y.Extension.MatchesTrimmed(".lnk"))
 				.Select(x => new FileInfoResult
 				{

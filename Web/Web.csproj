@@ -37,9 +37,9 @@
     <Reference Include="AjaxMin">
       <HintPath>..\packages\AjaxMin.4.37.4345.34101\lib\net20\AjaxMin.dll</HintPath>
     </Reference>
-    <Reference Include="Cassette, Version=1.1.0.41538, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="Cassette.Views, Version=1.1.0.41539, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="Cassette.Web, Version=1.1.0.41538, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Cassette, Version=1.1.0.26954, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Cassette.Views, Version=1.1.0.26954, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Cassette.Web, Version=1.1.0.26954, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Elmah">
       <HintPath>..\packages\elmah.corelibrary.1.2.1\lib\Elmah.dll</HintPath>
     </Reference>
@@ -145,10 +145,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Rephidim.sdf" />
+    <Content Include="App_Sprites\blank.gif" />
+    <Content Include="App_Sprites\highCompat.css" />
     <Content Include="App_Sprites\icon_audio.png" />
     <Content Include="App_Sprites\icon_binoculars.png" />
     <Content Include="App_Sprites\icon_bmp.png" />
     <Content Include="App_Sprites\icon_clock.png" />
+    <Content Include="App_Sprites\icon_delete.png" />
     <Content Include="App_Sprites\icon_download.png" />
     <Content Include="App_Sprites\icon_edit.png" />
     <Content Include="App_Sprites\icon_email.png" />
@@ -161,19 +164,30 @@
     <Content Include="App_Sprites\icon_help.png" />
     <Content Include="App_Sprites\icon_jpg.png" />
     <Content Include="App_Sprites\icon_mp3.png" />
+    <Content Include="App_Sprites\icon_open.png" />
     <Content Include="App_Sprites\icon_pdf.png" />
+    <Content Include="App_Sprites\icon_pdfmulti.png" />
+    <Content Include="App_Sprites\icon_pen.png" />
+    <Content Include="App_Sprites\icon_play.png" />
     <Content Include="App_Sprites\icon_plus.png" />
     <Content Include="App_Sprites\icon_png.png" />
     <Content Include="App_Sprites\icon_save.png" />
+    <Content Include="App_Sprites\icon_screen.png" />
+    <Content Include="App_Sprites\icon_search.png" />
     <Content Include="App_Sprites\icon_text.png" />
     <Content Include="App_Sprites\icon_tif.png" />
+    <Content Include="App_Sprites\icon_unk.png" />
+    <Content Include="App_Sprites\icon_unsub.png" />
     <Content Include="App_Sprites\icon_usb.png" />
     <Content Include="App_Sprites\icon_window.png" />
     <Content Include="App_Sprites\icon_windows.png" />
+    <Content Include="App_Sprites\icon_zip.png" />
     <Content Include="App_Sprites\icon_zoom.png" />
-    <Content Include="App_Sprites\README.txt" />
+    <Content Include="App_Sprites\lowCompat.css" />
+    <Content Include="App_Sprites\sprite0.png" />
     <Content Include="Content\css\app.css" />
     <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap-new.css" />
     <Content Include="Content\css\fonts.css" />
     <Content Include="Content\css\jquery-ui-1.8.16.custom.css" />
     <Content Include="Content\css\module.txt" />
@@ -311,6 +325,7 @@
     <Content Include="Views\Admin\Parse.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App_Sprites\timeStamp.dat" />
     <None Include="Content\static\Atlas_Addenda.pdf" />
     <None Include="Content\static\Atlas_Chapter1.pdf" />
     <None Include="Content\static\Atlas_Chapter2.pdf" />

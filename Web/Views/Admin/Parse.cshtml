@@ -27,11 +27,12 @@
 		{
 			var savedRules = [
 				{ Id: 1, Name: "Verse Parsing", Rules: [
-					{ Expr: "(\\n(?!(\\n))|[ ]{2,})", Attr: "ig", Replace: " " },
-					{ Expr: "[ ]+(.*)[ ](\\d{1,3})[:;](\\d{1,3})[ ]([a-z]{1,4}|[])?[ ]+(.*)", Attr: "ig", Replace: "$1\\t$2\\t$3\\t$4\\t$5" },
+					{ Expr: "(\\n(?!(\\n))|[ ]{2,}|_)", Attr: "ig", Replace: " " },
+					{ Expr: "[ ]?(.*)[ ](\\d{1,3})[:;](\\d{1,3})[ ]([a-z]{1,10}|[])?[ ]+(.*)", Attr: "ig", Replace: "$1\\t$2\\t$3\\t$4\\t$5" },
 					{ Expr: "  ", Attr: "ig", Replace: " " },
-					{ Expr: "\\n\\n", Attr: "ig", Replace: "\\n" },
+					{ Expr: "\\n{2,}", Attr: "ig", Replace: "\\n" },
 					{ Expr: "^[A-Za-z0-9 .,]*\\t", Attr: "igm", Replace: "BOOKNO\\t" },
+					{ Expr: "BRETHERN", Attr: "ig", Replace: "BRETHEREN" }
 				] }
 			];
 

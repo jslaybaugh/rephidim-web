@@ -11,5 +11,5 @@
 
 @if (ViewBag.Message != null && ViewBag.Message != "")
 { 
-	<div class="alert-message">@ViewBag.Message</div>
+	<div class="alert-message">@Html.Raw(ViewBag.Message)</div>
 }

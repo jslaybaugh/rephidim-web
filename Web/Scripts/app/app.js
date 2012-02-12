@@ -91,7 +91,10 @@
 
 		ChooseIcon: function (key)
 		{
-			return _icons[key.toLowerCase()];
+			var res = _icons[key.toLowerCase()];
+
+			if (res != null) return res;
+			else return _icons["unk"];
 		},
 
 		SetQueryParts: function (queryParts)

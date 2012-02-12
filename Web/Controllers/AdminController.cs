@@ -80,40 +80,67 @@ namespace Web.Controllers
 		[HttpPost]
 		public ActionResult Upload(HttpPostedFileBase file)
 		{
-			if (file == null) throw new Exception("File not supplied.");
-			if (!User.IsInRole("Dev")) return Redirect(Url.Action<HomeController>(x => x.Home()) + "?warning=Access Denied.");
-
 			List<string[]> parsedData = new List<string[]>();
 			List<ScriptureItem> results = new List<ScriptureItem>();
-			using (StreamReader reader = new StreamReader(file.InputStream))
-			{
-				string line;
-				string[] row;
+			List<int> good = new List<int>();
+			List<int> bad = new List<int>();
 
-				while ((line = reader.ReadLine()) != null)
+			try
+			{
+				if (file == null) throw new Exception("File not supplied.");
+				if (!User.IsInRole("Dev")) return Redirect(Url.Action<HomeController>(x => x.Home()) + "?warning=Access Denied.");
+
+				using (StreamReader reader = new StreamReader(file.InputStream))
 				{
-					row = line.Split('\t');
-					parsedData.Add(row);
+					string line;
+					string[] row;
+
+					while ((line = reader.ReadLine()) != null)
+					{
+						if (!string.IsNullOrEmpty(line.Trim()))
+						{
+							row = line.Split('\t');
+							parsedData.Add(row);
+						}
+					}
 				}
+
+				if (parsedData != null && parsedData.Count() > 0)
+				{
+					int index = 1;
+					foreach (var row in parsedData)
+					{
+						int bookid = Convert.ToInt16(row[0].Trim());
+						int chapter = Convert.ToInt32(row[1].Trim());
+						int verse = Convert.ToInt32(row[2].Trim());
+						string translation = row[3] == "" ? "RK" : row[3].ToUpperInvariant().Trim();
+						string content = row[4].Trim();
+
+						var res = DataAccess.UpdateVerse(content, "", translation, bookid, chapter, verse, true);
+						if (res != null)
+						{
+							results.Add(res);
+							good.Add(index);
+						}
+						else
+						{
+							bad.Add(index);
+						}
+
+						index += 1;
+					}
+				}
+
+				ViewBag.Message = string.Format("{0} rows parsed and then {1} records uploaded and overwritten!<ul><li>Good Rows: {2}.</li><li>Bad Rows: {3}.</li></ul>", parsedData.Count(), results.Count(), string.Join(", ", good.ToArray()), string.Join(", ", bad.ToArray()));
+				return View("Upload");
+			}
+			catch (Exception ex)
+			{
+				ViewBag.Message = string.Format("{0} rows parsed and then {1} records uploaded and overwritten!<ul><li>Good Rows: {2}.</li><li>Bad Rows: {3}.</li></ul>Error Details: {4}", parsedData.Count(), results.Count(), string.Join(", ", good.ToArray()), string.Join(", ", bad.ToArray()), ex.Message);
+				return View("Upload");
 			}
 
-			if (parsedData != null && parsedData.Count() > 0)
-			{
-				foreach (var row in parsedData)
-				{
-					int bookid = Convert.ToInt16(row[0].Trim());
-					int chapter = Convert.ToInt32(row[1].Trim());
-					int verse = Convert.ToInt32(row[2].Trim());
-					string translation = row[3] == "" ? "RK" : row[3].ToUpperInvariant().Trim() ;
-					string content = row[4].Trim();
-
-					var res = DataAccess.UpdateVerse(content, "", translation, bookid, chapter, verse, true);
-					if (res != null) results.Add(res);
-				}
-			}
-
-			ViewBag.Message = string.Format("{0} records uploaded and overwritten!", results.Count());
-			return View("Upload");
+			
 
 		}
 

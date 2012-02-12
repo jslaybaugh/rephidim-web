@@ -1,7 +1,7 @@
 ﻿<ul class="unstyled lines">
 	{{each Verses}}
 		<li>
-			<a href="#" class="edit-rights right" data-id="${Id}" title="Edit Verse">{{html App.ChooseIcon("edit")}}</a>
+			<a href="#" class="edit-rights verse-edit right" data-id="${Id}" title="Edit Verse">{{html App.ChooseIcon("edit")}}</a>
 			<b class="${Verse}">${Book.Name} ${Chapter}:${Verse}</b>
 			<span class="edit-rights label notice">${TranslationId}</span>
 			{{if IsNew}}<span class="label success">New: ${App.DateFromJson(DateCreated).format('m/d h:MM TT')}</span>{{/if}}

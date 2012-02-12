@@ -45,7 +45,7 @@ namespace EmailNotify
 				terms = (terms != null ? terms.Take(50) : new List<GlossaryItem>());
 				files = (files != null ? files.Take(50) : new List<FileInfoResult>());
 
-				bool sendEmail = (verses.Count() > 0 && terms.Count() > 0 && files.Count() > 0 && emails != null && emails.Count() > 0);
+				bool sendEmail = ((verses.Count() > 0 || terms.Count() > 0 || files.Count() > 0) && emails != null && emails.Count() > 0);
 
 				if (!sendEmail)
 				{

@@ -65,7 +65,7 @@
 
 		if (Modernizr.history)
 		{
-					window.onpopstate = function (event)
+			window.onpopstate = function (event)
 			{
 				if (_firstLoad)
 				{
