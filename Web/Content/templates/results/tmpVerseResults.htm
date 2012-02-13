@@ -5,9 +5,9 @@
 			{{each Verses}}
 				<li>
 					<a href="${App.ResolveUrl('~/Scripture/' + Book.Name + '/' + Chapter + '/' + Verse)}"><b>${Book.Name} ${Chapter}:${Verse}</b></a>
-					<span class="edit-rights label notice">${TranslationId}</span>
-					{{if IsNew}}<span class="label success">New: ${App.DateFromJson(DateCreated).format('m/d h:MM TT')}</span>{{/if}}
-					{{if !IsNew && IsModified}}<span class="label warning">Modified: ${App.DateFromJson(DateModified).format('m/d h:MM TT')}</span>{{/if}}<br />
+					<span class="edit-rights label label-info">${TranslationId}</span>
+					{{if IsNew}}<span class="label label-success">New: ${App.DateFromJson(DateCreated).format('m/d h:MM TT')}</span>{{/if}}
+					{{if !IsNew && IsModified}}<span class="label label-warning">Modified: ${App.DateFromJson(DateModified).format('m/d h:MM TT')}</span>{{/if}}<br />
 					{{html App.Highlight(Text) }}
 				</li>
 			{{/each}}

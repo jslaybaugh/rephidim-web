@@ -3,9 +3,9 @@
 		<li>
 			<a href="#" class="edit-rights verse-edit right" data-id="${Id}" title="Edit Verse">{{html App.ChooseIcon("edit")}}</a>
 			<b class="${Verse}">${Book.Name} ${Chapter}:${Verse}</b>
-			<span class="edit-rights label notice">${TranslationId}</span>
-			{{if IsNew}}<span class="label success">New: ${App.DateFromJson(DateCreated).format('m/d h:MM TT')}</span>{{/if}}
-			{{if !IsNew && IsModified}}<span class="label warning">Modified: ${App.DateFromJson(DateModified).format('m/d h:MM TT')}</span>{{/if}}
+			<span class="edit-rights label label-info">${TranslationId}</span>
+			{{if IsNew}}<span class="label label-success">New: ${App.DateFromJson(DateCreated).format('m/d h:MM TT')}</span>{{/if}}
+			{{if !IsNew && IsModified}}<span class="label label-warning">Modified: ${App.DateFromJson(DateModified).format('m/d h:MM TT')}</span>{{/if}}
 			<div class="verse-text">${Text}</div>
 		</li>
 	{{/each}}

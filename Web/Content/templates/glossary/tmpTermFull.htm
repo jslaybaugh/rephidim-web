@@ -14,13 +14,13 @@
 	<div id="uxDefinition" class="scrollable">
 		<div class="right">
 			{{if ActiveTerm.IsNew}}
-				<span class="label success right">New: ${App.DateFromJson(ActiveTerm.DateCreated).format('m/d h:MM TT')}</span>
+				<span class="label label-success right">New: ${App.DateFromJson(ActiveTerm.DateCreated).format('m/d h:MM TT')}</span>
 			{{else}}
 				<span class="label right">Created: ${App.DateFromJson(ActiveTerm.DateCreated).format('m/d/yyyy h:MM TT')}</span>
 			{{/if}}
 			{{if ActiveTerm.DateModified != ActiveTerm.DateCreated}}
 				{{if ActiveTerm.IsModified}}
-					<br /><span class="label warning right">Modified: ${App.DateFromJson(ActiveTerm.DateModified).format('m/d h:MM TT')}</span>
+					<br /><span class="label label-warning right">Modified: ${App.DateFromJson(ActiveTerm.DateModified).format('m/d h:MM TT')}</span>
 				{{else}}
 					<br /><span class="label right">Last Modified: ${App.DateFromJson(ActiveTerm.DateModified).format('m/d/yyyy h:MM TT')}</span>
 				{{/if}}

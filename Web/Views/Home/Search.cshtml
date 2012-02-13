@@ -13,16 +13,16 @@
 else
 { 
 	<div class="row search header-content">
-		<div class="span16">
+		<div class="span12">
 			<div class="alert-message">
 				Search results for @Html.Raw(string.Join(" and ", Model.QueryParts.Select(x => "<span class='hilite'>" + x + "</span>"))) (@String.Format("{0:N2} seconds",(ViewBag.Duration as Double?)))
 			</div>
 		</div>
 	</div>
 	<div class="row search">
-		<div class="span5 module primary-content" id="uxVerses"></div>
-		<div class="span6 module primary-content" id="uxGlossary"></div>
-		<div class="span5 module primary-content" id="uxFiles"></div>
+		<div class="span4 module primary-content" id="uxVerses"></div>
+		<div class="span4 module primary-content" id="uxGlossary"></div>
+		<div class="span4 module primary-content" id="uxFiles"></div>
 	</div>
 }
 

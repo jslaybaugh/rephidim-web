@@ -1,7 +1,7 @@
 ﻿<li>
 	<a class="folder-{{if DirectoryCount == 0}}no{{/if}}expand ui-icon {{if DirectoryCount > 0}}ui-icon-plus{{/if}}" href="#" data-path="${Path}">&nbsp;</a>
 	<a class="folder-view" href="#" data-path="${Path}">{{html App.ChooseIcon("folder")}}${Name}</a> 
-	{{if IsNew}}<span class="label success">New: ${App.DateFromJson(DateCreated).format('m/d h:MM TT')}</span>{{/if}}
-	{{if !IsNew && IsModified}}<span class="label warning">Modified: ${App.DateFromJson(DateModified).format('m/d h:MM TT')}</span>{{/if}}
+	{{if IsNew}}<span class="label label-success">New: ${App.DateFromJson(DateCreated).format('m/d h:MM TT')}</span>{{/if}}
+	{{if !IsNew && IsModified}}<span class="label label-warning">Modified: ${App.DateFromJson(DateModified).format('m/d h:MM TT')}</span>{{/if}}
 	<span class="small-info">{{if DirectoryCount > 0}}${DirectoryCount} folder{{if DirectoryCount != 1}}s{{/if}}{{/if}}{{if DirectoryCount > 0 && FileCount > 0}} &amp; {{/if}}{{if FileCount > 0}}${FileCount} file{{if FileCount != 1}}s{{/if}}{{/if}}</span>
 </li>
