@@ -161,11 +161,11 @@ namespace Common
 					else
 						p.Add("@lastDate", DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"])));
 
-					var res = cn.Query("SELECT TermId, Term, SUBSTRING(Definition,0, 125) + '...' as Definition, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew  FROM GlossaryTerms WHERE DateModified > @lastDate OR DateCreated > @lastDate ORDER BY Term", p);
+					var res = cn.Query("SELECT TermId, Term, SUBSTRING(Definition,0, 125) + '...' as Definition, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew FROM GlossaryTerms WHERE DateModified > @lastDate OR DateCreated > @lastDate ORDER BY Term", p);
 
 					if (res == null) return null;
 
-					return res.Select(x => new GlossaryItem
+					var found = res.Select(x => new GlossaryItem
 						{
 							Id = x.TermId,
 							Term = x.Term,
@@ -175,6 +175,8 @@ namespace Common
 							IsNew = x.IsNew,
 							IsModified = x.IsModified
 						});
+
+					return found.OrderByDescending(x => x.IsNew ? x.DateCreated : x.DateModified).ThenBy(x => x.Term);//.Take(200);
 				}
 			}
 			catch (Exception)
@@ -264,11 +266,11 @@ namespace Common
 					else
 						p.Add("@lastDate", DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"])));
 
-					var res = cn.Query("SELECT TOP 200 ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, VerseContent, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE DateModified > @lastDate OR DateCreated > @lastDate ORDER BY Books.BookId, ChapterNum, VerseNum", p);
+					var res = cn.Query("SELECT ScriptureId, Scriptures.BookId, BookName, Chapters, ChapterNum, VerseNum, VerseContent, TranslationId, DateCreated, DateModified, CONVERT(bit,CASE WHEN DateModified > @lastDate THEN 1 ELSE 0 END) AS IsModified, CONVERT(bit,CASE WHEN DateCreated > @lastDate THEN 1 ELSE 0 END) AS IsNew FROM Scriptures INNER JOIN Books ON Books.BookId=Scriptures.BookId WHERE DateModified > @lastDate OR DateCreated > @lastDate", p);
 
 					if (res == null) return null;
 
-					return res.Select(x => new ScriptureItem
+					var found = res.Select(x => new ScriptureItem
 					{
 						Id = x.ScriptureId,
 						Book = new BookItem { Id = x.BookId, Name = x.BookName, Chapters = x.Chapters },
@@ -281,6 +283,8 @@ namespace Common
 						DateCreated = x.DateCreated,
 						DateModified = x.DateModified
 					});
+
+					return found.OrderByDescending(x => x.IsNew ? x.DateCreated : x.DateModified).ThenBy(x => x.Book.Id).ThenBy(x => x.Chapter).ThenBy(x => x.Verse).Take(200);
 				}
 			}
 			catch (Exception)

@@ -5,14 +5,14 @@
 	<div class="module primary-content span12">
 		<h1>File Parsing Utility</h1>
 		<div>
-			<form data-bind="submit: Parse">
+			<form class="form-inline" data-bind="submit: Parse">
 				Use saved rules: <select data-bind="options: SavedRules, optionsText: 'Name', optionsValue: 'Id', optionsCaption: 'None, make my own', value: SavedRuleId"></select>
 				<br />Or make your own:<br />
 				<ul class="unstyled" data-bind="template: { name: 'tmpRules', foreach: Rules}"></ul>
 				<input type="button" value="Add New Rule" data-bind="click: AddRule" /> <input type="submit" value="Parse" />
 				<div>
-					<textarea style="font-family:Lucida Console" data-bind="value: Source" class="span8" wrap="off" rows="20"></textarea>
-					<textarea style="font-family:Lucida Console" data-bind="value: Result" class="span8" wrap="off" rows="20"></textarea>
+					<textarea style="font-family:Lucida Console" data-bind="value: Source" class="span6" wrap="off" rows="20"></textarea>
+					<textarea style="font-family:Lucida Console" data-bind="value: Result" class="span6" wrap="off" rows="20"></textarea>
 				</div>
 			</form>
 		</div>
@@ -32,7 +32,7 @@
 					{ Expr: "  ", Attr: "ig", Replace: " " },
 					{ Expr: "\\n{2,}", Attr: "ig", Replace: "\\n" },
 					{ Expr: "^[A-Za-z0-9 .,]*\\t", Attr: "igm", Replace: "BOOKNO\\t" },
-					{ Expr: "BRETHERN", Attr: "ig", Replace: "BRETHEREN" }
+					{ Expr: "BRETHERN", Attr: "ig", Replace: "BRETHREN" }
 				] }
 			];
 
@@ -85,9 +85,9 @@
 {
 	<script type="text/html" id="tmpRules">
 		<li>
-			Expr: <input data-bind="value:Expr" type="text" class="span7" />
-			Attr: <input data-bind="value:Attr" type="text" class="span2" />
-			Replace: <input data-bind="value:Replace" type="text" class="span3" />
+			Expr: <input data-bind="value:Expr" type="text" class="span5" />
+			Attr: <input data-bind="value:Attr" type="text" class="span1" />
+			Replace: <input data-bind="value:Replace" type="text" class="span2" />
 			<input type="button" value="Remove" data-bind="click: $root.DeleteRule, visible: $root.Rules().length > 1" />
 		</li>
 	</script>

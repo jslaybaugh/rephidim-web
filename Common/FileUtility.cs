@@ -121,7 +121,7 @@ namespace Common
 					IsModified = x.LastWriteTime.Subtract(x.CreationTime).TotalMinutes > 30 && x.LastWriteTime > lastDate.Value,
 					Extension = x.Extension.ToLower().Replace(".", "")
 				})
-				.OrderBy(x => x.Name)
+				.OrderByDescending(x => x.IsNew ? x.DateCreated : x.DateModified).ThenBy(x => x.Name)
 				.Distinct(new PropertyComparer<FileInfoResult>("Name"));
 		}
 

@@ -197,10 +197,9 @@
     <Content Include="Content\img\arcs-072.png" />
     <Content Include="Content\img\arcs-114.png" />
     <Content Include="Content\img\arcs-144.png" />
-    <Content Include="Content\img\bg1.png" />
-    <Content Include="Content\img\bg2.png" />
+    <Content Include="Content\img\bg.png" />
     <Content Include="Content\img\favicon.ico" />
-    <Content Include="Content\img\mosquito-elephant.jpg" />
+    <Content Include="Content\img\mosquito-elephant.png" />
     <Content Include="Content\img\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\img\ui-bg_glass_55_fbf9ee_1x400.png" />
     <Content Include="Content\img\ui-bg_glass_65_ffffff_1x400.png" />

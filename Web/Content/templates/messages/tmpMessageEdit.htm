@@ -1,31 +1,27 @@
 ﻿<div id="uxMessageDialogError" class="alert-message error none"></div>
-<form id="frmMessageEdit" class="form-stacked">
-	<div class="clearfix">
-		<label for="txtMessageValue">Message</label>
-		<div class="input">
-			<textarea id="txtMessageValue" class="span13" rows="5">${Value}</textarea>
+<form id="frmMessageEdit" class="form-inline">
+	<div class="control-group">
+		<label class="control-label" for="txtMessageValue">Message</label>
+		<div class="controls">
+			<textarea id="txtMessageValue" class="span10" rows="5">${Value}</textarea>
 			<input type="hidden" id="hdnMessageId" value="${Id}" />
 		</div>
 	</div>
-	<div class="clearfix">
-		<label>Style</label><br />
-		<div class="input">
-			<label style="display:inline;"><input type="radio" name="style" value="info" {{if Style.toUpperCase()=="INFO"}}checked="checked"{{/if}} /> <span class="alert-message info">Info</span></label>
-			<label style="display:inline;"><input type="radio" name="style" value="success" {{if Style.toUpperCase()=="SUCCESS"}}checked="checked"{{/if}} /> <span class="alert-message success">Success</span></label>
-			<label style="display:inline;"><input type="radio" name="style" value="warning" {{if Style.toUpperCase()=="WARNING"}}checked="checked"{{/if}} /> <span class="alert-message warning">Warning</span></label>
-			<label style="display:inline;"><input type="radio" name="style" value="error" {{if Style.toUpperCase()=="ERROR"}}checked="checked"{{/if}} /> <span class="alert-message error">Error</span></label>
+	<div class="control-group">
+		<label class="control-label" class="bold">Style</label>
+		<div class="controls">
+			<label><input type="radio" name="style" value="info" {{if Style.toUpperCase()=="INFO"}}checked="checked"{{/if}} /> <span class="alert-message info">Info</span></label>
+			<label><input type="radio" name="style" value="success" {{if Style.toUpperCase()=="SUCCESS"}}checked="checked"{{/if}} /> <span class="alert-message success">Success</span></label>
+			<label><input type="radio" name="style" value="warning" {{if Style.toUpperCase()=="WARNING"}}checked="checked"{{/if}} /> <span class="alert-message warning">Warning</span></label>
+			<label><input type="radio" name="style" value="error" {{if Style.toUpperCase()=="ERROR"}}checked="checked"{{/if}} /> <span class="alert-message error">Error</span></label>
 		</div>
 	</div>
-	<div class="clearfix">
-		<br /><label>Visibility Settings</label><br />
-		<div class="input">
-			<label style="display:inline;"><input type="checkbox" id="chkMessageIsActive" {{if IsActive}}checked="checked"{{/if}} /> Active</label>
-		</div>
-		<div class="input">
-			<label style="display:inline;"><input type="checkbox" id="chkMessageOnHomePage" {{if OnHomePage}}checked="checked"{{/if}} /> On Home Page</label>
-		</div>
-		<div class="input">
-			<label style="display:inline;"><input type="checkbox" id="chkMessageOnLoginPage" {{if OnLoginPage}}checked="checked"{{/if}} /> On Login Page</label>
+	<div class="control-group">
+		<br /><label class="control-label">Visibility</label>
+		<div class="controls">
+			<label><input type="checkbox" id="chkMessageIsActive" {{if IsActive}}checked="checked"{{/if}} /> Active</label><br />
+			<label><input type="checkbox" id="chkMessageOnHomePage" {{if OnHomePage}}checked="checked"{{/if}} /> On Home Page</label><br />
+			<label><input type="checkbox" id="chkMessageOnLoginPage" {{if OnLoginPage}}checked="checked"{{/if}} /> On Login Page</label>
 		</div>
 	</div>
 </form>
