@@ -31,7 +31,7 @@ namespace EmailNotify
 				{
 					lastDate = Convert.ToDateTime(storedDate);
 				}
-
+				Console.WriteLine("Last Run: {0:M/d/yyyy h:mm tt}", lastDate);
 				Console.WriteLine("Looking for verses....");
 				var verses = DataAccess.GetRecentVerses(lastDate);
 				Console.WriteLine("Looking for terms....");

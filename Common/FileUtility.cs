@@ -105,7 +105,7 @@ namespace Common
 		public static IEnumerable<FileInfoResult> Recent(DateTime? lastDate = null)
 		{
 			if (lastDate == null) lastDate = DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"]));
-			var matchingFiles = RecentFiles();
+			var matchingFiles = RecentFiles(lastDate);
 			return matchingFiles
 				.Where(y => !y.Attributes.HasFlag(FileAttributes.System | FileAttributes.Hidden))
 				.Where(y => !y.Extension.MatchesTrimmed(".ini") && !y.Extension.MatchesTrimmed(".db") && !y.Extension.MatchesTrimmed(".lnk"))

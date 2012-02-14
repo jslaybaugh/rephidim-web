@@ -1,0 +1,7 @@
+C:\Side Work\Rephidim Church\Rephidim Web 2011\Common\bin\Release\Common.dll
+C:\Side Work\Rephidim Church\Rephidim Web 2011\Common\bin\Release\Common.pdb
+C:\Side Work\Rephidim Church\Rephidim Web 2011\Common\bin\Release\Dapper.dll
+C:\Side Work\Rephidim Church\Rephidim Web 2011\Common\bin\Release\Dapper.pdb
+C:\Side Work\Rephidim Church\Rephidim Web 2011\Common\obj\Release\ResolveAssemblyReference.cache
+C:\Side Work\Rephidim Church\Rephidim Web 2011\Common\obj\Release\Common.dll
+C:\Side Work\Rephidim Church\Rephidim Web 2011\Common\obj\Release\Common.pdb
