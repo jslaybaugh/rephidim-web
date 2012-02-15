@@ -16,5 +16,6 @@ namespace EmailNotify
 		public IEnumerable<Common.Models.FileInfoResult> Files { get; set; }
 		public string To { get; set; }
 		public string AbsoluteRoot { get; set; }
+		public bool HasAttachments { get; set; }
 	}
 }

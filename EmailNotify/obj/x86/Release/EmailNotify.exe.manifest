@@ -79,7 +79,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>ub98M8zA94dTylzmCHVt7cKlzNY=</dsig:DigestValue>
+        <dsig:DigestValue>z8qGBoJucrhqSACw/9NPCkDhI74=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -96,14 +96,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EmailNotify.exe" size="9728">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EmailNotify.exe" size="10240">
       <assemblyIdentity name="EmailNotify" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>REuLJln04kcofN8p4ayO0FVHMoU=</dsig:DigestValue>
+        <dsig:DigestValue>qwmBmC18So1eNVZs0YucH6r7o9A=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

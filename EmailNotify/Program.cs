@@ -72,7 +72,8 @@ namespace EmailNotify
 				var service = new EmailService(engines);
 
 				NotifyEmail email = new NotifyEmail("Notification");
-				email.AbsoluteRoot = ConfigurationManager.AppSettings["AbsoluteRoot"];
+				var webroot = ConfigurationManager.AppSettings["AbsoluteRoot"];
+				email.AbsoluteRoot = webroot.EndsWith("/") ? webroot.Substring(0, webroot.Length - 1) : webroot;
 				email.To = string.Join(", ", emails.Select(x=>x.Email).ToArray());
 				email.Verses = verses;
 				email.Terms = terms;
@@ -97,7 +98,7 @@ namespace EmailNotify
 						}
 					}
 				}
-
+				email.HasAttachments = withAttachments;
 				service.Send(email);
 
 				var newDate = DateTime.Now.ToString("M/d/yyyy h:mm tt");
