@@ -9,7 +9,7 @@
 	img { vertical-align: text-bottom; }
 	a img { margin: 0px 5px 0px 0px; }
 
-	input[type=submit], input[type=button], button { background: #efefef; }
+	/*input[type=submit], input[type=button], button { background: #efefef; } */
 	input[type=range] { padding: 0px; }
 
 	.left { float: left; }
@@ -19,6 +19,7 @@
 	.center-align { text-align: center; }
 
 	.none { display: none; }
+	.inline {display:inline;}
 	.inline-block { display: inline-block; }
 	.block { display: block; }
 	.table { display: table;border-collapse:collapse; }
@@ -29,10 +30,12 @@
 	
 /*  BOOTSTRAP AND JQUERY UI OVERRIDES  */
 
+	.label {white-space:nowrap;}
+
 	.popover.right .arrow { top: 50%; left: -8px; margin-top: -15px; border-top: 15px solid transparent; border-bottom: 15px solid transparent; border-right: 15px solid black; }
 	.popover.left .arrow { top: 50%; right: -8px; margin-top: -15px; border-top: 15px solid transparent; border-bottom: 15px solid transparent; border-left: 15px solid black; }
-	.popover .content { padding: 5px; }
-	.popover .inner { width: 350px; }
+	.popover .popover-content { padding: 5px; }
+	.popover .popover-inner { width: 350px; }
 	.navbar { z-index: 10; }
 	.navbar .brand { padding-right: 8px; padding-left: 8px; margin-left: 0px; }
 	.ui-widget-overlay { background: #111; opacity: .80; filter: Alpha(Opacity=80); }
@@ -40,7 +43,6 @@
 	.dropdown-menu { max-width: 300px; }
 	.ui-dialog .ui-dialog-titlebar { color: #ffffff; background-color: #0064cd; background-repeat: repeat-x; background-image: -khtml-gradient(linear, left top, left bottom, from(#abcced), to(#0064cd)); background-image: -moz-linear-gradient(top, #abcced, #0064cd); background-image: -ms-linear-gradient(top, #abcced, #0064cd); background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #abcced), color-stop(100%, #0064cd)); background-image: -webkit-linear-gradient(top, #abcced, #0064cd); background-image: -o-linear-gradient(top, #abcced, #0064cd); background-image: linear-gradient(top, #abcced, #0064cd); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#abcced', endColorstr='#0064cd', GradientType=0); text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); border-color: #0064cd #0064cd #003f81; border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25); }
 	.ui-dialog .ui-dialog-title { color: #fff; }
-	.form-stacked { padding: 0px; }
 	
 	.alert-message.danger,
 	.alert-message.danger:hover,

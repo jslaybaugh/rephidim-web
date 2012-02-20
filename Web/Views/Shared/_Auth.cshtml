@@ -2,7 +2,7 @@
 	Layout = "_Master.cshtml";
 }
 
-<div class="navbar navbar-fixed-top" data-dropdown="dropdown" >
+<div class="navbar navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container">
 			<a class="brand" href="@(Url.Action<HomeController>(x => x.Home()))">Rephidim</a>
@@ -12,7 +12,7 @@
 				<li @(ViewBag.NavFiles != null && ViewBag.NavFiles == true ? "class=active" : "")><a href="@(Url.Action<FilesController>(x => x.Browse(null)))">Files</a></li>
 				<li @(ViewBag.NavScripture != null && ViewBag.NavScripture == true ? "class=active" : "")><a href="@(Url.Action<ScriptureController>(x => x.Read("Genesis", 1, 1)))">Bible</a></li>
 				<li class="dropdown @(ViewBag.NavOther != null && ViewBag.NavOther == true ? "active" : "")">
-					<a href="#" class="dropdown-toggle">Resources</a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Resources <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li><a href="@(Url.Action<StaticController>(x => x.Show("tapelist.pdf")))">Tape List</a></li>
 						<li class="divider"></li>
@@ -30,13 +30,13 @@
 				</li>
 			</ul>
 			<form id="frmNavSearch" method="get" class="navbar-search pull-left form-search" action="@(Url.Action<HomeController>(x => x.Search(null)))">
-				<input type="text" class="span2" placeholder="Search" value="@ViewBag.SearchQuery" name="query" />
+				<input type="text" class="span2" placeholder="Search Everything" value="@ViewBag.SearchQuery" name="query" />
 				<span id="uxAppWait" class="wait-light" style="display:none;"></span>
 			</form>
 			<ul class="nav pull-right">
 				<li><a href="#" class="help" style="padding:0px;margin-top:7px;" title="Get help">@Sprite.Image("~/App_Sprites/icon_help.png")</a></li>
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle">User: <b>@User.Identity.Name</b></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">User: <b>@User.Identity.Name</b> <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li><a href="@(Url.Action<AdminController>(x => x.Emails()))">Email Notifications</a></li>
 						@if (User.IsInRole("Messages"))	{ <li><a href="@(Url.Action<AdminController>(x=>x.Messages()))">Manage Messages</a></li> }
@@ -113,7 +113,7 @@
 					</div>
 				</div>
 				<div class="clearfix">
-					<input type="submit" value="Submit Issue" />
+					<input type="submit" class="btn btn-primary" value="Submit Issue" />
 				</div>
 			</form>
 		</div>

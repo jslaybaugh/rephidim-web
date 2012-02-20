@@ -86,14 +86,14 @@
 
 					trigger: "manual",
 					html: true,
-					content: function () { return loadPopover("content", x.data("details")); },
 					title: function () { return loadPopover("title", x.data("details")); },
+					content: function () { return loadPopover("content", x.data("details")); },
 					offset: 10,
 					placement: "left"
 				});
 
 				$(this).popover("show");
-				$("#txtEmail").val(window._LastUsedEmail);
+				$(".email-box").val(window._LastUsedEmail);
 
 				return false;
 			});

@@ -108,11 +108,13 @@
 			buttons: [
 				{
 					text: "Save",
-					click: saveTerm
+					click: saveTerm,
+					class: "btn btn-primary"
 				},
 				{
 					text: "Cancel",
-					click: function () { $(this).dialog("close"); }
+					click: function () { $(this).dialog("close"); },
+					class: "btn"
 				}
 			]
 		});
@@ -211,18 +213,20 @@
 			$("#uxTermsDialog").dialog(
 			{
 				width: 500,
-				height: 200,
+				height: 180,
 				title: "Update Version",
 				modal: true,
 				resizable: false,
 				buttons: [
 					{
 						text: "Save",
-						click: updateVersion
+						click: updateVersion,
+						class: "btn btn-primary"
 					},
 					{
 						text: "Cancel",
-						click: function () { $(this).dialog("close"); }
+						click: function () { $(this).dialog("close"); },
+						class: "btn"
 					}
 				]
 			});
@@ -243,11 +247,13 @@
 				buttons: [
 					{
 						text: "DELETE",
-						click: function () { deleteTerm(id); }
+						click: function () { deleteTerm(id); },
+						class: "btn btn-danger"
 					},
 					{
 						text: "Cancel",
-						click: function () { $(this).dialog("close"); }
+						click: function () { $(this).dialog("close"); },
+						class: "btn"
 					}
 				]
 			});

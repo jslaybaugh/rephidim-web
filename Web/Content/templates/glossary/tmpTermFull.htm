@@ -9,7 +9,7 @@
 			<li><a href="${App.ResolveUrl('~/Glossary/Print/' + ActiveTerm.Id)}" target="_blank" title="Print This Term">{{html App.ChooseIcon("pdf")}}</a></li>
 			<li><a href="${App.ResolveUrl('~/Glossary/Print/')}" target="_blank" title="Print All Terms">{{html App.ChooseIcon("pdfmulti")}}</a></li>
 		</ul>
-		Term: ${ActiveTerm.Term}
+		${ActiveTerm.Term}
 	</h1>
 	<div id="uxDefinition" class="scrollable">
 		<div class="right">

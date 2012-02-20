@@ -74,7 +74,7 @@
 </head>
 <body>
 	@RenderBody()
-	<div id="uxAlert" class="global-message alert-message fade in hide" data-alert="true"><a class="close" href="#">×</a><p></p></div>
+	<div id="uxAlert" class="global-message alert-message fade in hide" data-alert="true"><a class="close" data-dismiss="alert" href="#">&times;</a><p></p></div>
 	@Bundles.RenderHtmlTemplates()
 	@if (IsSectionDefined("templates"))
 	{

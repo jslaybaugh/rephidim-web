@@ -10,6 +10,7 @@
 	{
 		<div class="alert-message @msg.Style.ToLowerInvariant()">@Html.Raw(msg.Value)</div>
 	}
+	<div id="uxiOSVersion" class="alert-message warning none">To be able to use this site, you need to <a href="http://www.apple.com/ios/" style="text-decoration:underline;" target="_blank">upgrade your iOS version to at least version 5.0</a>.</div>
 }
 
 <div class="login-container">
@@ -29,7 +30,7 @@
 					<label class="control-label" for="UserName">User Name:</label> @Html.TextBoxFor(m => m.UserName)<br />
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="Password">Password:</label> @Html.PasswordFor(m => m.Password, new { placeholder = "Enter Password" }) &nbsp; <input type="submit" value="Knock" style="color:#000;" />
+					<label class="control-label" for="Password">Password:</label> @Html.PasswordFor(m => m.Password, new { placeholder = "Enter Password" }) &nbsp; <input type="submit" class="btn" value="Knock" />
 				</div>
 			</div>
 			<a id="lnk-more" class="bold @(Model.UserName.MatchesTrimmed("rephidim") ? "" : "none")" href="#">More Options</a>
@@ -48,6 +49,12 @@
 				$("#user-box").fadeIn();
 				$(this).hide();
 			});
+
+
+			if (navigator.userAgent.match(/(ipad|ipod|iphone)/i) && navigator.userAgent.match(/CPU OS [12345]/i))
+			{
+				$("#uxiOSVersion").show();
+			}
 		});
 	</script>
  }

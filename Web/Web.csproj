@@ -180,7 +180,6 @@
     <Content Include="App_Sprites\lowCompat.css" />
     <Content Include="App_Sprites\sprite0.png" />
     <Content Include="Content\css\app.css" />
-    <Content Include="Content\css\bootstrap-1.4.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\fonts.css" />
     <Content Include="Content\css\jquery-ui-1.8.16.custom.css" />
@@ -242,17 +241,13 @@
     <Content Include="Scripts\app\Search.js" />
     <Content Include="Scripts\app\Files.js" />
     <Content Include="Scripts\app\Glossary.js" />
-    <Content Include="Scripts\libs\bootstrap-alerts.js" />
-    <Content Include="Scripts\libs\bootstrap-dropdown.js" />
-    <Content Include="Scripts\libs\bootstrap-popover.js" />
-    <Content Include="Scripts\libs\bootstrap-twipsy.js" />
+    <Content Include="Scripts\libs\bootstrap.js" />
     <Content Include="Scripts\libs\Class.js" />
     <Content Include="Scripts\libs\consolelog.js" />
     <Content Include="Scripts\libs\date.format.js" />
     <Content Include="Scripts\libs\jquery-1.7.1.js" />
     <Content Include="Scripts\libs\jquery-ui-1.8.16.js" />
     <Content Include="Scripts\libs\jquery.ba-throttle-debounce.min.js" />
-    <Content Include="Scripts\libs\jquery.form.js" />
     <Content Include="Scripts\libs\jquery.scrollTo-1.4.2.js" />
     <Content Include="Scripts\libs\jquery.tmpl.js" />
     <Content Include="Scripts\libs\json2.js" />

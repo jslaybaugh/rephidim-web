@@ -40,6 +40,8 @@ namespace Web.Controllers
 			string root = ConfigurationManager.AppSettings["FilesRoot"];
 			root = root.Trim().EndsWith(@"\") ? root = root.Substring(0, root.Length - 2) : root;
 
+			if (!path.StartsWith("/")) path = "/" + path;
+
 			path = string.Format(@"{0}{1}", ConfigurationManager.AppSettings["FilesRoot"], path.Replace("/", "\\"));
 
 			var f = new FileInfo(path);

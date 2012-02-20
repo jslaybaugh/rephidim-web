@@ -72,14 +72,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Common.dll" size="169984">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Common.dll" size="116736">
       <assemblyIdentity name="Common" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>LmaJD6VnUiy28/d6y+uMUKUvXGw=</dsig:DigestValue>
+        <dsig:DigestValue>UP/qaMywQht6mF2DlFAMQlhHM5E=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Dapper.dll" size="56832">
+      <assemblyIdentity name="Dapper" version="1.8.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>QH2lcCb5uPle/tQLbFbT8VF1wbs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -91,7 +103,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>AO3NyeEpk0dqzXMbDt4d4UTdAfE=</dsig:DigestValue>
+        <dsig:DigestValue>lowbIzDxUxvGSBH4TW2mOYQOMKo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -108,14 +120,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RazorEngine.dll" size="95744">
-      <assemblyIdentity name="RazorEngine" version="3.0.7.0" publicKeyToken="9EE697374C7E744A" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RazorEngine.dll" size="97280">
+      <assemblyIdentity name="RazorEngine" version="3.0.8.0" publicKeyToken="9EE697374C7E744A" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>AcynQJMdWVNMFb1xLPmPSh7/G9A=</dsig:DigestValue>
+        <dsig:DigestValue>qJnu7Hhd2TA4c65VBk9LpdLLwFE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -131,13 +143,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="EmailNotify.exe.config" size="982">
+  <file name="EmailNotify.exe.config" size="1392">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>+H8GmmHaVHS6Iwwi/EcSLk2gCEE=</dsig:DigestValue>
+      <dsig:DigestValue>h6+CdZnlUU7DA88vFjZxajnXdpY=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

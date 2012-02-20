@@ -115,11 +115,13 @@
 			buttons: [
 				{
 					text: "Save",
-					click: saveVerse
+					click: saveVerse,
+					class: "btn btn-primary"
 				},
 				{
 					text: "Cancel",
-					click: function () { $(this).dialog("close"); }
+					click: function () { $(this).dialog("close"); },
+					class: "btn"
 				}
 			]
 		});
