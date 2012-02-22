@@ -22,7 +22,7 @@
 			{
 				data = JSON.parse(data);
 				var timestamp = new Date(data.Timestamp);
-				var expiryDate = new Date(timestamp.setDate(timestamp.getDate() + 7)) // one week
+				var expiryDate = new Date(timestamp.setTime(timestamp.getTime() + (4 * 60 * 60 * 1000))) // four hours
 				if (new Date() > expiryDate)
 				{
 					// it is too old, we need to get a new one

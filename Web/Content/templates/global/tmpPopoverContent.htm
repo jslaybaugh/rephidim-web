@@ -7,6 +7,6 @@
 		{{if Device != "iOS" }}
 			<li><a href="${App.ResolveUrl('~/Files/Download/' + Path)}" target="_blank">{{html App.ChooseIcon("usb")}}Download & Save</a></li>
 		{{/if}}
-		<li><form id="frmEmail" class="form-inline inline"><a>{{html App.ChooseIcon("email")}}Email </a><input type="text" id="txtEmail" placeholder="Email Address" class="span2 email-box" /> <input type="submit" id="btnEmail" class="btn" value="Send Email" /></form></li>
+		<li><form id="frmEmail" class="form-inline inline"><a>{{html App.ChooseIcon("email")}}Email </a><input type="email" id="txtEmail" placeholder="Email Address" class="span3 email-box" /> <input type="submit" id="btnEmail" class="btn" value="Send" /></form></li>
 	</ul>
 </div>

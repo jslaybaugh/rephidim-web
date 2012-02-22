@@ -76,7 +76,7 @@
 				return false;
 			});
 
-			$(".file-name").live("click", function (evt)
+			$(".file-name").live("mouseenter", function (evt)
 			{
 				var x = $(this);
 				$(".popover").hide();
@@ -95,6 +95,10 @@
 				$(this).popover("show");
 				$(".email-box").val(window._LastUsedEmail);
 
+				return false;
+			}).live("mouseleave", function (evt)
+			{
+				$(this).popover("hide");
 				return false;
 			});
 

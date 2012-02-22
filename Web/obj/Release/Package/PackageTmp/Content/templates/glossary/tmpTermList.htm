@@ -1,0 +1,20 @@
+﻿<h1>
+	{{if EditRights}}
+		<a href="#" id="btnVersion" data-id="${Version}" class="right">v.${Version}</a>
+	{{else}} 
+		<span class="right">v.${Version}</span>  
+	{{/if}}
+	${Terms.length} Terms
+</h1>
+<div class="scrollable">
+	<ul class="unstyled list-lines">
+		{{each Terms}}
+			<li>
+				<a class="term-link" name="${Id}" data-value="${Term}" href="#">${Term}</a>
+				{{if IsNew}}<span class="label label-success">New: ${App.DateFromJson(DateCreated).format('m/d h:MM TT')}</span>{{/if}}
+				{{if !IsNew && IsModified}}<span class="label label-warning">Modified: ${App.DateFromJson(DateModified).format('m/d h:MM TT')}</span>{{/if}}
+			</li>
+		{{/each}}
+	</ul>
+</div>
+		

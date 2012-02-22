@@ -30,7 +30,7 @@
 				</li>
 			</ul>
 			<form id="frmNavSearch" method="get" class="navbar-search pull-left form-search" action="@(Url.Action<HomeController>(x => x.Search(null)))">
-				<input type="text" class="span2" placeholder="Search Everything" value="@ViewBag.SearchQuery" name="query" />
+				<input type="search" class="span2" placeholder="Search Everything" value="@ViewBag.SearchQuery" name="query" />
 				<span id="uxAppWait" class="wait-light" style="display:none;"></span>
 			</form>
 			<ul class="nav pull-right">
@@ -88,7 +88,7 @@
 				<div class="clearfix">
 					<label for="txtHelpEmail">Your Email</label>
 					<div class="input">
-						<input type="text" id="txtHelpEmail" class="span4" placeholder="Your Email" />
+						<input type="email" id="txtHelpEmail" class="span4" placeholder="Your Email" />
 					</div>
 				</div>
 				<div class="clearfix">
@@ -103,7 +103,7 @@
 				<div class="clearfix">
 					<label for="txtHelpUrl">Page URL (defaults to current URL)</label>
 					<div class="input">
-						<input type="text" id="txtHelpUrl" class="span9" placeholder="URL of page with problem" />
+						<input type="url" id="txtHelpUrl" class="span9" placeholder="URL of page with problem" />
 					</div>
 				</div>
 				<div class="clearfix">

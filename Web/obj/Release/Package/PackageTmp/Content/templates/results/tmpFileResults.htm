@@ -1,0 +1,17 @@
+﻿<h1>${Title} (${Files != null ? Files.length : 0})</h1>
+<div class="scrollable">
+	{{if Files != null && Files.length > 0}}
+		<ul class="unstyled lines">
+			{{each Files}}
+				<li>
+					<a href="#" class="file-name" data-details="${Name}|${Extension}|${Size}|${Path}|${DateModified}">{{html App.ChooseIcon(Extension)}}{{html App.Highlight(Name)}}</a>
+					{{if IsNew}}<span class="label label-success">New: ${App.DateFromJson(DateCreated).format('m/d h:MM TT')}</span>{{/if}}
+					{{if !IsNew && IsModified}}<span class="label label-warning">Modified: ${App.DateFromJson(DateModified).format('m/d h:MM TT')}</span>{{/if}}<br />
+					<span class="small-info"><b>Path: </b> <a href="${App.ResolveUrl('~/Files/Browse/' + Path.replace(new RegExp(Name + '.' + Extension, 'ig'), ''))}">{{html App.Highlight(Path.replace(new RegExp(Name + "." + Extension, "ig"), "")) }}</a><br /><b>Size:</b> ${Size}, <b>Loaded:</b> ${App.DateFromJson(DateModified).format('m/d/yy h:MM TT')}</span>
+				</li>
+			{{/each}}
+		</ul>
+	{{else}}
+		<div class='message'><div><span>No files.</span></div></div>
+	{{/if}}
+</div>

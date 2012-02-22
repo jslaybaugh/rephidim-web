@@ -10,7 +10,7 @@
 	{
 		<div class="alert-message @msg.Style.ToLowerInvariant()">@Html.Raw(msg.Value)</div>
 	}
-	<div id="uxiOSVersion" class="alert-message warning none">To be able to use this site, you need to <a href="http://www.apple.com/ios/" style="text-decoration:underline;" target="_blank">upgrade your iOS version to at least version 5.0</a>.</div>
+	<div id="uxiOSVersion" class="alert-message warning none">To be able to use this site, you need to upgrade your device's operating system <a href="http://www.apple.com/ios/" style="text-decoration:underline;" target="_blank">to at least version 5.0</a>.</div>
 }
 
 <div class="login-container">
@@ -51,7 +51,7 @@
 			});
 
 
-			if (navigator.userAgent.match(/(ipad|ipod|iphone)/i) && navigator.userAgent.match(/CPU OS [12345]/i))
+			if (navigator.userAgent.match(/(ipad|ipod|iphone)/i) && navigator.userAgent.match(/CPU OS [1234]/i))
 			{
 				$("#uxiOSVersion").show();
 			}

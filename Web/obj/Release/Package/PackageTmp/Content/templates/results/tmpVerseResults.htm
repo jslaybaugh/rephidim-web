@@ -1,0 +1,18 @@
+﻿<h1>${Title} (${Verses != null ? Verses.length : 0}){{if Verses.length == 200}} <span class="small-info">Limit 200</span>{{/if}}</h1>
+<div class="scrollable">
+	{{if Verses != null && Verses.length > 0}}
+		<ul class="unstyled lines">
+			{{each Verses}}
+				<li>
+					<a href="${App.ResolveUrl('~/Scripture/' + Book.Name + '/' + Chapter + '/' + Verse)}"><b>${Book.Name} ${Chapter}:${Verse}</b></a>
+					<span class="edit-rights label label-info">${TranslationId}</span>
+					{{if IsNew}}<span class="label label-success">New: ${App.DateFromJson(DateCreated).format('m/d h:MM TT')}</span>{{/if}}
+					{{if !IsNew && IsModified}}<span class="label label-warning">Modified: ${App.DateFromJson(DateModified).format('m/d h:MM TT')}</span>{{/if}}<br />
+					{{html App.Highlight(Text) }}
+				</li>
+			{{/each}}
+		</ul>
+	{{else}}
+		<div class='message'><div><span>No verses.</span></div></div>
+	{{/if}}
+</div>

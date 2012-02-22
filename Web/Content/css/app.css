@@ -35,7 +35,7 @@
 	.popover.right .arrow { top: 50%; left: -8px; margin-top: -15px; border-top: 15px solid transparent; border-bottom: 15px solid transparent; border-right: 15px solid black; }
 	.popover.left .arrow { top: 50%; right: -8px; margin-top: -15px; border-top: 15px solid transparent; border-bottom: 15px solid transparent; border-left: 15px solid black; }
 	.popover .popover-content { padding: 5px; }
-	.popover .popover-inner { width: 350px; }
+	.popover .popover-inner { width: 370px; }
 	.navbar { z-index: 10; }
 	.navbar .brand { padding-right: 8px; padding-left: 8px; margin-left: 0px; }
 	.ui-widget-overlay { background: #111; opacity: .80; filter: Alpha(Opacity=80); }
@@ -221,7 +221,7 @@
 
 /* GLOBALLY USED CUSTOM CLASSES */
 
-	.scrollable { overflow: auto; -webkit-overflow-scrolling: touch; }
+	.scrollable { overflow: auto;overflow-x:visible; -webkit-overflow-scrolling: touch; }
 	.module {background: #f3f3f3;}
 	.boxshadow.borderradius .module { -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; box-shadow: 0 0 10px #444;  }
 	.no-borderradius.no-boxshadow .module > div {border:solid 1px #999;}

@@ -1,0 +1,51 @@
+﻿@model Web.Models.AdminEmailsView
+
+@{
+    ViewBag.Title = "Emails";
+}
+
+<div class="row header-content" style="margin-bottom:15px;">
+	<div class="span12 module">
+		<h1>Automated Email Notification</h1>
+		<div>
+			<p>At certain appointed times, the system will periodically check for additions/modifications to files, glossary terms, and scripture references.<br />If you would like to be notified of these changes via email, type your email address in the box below.</p>
+			<form id="frmEmail" class="form-inline">
+				Email: <input type="text" class="span6" id="txtEmail" placeholder="Your email address" value="@Model.Email" /> <input type="submit" class="btn" value="Submit" />
+			</form>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="span12 module primary-content">
+		<h1>
+			List of Current Emails
+		</h1>
+		<div class="scrollable">
+			<p>If your name is on the list below, you will receive the automated email. To unsubscribe, simply click the unsubscribe icon next to your email address.<br />To verify you are unsubscribing your own email, you will receive an email with a confirmation link.</p>
+			<ul class="unstyled list-lines">
+				@if (Model.Emails != null && Model.Emails.Count() > 0)
+				{
+					foreach (var item in Model.Emails)
+					{
+						<li><h4><a class="delete-btn" href="#" data-id="@item.Email" title="Remove from list">@(Sprite.Image("~/App_Sprites/icon_unsub.png"))</a> @item.Email</h4></li>
+					}
+				}
+				else
+				{
+					<li><h4>No emails!</h4></li>
+				}
+			</ul>
+		</div>
+	</div>
+</div>
+
+@section scripts
+{
+	<script type="text/javascript">
+		$(function ()
+		{
+			var Emails = new App.Emails();
+		});
+	</script>
+
+}
