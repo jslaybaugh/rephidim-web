@@ -26,14 +26,14 @@
 		@Html.ValidationMessageFor(m => m.Error, "Authentication Failed. Please try again.", new { @class = "alert-message error" })
 		<div class="login-bg module clear">
 			<div class="login-contents"><br />
-				<div id="user-box" class="control-group @(Model.UserName.MatchesTrimmed("rephidim") ? "none" : "")">
-					<label class="control-label" for="UserName">User Name:</label> @Html.TextBoxFor(m => m.UserName)<br />
+				<div id="user-box" class="control-group @(Model.UserName != null && Model.UserName.MatchesTrimmed("rephidim") ? "none" : "")">
+					<label class="control-label" for="UserName">User Name:</label> @Html.TextBoxFor(m => m.UserName, new { placeholder = "Enter User Name" })<br />
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="Password">Password:</label> @Html.PasswordFor(m => m.Password, new { placeholder = "Enter Password" }) &nbsp; <input type="submit" class="btn" value="Knock" />
 				</div>
 			</div>
-			<a id="lnk-more" class="bold @(Model.UserName.MatchesTrimmed("rephidim") ? "" : "none")" href="#">More Options</a>
+			<a id="lnk-more" class="bold @(Model.UserName != null && Model.UserName.MatchesTrimmed("rephidim") ? "" : "none")" href="#">More Options</a>
 		</div>
 		<p class="center-align">&copy; Rephidim Church, Inc. / RDBS, Inc. 1971-@DateTime.Now.Year<br />4430 Allendale Rd, Wichita Falls, TX 76310<br /><a href="mailto:rci@wfbiz.rr.com">Questions?</a></p>
 	 }
@@ -46,6 +46,7 @@
 		{
 			$("#lnk-more").live("click", function ()
 			{
+				$("#UserName").val("");
 				$("#user-box").fadeIn();
 				$(this).hide();
 			});

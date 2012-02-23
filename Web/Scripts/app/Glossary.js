@@ -205,6 +205,12 @@
 			return false;
 		});
 
+		$("#cmbAlpha").on("change", function ()
+		{
+			var letter = $(this).val();
+			$("#uxList .scrollable").scrollTo("[data-value^='" + letter + "']", 500, { easing: 'swing', axis: 'y' });
+		});
+
 		$("#btnVersion").live("click", function ()
 		{
 			var ver = $(this).data("id");
