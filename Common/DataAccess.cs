@@ -52,6 +52,95 @@ namespace Common
 			}
 		}
 
+		public static IEnumerable<UserItem> GetUsers()
+		{
+			try
+			{
+				using (var cn = new SqlCeConnection(ConnString))
+				{
+					cn.Open();
+
+					var p = new DynamicParameters();
+
+					var res = cn.Query("SELECT UserId, UserName, Password, Rights, IsActive FROM Users", p);
+
+					if (res == null) return null;
+
+					return res.Select(x => new UserItem
+					{
+						Id = x.UserId,
+						Name = x.UserName,
+						Password = x.Password,
+						Rights = x.Rights,
+						IsActive = x.IsActive
+					});
+				}
+			}
+			catch (Exception)
+			{
+				return null;
+			}
+		}
+
+		public static UserItem GetSingleUser(int id)
+		{
+			return GetUsers().FirstOrDefault(x => x.Id == id);
+		}
+
+		public static UserItem UpsertUser(int id, string name, string rights, string password, bool isActive)
+		{
+			try
+			{
+				using (var cn = new SqlCeConnection(ConnString))
+				{
+					cn.Open();
+
+					var p = new DynamicParameters();
+					p.Add("@userId", id);
+					p.Add("@name", name);
+					p.Add("@rights", rights);
+					p.Add("@password", password);
+					p.Add("@isActive", isActive);
+
+					string lastPart = "";
+					string firstquery = "";
+					string secondquery = "";
+					if (id > 0)
+					{
+						// edit
+						firstquery = "UPDATE Users SET UserName=@name, Password=@password, Rights=@rights, isActive=@isActive WHERE UserId=@UserId; ";
+						lastPart = "@UserId";
+					}
+					else
+					{
+						// insert
+						firstquery = "INSERT USERS(UserName, Rights, Password, IsActive) VALUES (@name, @rights, @password, @isActive);";
+						lastPart = "@@IDENTITY";
+					}
+
+					secondquery = "SELECT UserId, UserName, Password, Rights, IsActive FROM Users WHERE UserId=" + lastPart;
+
+					var exec = cn.Execute(firstquery, p);
+					var res = cn.Query(secondquery, p);
+
+					if (res == null) return null;
+
+					return res.Select(x => new UserItem
+					{
+						Id = x.UserId,
+						Name = x.UserName,
+						Password = x.Password,
+						Rights = x.Rights,
+						IsActive = x.IsActive
+					}).FirstOrDefault();
+				}
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
+
 		public static string InsertEmail(string email)
 		{
 			try

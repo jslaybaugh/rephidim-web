@@ -40,6 +40,7 @@
 					<ul class="dropdown-menu">
 						<li><a href="@(Url.Action<AdminController>(x => x.Emails()))">Email Notifications</a></li>
 						@if (User.IsInRole("Messages"))	{ <li><a href="@(Url.Action<AdminController>(x=>x.Messages()))">Manage Messages</a></li> }
+						@if (User.IsInRole("Dev"))	{ <li><a href="@(Url.Action<AdminController>(x=>x.Users()))">Manage Users</a></li> }
 						@if (User.IsInRole("Dev"))	{ <li><a href="@(Url.Action<AdminController>(x=>x.Parse()))">Parsing Utility</a></li> }
 						@if (User.IsInRole("Dev"))	{ <li><a id="lnkViewSource" href="#">View Source</a></li> }
 						<li class="divider"></li>

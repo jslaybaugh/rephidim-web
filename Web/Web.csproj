@@ -114,6 +114,7 @@
     <Compile Include="Areas\Ajax\Controllers\FilesController.cs" />
     <Compile Include="Areas\Ajax\Controllers\GlossaryController.cs" />
     <Compile Include="Areas\Ajax\Controllers\ScriptureController.cs" />
+    <Compile Include="Areas\Ajax\Controllers\UsersController.cs" />
     <Compile Include="CassetteConfiguration.cs" />
     <Compile Include="Code\AjaxHandleErrorAttribute.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
@@ -128,6 +129,7 @@
     </Compile>
     <Compile Include="Models\AdminMessagesView.cs" />
     <Compile Include="Models\AdminEmailsView.cs" />
+    <Compile Include="Models\AdminUsersView.cs" />
     <Compile Include="Models\ScriptureView.cs" />
     <Compile Include="Models\StaticView.cs" />
     <Compile Include="Models\SearchView.cs" />
@@ -209,6 +211,7 @@
     <Content Include="Content\img\microphone.png" />
     <Content Include="Content\img\ui-icons_f6cf3b_256x240.png" />
     <Content Include="Content\static\Chrono.html" />
+    <Content Include="Content\templates\users\tmpUserEdit.htm" />
     <Content Include="Content\templates\results\tmpVerseResults.htm" />
     <Content Include="Content\templates\messages\tmpMessageEdit.htm" />
     <Content Include="Content\templates\scripture\tmpChapterContent.htm" />
@@ -229,6 +232,7 @@
     <Content Include="humans.txt" />
     <Content Include="robots.txt" />
     <Content Include="Scripts\app\App.js" />
+    <Content Include="Scripts\app\Users.js" />
     <Content Include="Scripts\app\Master.js" />
     <Content Include="Scripts\app\Emails.js" />
     <Content Include="Scripts\app\Messages.js" />
@@ -256,6 +260,7 @@
     <Content Include="Scripts\pre\modernizr-2.0.min.js" />
     <Content Include="Content\static\Chronology.html" />
     <Content Include="Scripts\pre\syze.js" />
+    <Content Include="Views\Admin\Users.cshtml" />
     <None Include="Views\Emails\Notification.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

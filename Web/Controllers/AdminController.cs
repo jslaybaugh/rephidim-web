@@ -32,6 +32,16 @@ namespace Web.Controllers
 		}
 
 		[HttpGet]
+		public ActionResult Users()
+		{
+			if (!User.IsInRole("Dev")) return Redirect(Url.Action<HomeController>(x => x.Home()) + "?warning=" + Server.UrlEncode("You don't have access to that page"));
+			var m = new AdminUsersView();
+			m.Users = DataAccess.GetUsers();
+
+			return View("Users", m);
+		}
+
+		[HttpGet]
 		public ActionResult Emails()
 		{
 
