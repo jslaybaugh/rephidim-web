@@ -1,6 +1,6 @@
 ﻿<h1>All Books</h1>
 <div class="scrollable">
-	<ul class="unstyled list-lines">
+	<ul class="unstyled list-lines books">
 		{{each Books}}
 			<li>
 				<a class="book-link" name="${Id}" data-details="${Id}|${Name}|${Chapters}" href="#">${Name}</a> <span class="small-info">(${Chapters} chapter{{if Chapters != 1}}s{{/if}})</span>

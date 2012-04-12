@@ -14,8 +14,9 @@ else
 { 
 	<div class="row search header-content">
 		<div class="span12">
-			<div class="alert-message">
+			<div class="alert-message clearfix">
 				Search results for @Html.Raw(string.Join(" and ", Model.QueryParts.Select(x => "<span class='hilite'>" + x + "</span>"))) (@String.Format("{0:N2} seconds",(ViewBag.Duration as Double?)))
+				<a href="#" class="report-issue right" data-details="Search: @Model.OriginalQuery" title="Report Issue">@(Sprite.Image("~/App_Sprites/icon_report.png"))</a>
 			</div>
 		</div>
 	</div>

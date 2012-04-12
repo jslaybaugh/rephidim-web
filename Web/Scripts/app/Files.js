@@ -5,7 +5,7 @@
 (function ()
 {
 
-	var _firstLoad = true, _browsePath = "";
+	var _firstLoad = true, _browsePath = "", _editRights = false; ;
 
 	var loadFolders = function (path, callback)
 	{
@@ -35,6 +35,7 @@
 				var content = {};
 				content.Path = path;
 				content.Files = data;
+				content.EditRights = _editRights;
 				$("#tmpFolderContent").tmpl(content).appendTo($("#uxContents").empty());
 				$(window).resize();
 
@@ -56,7 +57,7 @@
 
 			if (_browsePath != "")
 			{
-				if (Modernizr.history)  history.replaceState({ Path: _browsePath }, _browsePath, App.ResolveUrl("~/Files/Browse/" + _browsePath));
+				if (Modernizr.history) history.replaceState({ Path: _browsePath }, _browsePath, App.ResolveUrl("~/Files/Browse/" + _browsePath));
 			}
 
 			loadContents(_browsePath, false);
@@ -87,7 +88,8 @@
 		}
 
 
-		$(".folder-expand").live("click", function ()
+		$(document)
+		.on("click", ".folder-expand", function ()
 		{
 			$(".popover").fadeOut();
 			var a = $(this);
@@ -107,9 +109,8 @@
 			}
 
 			return false;
-		});
-
-		$(".folder-view").live("click", function ()
+		})
+		.on("click", ".folder-view", function ()
 		{
 			$(".popover").fadeOut();
 			var a = $(this);
@@ -139,10 +140,11 @@
 
 	this.App.Files = Class.extend(
 	{
-		init: function (browsePath)
+		init: function (browsePath, editRights)
 		{
 			_browsePath = browsePath;
-			
+			_editRights = editRights;
+
 			loadFolders("", function (data)
 			{
 				$("#tmpFolders").tmpl(data).appendTo("#ulFolders");

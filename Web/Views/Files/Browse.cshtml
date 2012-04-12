@@ -23,7 +23,7 @@
 
 		$(function ()
 		{
-			var Files = new App.Files(@Html.Raw(Json.Encode(Model.Path ?? "")));
+			var Files = new App.Files(@Html.Raw(Json.Encode(Model.Path ?? "")), @Html.Raw(Json.Encode(User.IsInRole("Files"))));
 		});
 		
 	</script>

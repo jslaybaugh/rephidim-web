@@ -28,6 +28,11 @@ namespace Web.Controllers
 			return View("Home", m);
 		}
 
+		public ActionResult Help()
+		{
+			return View("Help");
+		}
+
 		public ActionResult Search(string query)
 		{
 			if (string.IsNullOrEmpty(query))

@@ -155,6 +155,7 @@
     <Content Include="App_Sprites\icon_favorite.png" />
     <Content Include="App_Sprites\icon_flow.png" />
     <Content Include="App_Sprites\icon_folder.png" />
+    <Content Include="App_Sprites\icon_folderadd.png" />
     <Content Include="App_Sprites\icon_gif.png" />
     <Content Include="App_Sprites\icon_goodreader.png" />
     <Content Include="App_Sprites\icon_help.png" />
@@ -167,6 +168,7 @@
     <Content Include="App_Sprites\icon_play.png" />
     <Content Include="App_Sprites\icon_plus.png" />
     <Content Include="App_Sprites\icon_png.png" />
+    <Content Include="App_Sprites\icon_report.png" />
     <Content Include="App_Sprites\icon_save.png" />
     <Content Include="App_Sprites\icon_screen.png" />
     <Content Include="App_Sprites\icon_search.png" />
@@ -261,6 +263,7 @@
     <Content Include="Content\static\Chronology.html" />
     <Content Include="Scripts\pre\syze.js" />
     <Content Include="Views\Admin\Users.cshtml" />
+    <None Include="App_Sprites\timeStamp.dat" />
     <None Include="Views\Emails\Notification.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -275,6 +278,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\Help.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Accounts\Login.cshtml" />
@@ -316,7 +320,6 @@
     <Content Include="Views\Admin\Parse.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App_Sprites\timeStamp.dat" />
     <None Include="Content\static\Atlas_Addenda.pdf" />
     <None Include="Content\static\Atlas_Chapter1.pdf" />
     <None Include="Content\static\Atlas_Chapter2.pdf" />

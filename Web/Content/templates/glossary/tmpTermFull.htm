@@ -1,6 +1,7 @@
 ﻿{{if ActiveTerm != null}}
 	<h1 id="uxTermName">
 		<ul class="toolbar">
+			<li><a href="#" class="report-issue" data-details="Term: ${ActiveTerm.Term}" title="Report Issue">{{html App.ChooseIcon("issue")}}</a></li>
 			{{if EditRights}}
 			<li><a href="#" id="btnDelete" data-id="${ActiveTerm.Id}" title="Delete Term">{{html App.ChooseIcon("delete")}}</a></li>
 			<li><a href="#" id="btnAdd" class="term-add" title="Add New Term">{{html App.ChooseIcon("new")}}</a></li>

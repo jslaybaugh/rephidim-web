@@ -19,6 +19,7 @@
 			success: function (data)
 			{
 				$("#uxChapter").text(chapterNum);
+				$(".report-issue").data("details", "Book: " + _book.Name + ", Chapter: " + chapterNum);
 				$("#tmpChapterContent").tmpl({ Verses: data }).appendTo($("#uxVerses").empty());
 				$(window).resize();
 				App.GlossaryHelper.HighlightTerms("#uxVerses");
@@ -190,7 +191,9 @@
 			};
 		}
 
-		$(".book-link").live("click", function ()
+		$(document)
+
+		.on("click", ".book-link", function ()
 		{
 			var lnk = $(this);
 			var details = lnk.data("details").split("|");
@@ -204,20 +207,19 @@
 			loadBook(null, null, true);
 
 			return false;
-		});
+		})
 
-		$("#rangeChapter, #cmbChapter").live("change", function ()
+		.on("change", "#rangeChapter, #cmbChapter", function ()
 		{
 			var chapter = $(this).val();
-			$("#uxChapter").text(chapter);
 			clearTimeout(_timer);
 			_timer = setTimeout(function ()
 			{
 				loadChapter(chapter, null, true);
 			}, 750);
-		});
+		})
 
-		$(document).on("click", ".verse-edit", function ()
+		.on("click", ".verse-edit", function ()
 		{
 			var lnk = $(this);
 			var id = lnk.data("id");

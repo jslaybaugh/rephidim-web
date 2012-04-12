@@ -60,7 +60,7 @@ namespace Web.Areas.Ajax.Controllers
 		}
 
 		[HttpPost]
-		public JsonResult SubmitIssue(string type, string email, string content, string url)
+		public JsonResult SubmitIssue(string email, string content, string url)
 		{
 			var cookie = Request.Cookies["rephidim"];
 			if (cookie == null)
@@ -72,7 +72,7 @@ namespace Web.Areas.Ajax.Controllers
 			Response.Cookies.Add(cookie);
 
 			dynamic msg = new Email("Issue");
-			msg.To = type.MatchesTrimmed("content") ? "bob.causey@sbcglobal.net" : "jslaybaugh@gmail.com";
+			msg.To = "jslaybaugh@gmail.com"; // "bob.causey@sbcglobal.net, jslaybaugh@gmail.com";
 			msg.From = email;
 			msg.Content = content;
 			msg.Url = url;

@@ -259,6 +259,9 @@
 
 /* LISTS */
 
+	.books { list-style-type: none; margin-left: 15px; padding: 0px; }
+	.books li { margin: 0px; padding: 0px; white-space: nowrap; }
+	.books a { text-transform:uppercase;}
 	.folders { list-style-type: none; margin-left: 15px; padding: 0px; }
 	.folders li { margin: 0px; padding: 0px; white-space: nowrap; }
 	.folder-expand { margin-left: -15px; display: inline-block; }
@@ -267,7 +270,7 @@
 	.toolbar { float: right; margin: -2px 0px 0px 0px; list-style: none; }
 	.toolbar li { float: left; margin: 0px; }
 
-	.list-lines li { white-space: nowrap; border-bottom: #fff solid 1px; }
+	.list-lines li { padding: 3px 0px 3px 0px; white-space: nowrap; border-bottom: #fff solid 1px; }
 	.lines { list-style-type: none; margin: 0px; padding: 0px; }
 	.lines li { padding: 3px 0px 3px 0px; border: none; border-bottom: solid 1px #ddd; width: 100%;display: block;clear:both; }
 
@@ -319,6 +322,7 @@
 	.ltMonitor .small-info {font-size:13px;line-height:18px;}
 	.ltMonitor p.church {font-size: 54px;line-height:50px;}
 	.ltMonitor p.scripture {font-size: 16px;line-height:16px;}
+
 
 /* PRINT STYLES */
 

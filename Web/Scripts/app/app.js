@@ -37,6 +37,35 @@
 			{
 				$(this).hide();
 			});
+
+			$(document).on("click", ".report-issue", function ()
+			{
+				var details = $(this).data("details");
+				var msg = prompt("Please provide helpful and descriptive information about your issue:");
+
+				if ($.trim(msg).length < 1) return false;
+
+				var email = prompt("Please provide your email address:", _LastUsedEmail);
+
+				if ($.trim(email) == "" || !email.match(App.Regex.EMAIL)) { App.ShowAlert("Invalid email!", "error"); return false; }
+
+				$.ajax(
+				{
+					url: App.ResolveUrl("~/Ajax/Emails/SubmitIssue"),
+					data: { email: email, content: details + "\n\n" + msg, url: location.href },
+					type: "POST",
+					success: function (data)
+					{
+						App.ShowAlert("Issue submitted! Thank you!", "success")
+					},
+					error: function (xhr)
+					{
+						App.HandleError(xhr);
+					}
+				});
+
+				return false;
+			});
 		},
 
 		ResolveUrl: function (relative, scheme)

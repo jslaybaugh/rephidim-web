@@ -36,7 +36,8 @@
 
 		ReadyPopover: function ()
 		{
-			$("#frmEmail").live("submit", function ()
+			$(document)
+			.on("submit", "#frmEmail", function ()
 			{
 				var email = $("#txtEmail").val();
 
@@ -74,9 +75,8 @@
 				});
 
 				return false;
-			});
-
-			$(".file-name").live("click", function (evt)
+			})
+			.on("click", ".file-name", function (evt)
 			{
 				var x = $(this);
 				$(".popover").hide();
@@ -96,9 +96,8 @@
 				$(".email-box").val(window._LastUsedEmail);
 
 				return false;
-			});
-
-			$(".popover-close").live("click", function (evt)
+			})
+			.on("click", ".popover-close", function (evt)
 			{
 				$(this).parents(".popover").fadeOut('fast');
 

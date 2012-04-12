@@ -199,19 +199,21 @@
 			};
 		}
 
-		$(".term-link").live("click", function ()
+		$(document)
+		
+		.on("click", ".term-link", function ()
 		{
 			getTerm($(this).data("value"), true);
 			return false;
-		});
+		})
 
-		$("#cmbAlpha").on("change", function ()
+		.on("change", "#cmbAlpha", function ()
 		{
 			var letter = $(this).val();
 			$("#uxList .scrollable").scrollTo("[data-value^='" + letter + "']", 500, { easing: 'swing', axis: 'y' });
-		});
+		})
 
-		$("#btnVersion").live("click", function ()
+		.on("click", "#btnVersion", function ()
 		{
 			var ver = $(this).data("id");
 			var data = { Version: ver };
@@ -237,9 +239,9 @@
 				]
 			});
 			return false;
-		});
+		})
 
-		$("#btnDelete").live("click", function ()
+		.on("click", "#btnDelete", function ()
 		{
 			var id = $(this).data("id");
 			$("#uxTermsDialog").html("Are you sure you want to PERMANENTLY delete this term???<br/><br/>This action CANNOT be undone!");
@@ -264,15 +266,15 @@
 				]
 			});
 			return false;
-		});
+		})
 
-		$(".term-add").live("click", function ()
+		.on("click", ".term-add", function ()
 		{
 			editTerm();
 			return false;
-		});
+		})
 
-		$("#btnEdit").live("click", function ()
+		.on("click", "#btnEdit", function ()
 		{
 			$.ajax(
 			{
