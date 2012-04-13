@@ -231,6 +231,8 @@
 	.no-cssgradients .module h1 { background: #222; }
 	.module h1 a, .module h1 a:link, .module h1 a:visited, .module h1 a:hover, .module h1 a:active { color: #eee; text-decoration: underline; }
 	.module > div { padding: 5px; box-sizing: border-box; }
+	
+	.subcontent { -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; background:#efefef; border:solid #fff 1px; margin: 10px 0px 0px 0px; padding:10px;  }
 
 	.term-link { color: #0069D6; text-decoration: underline; }
 	.verse-link { color: #080; text-decoration: underline; }

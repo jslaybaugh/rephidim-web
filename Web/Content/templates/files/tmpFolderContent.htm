@@ -2,11 +2,20 @@
 	<ul class="toolbar">
 		<li><a href="#" class="report-issue" data-details="Path: ${Path}" title="Report Issue">{{html App.ChooseIcon("issue")}}</a></li>
 		{{if EditRights}}
-		<li><a href="#" id="btnUpload" title="Upload to this directory">{{html App.ChooseIcon("new")}}</a></li>
-		<li><a href="#" id="btnNewFolder" title="Add new subfolder to this directory">{{html App.ChooseIcon("folderadd")}}</a></li>
+		<li><a href="#" id="btnUpload" title="Add to this directory">{{html App.ChooseIcon("new")}}</a></li>
 		{{/if}}
 	</ul>
 	${Path.length == "" ? "Home Directory" : Path.replace(/\//ig," / ")}
+	{{if EditRights}}
+	<div class="subcontent clearfix none">
+		<a href="#" class="right" id="btnNewFolder" title="Add new subfolder to this directory">{{html App.ChooseIcon("folderadd")}}</a>
+		<p>Select a file to upload to this directory:</p>
+		<form method="post" enctype="multipart/form-data" action="${App.ResolveUrl('~/Files/Upload') }" style="margin:0px;">
+			<input type="file" name="file" />
+			<input type="hidden" name="path" value="${Path}" />
+		</form>
+	</div>
+	{{/if}}
 </h1>
 <div id="uxFiles" class="scrollable">
 	{{if Files != null && Files.length > 0}}

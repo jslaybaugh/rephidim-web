@@ -38,7 +38,9 @@
 				$(this).hide();
 			});
 
-			$(document).on("click", ".report-issue", function ()
+			$(document)
+
+			.on("click", ".report-issue", function ()
 			{
 				var details = $(this).data("details");
 				var msg = prompt("Please provide helpful and descriptive information about your issue:");

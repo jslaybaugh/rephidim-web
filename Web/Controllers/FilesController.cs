@@ -42,6 +42,7 @@ namespace Web.Controllers
 		{
 			try
 			{
+				var orig = path;
 				if (file == null) throw new Exception("File not supplied.");
 				if (!User.IsInRole("Files")) return Redirect(Url.Action<FilesController>(x => x.Browse(null)) + "?warning=Access Denied.");
 
@@ -55,7 +56,7 @@ namespace Web.Controllers
 				var temp = path.EndsWith("\\") ? (path + file.FileName) : (path + "\\" + file.FileName);
 
 				file.SaveAs(temp);
-				return Redirect(Url.Action<FilesController>(x => x.Browse(path)) + "?success=File Saved!");
+				return Redirect(Url.Action<FilesController>(x => x.Browse(orig)) + "?success=File Saved!");
 			}
 			catch (Exception ex)
 			{

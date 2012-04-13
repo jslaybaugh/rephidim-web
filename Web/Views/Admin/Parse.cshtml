@@ -9,7 +9,7 @@
 				Use saved rules: <select data-bind="options: SavedRules, optionsText: 'Name', optionsValue: 'Id', optionsCaption: 'None, make my own', value: SavedRuleId"></select>
 				<br />Or make your own:<br />
 				<ul class="unstyled" data-bind="template: { name: 'tmpRules', foreach: Rules}"></ul>
-				<input type="button" value="Add New Rule" data-bind="click: AddRule" /> <input type="submit" value="Parse" />
+				<input type="button" class="btn" value="Add New Rule" data-bind="click: AddRule" /> <input type="submit" class="btn btn-primary" value="Parse" />
 				<div>
 					<textarea style="font-family:Lucida Console" data-bind="value: Source" class="span6" wrap="off" rows="20"></textarea>
 					<textarea style="font-family:Lucida Console" data-bind="value: Result" class="span6" wrap="off" rows="20"></textarea>
@@ -88,7 +88,7 @@
 			Expr: <input data-bind="value:Expr" type="text" class="span5" />
 			Attr: <input data-bind="value:Attr" type="text" class="span1" />
 			Replace: <input data-bind="value:Replace" type="text" class="span2" />
-			<input type="button" value="Remove" data-bind="click: $root.DeleteRule, visible: $root.Rules().length > 1" />
+			<input type="button" class="btn" value="Remove" data-bind="click: $root.DeleteRule, visible: $root.Rules().length > 1" />
 		</li>
 	</script>
 }

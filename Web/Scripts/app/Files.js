@@ -138,7 +138,12 @@
 		})
 		.on("click", "#btnUpload", function ()
 		{
+			var div = $(this).parents("h1").find(".subcontent");
+			
+			if (div.is(":visible")) div.slideUp('fast');
+			else div.slideDown('fast');
 
+			return false;
 		})
 		.on("click", "#btnNewFolder", function ()
 		{
@@ -179,6 +184,10 @@
 			});
 
 			return false;
+		})
+		.on("change", "[type='file']", function ()
+		{
+			$(this).parent("form").submit();
 		});
 
 	};
