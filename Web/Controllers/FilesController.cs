@@ -7,6 +7,7 @@ using System.IO;
 using Web.Models;
 using System.Configuration;
 using Postal;
+using MvcContrib;
 
 namespace Web.Controllers
 {
@@ -33,6 +34,34 @@ namespace Web.Controllers
 		{
 			var m = GetData(path);
 			return File(m.Path, m.ContentType, m.Name);
+		}
+
+		[Authorize]
+		[HttpPost]
+		public ActionResult Upload(HttpPostedFileBase file, string path)
+		{
+			try
+			{
+				if (file == null) throw new Exception("File not supplied.");
+				if (!User.IsInRole("Files")) return Redirect(Url.Action<FilesController>(x => x.Browse(null)) + "?warning=Access Denied.");
+
+				string root = ConfigurationManager.AppSettings["FilesRoot"];
+				root = root.Trim().EndsWith(@"\") ? root = root.Substring(0, root.Length - 2) : root;
+
+				if (!path.StartsWith("/")) path = "/" + path;
+
+				path = string.Format(@"{0}{1}", ConfigurationManager.AppSettings["FilesRoot"], path.Replace("/", "\\"));
+
+				var temp = path.EndsWith("\\") ? (path + file.FileName) : (path + "\\" + file.FileName);
+
+				file.SaveAs(temp);
+				return Redirect(Url.Action<FilesController>(x => x.Browse(path)) + "?success=File Saved!");
+			}
+			catch (Exception ex)
+			{
+				return Redirect(Url.Action<FilesController>(x => x.Browse(null)) + "?error=" + Server.UrlEncode(ex.Message));
+			}
+
 		}
 
 		private dynamic GetData(string path)

@@ -53,5 +53,23 @@ namespace Web.Areas.Ajax.Controllers
 			return Json(true);
 		}
 
+		[HttpPost]
+		public JsonResult NewFolder(string name, string path)
+		{
+			if (User.IsInRole("Files"))
+			{
+				string root = ConfigurationManager.AppSettings["FilesRoot"];
+				root = root.Trim().EndsWith(@"\") ? root = root.Substring(0, root.Length - 2) : root;
+
+				var fullpath = string.Format(@"{0}{1}", ConfigurationManager.AppSettings["FilesRoot"], path.Replace("/", "\\"));
+
+				Directory.CreateDirectory(fullpath.EndsWith("\\") ? fullpath + name : fullpath + "\\" + name);
+
+				return Json(true);
+			}
+			else
+				throw new Exception("Access Denied");
+		}
+
 	}
 }

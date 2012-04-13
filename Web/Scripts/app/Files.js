@@ -5,7 +5,7 @@
 (function ()
 {
 
-	var _firstLoad = true, _browsePath = "", _editRights = false; ;
+	var _firstLoad = true, _browsePath = "", _editRights = false, _currentPath = "";
 
 	var loadFolders = function (path, callback)
 	{
@@ -36,6 +36,7 @@
 				content.Path = path;
 				content.Files = data;
 				content.EditRights = _editRights;
+				_currentPath = path;
 				$("#tmpFolderContent").tmpl(content).appendTo($("#uxContents").empty());
 				$(window).resize();
 
@@ -132,6 +133,50 @@
 			}
 
 			loadContents(path, true);
+
+			return false;
+		})
+		.on("click", "#btnUpload", function ()
+		{
+
+		})
+		.on("click", "#btnNewFolder", function ()
+		{
+			var name = prompt("Enter the name of the new folder you'd like to add to this directory:");
+
+			if ($.trim(name).length < 1) return false;
+
+			$.ajax(
+			{
+				url: App.ResolveUrl("~/Ajax/Files/NewFolder"),
+				type: "POST",
+				data: {
+					name: name,
+					path: "/" + _currentPath
+				},
+				success: function (data)
+				{
+					App.ShowAlert("Directory Added", "success");
+					loadFolders(_currentPath, function (data)
+					{
+						if (_currentPath == "")
+						{
+							$("#tmpFolders").tmpl(data).appendTo($("#ulFolders").empty());
+						}
+						else
+						{
+							var a = $("[data-path='" + _currentPath + "']");
+							a.siblings(".folder-expand").removeClass("ui-icon-plus").addClass("ui-icon-minus");
+							$("#tmpFolders").tmpl(data).appendTo($("<ul class='folders'></ul>").appendTo(a.parent("li")));
+						}
+					});
+
+				},
+				error: function (xhr)
+				{
+					App.HandleError(xhr);
+				}
+			});
 
 			return false;
 		});
