@@ -1,0 +1,51 @@
+﻿<h1>
+	<span class="right">
+		<select class="span1" id="cmbAlpha">
+			<option value="-">#</option>
+			<option>A</option>
+			<option>B</option>
+			<option>C</option>
+			<option>D</option>
+			<option>E</option>
+			<option>F</option>
+			<option>G</option>
+			<option>H</option>
+			<option>I</option>
+			<option>J</option>
+			<option>K</option>
+			<option>L</option>
+			<option>M</option>
+			<option>N</option>
+			<option>O</option>
+			<option>P</option>
+			<option>Q</option>
+			<option>R</option>
+			<option>S</option>
+			<option>T</option>
+			<option>U</option>
+			<option>V</option>
+			<option>W</option>
+			<option>X</option>
+			<option>Y</option>
+			<option>Z</option>
+		</select>
+	</span>
+	${Terms.length} Terms
+	{{if EditRights}}
+		<a href="#" id="btnVersion" data-id="${Version}" class="small-info">v.${Version}</a>
+	{{else}} 
+		<span class="small-info">v.${Version}</span>  
+	{{/if}}
+</h1>
+<div class="scrollable">
+	<ul class="unstyled list-lines">
+		{{each Terms}}
+			<li>
+				<a class="term-link" name="${Id}" data-value="${Term}" href="#">${Term}</a>
+				{{if IsNew}}<span class="label label-success">New: ${App.DateFromJson(DateCreated).format('m/d h:MM TT')}</span>{{/if}}
+				{{if !IsNew && IsModified}}<span class="label label-warning">Modified: ${App.DateFromJson(DateModified).format('m/d h:MM TT')}</span>{{/if}}
+			</li>
+		{{/each}}
+	</ul>
+</div>
+		

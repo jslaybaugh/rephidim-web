@@ -38,7 +38,7 @@ namespace Web.Areas.Ajax.Controllers
 		{
 			if (User.IsInRole("Glossary"))
 			{
-				return Json(DataAccess.UpsertTerm(id, term, definition, updateDate), JsonRequestBehavior.AllowGet);
+				return Json(DataAccess.UpsertTerm(id, term, definition, updateDate));
 			}
 			else
 				throw new Exception("Access Denied.");
@@ -49,7 +49,7 @@ namespace Web.Areas.Ajax.Controllers
 		{
 			if (User.IsInRole("Glossary"))
 			{
-				return Json(DataAccess.DeleteTerm(id), JsonRequestBehavior.AllowGet);
+				return Json(DataAccess.DeleteTerm(id));
 			}
 			else
 				throw new Exception("Access Denied.");
@@ -60,7 +60,7 @@ namespace Web.Areas.Ajax.Controllers
 		{
 			if (User.IsInRole("Glossary"))
 			{
-				return Json(DataAccess.UpdateKeyValue("GlossaryVersion",version), JsonRequestBehavior.AllowGet);
+				return Json(DataAccess.UpdateKeyValue("GlossaryVersion",version));
 			}
 			else
 				throw new Exception("Access Denied.");

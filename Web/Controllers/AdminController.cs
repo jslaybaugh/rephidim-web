@@ -22,6 +22,12 @@ namespace Web.Controllers
         }
 
 		[HttpGet]
+		public ActionResult Draw()
+		{
+			return View("Draw");
+		}
+
+		[HttpGet]
 		public ActionResult Messages()
 		{
 			if (!User.IsInRole("Messages")) return Redirect(Url.Action<HomeController>(x => x.Home()) + "?warning=" + Server.UrlEncode("You don't have access to that page"));

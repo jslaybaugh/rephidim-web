@@ -261,9 +261,11 @@
     <Content Include="Scripts\libs\module.txt" />
     <Content Include="Scripts\pre\modernizr-2.0.min.js" />
     <Content Include="Content\static\Chronology.html" />
+    <Content Include="Bookmarklets\overlay.js" />
     <Content Include="Scripts\pre\syze.js" />
     <Content Include="Views\Admin\Users.cshtml" />
     <None Include="App_Sprites\timeStamp.dat" />
+    <Content Include="Views\Admin\Draw.cshtml" />
     <None Include="Views\Emails\Notification.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

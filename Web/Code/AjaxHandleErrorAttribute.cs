@@ -23,7 +23,6 @@ namespace Web.Code
 				|| IsFiltered(filterContext))     // filtered?
 			{ }
 
-
 			filterContext.HttpContext.Response.TrySkipIisCustomErrors = true;  // stupid IIS7
 
 			HttpRequestBase request = filterContext.RequestContext.HttpContext.Request;

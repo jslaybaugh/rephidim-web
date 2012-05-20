@@ -1,0 +1,44 @@
+﻿@model StaticView
+
+@{
+	ViewBag.Title = Model.Path;
+	ViewBag.NavOther = true;
+
+	var sizes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+	sizes.Add("TapeList.pdf", "30000px");
+	sizes.Add("Atlas_Front.pdf", "10000px");
+	sizes.Add("Atlas_Chapter1.pdf", "10000px");
+	sizes.Add("Atlas_Chapter2.pdf", "16000px");
+	sizes.Add("Atlas_Chapter3.pdf", "17000px");
+	sizes.Add("Atlas_Chapter4.pdf", "32000px");
+	sizes.Add("Atlas_Chapter5.pdf", "5000px");
+	sizes.Add("Atlas_Addendums.pdf", "160000px");
+
+	bool found = sizes.ContainsKey(Model.Path);
+	string height = "auto";
+
+
+	if (found) { height = sizes[Model.Path]; }
+	
+}
+
+@if (System.Text.RegularExpressions.Regex.IsMatch(Request.UserAgent, @"(ipad|ipod|iphone)", System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+{ 
+	@* iOS device with stupid scrolling iframe *@
+	@* we also hardcode the height of 30000 px if it is a pdf because thats how long the PDF is and thats the only PDF we're showing here. *@
+	<iframe class="module" style="width:100%;border:none 0;height:@(height);" src="@Href("~/Content/static/" + @Model.Path)"></iframe>
+}
+else
+{ 
+	<iframe id="uxContent" class="module primary-content" style="width:100%;border:none 0;" src="@Href("~/Content/static/" + @Model.Path)"></iframe>
+}
+
+@section scripts
+{
+	<script type="text/javascript">
+		$(function ()
+		{
+			var static = new App.Static();
+		});
+	</script>
+}

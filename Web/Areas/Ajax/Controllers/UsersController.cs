@@ -35,7 +35,7 @@ namespace Web.Areas.Ajax.Controllers
 		{
 			if (User.IsInRole("Dev"))
 			{
-				return Json(DataAccess.UpsertUser(id, name, rights, password, isActive), JsonRequestBehavior.AllowGet);
+				return Json(DataAccess.UpsertUser(id, name, rights, password, isActive));
 			}
 			else
 				throw new Exception("Access Denied.");

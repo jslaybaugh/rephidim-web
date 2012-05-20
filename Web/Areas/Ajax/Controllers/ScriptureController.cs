@@ -38,7 +38,7 @@ namespace Web.Areas.Ajax.Controllers
 		{
 			if (User.IsInRole("Scripture"))
 			{
-				return Json(DataAccess.UpdateVerse(id, text, notes, translationId, updateDate), JsonRequestBehavior.AllowGet);
+				return Json(DataAccess.UpdateVerse(id, text, notes, translationId, updateDate));
 			}
 			else
 				throw new Exception("Access Denied.");

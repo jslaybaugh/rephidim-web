@@ -1,0 +1,27 @@
+﻿<div id="uxUserDialogError" class="alert-message error none"></div>
+<form id="frmUserEdit" class="form-inline">
+	<div class="control-group">
+		<label class="control-label" for="txtUserName">UserName</label>
+		<div class="controls">
+			<input type="text" id="txtUserName" class="span3" value="${Name}" />
+			<input type="hidden" id="hdnUserId" value="${Id}" />
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="txtPassword">Password</label>
+		<div class="controls">
+			<input type="text" id="txtPassword" class="span3" value="${Password}" />
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="txtRights">Rights</label>
+		<div class="controls">
+			<input type="text" id="txtRights" class="span4" value="${Rights}" />
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="controls">
+			<label><input type="checkbox" id="chkUserIsActive" {{if IsActive}}checked="checked"{{/if}} /> Active</label>
+		</div>
+	</div>
+</form>

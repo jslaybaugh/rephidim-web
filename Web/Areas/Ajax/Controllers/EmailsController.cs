@@ -26,7 +26,7 @@ namespace Web.Areas.Ajax.Controllers
 			if (User.IsInRole("Emails"))
 			{
 				DataAccess.DeleteEmail(email);
-				return Json("Email removed!", JsonRequestBehavior.AllowGet);
+				return Json("Email removed!");
 			}
 			else
 			{
@@ -56,7 +56,7 @@ namespace Web.Areas.Ajax.Controllers
 			cookie.Expires = DateTime.Now.AddMonths(12);
 			Response.Cookies.Add(cookie);
 
-			return Json(DataAccess.InsertEmail(email), JsonRequestBehavior.AllowGet);
+			return Json(DataAccess.InsertEmail(email));
 		}
 
 		[HttpPost]
@@ -72,7 +72,7 @@ namespace Web.Areas.Ajax.Controllers
 			Response.Cookies.Add(cookie);
 
 			dynamic msg = new Email("Issue");
-			msg.To = "jslaybaugh@gmail.com"; // "bob.causey@sbcglobal.net, jslaybaugh@gmail.com";
+			msg.To = "bobcausey@sbcglobal.net, jslaybaugh@gmail.com";
 			msg.From = email;
 			msg.Content = content;
 			msg.Url = url;

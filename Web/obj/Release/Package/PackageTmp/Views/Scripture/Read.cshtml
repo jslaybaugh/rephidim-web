@@ -1,0 +1,27 @@
+﻿@model Web.Models.ScriptureView
+
+@{
+	ViewBag.Title = "Bible";
+	ViewBag.NavScripture = true;
+	Bundles.Reference("content/templates/scripture");
+}
+
+<div class="row">
+	<div class="span3 module primary-content" id="uxBooks"></div>
+	<div class="span9 module primary-content" id="uxContents"></div>
+</div>
+<div id="uxVerseDialog" class="none"></div>
+
+@section scripts
+{
+
+	<script type="text/javascript">
+
+		$(function ()
+		{
+			var Scripture = new App.Scripture(@Html.Raw(Json.Encode(Model.Book)), @Html.Raw(Json.Encode(Model.Chapter)), @Html.Raw(Json.Encode(Model.Verse)));
+		});
+		
+	</script>
+
+}

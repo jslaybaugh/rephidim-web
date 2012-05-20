@@ -31,7 +31,7 @@ namespace Web.Areas.Ajax.Controllers
 		public JsonResult Delete(int id)
 		{
 			if (User.IsInRole("Messages"))
-				return Json(DataAccess.DeleteMessage(id), JsonRequestBehavior.AllowGet);
+				return Json(DataAccess.DeleteMessage(id));
 			else
 				throw new Exception("Access Denied");
 		}
@@ -41,7 +41,7 @@ namespace Web.Areas.Ajax.Controllers
 		{
 			if (User.IsInRole("Messages"))
 			{
-				return Json(DataAccess.UpsertMessage(id, value, style, isActive, onHomePage, onLoginPage), JsonRequestBehavior.AllowGet);
+				return Json(DataAccess.UpsertMessage(id, value, style, isActive, onHomePage, onLoginPage));
 			}
 			else
 				throw new Exception("Access Denied.");
