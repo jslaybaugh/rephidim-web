@@ -185,7 +185,6 @@
     <Content Include="App_Sprites\sprite0.png" />
     <Content Include="Content\css\app.css" />
     <Content Include="Content\css\bootstrap.css" />
-    <Content Include="Content\css\fonts.css" />
     <Content Include="Content\css\jquery-ui-1.8.16.custom.css" />
     <Content Include="Content\css\module.txt" />
     <Content Include="Content\img\ajax-loader-light.gif" />

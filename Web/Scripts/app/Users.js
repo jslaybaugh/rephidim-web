@@ -42,12 +42,12 @@
 				{
 					text: "Save",
 					click: saveUser,
-					class: "btn btn-primary"
+					"class": "btn btn-primary"
 				},
 				{
 					text: "Cancel",
 					click: function () { $(this).dialog("close"); },
-					class: "btn"
+					"class": "btn"
 				}
 			]
 		});

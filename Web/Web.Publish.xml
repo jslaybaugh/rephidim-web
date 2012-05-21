@@ -17,7 +17,7 @@
     <file relUrl="Content/templates/results/tmpVerseResults.htm" publishTime="04/13/2012 10:19:10" />
     <file relUrl="bin/Microsoft.Web.Infrastructure.dll" publishTime="12/17/2011 17:46:35" />
     <file relUrl="bin/Microsoft.Web.Samples.ImageOptimizationFramework.dll" publishTime="12/27/2011 14:57:18" />
-    <file relUrl="App_Sprites/sprite0.png" publishTime="05/19/2012 18:38:51" />
+    <file relUrl="App_Sprites/sprite0.png" publishTime="05/21/2012 16:50:19" />
     <file relUrl="Views/Web.config" publishTime="01/24/2012 08:46:19" />
     <file relUrl="bin/NotFoundMvc.dll" publishTime="02/13/2012 21:45:06" />
     <file relUrl="Content/img/ui-bg_inset-soft_95_fef1ec_1x100.png" publishTime="01/07/2012 08:53:07" />
@@ -25,6 +25,7 @@
     <file relUrl="Content/img/ui-bg_flat_0_aaaaaa_40x100.png" publishTime="01/07/2012 08:53:07" />
     <file relUrl="bin/AjaxMin.pdb" publishTime="12/17/2011 17:46:33" />
     <file relUrl="Content/templates/files/tmpFolderContent.htm" publishTime="04/13/2012 10:23:52" />
+    <file relUrl="App_Sprites/icon_folderadd.png" publishTime="04/12/2012 17:29:06" />
     <file relUrl="Content/img/ui-bg_highlight-soft_75_cccccc_1x100.png" publishTime="01/07/2012 08:53:07" />
     <file relUrl="bin/System.Web.Razor.dll" publishTime="02/13/2012 19:52:30" />
     <file relUrl="App_Sprites/icon_screen.png" publishTime="12/28/2011 09:51:47" />
@@ -36,43 +37,40 @@
     <file relUrl="App_Sprites/icon_edit.png" publishTime="12/17/2011 17:28:03" />
     <file relUrl="Scripts/libs/jquery.ba-throttle-debounce.min.js" publishTime="12/17/2011 17:30:49" />
     <file relUrl="Content/img/arcs-114.png" publishTime="02/04/2012 17:00:20" />
-    <file relUrl="App_Sprites/icon_folder.png" publishTime="12/17/2011 17:28:03" />
-    <file relUrl="Views/Home/Search.cshtml" publishTime="04/12/2012 17:20:51" />
+    <file relUrl="App_Sprites/icon_plus.png" publishTime="12/17/2011 17:28:03" />
     <file relUrl="App_Sprites/icon_email.png" publishTime="12/17/2011 17:28:03" />
     <file relUrl="Views/Admin/Draw.cshtml" publishTime="04/27/2012 14:19:02" />
-    <file relUrl="bin/Web.dll" publishTime="05/19/2012 18:38:55" />
+    <file relUrl="bin/Web.dll" publishTime="05/21/2012 16:54:12" />
     <file relUrl="Scripts/libs/jquery.scrollTo-1.4.2.js" publishTime="12/17/2011 17:30:49" />
     <file relUrl="Scripts/app/FileHelper.js" publishTime="02/28/2012 15:38:46" />
-    <file relUrl="Views/Emails/FileAttach.cshtml" publishTime="12/28/2011 12:05:11" />
     <file relUrl="bin/Dapper.pdb" publishTime="02/13/2012 19:51:55" />
     <file relUrl="Content/templates/glossary/tmpTermVersion.htm" publishTime="02/20/2012 15:22:52" />
     <file relUrl="App_Sprites/icon_binoculars.png" publishTime="12/17/2011 17:28:03" />
-    <file relUrl="App_Data/Rephidim.sdf" publishTime="05/19/2012 18:39:03" />
+    <file relUrl="App_Data/Rephidim.sdf" publishTime="05/21/2012 16:45:42" />
     <file relUrl="Content/templates/files/tmpFolders.htm" publishTime="02/13/2012 14:51:50" />
     <file relUrl="Content/img/ui-icons_454545_256x240.png" publishTime="01/07/2012 08:53:07" />
     <file relUrl="App_Sprites/icon_pdfmulti.png" publishTime="01/07/2012 07:06:05" />
     <file relUrl="Content/img/bg.png" publishTime="02/13/2012 14:51:50" />
     <file relUrl="Content/templates/glossary/tmpTermEdit.htm" publishTime="02/13/2012 14:51:50" />
     <file relUrl="Content/templates/global/tmpPopoverTitle.htm" publishTime="01/26/2012 23:13:46" />
-    <file relUrl="Scripts/app/Scripture.js" publishTime="04/12/2012 17:18:11" />
+    <file relUrl="Scripts/app/Scripture.js" publishTime="05/21/2012 15:36:03" />
     <file relUrl="Content/img/ajax-loader-light.gif" publishTime="12/28/2011 13:00:36" />
     <file relUrl="Global.asax" publishTime="12/17/2011 17:09:16" />
     <file relUrl="App_Sprites/icon_unsub.png" publishTime="01/30/2012 22:53:46" />
-    <file relUrl="Scripts/app/Glossary.js" publishTime="02/28/2012 15:38:46" />
+    <file relUrl="Scripts/app/Glossary.js" publishTime="05/21/2012 15:36:42" />
     <file relUrl="Content/templates/scripture/tmpVerseEdit.htm" publishTime="02/13/2012 14:51:50" />
     <file relUrl="Content/css/jquery-ui-1.8.16.custom.css" publishTime="01/07/2012 11:48:06" />
     <file relUrl="Scripts/pre/modernizr-2.0.min.js" publishTime="12/17/2011 17:30:49" />
     <file relUrl="Views/Emails/_ViewStart.cshtml" publishTime="02/13/2012 19:52:32" />
     <file relUrl="Views/Shared/_NoAuth.cshtml" publishTime="01/28/2012 13:13:41" />
-    <file relUrl="App_Sprites/icon_plus.png" publishTime="12/17/2011 17:28:03" />
-    <file relUrl="Scripts/app/Messages.js" publishTime="02/20/2012 14:42:45" />
+    <file relUrl="Web.config" publishTime="05/21/2012 16:54:22" />
+    <file relUrl="Scripts/app/Messages.js" publishTime="05/21/2012 15:36:03" />
     <file relUrl="App_Sprites/icon_gif.png" publishTime="12/17/2011 17:28:03" />
     <file relUrl="App_Sprites/icon_jpg.png" publishTime="12/17/2011 17:28:03" />
     <file relUrl="Views/Admin/Users.cshtml" publishTime="02/25/2012 21:10:14" />
     <file relUrl="App_Sprites/icon_zoom.png" publishTime="12/17/2011 17:28:03" />
     <file relUrl="App_Sprites/icon_text.png" publishTime="12/17/2011 17:28:03" />
     <file relUrl="packages.config" publishTime="05/17/2012 14:33:30" />
-    <file relUrl="Content/css/fonts.css" publishTime="01/02/2012 16:52:11" />
     <file relUrl="Scripts/libs/jquery-1.7.1.js" publishTime="12/17/2011 17:30:49" />
     <file relUrl="bin/NotFoundMvc.pdb" publishTime="02/13/2012 21:45:06" />
     <file relUrl="Content/img/ui-icons_222222_256x240.png" publishTime="01/07/2012 08:53:07" />
@@ -80,10 +78,10 @@
     <file relUrl="Scripts/app/App.js" publishTime="04/13/2012 09:46:31" />
     <file relUrl="Scripts/app/Static.js" publishTime="01/26/2012 23:30:54" />
     <file relUrl="bin/RazorEngine.dll" publishTime="02/13/2012 19:52:30" />
-    <file relUrl="App_Sprites/highCompat.css" publishTime="05/19/2012 18:38:51" />
+    <file relUrl="App_Sprites/highCompat.css" publishTime="05/21/2012 16:50:19" />
     <file relUrl="Content/css/bootstrap.css" publishTime="02/20/2012 14:34:06" />
     <file relUrl="bin/itextsharp.dll" publishTime="11/30/2011 15:08:05" />
-    <file relUrl="Content/static/Chronology.html" publishTime="01/01/2012 09:25:40" />
+    <file relUrl="App_Sprites/icon_mp3.png" publishTime="12/17/2011 17:28:03" />
     <file relUrl="App_Sprites/icon_tif.png" publishTime="12/17/2011 17:28:03" />
     <file relUrl="Views/Admin/Upload.cshtml" publishTime="04/13/2012 09:40:49" />
     <file relUrl="bin/Jurassic.dll" publishTime="12/17/2011 17:46:33" />
@@ -92,22 +90,23 @@
     <file relUrl="Content/img/ui-icons_cd0a0a_256x240.png" publishTime="01/07/2012 08:53:07" />
     <file relUrl="App_Sprites/icon_save.png" publishTime="12/17/2011 17:28:03" />
     <file relUrl="Content/img/ui-bg_glass_55_fbf9ee_1x400.png" publishTime="01/07/2012 08:53:07" />
-    <file relUrl="App_Sprites/lowCompat.css" publishTime="05/19/2012 18:38:51" />
+    <file relUrl="App_Sprites/lowCompat.css" publishTime="05/21/2012 16:50:19" />
     <file relUrl="humans.txt" publishTime="01/03/2012 09:58:58" />
     <file relUrl="bin/Cassette.Views.dll" publishTime="02/12/2012 14:58:29" />
-    <file relUrl="Views/Scripture/Read.cshtml" publishTime="02/13/2012 14:51:50" />
-    <file relUrl="App_Sprites/icon_flow.png" publishTime="12/17/2011 17:28:03" />
+    <file relUrl="Content/static/Chronology.html" publishTime="01/01/2012 09:25:40" />
+    <file relUrl="App_Sprites/icon_folder.png" publishTime="12/17/2011 17:28:03" />
     <file relUrl="Content/templates/users/tmpUserEdit.htm" publishTime="02/25/2012 21:07:14" />
-    <file relUrl="Scripts/app/Users.js" publishTime="02/25/2012 21:08:08" />
+    <file relUrl="Scripts/app/Users.js" publishTime="05/21/2012 15:36:03" />
     <file relUrl="Content/img/arcs-057.png" publishTime="02/04/2012 17:01:04" />
-    <file relUrl="Views/_ViewStart.cshtml" publishTime="01/27/2012 01:35:02" />
+    <file relUrl="Content/img/ui-bg_glass_65_ffffff_1x400.png" publishTime="01/07/2012 08:53:07" />
     <file relUrl="App_Sprites/icon_delete.png" publishTime="01/07/2012 11:24:11" />
-    <file relUrl="bin/Common.dll" publishTime="05/19/2012 18:38:50" />
+    <file relUrl="bin/Common.dll" publishTime="05/21/2012 16:54:11" />
     <file relUrl="Scripts/app/Emails.js" publishTime="01/30/2012 23:21:39" />
     <file relUrl="Content/templates/scripture/tmpBookList.htm" publishTime="04/12/2012 15:49:54" />
     <file relUrl="App_Sprites/icon_goodreader.png" publishTime="12/17/2011 17:28:03" />
     <file relUrl="bin/MvcContrib.dll" publishTime="12/17/2011 17:49:39" />
     <file relUrl="Scripts/libs/jquery.tmpl.js" publishTime="12/17/2011 17:30:49" />
+    <file relUrl="App_Sprites/icon_report.png" publishTime="04/12/2012 16:50:28" />
     <file relUrl="bin/Postal.dll" publishTime="01/29/2012 13:59:03" />
     <file relUrl="Views/Admin/Emails.cshtml" publishTime="04/12/2012 17:24:21" />
     <file relUrl="Scripts/libs/Class.js" publishTime="12/17/2011 17:30:49" />
@@ -125,15 +124,13 @@
     <file relUrl="Content/img/ui-icons_888888_256x240.png" publishTime="01/07/2012 08:53:07" />
     <file relUrl="App_Sprites/icon_search.png" publishTime="12/28/2011 09:52:15" />
     <file relUrl="App_Sprites/icon_pen.png" publishTime="01/07/2012 06:41:15" />
-    <file relUrl="Views/Shared/_Master.cshtml" publishTime="04/12/2012 17:29:45" />
+    <file relUrl="Views/Shared/_Master.cshtml" publishTime="05/21/2012 16:38:45" />
     <file relUrl="Scripts/libs/date.format.js" publishTime="12/17/2011 17:30:49" />
     <file relUrl="Scripts/pre/syze.js" publishTime="01/28/2012 12:13:31" />
     <file relUrl="bin/Dapper.dll" publishTime="02/13/2012 19:51:55" />
-    <file relUrl="bin/Web.pdb" publishTime="05/19/2012 18:38:55" />
+    <file relUrl="bin/Web.pdb" publishTime="05/21/2012 16:54:12" />
     <file relUrl="bin/WebActivator.dll" publishTime="12/17/2011 17:46:35" />
     <file relUrl="App_Sprites/icon_bmp.png" publishTime="12/17/2011 17:28:03" />
-    <file relUrl="Web.config" publishTime="05/19/2012 18:39:04" />
-    <file relUrl="App_Sprites/icon_mp3.png" publishTime="12/17/2011 17:28:03" />
     <file relUrl="Content/img/favicon.ico" publishTime="01/30/2012 11:25:58" />
     <file relUrl="Views/Admin/Parse.cshtml" publishTime="04/13/2012 09:40:36" />
     <file relUrl="Scripts/app/Search.js" publishTime="01/26/2012 23:30:54" />
@@ -143,35 +140,37 @@
     <file relUrl="bin/AjaxMin.dll" publishTime="12/17/2011 17:46:33" />
     <file relUrl="App_Sprites/icon_favorite.png" publishTime="12/17/2011 17:28:03" />
     <file relUrl="App_Sprites/icon_pdf.png" publishTime="12/17/2011 17:28:03" />
-    <file relUrl="Views/Shared/_Auth.cshtml" publishTime="04/12/2012 16:01:45" />
+    <file relUrl="Views/Shared/_Auth.cshtml" publishTime="05/21/2012 15:39:12" />
     <file relUrl="Scripts/libs/bootstrap.js" publishTime="02/20/2012 14:34:15" />
-    <file relUrl="App_Sprites/icon_folderadd.png" publishTime="04/12/2012 17:29:06" />
+    <file relUrl="App_Sprites/icon_emaildownload.png" publishTime="12/17/2011 17:28:03" />
+    <file relUrl="Views/Home/Search.cshtml" publishTime="04/12/2012 17:20:51" />
     <file relUrl="Content/img/arcs-144.png" publishTime="02/04/2012 17:00:05" />
-    <file relUrl="bin/Microsoft.Web.Samples.SpriteHelper.dll" publishTime="12/27/2011 14:57:18" />
     <file relUrl="Scripts/app/Home.js" publishTime="01/26/2012 23:30:54" />
     <file relUrl="Views/Emails/Unsubscribe.cshtml" publishTime="01/30/2012 23:22:30" />
-    <file relUrl="Content/css/module.txt" publishTime="01/28/2012 13:31:22" />
+    <file relUrl="Content/css/module.txt" publishTime="05/21/2012 16:27:27" />
     <file relUrl="Content/templates/scripture/tmpBookContent.htm" publishTime="04/12/2012 17:05:21" />
-    <file relUrl="bin/Common.pdb" publishTime="05/19/2012 18:38:50" />
+    <file relUrl="bin/Common.pdb" publishTime="05/21/2012 16:54:11" />
     <file relUrl="App_Sprites/icon_window.png" publishTime="12/17/2011 17:28:03" />
-    <file relUrl="App_Sprites/icon_emaildownload.png" publishTime="12/17/2011 17:28:03" />
-    <file relUrl="Content/css/app.css" publishTime="04/13/2012 10:09:22" />
+    <file relUrl="Views/Emails/FileAttach.cshtml" publishTime="12/28/2011 12:05:11" />
+    <file relUrl="Content/css/app.css" publishTime="05/21/2012 16:41:17" />
     <file relUrl="Bookmarklets/overlay.js" publishTime="04/27/2012 15:04:10" />
-    <file relUrl="Views/Home/Help.cshtml" publishTime="04/13/2012 10:14:54" />
+    <file relUrl="Views/Home/Help.cshtml" publishTime="05/21/2012 15:48:28" />
     <file relUrl="bin/Elmah.dll" publishTime="01/07/2012 10:17:56" />
     <file relUrl="Scripts/libs/json2.js" publishTime="01/26/2012 11:06:18" />
     <file relUrl="Content/img/ui-bg_glass_75_dadada_1x400.png" publishTime="01/07/2012 08:53:07" />
     <file relUrl="Content/img/ui-bg_glass_75_ffffff_1x400.png" publishTime="01/07/2012 08:53:07" />
     <file relUrl="Content/templates/glossary/tmpTermList.htm" publishTime="02/22/2012 22:00:37" />
     <file relUrl="Scripts/libs/consolelog.js" publishTime="12/17/2011 17:30:49" />
-    <file relUrl="Views/Accounts/Login.cshtml" publishTime="05/19/2012 18:29:55" />
+    <file relUrl="Views/Accounts/Login.cshtml" publishTime="05/21/2012 12:01:10" />
     <file relUrl="Content/templates/glossary/tmpTermFull.htm" publishTime="04/12/2012 16:23:51" />
     <file relUrl="Content/static/Chrono.html" publishTime="01/10/2012 11:18:29" />
-    <file relUrl="Content/img/ui-bg_glass_65_ffffff_1x400.png" publishTime="01/07/2012 08:53:07" />
+    <file relUrl="Views/_ViewStart.cshtml" publishTime="01/27/2012 01:35:02" />
     <file relUrl="robots.txt" publishTime="12/17/2011 17:31:06" />
-    <file relUrl="App_Sprites/icon_report.png" publishTime="04/12/2012 16:50:28" />
+    <file relUrl="bin/Microsoft.Web.Samples.SpriteHelper.dll" publishTime="12/27/2011 14:57:18" />
     <file relUrl="App_Sprites/icon_clock.png" publishTime="12/17/2011 17:28:03" />
+    <file relUrl="Views/Scripture/Read.cshtml" publishTime="02/13/2012 14:51:50" />
     <file relUrl="App_Sprites/icon_windows.png" publishTime="12/17/2011 17:28:03" />
+    <file relUrl="App_Sprites/icon_flow.png" publishTime="12/17/2011 17:28:03" />
     <file relUrl="Content/templates/global/tmpPopoverContent.htm" publishTime="04/12/2012 15:21:28" />
     <file relUrl="Views/Emails/Issue.cshtml" publishTime="01/30/2012 22:25:41" />
     <file relUrl="Scripts/app/Master.js" publishTime="04/12/2012 16:54:44" />

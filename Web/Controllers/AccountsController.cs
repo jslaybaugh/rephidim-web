@@ -20,6 +20,12 @@ namespace Web.Controllers
 			return this.RedirectToAction<AccountsController>(x => x.Login(string.Empty));
 		}
 
+		public ActionResult Error()
+		{
+			throw new Exception("Error happened.");
+
+		}
+
 		[HttpGet]
 		public ActionResult Login(string returnUrl)
 		{

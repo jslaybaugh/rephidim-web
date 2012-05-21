@@ -24,8 +24,8 @@
 		@Html.ValidationMessageFor(m => m.UserName, "User Name is required.", new { @class = "alert-message error"})
 		@Html.ValidationMessageFor(m => m.Password, "Password is required.", new { @class = "alert-message error" })
 		@Html.ValidationMessageFor(m => m.Error, "Authentication Failed. Please try again.", new { @class = "alert-message error" })
-		<div class="login-bg module clear">
-			<div class="login-contents"><br />
+		<div class="module clear login-bg ">
+			<div class="login-contents" style="border:none 0px;"><br />
 				<div id="user-box" class="control-group @(Model.UserName != null && Model.UserName.MatchesTrimmed("rephidim") ? "none" : "")">
 					<label class="control-label" for="UserName">User Name:</label> @Html.TextBoxFor(m => m.UserName, new { placeholder = "Enter User Name" })<br />
 				</div>

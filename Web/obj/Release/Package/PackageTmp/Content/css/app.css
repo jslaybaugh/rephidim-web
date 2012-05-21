@@ -1,9 +1,15 @@
 ﻿
 /* AUTHOR: JORIN SLAYBAUGH */
+
+/* FONTS */
+
+	@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+	@import url(http://fonts.googleapis.com/css?family=Acme);
+
 /* PRIMARY STYLES */
 
 	html {overflow-y:hidden;}
-	html, body, input, select, textarea, input[type="text"], input[type="password"], .ui-autocomplete-input, .uneditable-input, p { font-family: 'Open Sans' , sans-serif; color: #333; font-size: 13px; line-height: 18px; }
+	html, body, input, select, textarea, input[type="text"], input[type="password"], .ui-autocomplete-input, .uneditable-input, p { font-family: 'Open Sans', sans-serif; color: #333; font-size: 13px; line-height: 18px; }
 	label, li { color: #333; }
 	body { background: #eee url(../img/bg.png) repeat; padding-top: 50px; }
 	img { vertical-align: text-bottom; }
@@ -258,6 +264,7 @@
 	
 	#help div { border:solid #aaa 1px; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; padding:10px; margin:0px 0px 10px 0px;background:#eee;}
 	
+	.report-issue {width:24px;}
 
 /* LISTS */
 
@@ -270,7 +277,7 @@
 	.folder-noexpand { margin-left: -15px; display: inline-block; visibility: hidden; }
 
 	.toolbar { float: right; margin: -2px 0px 0px 0px; list-style: none; }
-	.toolbar li { float: left; margin: 0px; }
+	.toolbar li { float: left; margin: 0px; width:24px; display:inline-block;}
 
 	.list-lines li { padding: 3px 0px 3px 0px; white-space: nowrap; border-bottom: #fff solid 1px; }
 	.lines { list-style-type: none; margin: 0px; padding: 0px; }
@@ -279,10 +286,10 @@
 
 /* LOGIN PAGE */
 
-	.church { font-family: 'Acme' , Serif; font-size: 54px; width: 500px; margin: auto; margin-bottom: 10px; text-align: center; font-weight: 900; border-bottom: solid 1px #444; padding-bottom: 5px; line-height: 50px; }
+	.church { font-family: 'Acme', serif; font-size: 54px; width: 500px; margin: auto; margin-bottom: 10px; text-align: center; font-weight: 900; border-bottom: solid 1px #444; padding-bottom: 5px; line-height: 50px; }
 	.scripture { font-family: 'Acme' , serif; font-size: 16px; width: 470px; margin: auto; margin-bottom: 5px; text-align: justify; line-height:16px;}
 	.login-container { margin: 30px auto 0px auto; }
-	.boxshadow .login-bg, .no-boxshadow .error-img { margin: auto auto 10px auto; background: #333 url(../img/microphone.png) top left; width: 470px; height: 278px; position:relative;  }
+	.boxshadow .login-bg, .no-boxshadow .login-bg { margin: auto auto 10px auto; background: #333 url(../img/microphone.png) top left; width: 470px; height: 278px; position:relative;  }
 	.login-contents { margin: 0px 0 0 10px; }
 	.login-contents label { width: 100px; color: #ddd; font-weight: bold; text-align: left; }
 	.login-container .alert-message { width: 440px; margin: auto; margin-bottom: 10px; clear: both; }

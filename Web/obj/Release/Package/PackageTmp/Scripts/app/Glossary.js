@@ -109,12 +109,12 @@
 				{
 					text: "Save",
 					click: saveTerm,
-					class: "btn btn-primary"
+					"class": "btn btn-primary"
 				},
 				{
 					text: "Cancel",
 					click: function () { $(this).dialog("close"); },
-					class: "btn"
+					"class": "btn"
 				}
 			]
 		});
@@ -229,12 +229,12 @@
 					{
 						text: "Save",
 						click: updateVersion,
-						class: "btn btn-primary"
+						"class": "btn btn-primary"
 					},
 					{
 						text: "Cancel",
 						click: function () { $(this).dialog("close"); },
-						class: "btn"
+						"class": "btn"
 					}
 				]
 			});
@@ -256,12 +256,12 @@
 					{
 						text: "DELETE",
 						click: function () { deleteTerm(id); },
-						class: "btn btn-danger"
+						"class": "btn btn-danger"
 					},
 					{
 						text: "Cancel",
 						click: function () { $(this).dialog("close"); },
-						class: "btn"
+						"class": "btn"
 					}
 				]
 			});
