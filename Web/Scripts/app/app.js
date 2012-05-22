@@ -151,7 +151,6 @@
 				$(el).html(xhr.responseText).fadeIn();
 
 			// for good measure
-
 			log(xhr);
 		}
 

@@ -1,12 +1,12 @@
 ﻿// https://github.com/cpatik/console.log-wrapper
 // Tell IE9 to use its built-in console
-if (Function.prototype.bind && console && typeof console.log == "object")
+if (Function.prototype.bind && typeof console !== 'undefined' && typeof console.log == "object")
 {
 	["log", "info", "warn", "error", "assert", "dir", "clear", "profile", "profileEnd"]
-		.forEach(function (method)
-		{
-			console[method] = this.call(console[method], console);
-		}, Function.prototype.bind);
+	.forEach(function (method)
+	{
+		console[method] = this.call(console[method], console);
+	}, Function.prototype.bind);
 }
 
 // log() -- The complete, cross-browser (we don't judge!) console.log wrapper for his or her logging pleasure

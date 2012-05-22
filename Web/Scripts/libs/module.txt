@@ -1,6 +1,6 @@
-﻿Class.js
+﻿consolelog.js
+Class.js
 json2.js
-consolelog.js
 date.format.js
 jquery-1.7.1.js
 jquery.ba-throttle-debounce.min.js
