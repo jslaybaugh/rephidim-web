@@ -107,14 +107,20 @@ namespace Web.Controllers
 
 					cbCover.SetFontAndSize(bfGaramond, 42);
 					cbCover.SetRGBColorFill(57, 81, 145);
-					cbCover.ShowTextAligned(PdfContentByte.ALIGN_CENTER, "The Glossary of", (PageWidth / 2) * ppi, ((PageHeight / 2) + Convert.ToSingle(1.5)) * ppi, 0);
+					cbCover.ShowTextAligned(PdfContentByte.ALIGN_CENTER, "Glossary of", (PageWidth / 2) * ppi, ((PageHeight / 2) + Convert.ToSingle(1.5)) * ppi, 0);
 					cbCover.ShowTextAligned(PdfContentByte.ALIGN_CENTER, "Systematic Christian Theology", (PageWidth / 2) * ppi, ((PageHeight / 2) + 1) * ppi, 0);
+
+					cbCover.SetFontAndSize(bfGaramond, 16);
+					cbCover.SetRGBColorFill(0, 0, 0);
+					cbCover.ShowTextAligned(PdfContentByte.ALIGN_CENTER, "A collection of technical terms and associated definitions", (PageWidth / 2) * ppi, ((PageHeight / 2) + Convert.ToSingle(0.6)) * ppi, 0);
+					cbCover.ShowTextAligned(PdfContentByte.ALIGN_CENTER, "as taught by Dr. Ron Killingsworth, Rephidim Church, Wichita Falls, Texas", (PageWidth / 2) * ppi, ((PageHeight / 2) + Convert.ToSingle(0.4)) * ppi, 0);
 
 					cbCover.SetFontAndSize(bfGaramond, 12);
 					cbCover.SetRGBColorFill(0, 0, 0);
-					cbCover.ShowTextAligned(PdfContentByte.ALIGN_CENTER, "A collection of technical terms and associated definitions", (PageWidth / 2) * ppi, ((PageHeight / 2) + Convert.ToSingle(0.6)) * ppi, 0);
-					cbCover.ShowTextAligned(PdfContentByte.ALIGN_CENTER, "as taught from the pulpit by Dr. Ron Killingsworth in", (PageWidth / 2) * ppi, ((PageHeight / 2) + Convert.ToSingle(0.4)) * ppi, 0);
-					cbCover.ShowTextAligned(PdfContentByte.ALIGN_CENTER, "classes at Rephidim Church.", (PageWidth / 2) * ppi, ((PageHeight / 2) + Convert.ToSingle(0.2)) * ppi, 0);
+					cbCover.ShowTextAligned(PdfContentByte.ALIGN_CENTER, "Published by:", (PageWidth / 2) * ppi, ((PageHeight / 2) - Convert.ToSingle(0.6)) * ppi, 0);
+					cbCover.ShowTextAligned(PdfContentByte.ALIGN_CENTER, "Rephidim Doctrinal Bible Studies, Inc.", (PageWidth / 2) * ppi, ((PageHeight / 2) - Convert.ToSingle(0.8)) * ppi, 0);
+					cbCover.ShowTextAligned(PdfContentByte.ALIGN_CENTER, "4430 Allendale Rd., Wichita Falls, Texas 76310", (PageWidth / 2) * ppi, ((PageHeight / 2) - Convert.ToSingle(1.0)) * ppi, 0);
+					cbCover.ShowTextAligned(PdfContentByte.ALIGN_CENTER, "(940) 691-1166     rephidim.org     rci@wfbiz.rr.com", (PageWidth / 2) * ppi, ((PageHeight / 2) - Convert.ToSingle(1.2)) * ppi, 0);
 
 					cbCover.SetFontAndSize(bfGaramond, 10);
 					cbCover.SetRGBColorFill(0, 0, 0);
