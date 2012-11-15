@@ -3,7 +3,6 @@ C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\Web.pdb
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\AjaxMin.dll
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\Common.dll
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\Elmah.dll
-C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\Jurassic.dll
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\Microsoft.Web.Infrastructure.dll
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\Microsoft.Web.Mvc.dll
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\Microsoft.Web.Samples.ImageOptimizationFramework.dll
@@ -16,9 +15,12 @@ C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\System.Web.Razor.dll
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\WebActivator.dll
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\Dapper.dll
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\Common.pdb
-C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\AjaxMin.pdb
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\NotFoundMvc.pdb
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\Dapper.pdb
-C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\obj\Release\ResolveAssemblyReference.cache
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\obj\Release\Web.dll
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\obj\Release\Web.pdb
+C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\obj\Release\Web.csprojResolveAssemblyReference.cache
+C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\Cassette.Aspnet.dll
+C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\Cassette.dll
+C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\Cassette.Views.dll
+C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\Dapper.xml

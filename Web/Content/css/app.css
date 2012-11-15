@@ -6,12 +6,9 @@
 	html {overflow-y:hidden;}
 	html, body, input, select, textarea, input[type="text"], input[type="password"], .ui-autocomplete-input, .uneditable-input, p { font-family: 'Open Sans', sans-serif; color: #333; font-size: 13px; line-height: 18px; }
 	label, li { color: #333; }
-	body { background: #eee url(../img/bg.png) repeat; padding-top: 50px; }
+	body { background: #eee url(../img/bg.png) repeat; }
 	img { vertical-align: text-bottom; }
-	a img { margin: 0px 5px 0px 0px; }
-
-	/*input[type=submit], input[type=button], button { background: #efefef; } */
-	input[type=range] { padding: 0px; }
+	a img { margin: 0px 5px 0px 0px; }\
 
 	.left { float: left; }
 	.right { float: right; }
@@ -211,14 +208,6 @@
 	.alert-message.block-message.info p a {
 	  color: #404040;
 	}
-	
-
-/* MODERNIZR HTML5 ADDITIONS */
-
-	.input-range span.range { display: inline; }
-	.input-range span.no-range { display: none; }
-	.no-input-range span.range { display: none; }
-	.no-input-range span.no-range { display: inline; }	
 
 /* GLOBALLY USED CUSTOM CLASSES */
 
@@ -297,7 +286,7 @@
 /* SYZE OVERRIDES OF MY STYLES */
 	
 /* SYZE OVERRIDES OF STYLES DECLARED FROM HERE UP */
-
+/*
 	.ltMonitor body, 
 	.ltMonitor input, 
 	.ltMonitor select, 
@@ -326,7 +315,7 @@
 	.ltMonitor .small-info {font-size:13px;line-height:18px;}
 	.ltMonitor p.church {font-size: 54px;line-height:50px;}
 	.ltMonitor p.scripture {font-size: 16px;line-height:16px;}
-
+*/
 
 /* PRINT STYLES */
 

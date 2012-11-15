@@ -1,16 +1,16 @@
-using Cassette.Configuration;
 using Cassette.Scripts;
 using Cassette.Stylesheets;
 using Cassette.HtmlTemplates;
+using Cassette;
 
 namespace Web
 {
 	/// <summary>
 	/// Configures the Cassette asset modules for the web application.
 	/// </summary>
-	public class CassetteConfiguration : ICassetteConfiguration
+	public class CassetteConfiguration : IConfiguration<BundleCollection>
 	{
-		public void Configure(BundleCollection bundles, CassetteSettings settings)
+		public void Configure(BundleCollection bundles)
 		{
 			// TODO: Configure your bundles here...
 			// Please read http://getcassette.net/documentation/configuration

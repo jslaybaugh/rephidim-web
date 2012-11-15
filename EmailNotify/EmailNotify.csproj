@@ -63,8 +63,8 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Postal">
-      <HintPath>..\packages\postal.0.7.3\lib\net40\Postal.dll</HintPath>
+    <Reference Include="Postal, Version=0.7.3.0, Culture=neutral, PublicKeyToken=45719375b8b4d528, processorArchitecture=MSIL">
+      <HintPath>..\packages\postal.0.8.0\lib\net40\Postal.dll</HintPath>
     </Reference>
     <Reference Include="RazorEngine">
       <HintPath>..\packages\RazorEngine.3.0.8\lib\net40\RazorEngine.dll</HintPath>
@@ -101,6 +101,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Views\Emails\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
