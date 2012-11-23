@@ -23,13 +23,15 @@ namespace Web.Controllers
 			return View("Browse", m);
 		}
 
-		public ActionResult Options(string path)
-		{
-			var m = new Models.FileOptions();
-			var k = GetData(path);
+		//public ActionResult Options(string path)
+		//{
+		//    //var m = new Models.FileOptions();
+		//    //var k = GetData(path);
 
-			return View("_Options", m);
-		}
+		//    //return View("_Options", m);
+
+		//    throw new NotImplementedException();
+		//}
 
 		// this remains open for good reader [Authorize]
 		public ActionResult Open(string path)

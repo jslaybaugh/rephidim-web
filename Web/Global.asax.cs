@@ -80,7 +80,7 @@ namespace Web
 				new string[] { "Web.Controllers" }
 			);
 
-			routes.RouteExistingFiles = true;
+			//routes.RouteExistingFiles = false;
 
 		}
 
