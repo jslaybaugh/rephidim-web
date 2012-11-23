@@ -17,8 +17,8 @@ C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\WebActivator.dll
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\Common.pdb
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\AjaxMin.pdb
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\NotFoundMvc.pdb
-C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\obj\Debug\ResolveAssemblyReference.cache
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\obj\Debug\Web.dll
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\obj\Debug\Web.pdb
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\Dapper.dll
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\Dapper.pdb
+C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\obj\Debug\Web.csprojResolveAssemblyReference.cache

@@ -1,7 +1,7 @@
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Common\bin\Debug\Common.dll
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Common\bin\Debug\Common.pdb
-C:\Side Work\Rephidim Church\Rephidim Web 2011\Common\obj\Debug\ResolveAssemblyReference.cache
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Common\obj\Debug\Common.dll
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Common\obj\Debug\Common.pdb
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Common\bin\Debug\Dapper.dll
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Common\bin\Debug\Dapper.pdb
+C:\Side Work\Rephidim Church\Rephidim Web 2011\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
