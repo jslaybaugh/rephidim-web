@@ -1,16 +1,16 @@
-using Cassette.Configuration;
 using Cassette.Scripts;
 using Cassette.Stylesheets;
 using Cassette.HtmlTemplates;
+using Cassette;
 
 namespace Web
 {
 	/// <summary>
 	/// Configures the Cassette asset modules for the web application.
 	/// </summary>
-	public class CassetteConfiguration : ICassetteConfiguration
+	public class CassetteConfiguration : IConfiguration<BundleCollection>
 	{
-		public void Configure(BundleCollection bundles, CassetteSettings settings)
+		public void Configure(BundleCollection bundles)
 		{
 			// TODO: Configure your bundles here...
 			// Please read http://getcassette.net/documentation/configuration
@@ -25,7 +25,7 @@ namespace Web
 			// To combine files, try something like this instead:
 			//   bundles.Add<StylesheetBundle>("Content");
 			// In production mode, all of ~/Content will be combined into a single bundle.
-			
+
 			// If you want a bundle per folder, try this:
 			//   bundles.AddPerSubDirectory<ScriptBundle>("Scripts");
 			// Each immediate sub-directory of ~/Scripts will be combined into its own bundle.
