@@ -1,8 +1,8 @@
 ﻿@model HomeView
+@using System.Text.RegularExpressions;
 @{
 	ViewBag.Title = "Home";
 	ViewBag.NavHome = true;
-	Bundles.Reference("content/templates/results");
 }
 
 <div class="row header-content">
@@ -19,7 +19,31 @@
 <div class="row">
 	<div class="span4 module primary-content" id="uxVerses"></div>
 	<div class="span4 module primary-content" id="uxGlossary"></div>
-	<div class="span4 module primary-content" id="uxFiles"></div>
+	<div class="span4 module primary-content" id="uxFiles">
+		<h1>Recent Files (@(Model.RecentFiles != null && Model.RecentFiles.Count() > 0 ? Model.RecentFiles.Count() : 0))</h1>
+		<div class="scrollable">
+			@if (Model.RecentFiles != null && Model.RecentFiles.Count() > 0)
+			{
+				<ul class="unstyled lines">
+					@foreach (var file in Model.RecentFiles)
+					{
+						<li>
+							<a class="file-name" data-toggle="modal" data-target="#uxModal" href="@(Url.Action<FilesController>(x => x.Options(file.Path)))">@file.Name</a>
+							@if (file.IsNew) { <span class="label label-success">New: @string.Format("{0:M/d/yy h:mm tt}", file.DateCreated)</span> }
+							@if (!file.IsNew && file.IsModified) { <span class="label label-success">Modified: @string.Format("{0:M/d/yy h:mm tt}", file.DateModified)</span> }<br />
+							<span class="small-info">
+								<b>Path: </b> <a href="@(Url.Action<FilesController>(x=>x.Browse(Regex.Replace(file.Path, file.Name + "." + file.Extension, "", RegexOptions.IgnoreCase))))">@Regex.Replace(file.Path, file.Name + "." + file.Extension, "", RegexOptions.IgnoreCase)</a><br />
+								<b>Size:</b> @file.Size, <b>Loaded:</b> @string.Format("{0:M/d/yy h:mm tt}", file.DateModified)</span>
+						</li>
+					}
+				</ul>
+			}
+			else
+			{
+				<div class='message'><div><span>No files.</span></div></div>
+			}
+		</div>
+	</div>
 </div>
 
 @section scripts
@@ -31,6 +55,3 @@
 		});
 	</script>
 }
-
-
-

@@ -26,7 +26,7 @@
 
 		$(window).resize($.throttle(500, function ()
 		{
-			$(".primary-content").height($(window).height() - $(".header-content").outerHeight(true) - 60);
+			$(".primary-content").height($(window).height() - $(".header-content").outerHeight(true) - $(".navbar-fixed-top").outerHeight(true) - 15);
 			setTimeout(function ()
 			{
 				$(".primary-content > .scrollable").each(function (i, n)

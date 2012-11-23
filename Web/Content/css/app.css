@@ -6,12 +6,9 @@
 	html {overflow-y:hidden;}
 	html, body, input, select, textarea, input[type="text"], input[type="password"], .ui-autocomplete-input, .uneditable-input, p { font-family: 'Open Sans', sans-serif; color: #333; font-size: 13px; line-height: 18px; }
 	label, li { color: #333; }
-	body { background: #eee url(../img/bg.png) repeat; padding-top: 50px; }
+	body { background: #eee url(../img/bg.png) repeat; }
 	img { vertical-align: text-bottom; }
-	a img { margin: 0px 5px 0px 0px; }
-
-	/*input[type=submit], input[type=button], button { background: #efefef; } */
-	input[type=range] { padding: 0px; }
+	a img { margin: 0px 5px 0px 0px; }\
 
 	.left { float: left; }
 	.right { float: right; }
@@ -28,7 +25,7 @@
 	td {border:solid #ccc 1px;padding:10px;}
 
 	.bold { font-weight: bold; }
-	
+
 /*  BOOTSTRAP AND JQUERY UI OVERRIDES  */
 
 	.label {white-space:nowrap;}
@@ -44,7 +41,7 @@
 	.dropdown-menu { max-width: 300px; }
 	.ui-dialog .ui-dialog-titlebar { color: #ffffff; background-color: #0064cd; background-repeat: repeat-x; background-image: -khtml-gradient(linear, left top, left bottom, from(#abcced), to(#0064cd)); background-image: -moz-linear-gradient(top, #abcced, #0064cd); background-image: -ms-linear-gradient(top, #abcced, #0064cd); background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #abcced), color-stop(100%, #0064cd)); background-image: -webkit-linear-gradient(top, #abcced, #0064cd); background-image: -o-linear-gradient(top, #abcced, #0064cd); background-image: linear-gradient(top, #abcced, #0064cd); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#abcced', endColorstr='#0064cd', GradientType=0); text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); border-color: #0064cd #0064cd #003f81; border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25); }
 	.ui-dialog .ui-dialog-title { color: #fff; }
-	
+
 	.alert-message.danger,
 	.alert-message.danger:hover,
 	.alert-message.error,
@@ -108,7 +105,7 @@
 	:root .alert-message {
 	  border-radius: 0 \0;
 	}
-	
+
 	.alert-message {
 	  position: relative;
 	  padding: 7px 15px;
@@ -211,14 +208,6 @@
 	.alert-message.block-message.info p a {
 	  color: #404040;
 	}
-	
-
-/* MODERNIZR HTML5 ADDITIONS */
-
-	.input-range span.range { display: inline; }
-	.input-range span.no-range { display: none; }
-	.no-input-range span.range { display: none; }
-	.no-input-range span.no-range { display: inline; }	
 
 /* GLOBALLY USED CUSTOM CLASSES */
 
@@ -232,7 +221,7 @@
 	.no-cssgradients .module h1 { background: #222; }
 	.module h1 a, .module h1 a:link, .module h1 a:visited, .module h1 a:hover, .module h1 a:active { color: #eee; text-decoration: underline; }
 	.module > div { padding: 5px; box-sizing: border-box; }
-	
+
 	.subcontent { -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; background:#efefef; border:solid #fff 1px; margin: 10px 0px 0px 0px; padding:10px;  }
 
 	.term-link { color: #0069D6; text-decoration: underline; }
@@ -256,9 +245,9 @@
 	.message { display: table; height: 100%; width: 100%; vertical-align: middle; text-align: center; }
 	.message div { display: table-cell; height: 100%; width: 100%; vertical-align: middle; text-align: center; }
 	.message span { display: block; width: auto; margin-left: auto; margin-right: auto; text-align: center; font-weight: 900; font-style: normal; font-size: larger; }
-	
+
 	#help div { border:solid #aaa 1px; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; padding:10px; margin:0px 0px 10px 0px;background:#eee;}
-	
+
 	.report-issue {width:24px;}
 
 /* LISTS */
@@ -290,14 +279,14 @@
 	.login-container .alert-message { width: 440px; margin: auto; margin-bottom: 10px; clear: both; }
 
 	#lnk-more:link, #lnk-more:active, #lnk-more:visited, #lnk-more:hover { position: absolute; bottom: 5px; right: 10px; color: #fff; }
-	
+
 	.boxshadow .error-img, .no-boxshadow .error-img { margin:auto auto 20px auto;background-color:#333;background-image: url(../img/mosquito-elephant.png);width:653px;height:500px;}
 
 
 /* SYZE OVERRIDES OF MY STYLES */
-	
-/* SYZE OVERRIDES OF STYLES DECLARED FROM HERE UP */
 
+/* SYZE OVERRIDES OF STYLES DECLARED FROM HERE UP */
+/*
 	.ltMonitor body, 
 	.ltMonitor input, 
 	.ltMonitor select, 
@@ -326,7 +315,7 @@
 	.ltMonitor .small-info {font-size:13px;line-height:18px;}
 	.ltMonitor p.church {font-size: 54px;line-height:50px;}
 	.ltMonitor p.scripture {font-size: 16px;line-height:16px;}
-
+*/
 
 /* PRINT STYLES */
 

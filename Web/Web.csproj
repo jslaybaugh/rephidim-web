@@ -142,6 +142,7 @@
     <Compile Include="Models\AdminMessagesView.cs" />
     <Compile Include="Models\AdminEmailsView.cs" />
     <Compile Include="Models\AdminUsersView.cs" />
+    <Compile Include="Models\FileOptions.cs" />
     <Compile Include="Models\ScriptureView.cs" />
     <Compile Include="Models\StaticView.cs" />
     <Compile Include="Models\SearchView.cs" />
@@ -197,9 +198,10 @@
     <Content Include="App_Sprites\lowCompat.css" />
     <Content Include="App_Sprites\sprite0.png" />
     <Content Include="Content\css\app.css" />
+    <Content Include="Content\css\bootstrap-responsive.css" />
     <Content Include="Content\css\bootstrap.css" />
-    <Content Include="Content\css\jquery-ui-1.8.16.custom.css" />
-    <Content Include="Content\css\module.txt" />
+    <Content Include="Content\css\core.css" />
+    <Content Include="Content\css\bundle.txt" />
     <Content Include="Content\img\ajax-loader-light.gif" />
     <Content Include="Content\img\ajax-loader-dark.gif" />
     <Content Include="Content\img\arcs-057.png" />
@@ -263,18 +265,15 @@
     <Content Include="Scripts\libs\Class.js" />
     <Content Include="Scripts\libs\consolelog.js" />
     <Content Include="Scripts\libs\date.format.js" />
-    <Content Include="Scripts\libs\jquery-1.7.1.js" />
-    <Content Include="Scripts\libs\jquery-ui-1.8.16.js" />
     <Content Include="Scripts\libs\jquery.ba-throttle-debounce.min.js" />
     <Content Include="Scripts\libs\jquery.scrollTo-1.4.2.js" />
     <Content Include="Scripts\libs\jquery.tmpl.js" />
     <Content Include="Scripts\libs\json2.js" />
-    <Content Include="Scripts\libs\knockout-2.0.0.js" />
-    <Content Include="Scripts\libs\module.txt" />
+    <Content Include="Scripts\libs\bundle.txt" />
+    <Content Include="Scripts\libs\knockout-2.2.0.js" />
     <Content Include="Scripts\pre\modernizr-2.0.min.js" />
     <Content Include="Content\static\Chronology.html" />
     <Content Include="Bookmarklets\overlay.js" />
-    <Content Include="Scripts\pre\syze.js" />
     <Content Include="Views\Admin\Users.cshtml" />
     <None Include="App_Sprites\timeStamp.dat" />
     <Content Include="Views\Admin\Draw.cshtml" />
@@ -294,6 +293,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Help.cshtml" />
     <Content Include="Views\Emails\_ViewStart.cshtml" />
+    <Content Include="Views\Files\_Dialog.cshtml" />
+    <Content Include="Views\Files\_Options.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Accounts\Login.cshtml" />
