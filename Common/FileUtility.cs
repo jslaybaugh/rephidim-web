@@ -81,7 +81,7 @@ namespace Common
 			var dir = new DirectoryInfo(localPath);
 
 			var files = dir.EnumerateFiles()
-				.Where(y=> !y.Attributes.HasFlag(FileAttributes.System | FileAttributes.Hidden))
+				.Where(y => !y.Attributes.HasFlag(FileAttributes.System | FileAttributes.Hidden))
 				.Where(y => !y.Extension.MatchesTrimmed(".ini") && !y.Extension.MatchesTrimmed(".db") && !y.Extension.MatchesTrimmed(".lnk"))
 				.Select(x => x.ToFileInfoResult(lastDate))
 				.OrderBy(x => x.Name);
@@ -145,7 +145,7 @@ namespace Common
 
 			var results = dir.EnumerateFiles("*", SearchOption.AllDirectories).Where(x => x.FullName.ToUpperInvariant().Contains(queryParts[0].ToUpperInvariant()));
 			if (queryParts.Length > 1)
-			{ 
+			{
 				for (int i = 1; i < queryParts.Length; i++)
 				{
 					var nextResult = dir.EnumerateFiles("*", SearchOption.AllDirectories).Where(x => x.FullName.ToUpperInvariant().Contains(queryParts[i].ToUpperInvariant())).ToList();

@@ -23,15 +23,15 @@ namespace Web.Controllers
 			return View("Browse", m);
 		}
 
-		//public ActionResult Options(string path)
-		//{
-		//    //var m = new Models.FileOptions();
-		//    //var k = GetData(path);
+		public ActionResult Options(string path)
+		{
+			//var m = new Models.FileOptions();
+			//var k = GetData(path);
 
-		//    //return View("_Options", m);
+			//return View("_Options", m);
 
-		//    throw new NotImplementedException();
-		//}
+			throw new NotImplementedException();
+		}
 
 		// this remains open for good reader [Authorize]
 		public ActionResult Open(string path)
@@ -40,9 +40,10 @@ namespace Web.Controllers
 			return File(m.Path, m.ContentType);
 		}
 
-		[Authorize]
+		//[Authorize]
 		public ActionResult Download(string path)
 		{
+			throw new FileNotFoundException();
 			var m = GetData(path);
 			return File(m.Path, m.ContentType, m.Name);
 		}
