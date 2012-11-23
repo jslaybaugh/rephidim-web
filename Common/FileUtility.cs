@@ -22,6 +22,37 @@ namespace Common
 			}
 		}
 
+		public static FileInfoResult ToFileInfoResult(this FileInfo file, DateTime? lastDate = null)
+		{
+			return new FileInfoResult
+			{
+				Name = file.Name.Substring(0, file.Name.LastIndexOf(".") < 0 ? 0 : file.Name.LastIndexOf(".")),
+				Path = file.FullName.Replace(Root, "").Replace(@"\", "/"),
+				Size = PrintFileSize(file.Length),
+				Length = file.Length,
+				DateModified = file.LastWriteTime,
+				DateCreated = file.CreationTime,
+				IsNew = file.LastWriteTime.Subtract(file.CreationTime).TotalMinutes < 31 && file.CreationTime > lastDate.Value,
+				IsModified = file.LastWriteTime.Subtract(file.CreationTime).TotalMinutes > 30 && file.LastWriteTime > lastDate.Value,
+				Extension = file.Extension.ToLower().Replace(".", "")
+			};
+		}
+
+		public static DirectoryInfoResult ToDirectoryInfoResult(this DirectoryInfo dir, DateTime? lastDate = null)
+		{
+			return new DirectoryInfoResult
+			{
+				Name = dir.Name,
+				Path = dir.FullName.Replace(Root, "").Replace(@"\", "/"),
+				DirectoryCount = dir.EnumerateDirectories().Count(),
+				DateModified = dir.LastWriteTime,
+				DateCreated = dir.CreationTime,
+				IsNew = dir.LastWriteTime.Subtract(dir.CreationTime).TotalMinutes < 31 && dir.CreationTime > lastDate.Value,
+				IsModified = dir.LastWriteTime.Subtract(dir.CreationTime).TotalMinutes > 30 && dir.LastWriteTime > lastDate.Value,
+				FileCount = dir.EnumerateFiles().Count(y => !y.Attributes.HasFlag(FileAttributes.System | FileAttributes.Hidden) && !y.Extension.MatchesTrimmed(".ini") && !y.Extension.MatchesTrimmed(".db") && !y.Extension.MatchesTrimmed(".lnk"))
+			};
+		}
+
 		private static string MakeFullLocal(string path)
 		{
 			if (path.StartsWith("/")) path = path.Substring(1);
@@ -37,17 +68,7 @@ namespace Common
 
 			var dir = new DirectoryInfo(localPath);
 
-			var dirs = dir.EnumerateDirectories().Select(x => new DirectoryInfoResult
-			{
-				Name = x.Name,
-				Path = x.FullName.Replace(Root, "").Replace(@"\", "/"),
-				DirectoryCount = x.EnumerateDirectories().Count(),
-				DateModified = x.LastWriteTime,
-				DateCreated = x.CreationTime,
-				IsNew = x.LastWriteTime.Subtract(x.CreationTime).TotalMinutes < 31 && x.CreationTime > lastDate.Value,
-				IsModified = x.LastWriteTime.Subtract(x.CreationTime).TotalMinutes > 30 && x.LastWriteTime > lastDate.Value,
-				FileCount = x.EnumerateFiles().Count(y => !y.Attributes.HasFlag(FileAttributes.System | FileAttributes.Hidden) && !y.Extension.MatchesTrimmed(".ini") && !y.Extension.MatchesTrimmed(".db") && !y.Extension.MatchesTrimmed(".lnk"))
-			}).OrderBy(x => x.Name);
+			var dirs = dir.EnumerateDirectories().Select(x => x.ToDirectoryInfoResult(lastDate)).OrderBy(x => x.Name);
 
 			return dirs;
 		}
@@ -62,18 +83,8 @@ namespace Common
 			var files = dir.EnumerateFiles()
 				.Where(y=> !y.Attributes.HasFlag(FileAttributes.System | FileAttributes.Hidden))
 				.Where(y => !y.Extension.MatchesTrimmed(".ini") && !y.Extension.MatchesTrimmed(".db") && !y.Extension.MatchesTrimmed(".lnk"))
-				.Select(x => new FileInfoResult
-				{
-					Name = x.Name.Substring(0, x.Name.LastIndexOf(".") < 0 ? 0 : x.Name.LastIndexOf(".")),
-					Path = x.FullName.Replace(Root, "").Replace(@"\", "/"),
-					Size = PrintFileSize(x.Length),
-					Length = x.Length,
-					DateModified = x.LastWriteTime,
-					DateCreated = x.CreationTime,
-					IsNew = x.LastWriteTime.Subtract(x.CreationTime).TotalMinutes < 31 && x.CreationTime > lastDate.Value,
-					IsModified = x.LastWriteTime.Subtract(x.CreationTime).TotalMinutes > 30 && x.LastWriteTime > lastDate.Value,
-					Extension = x.Extension.ToLower().Replace(".", "")
-				}).OrderBy(x => x.Name);
+				.Select(x => x.ToFileInfoResult(lastDate))
+				.OrderBy(x => x.Name);
 
 			return files;
 		}
@@ -86,18 +97,7 @@ namespace Common
 			return matchingFiles
 				.Where(y => !y.Attributes.HasFlag(FileAttributes.System | FileAttributes.Hidden))
 				.Where(y => !y.Extension.MatchesTrimmed(".ini") && !y.Extension.MatchesTrimmed(".db") && !y.Extension.MatchesTrimmed(".lnk"))
-				.Select(x => new FileInfoResult
-				{
-					Name = x.Name.Substring(0, x.Name.LastIndexOf(".") < 0 ? 0 : x.Name.LastIndexOf(".")),
-					Path = x.FullName.Replace(Root, "").Replace(@"\", "/"),
-					Size = FileUtility.PrintFileSize(x.Length),
-					Length = x.Length,
-					DateModified = x.LastWriteTime,
-					DateCreated = x.CreationTime,
-					IsNew = x.LastWriteTime.Subtract(x.CreationTime).TotalMinutes < 31 && x.CreationTime > lastDate.Value,
-					IsModified = x.LastWriteTime.Subtract(x.CreationTime).TotalMinutes > 30 && x.LastWriteTime > lastDate.Value,
-					Extension = x.Extension.ToLower().Replace(".", "")
-				})
+				.Select(x => x.ToFileInfoResult(lastDate))
 				.OrderBy(x => x.Name)
 				.Distinct(new PropertyComparer<FileInfoResult>("Name"));
 		}
@@ -109,18 +109,7 @@ namespace Common
 			return matchingFiles
 				.Where(y => !y.Attributes.HasFlag(FileAttributes.System | FileAttributes.Hidden))
 				.Where(y => !y.Extension.MatchesTrimmed(".ini") && !y.Extension.MatchesTrimmed(".db") && !y.Extension.MatchesTrimmed(".lnk"))
-				.Select(x => new FileInfoResult
-				{
-					Name = x.Name.Substring(0, x.Name.LastIndexOf(".") < 0 ? 0 : x.Name.LastIndexOf(".")),
-					Path = x.FullName.Replace(Root, "").Replace(@"\", "/"),
-					Size = FileUtility.PrintFileSize(x.Length),
-					Length = x.Length,
-					DateModified = x.LastWriteTime,
-					DateCreated = x.CreationTime,
-					IsNew = x.LastWriteTime.Subtract(x.CreationTime).TotalMinutes < 31 && x.CreationTime > lastDate.Value,
-					IsModified = x.LastWriteTime.Subtract(x.CreationTime).TotalMinutes > 30 && x.LastWriteTime > lastDate.Value,
-					Extension = x.Extension.ToLower().Replace(".", "")
-				})
+				.Select(x => x.ToFileInfoResult(lastDate))
 				.OrderByDescending(x => x.IsNew ? x.DateCreated : x.DateModified).ThenBy(x => x.Name)
 				.Distinct(new PropertyComparer<FileInfoResult>("Name"));
 		}

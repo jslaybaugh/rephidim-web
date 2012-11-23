@@ -1,0 +1,21 @@
+﻿@model Web.Models.FileOptions
+@{
+	Layout = null;
+	
+}
+
+<div>
+	<span>@Model.File.Name</span><br/>
+	<span class="small-info"><b>Size:</b> @Model.File.Size, <b>Loaded:</b> @string.Format("{0:M/d/yy h:mm tt}", Model.File.DateModified)</span>
+</div>
+<div>
+	<ul class="unstyled lines">
+		<li><a href="@(Url.Action<FilesController>(x=>x.Open(Model.File.Path)))" target="_blank">Open (new window)</a></li>
+		@if (Model.File.Extension.MatchesTrimmed("pdf") || Model.File.Extension.MatchesTrimmed("mp3"))
+		{			
+			<li class="iOS"><a href="@("g" + Url.Action<FilesController>(x=>x.Open(Model.File.Path)))" target="_blank">Open in GoodReader™</a></li>
+		}
+		<li class="no-iOS"><a href="@(Url.Action<FilesController>(x=>x.Download(Model.File.Path)))" target="_blank">Download & Save</a></li>
+		<li><form id="frmEmail" class="form-inline inline"><a></a><input type="email" id="txtEmail" placeholder="Email Address" class="span3 email-box" /> <input type="submit" id="btnEmail" class="btn" value="Send" /></form></li>
+	</ul>
+</div>

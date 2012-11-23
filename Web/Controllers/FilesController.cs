@@ -8,6 +8,7 @@ using Web.Models;
 using System.Configuration;
 using Postal;
 using MvcContrib;
+using Common;
 
 namespace Web.Controllers
 {
@@ -20,6 +21,14 @@ namespace Web.Controllers
 			m.Path = path;
 			
 			return View("Browse", m);
+		}
+
+		public ActionResult Options(string path)
+		{
+			var m = new Models.FileOptions();
+			var k = GetData(path);
+
+			return View("_Options", m);
 		}
 
 		// this remains open for good reader [Authorize]

@@ -138,6 +138,7 @@
     <Compile Include="Models\AdminMessagesView.cs" />
     <Compile Include="Models\AdminEmailsView.cs" />
     <Compile Include="Models\AdminUsersView.cs" />
+    <Compile Include="Models\FileOptions.cs" />
     <Compile Include="Models\ScriptureView.cs" />
     <Compile Include="Models\StaticView.cs" />
     <Compile Include="Models\SearchView.cs" />
@@ -196,7 +197,6 @@
     <Content Include="Content\css\bootstrap-responsive.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\core.css" />
-    <Content Include="Content\css\jquery-ui-1.8.16.custom.css" />
     <Content Include="Content\css\bundle.txt" />
     <Content Include="Content\img\ajax-loader-light.gif" />
     <Content Include="Content\img\ajax-loader-dark.gif" />
@@ -289,6 +289,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Help.cshtml" />
     <Content Include="Views\Emails\_ViewStart.cshtml" />
+    <Content Include="Views\Files\_Options.cshtml" />
+    <Content Include="Views\Files\_Dialog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Accounts\Login.cshtml" />
