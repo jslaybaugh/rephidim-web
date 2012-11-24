@@ -3,7 +3,7 @@
 	ViewBag.Title = "Search";
 	ViewBag.NavHome = true;
 	ViewBag.SearchQuery = Model.OriginalQuery;
-	Bundles.Reference("content/templates/results");
+	ViewBag.QueryParts = Model.QueryParts;
 }
 
 @if (string.IsNullOrEmpty(Model.OriginalQuery))
@@ -20,22 +20,61 @@ else
 			</div>
 		</div>
 	</div>
-	<div class="row search">
-		<div class="span4 module primary-content" id="uxVerses"></div>
-		<div class="span4 module primary-content" id="uxGlossary"></div>
-		<div class="span4 module primary-content" id="uxFiles"></div>
+	<div class="row">
+		<div class="span4 module primary-content" id="uxVerses">
+			<h1>Matching Verses (@(Model.MatchingVerses != null && Model.MatchingVerses.Count() > 0 ? Model.MatchingVerses.Count() : 0))</h1>
+			<div class="scrollable">
+				@if (Model.MatchingVerses != null && Model.MatchingVerses.Count() > 0)
+				{
+					<ul class="unstyled lines">
+						@foreach (var verse in Model.MatchingVerses)
+						{
+							Html.RenderPartial("~/Views/Scripture/_Verse.cshtml", verse);
+						}
+					</ul>
+				}
+				else
+				{
+					<div class='message'><div><span>No verses.</span></div></div>
+				}
+			</div>
+		</div>
+		<div class="span4 module primary-content" id="uxGlossary">
+			<h1>Matching Terms (@(Model.MatchingTerms != null && Model.MatchingTerms.Count() > 0 ? Model.MatchingTerms.Count() : 0))</h1>
+			<div class="scrollable">
+				@if (Model.MatchingTerms != null && Model.MatchingTerms.Count() > 0)
+				{
+					<ul class="unstyled lines">
+						@foreach (var term in Model.MatchingTerms)
+						{
+							Html.RenderPartial("~/Views/Glossary/_Term.cshtml", term);
+						}
+					</ul>
+				}
+				else
+				{
+					<div class='message'><div><span>No terms.</span></div></div>
+				}
+			</div>
+		</div>
+		<div class="span4 module primary-content" id="uxFiles">
+			<h1>Matching Files (@(Model.MatchingFiles != null && Model.MatchingFiles.Count() > 0 ? Model.MatchingFiles.Count() : 0))</h1>
+			<div class="scrollable">
+				@if (Model.MatchingFiles != null && Model.MatchingFiles.Count() > 0)
+				{
+					<ul class="unstyled lines">
+						@foreach (var file in Model.MatchingFiles)
+						{
+							Html.RenderPartial("~/Views/Files/_File.cshtml", file);
+						}
+					</ul>
+				}
+				else
+				{
+					<div class='message'><div><span>No files.</span></div></div>
+				}
+			</div>
+		</div>
 	</div>
+	@Html.Partial("~/Views/Files/_Dialog.cshtml")
 }
-
-@section scripts
-{
-	<script type="text/javascript">
-		$(function ()
-		{
-			var Search = new App.Search(@Html.Raw(Json.Encode(Model.QueryParts)), @Html.Raw(Json.Encode(Model.MatchingTerms)), @Html.Raw(Json.Encode(Model.MatchingFiles)), @Html.Raw(Json.Encode(Model.MatchingVerses)));
-		});
-	</script>
-}
-
-
-

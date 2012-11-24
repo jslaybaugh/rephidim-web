@@ -1,0 +1,8 @@
+﻿@model Common.Models.GlossaryItem
+
+<li>
+	<a title="Go to full definition for @Model.Term" href="@(Url.Action<GlossaryController>(x=>x.Term(Model.Id, null)))"><b>@Model.Term</b></a>
+	@if (Model.IsNew) {<span class="label label-success">New: @string.Format("{0:M/d h:mm tt'}", Model.DateCreated)</span>}
+	@if (!Model.IsNew && Model.IsModified) {<span class="label label-warning">Modified: @string.Format("{0:M/d h:mm tt'}", Model.DateModified)</span>}<br />
+	@Model.Definition
+</li>

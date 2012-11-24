@@ -1,0 +1,33 @@
+﻿
+@helper RenderIcon(string extension)
+{
+	switch (extension.ToLower().Trim())
+	{
+		case "txt": @Sprite.Image("~/App_Sprites/icon_text.png") break;
+		case "rtf": @Sprite.Image("~/App_Sprites/icon_text.png") break;
+		case "pdf": @Sprite.Image("~/App_Sprites/icon_pdf.png") break;
+		case "mp3": @Sprite.Image("~/App_Sprites/icon_mp3.png") break;
+		case "exe": @Sprite.Image("~/App_Sprites/icon_window.png") break;
+		case "jpg": 
+		case "jpeg": @Sprite.Image("~/App_Sprites/icon_jpg.png") break;
+		case "png": @Sprite.Image("~/App_Sprites/icon_png.png") break;
+		case "tif": 
+		case "tiff": @Sprite.Image("~/App_Sprites/icon_tif.png") break;
+		case "gif": @Sprite.Image("~/App_Sprites/icon_gif.png") break;
+		case "cdr": @Sprite.Image("~/App_Sprites/icon_flow.png") break;
+		case "asd": @Sprite.Image("~/App_Sprites/icon_flow.png") break;
+		default: @Sprite.Image("~/App_Sprites/icon_unk.png") break;
+	}
+}
+
+@helper Highlight(string text, string[] queryParts)
+{
+	if (queryParts != null && queryParts.Length > 0)
+	{
+		<text>@System.Text.RegularExpressions.Regex.Replace(text, "(" + string.Join("|",queryParts) + ")", "<span class='hilite'>$1</span>", System.Text.RegularExpressions.RegexOptions.IgnoreCase)</text>
+	}
+	else
+	{ 
+		<text>@text</text>
+	}
+}

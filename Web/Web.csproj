@@ -243,7 +243,6 @@
     <Content Include="Scripts\app\ScriptureHelper.js" />
     <Content Include="Scripts\app\GlossaryHelper.js" />
     <Content Include="Scripts\app\Scripture.js" />
-    <Content Include="Scripts\app\Home.js" />
     <Content Include="Scripts\app\FileHelper.js" />
     <Content Include="Scripts\app\Static.js" />
     <Content Include="Scripts\app\Search.js" />
@@ -263,6 +262,7 @@
     <Content Include="Content\static\Chronology.html" />
     <Content Include="Bookmarklets\overlay.js" />
     <Content Include="Views\Admin\Users.cshtml" />
+    <Content Include="App_Code\RazorHelpers.cshtml" />
     <None Include="App_Sprites\timeStamp.dat" />
     <Content Include="Views\Admin\Draw.cshtml" />
     <None Include="Views\Emails\Notification.cshtml" />
@@ -283,6 +283,9 @@
     <Content Include="Views\Emails\_ViewStart.cshtml" />
     <Content Include="Views\Files\_Dialog.cshtml" />
     <Content Include="Views\Files\_Options.cshtml" />
+    <Content Include="Views\Files\_File.cshtml" />
+    <Content Include="Views\Glossary\_Term.cshtml" />
+    <Content Include="Views\Scripture\_Verse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Accounts\Login.cshtml" />

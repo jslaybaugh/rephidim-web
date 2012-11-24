@@ -24,6 +24,7 @@ namespace Common
 
 		public static FileInfoResult ToFileInfoResult(this FileInfo file, DateTime? lastDate = null)
 		{
+			if (lastDate == null) lastDate = DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"]));
 			return new FileInfoResult
 			{
 				Name = file.Name.Substring(0, file.Name.LastIndexOf(".") < 0 ? 0 : file.Name.LastIndexOf(".")),
@@ -40,6 +41,7 @@ namespace Common
 
 		public static DirectoryInfoResult ToDirectoryInfoResult(this DirectoryInfo dir, DateTime? lastDate = null)
 		{
+			if (lastDate == null) lastDate = DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"]));
 			return new DirectoryInfoResult
 			{
 				Name = dir.Name,

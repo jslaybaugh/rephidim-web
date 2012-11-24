@@ -1,4 +1,4 @@
-﻿﻿bootstrap.css
+﻿bootstrap.css
 core.css
 bootstrap-responsive.css
 app.css

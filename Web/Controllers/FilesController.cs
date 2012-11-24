@@ -25,12 +25,10 @@ namespace Web.Controllers
 
 		public ActionResult Options(string path)
 		{
-			//var m = new Models.FileOptions();
-			//var k = GetData(path);
+			var m = new Models.FileOptions();
+			m.File = new FileInfo(GetData(path).Path).ToFileInfoResult();
 
-			//return View("_Options", m);
-
-			throw new NotImplementedException();
+			return View("_Options", m);
 		}
 
 		// this remains open for good reader [Authorize]
@@ -40,7 +38,7 @@ namespace Web.Controllers
 			return File(m.Path, m.ContentType);
 		}
 
-		[Authorize]
+		//[Authorize]
 		public ActionResult Download(string path)
 		{
 			var m = GetData(path);

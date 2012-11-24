@@ -282,6 +282,9 @@
 
 	.boxshadow .error-img, .no-boxshadow .error-img { margin:auto auto 20px auto;background-color:#333;background-image: url(../img/mosquito-elephant.png);width:653px;height:500px;}
 
+	.ios .download, .no-ios .goodreader {display:none;}
+	.no-ios .goodreader, .ios .download {display:none;}
+	
 
 /* SYZE OVERRIDES OF MY STYLES */
 

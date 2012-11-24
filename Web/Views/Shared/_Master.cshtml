@@ -20,6 +20,7 @@
 		lastEmail = cookie["email"];
 	}
 }
+
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
@@ -51,6 +52,10 @@
 		<style type="text/css">.edit-rights {display:inline-block;}</style>
 	}
 	@Bundles.RenderScripts("head")
+	<script type="text/javascript">
+		h = document.getElementsByTagName('html')[0];
+		h.className += (navigator.userAgent.match(/(ipad|ipod|iphone)/i) ? ' ios' : ' no-ios');
+	</script>
 </head>
 <body>
 	@RenderBody()
@@ -103,6 +108,10 @@
 			@if (!string.IsNullOrEmpty(Request["error"])) { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["error"])),"error");</text> }
 			@if (!string.IsNullOrEmpty(Request["warning"])) { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["warning"])),"warning");</text> }
 			@if (!string.IsNullOrEmpty(Request["info"])) { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["info"])),"info");</text> }
+
+			$('body').on('hidden', '.modal', function () {
+				$(this).removeData('modal');
+			});
 		});
 	</script>
 	@if (IsSectionDefined("scripts"))

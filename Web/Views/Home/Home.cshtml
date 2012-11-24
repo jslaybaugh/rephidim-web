@@ -17,8 +17,42 @@
 	</div>
 </div>
 <div class="row">
-	<div class="span4 module primary-content" id="uxVerses"></div>
-	<div class="span4 module primary-content" id="uxGlossary"></div>
+	<div class="span4 module primary-content" id="uxVerses">
+		<h1>Recent Verses (@(Model.RecentVerses != null && Model.RecentVerses.Count() > 0 ? Model.RecentVerses.Count() : 0))</h1>
+		<div class="scrollable">
+			@if (Model.RecentVerses != null && Model.RecentVerses.Count() > 0)
+			{
+				<ul class="unstyled lines">
+					@foreach (var verse in Model.RecentVerses)
+					{
+						Html.RenderPartial("~/Views/Scripture/_Verse.cshtml", verse);
+					}
+				</ul>
+			}
+			else
+			{
+				<div class='message'><div><span>No verses.</span></div></div>
+			}
+		</div>
+	</div>
+	<div class="span4 module primary-content" id="uxGlossary">
+		<h1>Recent Terms (@(Model.RecentTerms != null && Model.RecentTerms.Count() > 0 ? Model.RecentTerms.Count() : 0))</h1>
+		<div class="scrollable">
+			@if (Model.RecentTerms != null && Model.RecentTerms.Count() > 0)
+			{
+				<ul class="unstyled lines">
+					@foreach (var term in Model.RecentTerms)
+					{
+						Html.RenderPartial("~/Views/Glossary/_Term.cshtml", term);
+					}
+				</ul>
+			}
+			else
+			{
+				<div class='message'><div><span>No terms.</span></div></div>
+			}
+		</div>
+	</div>
 	<div class="span4 module primary-content" id="uxFiles">
 		<h1>Recent Files (@(Model.RecentFiles != null && Model.RecentFiles.Count() > 0 ? Model.RecentFiles.Count() : 0))</h1>
 		<div class="scrollable">
@@ -27,14 +61,7 @@
 				<ul class="unstyled lines">
 					@foreach (var file in Model.RecentFiles)
 					{
-						<li>
-							<a class="file-name" data-toggle="modal" data-target="#uxModal" href="@(Url.Action<FilesController>(x => x.Options(file.Path)))">@file.Name</a>
-							@if (file.IsNew) { <span class="label label-success">New: @string.Format("{0:M/d/yy h:mm tt}", file.DateCreated)</span> }
-							@if (!file.IsNew && file.IsModified) { <span class="label label-success">Modified: @string.Format("{0:M/d/yy h:mm tt}", file.DateModified)</span> }<br />
-							<span class="small-info">
-								<b>Path: </b> <a href="@(Url.Action<FilesController>(x=>x.Browse(Regex.Replace(file.Path, file.Name + "." + file.Extension, "", RegexOptions.IgnoreCase))))">@Regex.Replace(file.Path, file.Name + "." + file.Extension, "", RegexOptions.IgnoreCase)</a><br />
-								<b>Size:</b> @file.Size, <b>Loaded:</b> @string.Format("{0:M/d/yy h:mm tt}", file.DateModified)</span>
-						</li>
+						Html.RenderPartial("~/Views/Files/_File.cshtml", file);
 					}
 				</ul>
 			}
@@ -45,13 +72,4 @@
 		</div>
 	</div>
 </div>
-
-@section scripts
-{
-	<script type="text/javascript">
-		$(function ()
-		{
-			var Home = new App.Home(@Html.Raw(Json.Encode(Model.RecentTerms)), @Html.Raw(Json.Encode(Model.RecentFiles)), @Html.Raw(Json.Encode(Model.RecentVerses)));
-		});
-	</script>
-}
+@Html.Partial("~/Views/Files/_Dialog.cshtml")
