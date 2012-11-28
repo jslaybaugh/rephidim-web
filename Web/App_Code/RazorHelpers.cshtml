@@ -22,12 +22,6 @@
 
 @helper Highlight(string text, string[] queryParts)
 {
-	if (queryParts != null && queryParts.Length > 0)
-	{
-		<text>@System.Text.RegularExpressions.Regex.Replace(text, "(" + string.Join("|",queryParts) + ")", "<span class='hilite'>$1</span>", System.Text.RegularExpressions.RegexOptions.IgnoreCase)</text>
-	}
-	else
-	{ 
-		<text>@text</text>
-	}
+	if (queryParts != null && queryParts.Length > 0) {<text>@(new HtmlString(System.Text.RegularExpressions.Regex.Replace(text, "(" + string.Join("|", queryParts) + ")", "<span class='hilite'>$1</span>", System.Text.RegularExpressions.RegexOptions.IgnoreCase)))</text>}
+	else {<text>@text</text>}
 }

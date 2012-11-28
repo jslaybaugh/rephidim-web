@@ -47,14 +47,9 @@
 	{
 		@RenderSection("styles")
 	}
-	@if (User.IsInRole("Scripture"))
-	{
-		<style type="text/css">.edit-rights {display:inline-block;}</style>
-	}
 	@Bundles.RenderScripts("head")
 	<script type="text/javascript">
-		h = document.getElementsByTagName('html')[0];
-		h.className += (navigator.userAgent.match(/(ipad|ipod|iphone)/i) ? ' ios' : ' no-ios');
+		document.getElementsByTagName('html')[0].className += (navigator.userAgent.match(/(ipad|ipod|iphone)/i) ? ' ios' : ' no-ios');
 	</script>
 </head>
 <body>
@@ -109,9 +104,51 @@
 			@if (!string.IsNullOrEmpty(Request["warning"])) { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["warning"])),"warning");</text> }
 			@if (!string.IsNullOrEmpty(Request["info"])) { <text>App.ShowAlert(@Html.Raw(Json.Encode(Request["info"])),"info");</text> }
 
-			$('body').on('hidden', '.modal', function () {
+			$('body')
+			
+			.on('hidden', '.modal', function () {
 				$(this).removeData('modal');
-			});
+			})
+
+			.on("submit", "#frmEmail", function ()
+			{
+				var email = $("#txtEmail").val();
+
+				if ($.trim(email) == "" || !email.match(App.Regex.EMAIL))
+				{
+					App.ShowAlert("A valid email is required.", "error");
+					return false;
+				}
+
+				var origText = $("#btnEmail").val();
+
+				$("#btnEmail").attr("disabled", true).val("Please Wait");
+				$.ajax(
+				{
+					url: App.ResolveUrl("~/Ajax/Files/Email"),
+					type: "POST",
+					data: { email: $("#txtEmail").val(), path: _path },
+					success: function (data)
+					{
+						$("#btnEmail").attr("disabled", false).val(origText);
+						if (data)
+						{
+							App.ShowAlert("Email sent to " + $("#txtEmail").val() + "!", "success");
+						}
+						else
+						{
+							App.ShowAlert("Error sending email! Please refresh and try again!", "error");
+						}
+					},
+					error: function (xhr)
+					{
+						$("#btnEmail").attr("disabled", false).val(origText);
+						App.ShowAlert(xhr.responseText, "error");
+					}
+				});
+
+				return false;
+			})
 		});
 	</script>
 	@if (IsSectionDefined("scripts"))

@@ -1,28 +1,8 @@
 ﻿/// <reference path="app.js" />
-/// <reference path="filehelper.js" />
 /// <reference path="../libs/Class.js" />
 
 (function ()
 {
-
-	var _firstLoad = true, _browsePath = "", _editRights = false, _currentPath = "";
-
-	var loadFolders = function (path, callback)
-	{
-		$.ajax(
-		{
-			url: App.ResolveUrl("~/Ajax/Files/Folders"),
-			data: { path: path },
-			success: function (data)
-			{
-				if (callback) callback(data);
-			},
-			error: function (xhr)
-			{
-				App.HandleError(xhr);
-			}
-		});
-	}
 
 	var loadContents = function (path, push)
 	{
@@ -52,84 +32,39 @@
 
 	var domSetup = function (me)
 	{
-		window.onload = function ()
-		{
-			_firstLoad = true;
-
-			if (_browsePath != "")
-			{
-				if (Modernizr.history) history.replaceState({ Path: _browsePath }, _browsePath, App.ResolveUrl("~/Files/Browse/" + _browsePath));
-			}
-
-			loadContents(_browsePath, false);
-			setTimeout(function () { _firstLoad = false; }, 0);
-		};
-
-		if (Modernizr.history)
-		{
-			window.onpopstate = function (event)
-			{
-				if (_firstLoad)
-				{
-					_firstLoad = false;
-				}
-				else
-				{
-					if (event.state != null)
-					{
-						loadContents(event.state.Path, false);
-					}
-					else
-					{
-						loadContents("", false);
-					}
-				}
-
-			};
-		}
-
 
 		$(document)
 		.on("click", ".folder-expand", function ()
 		{
-			$(".popover").fadeOut();
 			var a = $(this);
 
-			if (a.hasClass("ui-icon-plus"))
+			if (a.find(".icon-plus").length > 0)
 			{
-				loadFolders(a.data("path"), function (data)
-				{
-					a.removeClass("ui-icon-plus").addClass("ui-icon-minus");
-					$("#tmpFolders").tmpl(data).appendTo($("<ul class='folders'></ul>").appendTo(a.parent("li")));
-				});
+				a.find(".icon-plus").removeClass().addClass("icon-minus");
+				a.parent("li").load(App.ResolveUrl("~/Files/Folders"), a.data("path"));
 			}
 			else
 			{
 				a.parent("li").find("ul").remove();
-				a.removeClass("ui-icon-minus").addClass("ui-icon-plus");
+				a.find(".icon-minus").removeClass().addClass("icon-plus");
 			}
 
 			return false;
 		})
 		.on("click", ".folder-view", function ()
 		{
-			$(".popover").fadeOut();
 			var a = $(this);
-
 			var path = a.data("path");
 
-			if (a.siblings(".folder-expand").hasClass("ui-icon-plus"))
+			if (a.siblings(".folder-expand").find(".icon-plus").length > 0)
 			{
-				loadFolders(path, function (data)
-				{
-					a.siblings(".folder-expand").removeClass("ui-icon-plus").addClass("ui-icon-minus");
-					$("#tmpFolders").tmpl(data).appendTo($("<ul class='folders'></ul>").appendTo(a.parent("li")));
-				});
+				a.siblings(".folder-expand").find(".icon-plus").removeClass().addClass("icon-minus");
+				a.parent("li").load(App.ResolveUrl("~/Files/Folders"), a.data("path"));
 			}
 			else
 			{
 				a.parent("li").find("ul").remove();
-				a.siblings(".folder-expand").removeClass("ui-icon-minus").addClass("ui-icon-plus");
+				a.siblings(".folder-expand").find(".icon-minus").removeClass().addClass("icon-plus");
 			}
 
 			loadContents(path, true);
@@ -139,7 +74,7 @@
 		.on("click", "#btnUpload", function ()
 		{
 			var div = $(this).parents("h1").find(".subcontent");
-			
+
 			if (div.is(":visible")) div.slideUp('fast');
 			else div.slideDown('fast');
 
@@ -194,17 +129,11 @@
 
 	this.App.Files = Class.extend(
 	{
-		init: function (browsePath, editRights)
+		init: function (browsePath)
 		{
 			_browsePath = browsePath;
-			_editRights = editRights;
 
-			loadFolders("", function (data)
-			{
-				$("#tmpFolders").tmpl(data).appendTo("#ulFolders");
-			});
-
-			App.FileHelper.ReadyPopover();
+			$("#uxFolders .scrollable").load(App.ResolveUrl("~/Files/Folders"), { path: "" });
 
 			domSetup(this);
 		}

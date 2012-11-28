@@ -3,24 +3,22 @@
 @{
 	ViewBag.Title = "Files";
 	ViewBag.NavFiles = true;
-	Bundles.Reference("content/templates/files");
 }
 
 <div class="row">
 	<div class="span5 no-print module primary-content" id="uxFolders">
 		<h1>All Folders</h1>
-		<div class="scrollable">
-			<ul id="ulFolders" class="folders list-lines"></ul>
-		</div>
+		<div class="scrollable"></div>
 	</div>
 	<div class="span7 module primary-content" id="uxContents"></div>
 </div>
-
+@Html.Partial("~/Views/Files/_Dialog.cshtml")
 @section scripts
 {
 
 	<script type="text/javascript">
-
+		
+		document.getElementsByTagName('html')[0].className += "@(User.IsInRole("Files") ? "hasrights" : "no-hasrights")";
 		$(function ()
 		{
 			var Files = new App.Files(@Html.Raw(Json.Encode(Model.Path ?? "")), @Html.Raw(Json.Encode(User.IsInRole("Files"))));

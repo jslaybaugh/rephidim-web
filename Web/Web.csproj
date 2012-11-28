@@ -142,6 +142,7 @@
     <Compile Include="Models\AdminMessagesView.cs" />
     <Compile Include="Models\AdminEmailsView.cs" />
     <Compile Include="Models\AdminUsersView.cs" />
+    <Compile Include="Models\ContentView.cs" />
     <Compile Include="Models\FileOptions.cs" />
     <Compile Include="Models\ScriptureView.cs" />
     <Compile Include="Models\StaticView.cs" />
@@ -243,9 +244,6 @@
     <Content Include="Scripts\app\ScriptureHelper.js" />
     <Content Include="Scripts\app\GlossaryHelper.js" />
     <Content Include="Scripts\app\Scripture.js" />
-    <Content Include="Scripts\app\FileHelper.js" />
-    <Content Include="Scripts\app\Static.js" />
-    <Content Include="Scripts\app\Search.js" />
     <Content Include="Scripts\app\Files.js" />
     <Content Include="Scripts\app\Glossary.js" />
     <Content Include="Scripts\libs\bootstrap.js" />
@@ -283,9 +281,11 @@
     <Content Include="Views\Emails\_ViewStart.cshtml" />
     <Content Include="Views\Files\_Dialog.cshtml" />
     <Content Include="Views\Files\_Options.cshtml" />
-    <Content Include="Views\Files\_File.cshtml" />
-    <Content Include="Views\Glossary\_Term.cshtml" />
-    <Content Include="Views\Scripture\_Verse.cshtml" />
+    <Content Include="Views\Files\_Result.cshtml" />
+    <Content Include="Views\Glossary\_Result.cshtml" />
+    <Content Include="Views\Scripture\_Result.cshtml" />
+    <Content Include="Views\Files\_Folders.cshtml" />
+    <Content Include="Views\Files\_Content.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Accounts\Login.cshtml" />

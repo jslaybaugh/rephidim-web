@@ -25,7 +25,7 @@
 				<ul class="unstyled lines">
 					@foreach (var verse in Model.RecentVerses)
 					{
-						Html.RenderPartial("~/Views/Scripture/_Verse.cshtml", verse);
+						Html.RenderPartial("~/Views/Scripture/_Result.cshtml", verse);
 					}
 				</ul>
 			}
@@ -43,7 +43,7 @@
 				<ul class="unstyled lines">
 					@foreach (var term in Model.RecentTerms)
 					{
-						Html.RenderPartial("~/Views/Glossary/_Term.cshtml", term);
+						Html.RenderPartial("~/Views/Glossary/_Result.cshtml", term);
 					}
 				</ul>
 			}
@@ -61,7 +61,7 @@
 				<ul class="unstyled lines">
 					@foreach (var file in Model.RecentFiles)
 					{
-						Html.RenderPartial("~/Views/Files/_File.cshtml", file);
+						Html.RenderPartial("~/Views/Files/_Result.cshtml", file);
 					}
 				</ul>
 			}

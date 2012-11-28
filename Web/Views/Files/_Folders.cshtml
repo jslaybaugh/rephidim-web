@@ -1,0 +1,12 @@
+﻿<ul id="ulFolders" class="folders list-lines">
+@foreach (Common.Models.DirectoryInfoResult folder in ViewBag.Folders)
+{
+	<li>
+		<a class="folder-expand @(folder.DirectoryCount == 0 ? "hidden" : "")" href="#" data-path="@folder.Path"><i class="icon-plus"></i></a>
+		<a class="folder-view" href="#" data-path="@folder.Path"><i class="icon-folder-close"></i> @folder.Name</a> 
+		@if (folder.IsNew) {<span class="label label-success">New: @string.Format("{0:M/d/yy h:mm tt}", folder.DateCreated)</span>}
+		@if (!folder.IsNew && folder.IsModified) {<span class="label label-warning">Modified: @string.Format("{0:M/d/yy h:mm tt}", folder.DateModified)</span>}
+		<span class="small-info">@if (folder.DirectoryCount > 0) { <text>@folder.DirectoryCount folder@(folder.DirectoryCount != 1 ? "s" : "")</text>} @(folder.DirectoryCount > 0 && folder.FileCount > 0 ? "&amp;" : "") @if (folder.FileCount > 0) { <text>@folder.FileCount file@(folder.FileCount != 1 ? "s" : "")</text>}</span>
+	</li>
+}
+</ul>

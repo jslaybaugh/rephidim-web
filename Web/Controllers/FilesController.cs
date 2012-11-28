@@ -31,6 +31,13 @@ namespace Web.Controllers
 			return View("_Options", m);
 		}
 
+		public ActionResult Folders(string path)
+		{
+			ViewBag.Folders = FileUtility.GetFolders(string.IsNullOrEmpty(path) ? "" : path);
+
+			return View("_Folders");
+		}
+
 		// this remains open for good reader [Authorize]
 		public ActionResult Open(string path)
 		{

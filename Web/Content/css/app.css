@@ -232,7 +232,6 @@
 
 	.small-info { font-size: 10px; color: #777; font-weight: normal; line-height:15px; }
 
-	.edit-rights { display: none; }
 
 	.wait-dark { height: 16px; width: 16px; display: inline-block; background: url("../img/ajax-loader-dark.gif") top center no-repeat; }
 	.wait-light { height: 21px; width: 56px; display: inline-block; background: url("../img/ajax-loader-light.gif") top center no-repeat; margin: -8px auto -8px 20px; }
@@ -284,6 +283,9 @@
 
 	.ios .download, .no-ios .goodreader {display:none;}
 	.no-ios .goodreader, .ios .download {display:none;}
+	
+	.hasrights .edit-rights {display:inline-block;}
+	.no-hasrights .edit-rights {display:none;}
 	
 
 /* SYZE OVERRIDES OF MY STYLES */

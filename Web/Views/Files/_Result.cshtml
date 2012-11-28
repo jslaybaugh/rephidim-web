@@ -1,0 +1,12 @@
+﻿@model Common.Models.FileInfoResult
+@using System.Text.RegularExpressions;
+<li>
+	<a class="file-name" data-toggle="modal" data-target="#uxModal" href="@(Url.Action<FilesController>(x => x.Options(Model.Path)))">@RazorHelpers.RenderIcon(Model.Extension)@RazorHelpers.Highlight(Model.Name, ViewBag.QueryParts)</a>
+	@if (Model.IsNew) {<span class="label label-success">New: @string.Format("{0:M/d/yy h:mm tt}", Model.DateCreated)</span>}
+	@if (!Model.IsNew && Model.IsModified) {<span class="label label-success">Modified: @string.Format("{0:M/d/yy h:mm tt}", Model.DateModified)</span>}<br />
+	<span class="small-info">
+		@{ var newPath = Regex.Replace(Model.Path, Model.Name + "." + Model.Extension, "", RegexOptions.IgnoreCase); }
+		<b>Path: </b> <a href="@(Url.Action<FilesController>(x=>x.Browse(newPath)))">@RazorHelpers.Highlight(newPath.Trim().Length > 0 ? newPath : "Home Directory", ViewBag.QueryParts)</a><br />
+		<b>Size:</b> @Model.Size, <b>Loaded:</b> @string.Format("{0:M/d/yy h:mm tt}", Model.DateModified)
+	</span>
+</li>	

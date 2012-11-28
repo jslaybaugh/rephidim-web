@@ -32,13 +32,3 @@ else
 { 
 	<iframe id="uxContent" class="module primary-content" style="width:100%;border:none 0;" src="@Href("~/Content/static/" + @Model.Path)"></iframe>
 }
-
-@section scripts
-{
-	<script type="text/javascript">
-		$(function ()
-		{
-			var static = new App.Static();
-		});
-	</script>
-}

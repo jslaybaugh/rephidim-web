@@ -1,9 +1,0 @@
-﻿@model Common.Models.ScriptureItem
-		   
-<li>
-	<a href="@(Url.Action<ScriptureController>(x=>x.Read(Model.Book.Name, Model.Chapter, Model.Verse)))"><b>@Model.Book.Name @Model.Chapter:@Model.Verse</b></a>
-	<span class="edit-rights label label-info">@Model.TranslationId</span>
-	@if (Model.IsNew) {<span class="label label-success">New: @string.Format("{0:M/d h:mm tt'}", Model.DateCreated)</span>}
-	@if (!Model.IsNew && Model.IsModified) {<span class="label label-warning">Modified: @string.Format("{0:M/d h:mm tt'}", Model.DateModified)</span>}<br />
-	@Model.Text
-</li>

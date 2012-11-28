@@ -20,7 +20,7 @@ else
 			</div>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row search">
 		<div class="span4 module primary-content" id="uxVerses">
 			<h1>Matching Verses (@(Model.MatchingVerses != null && Model.MatchingVerses.Count() > 0 ? Model.MatchingVerses.Count() : 0))</h1>
 			<div class="scrollable">
@@ -29,7 +29,7 @@ else
 					<ul class="unstyled lines">
 						@foreach (var verse in Model.MatchingVerses)
 						{
-							Html.RenderPartial("~/Views/Scripture/_Verse.cshtml", verse);
+							Html.RenderPartial("~/Views/Scripture/_Result.cshtml", verse);
 						}
 					</ul>
 				}
@@ -47,7 +47,7 @@ else
 					<ul class="unstyled lines">
 						@foreach (var term in Model.MatchingTerms)
 						{
-							Html.RenderPartial("~/Views/Glossary/_Term.cshtml", term);
+							Html.RenderPartial("~/Views/Glossary/_Result.cshtml", term);
 						}
 					</ul>
 				}
@@ -65,7 +65,7 @@ else
 					<ul class="unstyled lines">
 						@foreach (var file in Model.MatchingFiles)
 						{
-							Html.RenderPartial("~/Views/Files/_File.cshtml", file);
+							Html.RenderPartial("~/Views/Files/_Result.cshtml", file);
 						}
 					</ul>
 				}
