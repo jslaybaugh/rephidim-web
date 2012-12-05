@@ -1,0 +1,22 @@
+﻿@{
+	Layout = null;
+}
+
+<h1 id="uxTermName">
+	@ViewBag.ActiveTerm.Term
+</h1>
+<div id="uxDefinition" class="scrollable">
+	<form>
+		<label for="txtTerm">Term Name</label>
+		<input type="text" id="txtTerm" class="input-block-level" placeholder="Term Name" name="Term" value="@ViewBag.ActiveTerm.Term" />
+		<label for="txtDefinition">Definition</label>
+		<textarea id="txtDefinition" class="input-block-level" name="Definition" rows="20">@System.Text.RegularExpressions.Regex.Replace(ViewBag.ActiveTerm.Definition, "<br/>", "\r", System.Text.RegularExpressions.RegexOptions.IgnoreCase)</textarea>
+		<label for="txtDateModified">Modified Date</label>
+		<input id="txtDateModified" type="datetime" name="DateModified" class="input-block-level" value="@string.Format("{0: M/d/yyyy h:mm tt}", ViewBag.ActiveTerm.DateModified)" />
+		<input type="hidden" name="Id" value="@ViewBag.ActiveTerm.Id" />
+		<div class="pull-right">
+			<button id="btnCancel" class="btn" title="Cancel"><i class="icon-thumbs-down"></i> Cancel</button>
+			<button type="submit" id="btnSave" class="btn btn-success" title="Save Term"><i class="icon-thumbs-up icon-white"></i> Save</button>
+		</div>
+	</form>
+</div>

@@ -142,7 +142,6 @@
     <Compile Include="Models\AdminMessagesView.cs" />
     <Compile Include="Models\AdminEmailsView.cs" />
     <Compile Include="Models\AdminUsersView.cs" />
-    <Compile Include="Models\ContentView.cs" />
     <Compile Include="Models\FileOptions.cs" />
     <Compile Include="Models\ScriptureView.cs" />
     <Compile Include="Models\StaticView.cs" />
@@ -251,6 +250,7 @@
     <Content Include="Scripts\libs\consolelog.js" />
     <Content Include="Scripts\libs\date.format.js" />
     <Content Include="Scripts\libs\jquery.ba-throttle-debounce.min.js" />
+    <Content Include="Scripts\libs\jquery.history.js" />
     <Content Include="Scripts\libs\jquery.scrollTo-1.4.2.js" />
     <Content Include="Scripts\libs\jquery.tmpl.js" />
     <Content Include="Scripts\libs\json2.js" />
@@ -285,7 +285,10 @@
     <Content Include="Views\Glossary\_Result.cshtml" />
     <Content Include="Views\Scripture\_Result.cshtml" />
     <Content Include="Views\Files\_Folders.cshtml" />
-    <Content Include="Views\Files\_Content.cshtml" />
+    <Content Include="Views\Files\_Contents.cshtml" />
+    <Content Include="Views\Glossary\_List.cshtml" />
+    <Content Include="Views\Glossary\_Details.cshtml" />
+    <Content Include="Views\Glossary\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Accounts\Login.cshtml" />

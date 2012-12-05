@@ -38,6 +38,15 @@ namespace Web.Controllers
 			return View("_Folders");
 		}
 
+		public ActionResult Contents(string path)
+		{
+			path = string.IsNullOrEmpty(path) ? "" : path;
+			ViewBag.Path = path;
+			ViewBag.Files = FileUtility.GetFiles(path);
+
+			return View("_Contents");
+		}
+
 		// this remains open for good reader [Authorize]
 		public ActionResult Open(string path)
 		{

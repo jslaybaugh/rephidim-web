@@ -1,0 +1,35 @@
+﻿@using System.Text.RegularExpressions;
+@{
+	Layout = null;
+	ViewBag.Browse = true;
+}
+<h1 id="uxPath">
+	<div class="pull-right">
+		<button class="btn btn-mini report-issue" data-details="Path: @ViewBag.Path" title="Report Issue"><i class="icon-flag"></i> Report Issue</button>
+		@if (User.IsInRole("Files")) {<button id="btnUpload" class="btn btn-mini" title="Add to this directory"><i class="icon-plus-sign"></i> New...</button>}
+	</div>
+	@(ViewBag.Path.Length == 0 ? "Home Directory" : Regex.Replace(ViewBag.Path, "/", " / ", RegexOptions.IgnoreCase))
+	<div class="subcontent clearfix none">
+		<button class="right btn" id="btnNewFolder"><i class="icon-folder-close"></i> New Folder</button>
+		<p>Select a file to upload to this directory:</p>
+		<form method="post" enctype="multipart/form-data" action="@(Url.Action<FilesController>(x=>x.Upload(null, null)))" style="margin:0px;">
+			<input type="file" name="file" />
+			<input type="hidden" name="path" value="@ViewBag.Path" />
+		</form>
+	</div>
+</h1>
+<div id="uxFiles" class="scrollable">
+	@if (ViewBag.Files != null && (ViewBag.Files as IEnumerable<Common.Models.FileInfoResult>).Count() > 0)
+	{
+		<ul class="lines">
+			@foreach (Common.Models.FileInfoResult file in ViewBag.Files)
+			{
+				Html.RenderPartial("~/Views/Files/_Result.cshtml", file);
+			}
+		</ul>
+	}
+	else
+	{
+		<div class='message'><div><span>There are no files in this directory.<br/><br/>Select a folder/subfolder from the left.</span></div></div>
+	}
+</div>

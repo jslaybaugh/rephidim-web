@@ -4,7 +4,7 @@
 /* PRIMARY STYLES */
 
 	html {overflow-y:hidden;}
-	html, body, input, select, textarea, input[type="text"], input[type="password"], .ui-autocomplete-input, .uneditable-input, p { font-family: 'Open Sans', sans-serif; color: #333; font-size: 13px; line-height: 18px; }
+	html, body, input, select, textarea, button, input[type="text"], input[type="password"], .ui-autocomplete-input, .uneditable-input, p { font-family: 'Open Sans', sans-serif; color: #333; font-size: 13px; line-height: 18px; }
 	label, li { color: #333; }
 	body { background: #eee url(../img/bg.png) repeat; }
 	img { vertical-align: text-bottom; }
@@ -247,8 +247,6 @@
 
 	#help div { border:solid #aaa 1px; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; padding:10px; margin:0px 0px 10px 0px;background:#eee;}
 
-	.report-issue {width:24px;}
-
 /* LISTS */
 
 	.books { list-style-type: none; margin-left: 15px; padding: 0px; }
@@ -286,41 +284,6 @@
 	
 	.hasrights .edit-rights {display:inline-block;}
 	.no-hasrights .edit-rights {display:none;}
-	
-
-/* SYZE OVERRIDES OF MY STYLES */
-
-/* SYZE OVERRIDES OF STYLES DECLARED FROM HERE UP */
-/*
-	.ltMonitor body, 
-	.ltMonitor input, 
-	.ltMonitor select, 
-	.ltMonitor textarea, 
-	.ltMonitor input[type="text"], 
-	.ltMonitor input[type="password"], 
-	.ltMonitor .ui-autocomplete-input, 
-	.ltMonitor .uneditable-input,
-	.ltMonitor label,
-	.ltMonitor table,
-	.ltMonitor p,
-	.ltMonitor .topbar input,
-	.ltMonitor ul
-			{ font-size: 16px; line-height: 21px; }
- 
-	.ltMonitor h1 {font-size:36px; line-height: 42px;}
-	.ltMonitor h2 {font-size:30px; line-height: 36px;}
-	.ltMonitor h3 {font-size:24px; line-height: 36px;}
-	.ltMonitor h4 {font-size:18px; line-height: 36px;}
-	.ltMonitor h5 {font-size:16px; line-height: 36px;}
-	.ltMonitor h6 {font-size:14px; line-height: 36px;}
-
-	.ltMonitor .topbar h3 a, .ltMonitor .topbar .brand { font-size:24px;line-height:1;}
-
-	.ltMonitor .module h1 {font-size:22px;line-height:24px;}
-	.ltMonitor .small-info {font-size:13px;line-height:18px;}
-	.ltMonitor p.church {font-size: 54px;line-height:50px;}
-	.ltMonitor p.scripture {font-size: 16px;line-height:16px;}
-*/
 
 /* PRINT STYLES */
 

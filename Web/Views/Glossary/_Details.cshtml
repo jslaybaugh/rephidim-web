@@ -1,0 +1,44 @@
+﻿@{
+	Layout = null;
+}
+
+<h1 id="uxTermName">
+	<div class="pull-right">
+		<button class="btn btn-mini btn-inverse report-issue" data-details="Term: @(ViewBag.ActiveTerm != null ? ViewBag.ActiveTerm.Term : "Glossary")" title="Report Issue"><i class="icon-flag icon-white"></i> Report Issue</button>
+		<div class="btn-group">
+			<button class="btn btn-mini dropdown-toggle" data-toggle="dropdown"><i class="icon-print"></i> Print <span class="caret"></span></button>
+			<ul class="dropdown-menu">
+				<li><a href="@(Url.Action<GlossaryController>(x=>x.Print(null)))" target="_blank" title="Print This Term">Print this term</a></li>
+				<li><a href="@(Url.Action<GlossaryController>(x=>x.Print(null)))" target="_blank" title="Print This Term">Print this term</a></li>
+				<li><a href="@(Url.Action<GlossaryController>(x=>x.Print(null)))" target="_blank" title="Print This Term">Print this term</a></li>
+			</ul>
+		</div>
+		
+		@if (User.IsInRole("Glossary"))
+		{
+			if (ViewBag.ActiveTerm != null) {<button id="btnDelete" class="btn btn-mini btn-danger" data-id="@ViewBag.ActiveTerm.Id" title="Delete This Term"><i class="icon-remove icon-white"></i> Delete</button>}
+			<button id="btnAdd" class="btn btn-mini btn-success term-add" title="Add New Term"><i class="icon-plus icon-white"></i> New</button>
+			if (ViewBag.ActiveTerm != null) {<button id="btnEdit" class="btn btn-mini btn-info" data-id="@ViewBag.ActiveTerm.Id" title="Edit This Term"><i class="icon-pencil icon-white"></i> Edit</button>}
+		}
+	</div>
+	@(ViewBag.ActiveTerm != null ? ViewBag.ActiveTerm.Term : "Glossary")
+</h1>
+<div id="uxDefinition" class="scrollable">
+	@if (ViewBag.ActiveTerm != null)
+	{
+		<div class="pull-right">
+			@if (ViewBag.ActiveTerm.IsNew)	{<span class="label label-success pull-right">New: @string.Format("{0:M/d h:mm tt}", ViewBag.ActiveTerm.DateCreated)</span>}
+			else {<span class="label right">Created: @string.Format("{0:M/d h:mm tt}", ViewBag.ActiveTerm.DateCreated)</span>}
+			@if (ViewBag.ActiveTerm.DateModified != ViewBag.ActiveTerm.DateCreated)
+			{	
+				if (ViewBag.ActiveTerm.IsModified) {<br /><span class="label label-warning pull-right">Modified: @string.Format("{0:M/d h:mm tt}", ViewBag.ActiveTerm.DateModified)</span>}
+				else {<br /><span class="label right">Last Modified: @string.Format("{0:M/d h:mm tt}", ViewBag.ActiveTerm.DateModified)</span>}
+			}
+		</div>
+		@Html.Raw(ViewBag.ActiveTerm.Definition)
+	}
+	else
+	{
+		<div class='message'><div><span>There is no term selected.<br/><br/>Select a term from the left to get started.</span></div></div>
+	}
+</div>

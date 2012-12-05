@@ -40,22 +40,22 @@
 					<span id="uxAppWait" class="wait-light" style="display:none;"></span>
 				</form>
 				<ul class="nav pull-right">
-					<li>
-						<a class="visible-desktop" href="@(Url.Action<HomeController>(x => x.Help()))" style="padding:0px;margin-top:7px;width:24px;" title="Get help">@Sprite.Image("~/App_Sprites/icon_help.png")</a>
-						<a class="hidden-desktop" href="@(Url.Action<HomeController>(x => x.Help()))" title="Get help">System Help</a>
-					</li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">User: <b>@User.Identity.Name</b> <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="@(Url.Action<AdminController>(x => x.Emails()))">Email Notifications</a></li>
-							@if (User.IsInRole("Messages"))	{ <li><a href="@(Url.Action<AdminController>(x=>x.Messages()))">Manage Messages</a></li> }
-							@if (User.IsInRole("Dev"))	{ <li><a href="@(Url.Action<AdminController>(x=>x.Users()))">Manage Users</a></li> }
-							@if (User.IsInRole("Dev"))	{ <li><a href="@(Url.Action<AdminController>(x=>x.Parse()))">Parsing Utility</a></li> }
-							@if (User.IsInRole("Dev"))	{ <li><a id="lnkViewSource" href="#">View Source</a></li> }
-							<li class="divider"></li>
-							<li><a href="@(Url.Action<AccountsController>(x => x.Logout()))">Logout</a></li>
-						</ul>
-					</li>
+					<li @(ViewBag.NavHelp != null && ViewBag.NavHelp == true ? "class=active" : "")><a href="@(Url.Action<HomeController>(x => x.Help()))"><b>Help!</b></a></li>
+					<li @(ViewBag.NavEmail != null && ViewBag.NavEmail == true ? "class=active" : "")><a href="@(Url.Action<AdminController>(x => x.Emails()))">Email Notifications</a></li>
+					@if (User.IsInRole("Messages") || User.IsInRole("Dev"))
+					{
+						 <li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								@if (User.IsInRole("Messages"))	{ <li><a href="@(Url.Action<AdminController>(x=>x.Messages()))">Manage Messages</a></li> }
+								@if (User.IsInRole("Dev"))	{ <li><a href="@(Url.Action<AdminController>(x=>x.Users()))">Manage Users</a></li> }
+								@if (User.IsInRole("Dev"))	{ <li><a href="@(Url.Action<AdminController>(x=>x.Parse()))">Parsing Utility</a></li> }
+								@if (User.IsInRole("Dev"))	{ <li><a id="lnkViewSource" href="#">View Source</a></li> }
+							</ul>
+						</li>
+					}
+					<li><a href="@(Url.Action<AccountsController>(x => x.Logout()))">Logout</a></li>
+					
 				</ul>
 			</div>
 		</div>
@@ -69,23 +69,23 @@
 @section styles 
 {
 	@if (IsSectionDefined("styles"))
-	{
+ {
 		@RenderSection("styles")
-	}
+ }
 }
 
 @section scripts 
 {
 	@if (IsSectionDefined("scripts"))
-	{
+ {
 		@RenderSection("scripts")
-	}
+ }
 }
 
 @section templates 
 {
 	@if (IsSectionDefined("templates"))
-	{
+ {
 		@RenderSection("templates")
 	}
 }

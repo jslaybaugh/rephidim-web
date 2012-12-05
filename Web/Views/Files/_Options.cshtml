@@ -9,14 +9,15 @@
 </div>
 <br />
 <div>
-	<a class="btn btn-primary" href="@(Url.Action<FilesController>(x=>x.Open(Model.File.Path)))" target="_blank"><i class="icon-white icon-ok"></i> Open in browser</a>
+	<a class="btn btn-primary btn-large btn-block" href="@(Url.Action<FilesController>(x=>x.Open(Model.File.Path)))" target="_blank"><i class="icon-white icon-ok"></i> Open in browser</a>
 	@if (Model.File.Extension.MatchesTrimmed("pdf") || Model.File.Extension.MatchesTrimmed("mp3"))
 	{			
-		<a class="btn btn-success goodreader" href="@("g" + Url.Action<FilesController>(x=>x.Open(Model.File.Path)))" target="_blank"><i class="icon-white icon-eye-open"></i> Open in GoodReader™</a>
+		<a class="btn btn-success btn-block btn-large goodreader" href="@("g" + Url.Action<FilesController>(x=>x.Open(Model.File.Path)))" target="_blank"><i class="icon-white icon-eye-open"></i> Open in GoodReader™</a>
 	}
-	<a class="btn btn-success download" href="@(Url.Action<FilesController>(x=>x.Download(Model.File.Path)))" target="_blank"><i class="icon-white icon-download-alt"></i> Download & Save</a>
+	<a class="btn btn-success btn-block btn-large download" href="@(Url.Action<FilesController>(x=>x.Download(Model.File.Path)))" target="_blank"><i class="icon-white icon-download-alt"></i> Download & Save</a>
 </div>
-<form id="frmEmail" class="form-inline">
-	<input type="email" id="txtEmail" placeholder="Email Address" class="span3 email-box" style="margin-top:10px;" /> 
-	<button type="submit" id="btnEmail" class="btn btn-inverse" style="margin-top:10px;"><i class="icon-white icon-envelope"></i> Send Email</button>
+<br />
+<form id="frmEmail">
+	<input type="email" id="txtEmail" placeholder="Email Address" class="input-block-level" /> 
+	<button type="submit" id="btnEmail" class="btn btn-inverse btn-large btn-block"><i class="icon-white icon-envelope"></i> Send Email</button>
 </form>

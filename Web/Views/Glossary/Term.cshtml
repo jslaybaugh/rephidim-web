@@ -3,23 +3,69 @@
 @{
 	ViewBag.Title = Model.ActiveTerm != null ? Model.ActiveTerm.Term : "Glossary";
 	ViewBag.NavGlossary = true;
-	Bundles.Reference("content/templates/glossary");
+	ViewBag.Terms = Model.Terms;
+	ViewBag.ActiveTerm = Model.ActiveTerm;
 }
 
 <div class="row">
-	<div class="span4 module primary-content" id="uxList"></div>
-	<div class="span8 module primary-content" id="uxTerm"></div>
+	<div class="span4 module primary-content" id="uxList">
+		<h1>
+			<span class="right">
+				<select class="span1" id="cmbAlpha">
+					<option value="-">#</option>
+					<option>A</option>
+					<option>B</option>
+					<option>C</option>
+					<option>D</option>
+					<option>E</option>
+					<option>F</option>
+					<option>G</option>
+					<option>H</option>
+					<option>I</option>
+					<option>J</option>
+					<option>K</option>
+					<option>L</option>
+					<option>M</option>
+					<option>N</option>
+					<option>O</option>
+					<option>P</option>
+					<option>Q</option>
+					<option>R</option>
+					<option>S</option>
+					<option>T</option>
+					<option>U</option>
+					<option>V</option>
+					<option>W</option>
+					<option>X</option>
+					<option>Y</option>
+					<option>Z</option>
+				</select>
+			</span>
+			@Model.Terms.Count() Terms
+			@if (User.IsInRole("Glossary"))
+			{
+				<a href="#" id="btnVersion" data-id="@Model.Version.Value" class="small-info">v.@Model.Version.Value</a>
+			}
+			else
+			{
+				<span class="small-info">v.@Model.Version.Value</span>  
+			}
+		</h1>
+		<div class="scrollable">
+			@{Html.RenderPartial("_List");}
+		</div>
+	</div>
+	<div class="span8 module primary-content" id="uxTerm">
+		@{Html.RenderPartial("_Details"); }
+	</div>
 </div>
-<div id="uxTermsDialog" class="none"></div>
 
 @section scripts
 {
-	<script type="text/javascript">		
+	<script type="text/javascript">
 		$(function ()
 		{
-			var activeTerm = @Html.Raw(Json.Encode(Model.ActiveTerm));
-			window.Glossary = new App.Glossary(activeTerm, @Html.Raw(Json.Encode(Model.Version.Value)), @Html.Raw(Json.Encode(User.IsInRole("Glossary"))));
+			window.Glossary = new App.Glossary(@Html.Raw(Json.Encode(Model.ActiveTerm)));
 		});
 	</script>
-
 }

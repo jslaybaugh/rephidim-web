@@ -46,11 +46,26 @@ namespace Web
 			);
 
 			routes.MapRoute(
+				"Glossary Term Details", // Route name
+				"Glossary/Details/{id}", // URL with parameters
+				new { controller = "Glossary", action = "Details", id = UrlParameter.Optional }, // Parameter defaults
+				new string[] { "Web.Controllers" }
+			);
+
+			routes.MapRoute(
+				"Glossary Term Edit", // Route name
+				"Glossary/Edit/{id}", // URL with parameters
+				new { controller = "Glossary", action = "Edit", id = UrlParameter.Optional }, // Parameter defaults
+				new string[] { "Web.Controllers" }
+			);
+
+			routes.MapRoute(
 				"Glossary Term by Name", // Route name
 				"Glossary/{term}", // URL with parameters
 				new { controller = "Glossary", action = "Term", term = UrlParameter.Optional}, // Parameter defaults
 				new string[] { "Web.Controllers" }
 			);
+
 
 			routes.MapRoute(
 				"Scripture", // Route name

@@ -7,3 +7,4 @@ jquery.tmpl.js
 jquery.scrollTo-1.4.2.js
 bootstrap.js
 knockout-2.2.0.js
+jquery.history.js

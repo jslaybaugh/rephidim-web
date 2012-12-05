@@ -569,7 +569,7 @@ namespace Common
 			}
 		}
 
-		public static IEnumerable<GlossarySummary> GetAllTerms()
+		public static IEnumerable<GlossarySummaryMore> GetAllTerms()
 		{
 			try
 			{
@@ -584,8 +584,7 @@ namespace Common
 
 					if (res == null) return null;
 
-					return res.Select(x => x.IsNew || x.IsModified
-						? new GlossarySummaryMore
+					return res.Select(x => new GlossarySummaryMore
 						{
 							Id = x.TermId,
 							Term = x.Term,
@@ -593,12 +592,23 @@ namespace Common
 							DateModified = x.DateModified,
 							IsModified = x.IsModified,
 							IsNew = x.IsNew
-						}
-						: new GlossarySummary
-						{
-							Id = x.TermId,
-							Term = x.Term,
 						});
+
+					//return res.Select(x => x.IsNew || x.IsModified
+					//    ? new GlossarySummaryMore
+					//    {
+					//        Id = x.TermId,
+					//        Term = x.Term,
+					//        DateCreated = x.DateCreated,
+					//        DateModified = x.DateModified,
+					//        IsModified = x.IsModified,
+					//        IsNew = x.IsNew
+					//    }
+					//    : new GlossarySummary
+					//    {
+					//        Id = x.TermId,
+					//        Term = x.Term,
+					//    });
 				}
 			}
 			catch (Exception)

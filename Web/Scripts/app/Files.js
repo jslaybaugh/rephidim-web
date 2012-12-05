@@ -4,24 +4,17 @@
 (function ()
 {
 
-	var loadContents = function (path, push)
+	var loadContents = function (path)
 	{
 		$.ajax(
 		{
-			url: App.ResolveUrl("~/Ajax/Files/Contents"),
-			data: { path: path },
-			success: function (data)
+			url: App.ResolveUrl("~/Files/Contents/" + path),
+			success: function (html)
 			{
-				var content = {};
-				content.Path = path;
-				content.Files = data;
-				content.EditRights = _editRights;
-				_currentPath = path;
-				$("#tmpFolderContent").tmpl(content).appendTo($("#uxContents").empty());
+				$("#uxContents").html(html);
 				$(window).resize();
 
 				App.SetTitle(path || "Home Directory");
-				if (Modernizr.history && push) history.pushState({ Path: path }, path, App.ResolveUrl("~/Files/Browse/" + path));
 			},
 			error: function (xhr)
 			{
@@ -41,7 +34,7 @@
 			if (a.find(".icon-plus").length > 0)
 			{
 				a.find(".icon-plus").removeClass().addClass("icon-minus");
-				a.parent("li").load(App.ResolveUrl("~/Files/Folders"), a.data("path"));
+				$.get(App.ResolveUrl("~/Files/Folders/" + a.data("path")), function (html) { a.parent("li").append(html); });
 			}
 			else
 			{
@@ -59,7 +52,7 @@
 			if (a.siblings(".folder-expand").find(".icon-plus").length > 0)
 			{
 				a.siblings(".folder-expand").find(".icon-plus").removeClass().addClass("icon-minus");
-				a.parent("li").load(App.ResolveUrl("~/Files/Folders"), a.data("path"));
+				$.get(App.ResolveUrl("~/Files/Folders/" + a.data("path")), function (html) { a.parent("li").append(html); });
 			}
 			else
 			{
@@ -133,7 +126,8 @@
 		{
 			_browsePath = browsePath;
 
-			$("#uxFolders .scrollable").load(App.ResolveUrl("~/Files/Folders"), { path: "" });
+			$.get(App.ResolveUrl("~/Files/Folders/"), function (html) { $("#uxFolders .scrollable").html(html); });
+			loadContents("");
 
 			domSetup(this);
 		}

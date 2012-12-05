@@ -22,7 +22,7 @@
 			{
 				data = JSON.parse(data);
 				var timestamp = new Date(data.Timestamp);
-				var expiryDate = new Date(timestamp.setTime(timestamp.getTime() + (4 * 60 * 60 * 1000))) // four hours
+				var expiryDate = new Date(timestamp.setTime(timestamp.getTime() + (1 * 60 * 60 * 1000))) // 1 hour
 				if (new Date() > expiryDate)
 				{
 					// it is too old, we need to get a new one
@@ -71,7 +71,7 @@
 				// g makes it global and not just first
 				var regex = new RegExp("\\b(" + termString.replace(/(\^|\.|\*|\+|\?|\=|\!|\\|\/|\(|\)|\[|\]|\{|\})/ig, "\\$1") + ")\\b", "ig");
 
-				$(container).html($(container).html().replace(regex, "<a class='term-link' data-value='$1' href='" + App.ResolveUrl("~/Glossary/$1") + "'>$1</a>"));
+				$(container).html($(container).html().replace(regex, "<a class='term-link' data-term='$1' href='" + App.ResolveUrl("~/Glossary/$1") + "'>$1</a>"));
 
 				/*.inactive-link { color: #404040; text-decoration: none; }
 				.active-link { color: #0069D6; text-decoration: underline; }*/
@@ -80,6 +80,15 @@
 
 		LoadTerms: function (callback)
 		{
+			getTerms(function (terms)
+			{
+				callback(terms);
+			});
+		},
+
+		ReloadTerms: function (callback)
+		{
+			if (Modernizr.localstorage) localStorage.removeItem("terms");
 			getTerms(function (terms)
 			{
 				callback(terms);

@@ -33,9 +33,32 @@ namespace Web.Controllers
 			}
 
 			m.Version = DataAccess.GetKeyValue("GlossaryVersion");
+			m.Terms = DataAccess.GetAllTerms();
 
             return View("Term",m);
         }
+
+		public ActionResult Terms()
+		{
+			ViewBag.Terms = DataAccess.GetAllTerms();
+			return View("_Terms");
+		}
+
+		public ActionResult Details(int? id, string term)
+		{
+			if (id.HasValue)
+				ViewBag.ActiveTerm = DataAccess.GetSingleTerm(id.Value);
+			else
+				ViewBag.ActiveTerm = DataAccess.GetSingleTerm(term);
+
+			return View("_Details");
+		}
+
+		public ActionResult Edit(int id)
+		{
+			ViewBag.ActiveTerm = DataAccess.GetSingleTerm(id);
+			return View("_Edit");
+		}
 
 		public FileResult Print(int? id)
 		{
