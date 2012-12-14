@@ -47,17 +47,26 @@ namespace Web.Controllers
 		public ActionResult Details(int? id, string term)
 		{
 			if (id.HasValue)
-				ViewBag.ActiveTerm = DataAccess.GetSingleTerm(id.Value);
+				return View("_Details", DataAccess.GetSingleTerm(id.Value));
 			else
-				ViewBag.ActiveTerm = DataAccess.GetSingleTerm(term);
+				return View("_Details", DataAccess.GetSingleTerm(term));
 
-			return View("_Details");
 		}
 
 		public ActionResult Edit(int id)
 		{
 			ViewBag.ActiveTerm = DataAccess.GetSingleTerm(id);
 			return View("_Edit");
+		}
+
+		[HttpPost]
+		public ActionResult Edit(GlossaryEditView m)
+		{
+			if (!ModelState.IsValid) return View("_Edit", m);
+
+			var result = DataAccess.UpsertTerm(m.Id, m.Term, m.Definition, m.DateModified);
+			return View("_Details", result);
+
 		}
 
 		public FileResult Print(int? id)

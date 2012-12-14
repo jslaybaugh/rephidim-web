@@ -727,7 +727,7 @@ namespace Common
 			}
 		}
 
-		public static GlossaryItem UpsertTerm(int id, string term, string definition, bool? updateDate)
+		public static GlossaryItem UpsertTerm(int id, string term, string definition, DateTime? dateModified)
 		{
 			try
 			{
@@ -739,7 +739,7 @@ namespace Common
 					p.Add("@termid", id);
 					p.Add("@term", term.Trim().ToUpperInvariant());
 					p.Add("@definition", Regex.Replace(definition.Trim(), "(\r|\n)", "<br/>", RegexOptions.IgnoreCase));
-					p.Add("@datemodified", DateTime.Now);
+					p.Add("@datemodified", dateModified ?? DateTime.Now);
 					p.Add("@lastDate", DateTime.Now.AddDays(-Convert.ToInt32(ConfigurationManager.AppSettings["days"])));
 
 					string lastPart = "";
@@ -748,14 +748,7 @@ namespace Common
 					if (id > 0)
 					{
 						// edit
-						if (updateDate.HasValue && updateDate.Value)
-						{
-							firstquery = "UPDATE GlossaryTerms SET Term=@Term, Definition=@Definition, DateModified=@DateModified WHERE TermID=@termid; ";
-						}
-						else
-						{
-							firstquery = "UPDATE GlossaryTerms SET Term=@Term, Definition=@Definition WHERE TermID=@termid; ";
-						}
+						firstquery = "UPDATE GlossaryTerms SET Term=@Term, Definition=@Definition, DateModified=@DateModified WHERE TermID=@termid; ";
 						lastPart = "@termid";
 					}
 					else

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Common.Models.BookItem
+@{
 	Layout = null;
 }
 
@@ -7,8 +8,10 @@
 </h1>
 <div id="uxDefinition" class="scrollable">
 	<form>
-		<label for="txtTerm">Term Name</label>
-		<input type="text" id="txtTerm" class="input-block-level" placeholder="Term Name" name="Term" value="@ViewBag.ActiveTerm.Term" />
+		<div class="control-group error">
+			<label for="txtTerm" class="control-label">Term Name</label>
+			<input type="text" id="txtTerm" class="input-block-level" placeholder="Term Name" name="Term" value="@ViewBag.ActiveTerm.Term" />
+		</div>
 		<label for="txtDefinition">Definition</label>
 		<textarea id="txtDefinition" class="input-block-level" name="Definition" rows="20">@System.Text.RegularExpressions.Regex.Replace(ViewBag.ActiveTerm.Definition, "<br/>", "\r", System.Text.RegularExpressions.RegexOptions.IgnoreCase)</textarea>
 		<label for="txtDateModified">Modified Date</label>
