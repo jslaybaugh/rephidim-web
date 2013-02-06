@@ -224,14 +224,16 @@
 
 	.scrollable { overflow: auto;overflow-x:visible; -webkit-overflow-scrolling: touch; }
 	.module {background: #f3f3f3;}
+	.module > div { padding: 5px; box-sizing: border-box;}
 	.boxshadow.borderradius .module { -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; box-shadow: 0 0 10px #444;  }
-	.no-borderradius.no-boxshadow .module > div {border:solid 1px #999;}
+	.boxshadow .module > div {border: none 0;}
+	.no-boxshadow .module > div {border:solid 1px #999; }
 	.module h1 { clear: both; -webkit-border-top-left-radius: 5px; -moz-border-top-left-radius: 5px; border-top-left-radius: 5px; -webkit-border-top-right-radius: 5px; -moz-border-top-right-radius: 5px; border-top-right-radius: 5px; margin: 0px; display: block; padding: 8px; color: #eee; font-size: 18px; line-height: 20px; background: #222; font-weight: normal; }
 	.module h1 input, .module h1 select {margin:0px;margin-top:-5px;}
 	.cssgradients .module h1 { filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333', endColorstr='#222'); background: -webkit-gradient(linear, left top, left bottom, from(#333), to(#222)); background: -moz-linear-gradient(top,  #333,  #222); }
 	.no-cssgradients .module h1 { background: #222; }
 	.module h1 a, .module h1 a:link, .module h1 a:visited, .module h1 a:hover, .module h1 a:active { color: #eee; text-decoration: underline; }
-	.module > div { padding: 5px; box-sizing: border-box; }
+
 	
 	.subcontent { -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; background:#efefef; border:solid #fff 1px; margin: 10px 0px 0px 0px; padding:10px;  }
 

@@ -15,3 +15,16 @@ C:\Side Work\Rephidim Church\Rephidim Web 2011\EmailNotify\obj\x86\Debug\EmailNo
 C:\Side Work\Rephidim Church\Rephidim Web 2011\EmailNotify\bin\Debug\Dapper.dll
 C:\Side Work\Rephidim Church\Rephidim Web 2011\EmailNotify\bin\Debug\Dapper.pdb
 C:\Side Work\Rephidim Church\Rephidim Web 2011\EmailNotify\obj\x86\Debug\EmailNotify.csprojResolveAssemblyReference.cache
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\obj\x86\Debug\EmailNotify.csprojResolveAssemblyReference.cache
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Debug\EmailNotify.exe.config
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Debug\EmailNotify.exe
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Debug\EmailNotify.pdb
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Debug\Common.dll
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Debug\Postal.dll
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Debug\RazorEngine.dll
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Debug\System.Web.Razor.dll
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Debug\Dapper.dll
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Debug\Common.pdb
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Debug\Dapper.pdb
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\obj\x86\Debug\EmailNotify.exe
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\obj\x86\Debug\EmailNotify.pdb
