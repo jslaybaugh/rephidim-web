@@ -60,7 +60,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Postal, Version=0.7.3.0, Culture=neutral, PublicKeyToken=45719375b8b4d528, processorArchitecture=MSIL">

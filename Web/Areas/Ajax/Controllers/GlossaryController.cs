@@ -33,16 +33,16 @@ namespace Web.Areas.Ajax.Controllers
 				throw new Exception("Access Denied");
 		}
 
-		[HttpPost]
-		public JsonResult Save(int id, string term, string definition, bool? updateDate)
-		{
-			if (User.IsInRole("Glossary"))
-			{
-				return Json(DataAccess.UpsertTerm(id, term, definition, updateDate));
-			}
-			else
-				throw new Exception("Access Denied.");
-		}
+        //[HttpPost]
+        //public JsonResult Save(int id, string term, string definition, bool? updateDate)
+        //{
+        //    if (User.IsInRole("Glossary"))
+        //    {
+        //        return Json(DataAccess.UpsertTerm(id, term, definition, updateDate));
+        //    }
+        //    else
+        //        throw new Exception("Access Denied.");
+        //}
 
 		[HttpPost]
 		public JsonResult Delete(int id)

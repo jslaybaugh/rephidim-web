@@ -51,6 +51,13 @@
 			});
 
 
+			if (navigator.userAgent.match(/(kindle|silk)/i))
+			{
+				$("#user-box").show();
+				$("#lnk-more").hide();
+			}
+
+
 			if (navigator.userAgent.match(/(ipad|ipod|iphone)/i) && navigator.userAgent.match(/CPU OS [1234]/i))
 			{
 				$("#uxiOSVersion").show();

@@ -25,3 +25,30 @@ C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\bin\Dapper.xml
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\obj\Debug\Web.csprojResolveAssemblyReference.cache
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\obj\Debug\Web.dll
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\obj\Debug\Web.pdb
+\\psf\Home\Projects\Rephidim-Web\Web\bin\Web.dll
+\\psf\Home\Projects\Rephidim-Web\Web\bin\Web.pdb
+\\psf\Home\Projects\Rephidim-Web\Web\bin\AjaxMin.dll
+\\psf\Home\Projects\Rephidim-Web\Web\bin\Cassette.Aspnet.dll
+\\psf\Home\Projects\Rephidim-Web\Web\bin\Cassette.dll
+\\psf\Home\Projects\Rephidim-Web\Web\bin\Cassette.Views.dll
+\\psf\Home\Projects\Rephidim-Web\Web\bin\Common.dll
+\\psf\Home\Projects\Rephidim-Web\Web\bin\Elmah.dll
+\\psf\Home\Projects\Rephidim-Web\Web\bin\Jurassic.dll
+\\psf\Home\Projects\Rephidim-Web\Web\bin\Microsoft.Web.Infrastructure.dll
+\\psf\Home\Projects\Rephidim-Web\Web\bin\Microsoft.Web.Mvc.dll
+\\psf\Home\Projects\Rephidim-Web\Web\bin\Microsoft.Web.Samples.ImageOptimizationFramework.dll
+\\psf\Home\Projects\Rephidim-Web\Web\bin\Microsoft.Web.Samples.SpriteHelper.dll
+\\psf\Home\Projects\Rephidim-Web\Web\bin\MvcContrib.dll
+\\psf\Home\Projects\Rephidim-Web\Web\bin\NotFoundMvc.dll
+\\psf\Home\Projects\Rephidim-Web\Web\bin\Postal.dll
+\\psf\Home\Projects\Rephidim-Web\Web\bin\RazorEngine.dll
+\\psf\Home\Projects\Rephidim-Web\Web\bin\System.Web.Razor.dll
+\\psf\Home\Projects\Rephidim-Web\Web\bin\WebActivator.dll
+\\psf\Home\Projects\Rephidim-Web\Web\bin\Dapper.dll
+\\psf\Home\Projects\Rephidim-Web\Web\bin\Common.pdb
+\\psf\Home\Projects\Rephidim-Web\Web\bin\NotFoundMvc.pdb
+\\psf\Home\Projects\Rephidim-Web\Web\bin\Dapper.pdb
+\\psf\Home\Projects\Rephidim-Web\Web\bin\Dapper.xml
+\\psf\Home\Projects\Rephidim-Web\Web\obj\Debug\Web.csprojResolveAssemblyReference.cache
+\\psf\Home\Projects\Rephidim-Web\Web\obj\Debug\Web.dll
+\\psf\Home\Projects\Rephidim-Web\Web\obj\Debug\Web.pdb

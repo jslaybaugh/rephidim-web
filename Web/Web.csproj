@@ -34,9 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AjaxMin, Version=4.74.4698.25423, Culture=neutral, PublicKeyToken=21ef50ce11b5d80f, processorArchitecture=MSIL">
+    <Reference Include="AjaxMin, Version=4.78.4724.23863, Culture=neutral, PublicKeyToken=21ef50ce11b5d80f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\AjaxMin.4.74.4698.25434\lib\net40\AjaxMin.dll</HintPath>
+      <HintPath>..\packages\AjaxMin.4.78.4724.23869\lib\net40\AjaxMin.dll</HintPath>
     </Reference>
     <Reference Include="Cassette, Version=2.0.0.17974, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -49,7 +49,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Cassette.Views.2.0.0\lib\net40\Cassette.Views.dll</HintPath>
     </Reference>
-    <Reference Include="Cassette.Web, Version=1.1.0.26954, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
@@ -366,7 +365,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49799</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/RephidimWeb2011</IISUrl>
+          <IISUrl>http://localhost/Rephidim-Web/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
