@@ -1,0 +1,46 @@
+﻿@model Web.Models.CalendarView
+
+@{var firstDayOfMonth = new DateTime(Model.Year, Model.Month, 1);}
+	
+
+<div style="width:210px;margin-left:auto;margin-right:auto;">
+	<table class="dates">
+		<tr>
+			<td class="day-of-weeks">S</td>
+			<td class="day-of-weeks">M</td>
+			<td class="day-of-weeks">T</td>
+			<td class="day-of-weeks">W</td>
+			<td class="day-of-weeks">T</td>
+			<td class="day-of-weeks">F</td>
+			<td class="day-of-weeks">S</td>
+		</tr>
+			@for (int j = 1; j < DateTime.DaysInMonth(Model.Year, Model.Month) + 1; j++)
+			{
+				var thisDate = new DateTime(Model.Year, Model.Month, j);
+				var intOfWeek = Convert.ToInt16(thisDate.DayOfWeek);
+				if (j==1 || intOfWeek == 0 || intOfWeek % 7 == 0)
+				{
+					@:<tr style="height:30px;">
+				}
+				if (j == 1)
+				{
+					for (int k = 0; k < Convert.ToInt16(firstDayOfMonth.DayOfWeek); k++)
+					{
+						<td>&nbsp;</td>
+					}
+				}
+
+				<td>@j
+					<ul class="unstyled list-lines connected-sortable nursery"></ul>
+					<ul class="unstyled list-lines connected-sortable security-inside"></ul>
+					<ul class="unstyled list-lines connected-sortable security-outside"></ul>
+					<ul class="unstyled list-lines connected-sortable kitchen"></ul>
+				</td>
+					
+				if (j==DateTime.DaysInMonth(Model.Year, Model.Month) || intOfWeek % 7 == 6)
+				{
+					@:</tr>
+				}
+			}
+	</table>
+</div>

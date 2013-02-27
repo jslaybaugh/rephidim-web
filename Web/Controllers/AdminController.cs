@@ -48,6 +48,15 @@ namespace Web.Controllers
 		}
 
 		[HttpGet]
+		public ActionResult Schedule(string id)
+		{
+		    var m = new AdminScheduleView();
+			m.Mode = id;
+			m.People = DataAccess.GetPeople();
+		    return View("Schedule", m);
+		}
+
+		[HttpGet]
 		public ActionResult Emails()
 		{
 

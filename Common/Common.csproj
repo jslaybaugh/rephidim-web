@@ -59,6 +59,7 @@
     <Compile Include="Extensions\Url.cs" />
     <Compile Include="FileUtility.cs" />
     <Compile Include="Models\BookItem.cs" />
+    <Compile Include="Models\PeopleItem.cs" />
     <Compile Include="Models\DirectoryInfoResult.cs" />
     <Compile Include="Models\EmailItem.cs" />
     <Compile Include="Models\FileInfoResult.cs" />

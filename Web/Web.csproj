@@ -129,7 +129,9 @@
     </Compile>
     <Compile Include="Models\AdminMessagesView.cs" />
     <Compile Include="Models\AdminEmailsView.cs" />
+    <Compile Include="Models\AdminScheduleView.cs" />
     <Compile Include="Models\AdminUsersView.cs" />
+    <Compile Include="Models\CalendarView.cs" />
     <Compile Include="Models\ScriptureView.cs" />
     <Compile Include="Models\StaticView.cs" />
     <Compile Include="Models\SearchView.cs" />
@@ -140,7 +142,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Rephidim.sdf" />
     <Content Include="App_Sprites\blank.gif" />
     <Content Include="App_Sprites\highCompat.css" />
     <Content Include="App_Sprites\icon_audio.png" />
@@ -265,6 +266,8 @@
     <Content Include="Views\Admin\Users.cshtml" />
     <None Include="App_Sprites\timeStamp.dat" />
     <Content Include="Views\Admin\Draw.cshtml" />
+    <Content Include="Views\Admin\Schedule.cshtml" />
+    <Content Include="Views\Admin\_Calendar.cshtml" />
     <None Include="Views\Emails\Notification.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

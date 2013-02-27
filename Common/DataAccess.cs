@@ -82,6 +82,42 @@ namespace Common
 			}
 		}
 
+		public static IEnumerable<PeopleItem> GetPeople()
+		{
+			try
+			{
+				using (var cn = new SqlCeConnection(ConnString))
+				{
+					cn.Open();
+
+					var p = new DynamicParameters();
+
+					var res = cn.Query("SELECT * FROM People WHERE IsActive=1 ORDER BY LastName, FirstName ", p);
+
+					if (res == null) return null;
+
+					return res.Select(x => new PeopleItem
+					{
+						Id = x.PersonId,
+						FirstName = x.FirstName,
+						LastName = x.LastName,
+						Email = x.Email,
+						Phone = x.Phone,
+						Security = x.Security,
+						FirstAid = x.FirstAid,
+						Notes = x.Notes,
+						Kitchen = x.Kitchen,
+						Nursery = x.Nursery,
+						IsActive = x.IsActive
+					});
+				}
+			}
+			catch (Exception)
+			{
+				return null;
+			}
+		}
+
 		public static UserItem GetSingleUser(int id)
 		{
 			return GetUsers().FirstOrDefault(x => x.Id == id);
