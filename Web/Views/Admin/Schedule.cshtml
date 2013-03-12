@@ -16,43 +16,38 @@
 			</span>
 			Volunteers
 		</h1>
-		<div class="scrollable">
-			<ul class="unstyled list-lines connected-sortable">
-				@foreach (var person in Model.People)
-				{
-					<li>@person.FirstName</li>
-				}
-			</ul>
+		<div class="scrollable volunteers">
+			@{Html.RenderPartial("_Volunteers", new VolunteerListView { People = Model.People.ToList() });}
 		</div>
 	</div>
 	<div class="span9 module primary-content" id="uxContents">
 		<h1>
 			<span class="right">
 				<select class="span2" id="cmbMonth">
-					<option value="1">January</option>
-					<option value="2">February</option>
-					<option value="3">March</option>
-					<option value="4">April</option>
-					<option value="5">May</option>
-					<option value="6">June</option>
-					<option value="7">July</option>
-					<option value="8">August</option>
-					<option value="9">September</option>
-					<option value="10">October</option>
-					<option value="11">November</option>
-					<option value="12">December</option>
+					<option @(DateTime.Today.Month == 1 ? "selected=selected" : "") value="1">January</option>
+					<option @(DateTime.Today.Month == 2 ? "selected=selected" : "") value="2">February</option>
+					<option @(DateTime.Today.Month == 3 ? "selected=selected" : "") value="3">March</option>
+					<option @(DateTime.Today.Month == 4 ? "selected=selected" : "") value="4">April</option>
+					<option @(DateTime.Today.Month == 5 ? "selected=selected" : "") value="5">May</option>
+					<option @(DateTime.Today.Month == 6 ? "selected=selected" : "") value="6">June</option>
+					<option @(DateTime.Today.Month == 7 ? "selected=selected" : "") value="7">July</option>
+					<option @(DateTime.Today.Month == 8 ? "selected=selected" : "") value="8">August</option>
+					<option @(DateTime.Today.Month == 9 ? "selected=selected" : "") value="9">September</option>
+					<option @(DateTime.Today.Month == 10 ? "selected=selected" : "") value="10">October</option>
+					<option @(DateTime.Today.Month == 11 ? "selected=selected" : "") value="11">November</option>
+					<option @(DateTime.Today.Month == 12 ? "selected=selected" : "") value="12">December</option>
 				</select>
 				<select class="span1" id="cmbYear">
 					@for (int i = 2013; i < DateTime.Today.Year + 2; i++)
 					{
-						<option>@i</option>
+						<option @(DateTime.Today.Year == i ? "selected=selected" : "")>@i</option>
 					}
 				</select>
 			</span>
 			Calendar
 		</h1>
-		<div class="scrollable">
-			@{Html.RenderPartial("_Calendar", new CalendarView { Year = 2013, Month = 1 });}
+		<div class="scrollable calendar">
+			@{Html.RenderPartial("_Calendar", new CalendarView { Year = DateTime.Today.Year, Month = DateTime.Today.Month });}
 		</div>
 	</div>
 </div>
@@ -62,6 +57,26 @@
 	<script type="text/javascript">
 		$(function ()
 		{
+			$("#cmbMonth, #cmbYear").change(function ()
+			{
+				$(".calendar").load(App.ResolveUrl("~/Admin/Calendar?month=" + $("#cmbMonth").val() + "&year=" + $("#cmbYear").val()));
+			});
+
+			$("#cmbArea").change(function ()
+			{
+				$(".volunteers").load(App.ResolveUrl("~/Admin/Volunteers?mode=" + $("#cmbArea").val()), function ()
+				{
+					$(".calendar .vol").removeClass("connected-sortable");
+					$(".calendar ." + $("#cmbArea").val().toLowerCase()).addClass("connected-sortable");
+					drag(); 
+				});
+			});
+			drag();
+
+		});
+
+		var drag = function ()
+		{
 			$(".connected-sortable").sortable({
 				connectWith: ".connected-sortable",
 				dropOnEmpty: true,
@@ -70,6 +85,6 @@
 				receive: function (event, ui) { },
 				revert: false
 			}).disableSelection();
-		});
+		};
 	</script>
 }

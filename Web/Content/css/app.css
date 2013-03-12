@@ -262,6 +262,9 @@
 	#help div { border:solid #aaa 1px; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; padding:10px; margin:0px 0px 10px 0px;background:#eee;}
 	
 	.report-issue {width:24px;}
+	
+	.dates {table-layout:fixed;width:100%;}
+	.dates td {width:14.285%;vertical-align:top;}
 
 /* LISTS */
 
@@ -328,6 +331,7 @@
 	.ltMonitor .small-info {font-size:13px;line-height:18px;}
 	.ltMonitor p.church {font-size: 54px;line-height:50px;}
 	.ltMonitor p.scripture {font-size: 16px;line-height:16px;}
+	
 
 
 /* PRINT STYLES */

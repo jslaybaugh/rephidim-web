@@ -139,6 +139,7 @@
     <Compile Include="Models\GlossaryView.cs" />
     <Compile Include="Models\HomeView.cs" />
     <Compile Include="Models\LoginView.cs" />
+    <Compile Include="Models\VolunteerListView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -268,6 +269,7 @@
     <Content Include="Views\Admin\Draw.cshtml" />
     <Content Include="Views\Admin\Schedule.cshtml" />
     <Content Include="Views\Admin\_Calendar.cshtml" />
+    <Content Include="Views\Admin\_Volunteers.cshtml" />
     <None Include="Views\Emails\Notification.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

@@ -48,12 +48,43 @@ namespace Web.Controllers
 		}
 
 		[HttpGet]
-		public ActionResult Schedule(string id)
+		public ActionResult Schedule()
 		{
-		    var m = new AdminScheduleView();
-			m.Mode = id;
-			m.People = DataAccess.GetPeople();
+			var m = new AdminScheduleView();
+			m.People = DataAccess.GetPeople().Where(x=>x.Nursery);
 		    return View("Schedule", m);
+		}
+
+		[HttpGet]
+		public ActionResult Calendar(int month, int year)
+		{
+			var m = new CalendarView();
+			m.Month = month;
+			m.Year = year;
+			return View("_Calendar", m);
+		}
+
+		[HttpGet]
+		public ActionResult Volunteers(string mode)
+		{
+			var m = new VolunteerListView();
+			var people = DataAccess.GetPeople();
+
+			if (mode.MatchesTrimmed("nursery"))
+			{
+				people = people.Where(x => x.Nursery);
+			}
+			else if (mode.MatchesTrimmed("security"))
+			{
+				people = people.Where(x => x.Security);
+			}
+			else if (mode.MatchesTrimmed("kitchen"))
+			{
+				people = people.Where(x => x.Kitchen);
+			}
+
+			m.People = people.OrderBy(x=>x.LastName).ThenBy(x=>x.FirstName).ToList();
+			return View("_Volunteers", m);
 		}
 
 		[HttpGet]

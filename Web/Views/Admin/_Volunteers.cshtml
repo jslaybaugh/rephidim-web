@@ -1,0 +1,13 @@
+﻿@model VolunteerListView
+
+@{
+	Layout = null;
+}
+
+
+<ul class="unstyled list-lines connected-sortable">
+	@foreach (var person in Model.People)
+	{
+		<li data-id="@person.Id">@person.FirstName @person.LastName.Substring(0,1)</li>
+	}
+</ul>

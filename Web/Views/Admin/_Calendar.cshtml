@@ -1,18 +1,18 @@
 ﻿@model Web.Models.CalendarView
 
-@{var firstDayOfMonth = new DateTime(Model.Year, Model.Month, 1);}
+@{Layout = null; var firstDayOfMonth = new DateTime(Model.Year, Model.Month, 1);}
 	
 
-<div style="width:210px;margin-left:auto;margin-right:auto;">
+<div>
 	<table class="dates">
 		<tr>
-			<td class="day-of-weeks">S</td>
-			<td class="day-of-weeks">M</td>
-			<td class="day-of-weeks">T</td>
-			<td class="day-of-weeks">W</td>
-			<td class="day-of-weeks">T</td>
-			<td class="day-of-weeks">F</td>
-			<td class="day-of-weeks">S</td>
+			<td class="day-of-weeks">Sunday</td>
+			<td class="day-of-weeks">Monday</td>
+			<td class="day-of-weeks">Tuesday</td>
+			<td class="day-of-weeks">Wednesday</td>
+			<td class="day-of-weeks">Thursday</td>
+			<td class="day-of-weeks">Friday</td>
+			<td class="day-of-weeks">Saturday</td>
 		</tr>
 			@for (int j = 1; j < DateTime.DaysInMonth(Model.Year, Model.Month) + 1; j++)
 			{
@@ -30,11 +30,15 @@
 					}
 				}
 
-				<td>@j
-					<ul class="unstyled list-lines connected-sortable nursery"></ul>
-					<ul class="unstyled list-lines connected-sortable security-inside"></ul>
-					<ul class="unstyled list-lines connected-sortable security-outside"></ul>
-					<ul class="unstyled list-lines connected-sortable kitchen"></ul>
+				<td><b>@j</b>
+				<br />Nursery
+					<ul style="border:black 1px solid;padding:10px;" class="unstyled list-lines connected-sortable vol nursery"></ul>
+					Security Inside
+					<ul style="border:black 1px solid;padding:10px;" class="unstyled list-lines connected-sortable vol security security-inside"></ul>
+					Security Outside
+					<ul style="border:black 1px solid;padding:10px;" class="unstyled list-lines connected-sortable vol security security-outside"></ul>
+					Kitchen
+					<ul style="border:black 1px solid;padding:10px;" class="unstyled list-lines connected-sortable vol kitchen"></ul>
 				</td>
 					
 				if (j==DateTime.DaysInMonth(Model.Year, Model.Month) || intOfWeek % 7 == 6)
