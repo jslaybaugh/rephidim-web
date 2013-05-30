@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable = no">
+		<link href='http://fonts.googleapis.com/css?family=Finger+Paint|Lemon|Gloria+Hallelujah' rel='stylesheet' type='text/css'>
+		<style type="text/css">
+			html, body {margin:0;padding:0;}
+			ul {margin-left:10px;margin-right:10px;padding:0;list-style:none;}
+			li {padding:8px;font-size:52px;-webkit-border-radius:25px;margin-bottom:10px;background-color:#efefef;text-align:center;}
+			a, a:link, a:visited, a:active {color:#666;text-decoration:none;display:block;}
+		</style>
+	</head>
+	<body>
+		<ul></ul>
+	</body>
+	<script type="text/javascript" src="https://raw.github.com/ftlabs/fastclick/master/lib/fastclick.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		window.addEventListener('load', function() {
+		    FastClick.attach(document.body);
+		}, false);
+		$(function()
+		{
+			var names = ["Ezra Blair", "Reegan Blair", "Elisabeth East", "Abby Thompson", "Manuel Simantel", "Joel Simantel", "Hudson Slaybaugh", "Claire Causey", "Julian Castillo"];
+			var backColors = ["#baff1e", "#5010ed", "#10afed", "#feeb1e", "#c00c00", "#fa501a", "#5a11ad", "#1ab1ab", "#1eafed"];
+			var foreColors = ["#000", "#fff", "#000", "#000", "#fff", "#000", "#fff", "#000", "#000"];
+			var fonts = ["Finger Paint", "Gloria Hallelujah", "Lemon"];
+
+			var randomNames = names.sort(function() { return 0.5 - Math.random()});
+			var lowerCase = false;
+			var upperCase = false;
+			var randomFont = Math.floor(Math.random() * fonts.length);
+			var now = new Date();
+			if (now.getSeconds() % 3 == 1) lowerCase = true;
+			if (now.getSeconds() % 3 == 2) upperCase = true;
+			$("ul").append($.map(randomNames, function(n, i)
+			{
+				return $("<li style='font-family:\"" + fonts[randomFont] + "\"'><a href='#' data-index='" + i + "'>" + (lowerCase ? n.toLowerCase() : (upperCase ? n.toUpperCase() : n)) + "</a></li>");
+
+			}))
+
+			$(document).on("click", "a", function()
+			{
+				if (!$(this).parents("li").hasClass("active"))
+				{
+					var index = $(this).data("index");
+					$(this).parents("li").css("backgroundColor", backColors[index]).addClass("active");
+					$(this).css("color", foreColors[index])
+				}
+				else
+				{
+					$(this).parents("li").css("backgroundColor", "#efefef").removeClass("active");
+					$(this).css("color", "#666")
+				}
+				return false
+			})		})
+	</script>
+</html>
