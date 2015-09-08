@@ -1,0 +1,25 @@
+﻿@model Web.Models.GlossaryView
+
+@{
+	ViewBag.Title = Model.ActiveTerm != null ? Model.ActiveTerm.Term : "Glossary";
+	ViewBag.NavGlossary = true;
+	Bundles.Reference("content/templates/glossary");
+}
+
+<div class="row">
+	<div class="span4 module primary-content" id="uxList"></div>
+	<div class="span8 module primary-content" id="uxTerm"></div>
+</div>
+<div id="uxTermsDialog" class="none"></div>
+
+@section scripts
+{
+	<script type="text/javascript">		
+		$(function ()
+		{
+			var activeTerm = @Html.Raw(Json.Encode(Model.ActiveTerm));
+			window.Glossary = new App.Glossary(activeTerm, @Html.Raw(Json.Encode(Model.Version.Value)), @Html.Raw(Json.Encode(User.IsInRole("Glossary"))));
+		});
+	</script>
+
+}

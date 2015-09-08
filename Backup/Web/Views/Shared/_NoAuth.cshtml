@@ -1,0 +1,33 @@
+﻿@using Cassette.Views;
+@{	
+	Layout = "_Master.cshtml";
+}
+<div class="container">
+	@RenderBody()
+</div>
+	
+
+@section styles 
+{
+	<style type="text/css">body {padding-top:5px;}</style>
+	@if (IsSectionDefined("styles"))
+	{
+		@RenderSection("styles")
+	}
+}
+
+@section scripts 
+{
+	@if (IsSectionDefined("scripts"))
+	{
+		@RenderSection("scripts")
+	}
+}
+
+@section templates 
+{
+	@if (IsSectionDefined("templates"))
+	{
+		@RenderSection("templates")
+	}
+}

@@ -1,0 +1,71 @@
+﻿@model EmailNotify.NotifyEmail   
+Bcc: @Model.To
+From: "Rephidim Church" <rci@@wfbiz.rr.com>
+Subject: Recently Added/Modified Items on the Rephidim Church Website
+Content-Type: text/html; charset=utf-8
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<style type="text/css">
+			body {font-size:12px;font-family:helvetica, Arial, sans-serif;}
+			h1 {font-size:20px;font-weight:bold;line-height:20px; display:inline;}
+			h2 {font-size:18px;font-weight:bold;line-height:18px; display:inline;}
+			h3 {font-size:16px;font-weight:bold;line-height:16px; display:inline;}
+			h4 {font-size:13px;font-style:italic;line-height:13px;display:inline;color:#666;}
+		</style>
+	</head>
+	<body>
+		<h1>Recently Added/Modified Items</h1>
+		<h4><br />Clicking on any link will take you to that resource on the website.</h4>
+		<hr />
+		<h2>Files</h2> 
+		<h4>(If these files are less than 15mb combined, they will also be attached to this message)</h4>
+		@if (Model.Files != null && Model.Files.Count() >= 50) { <h4><br />(limited to 50, go online to see all)</h4> }
+		<ul>
+			@if (Model.Files != null && Model.Files.Count() > 0)
+			{
+				foreach (var file in Model.Files)
+				{
+					<li><a href="@Model.AbsoluteRoot/Files/Download/@file.Path">@(file.Name).@(file.Extension)</a> (@(file.Size + (Model.HasAttachments ? " - Attached" : "")))</li>
+				}
+			}
+			else
+			{
+				<li>No files.</li>
+			}
+		</ul>
+		<h2>Verses</h2> 
+		@if (Model.Verses != null && Model.Verses.Count() >= 50) { <h4><br />(limited to 50, go online to see all)</h4> }
+		<ul>
+			@if (Model.Verses != null && Model.Verses.Count() > 0)
+			{
+				foreach (var verse in Model.Verses)
+				{
+					<li><a href="@Model.AbsoluteRoot/Scripture/@verse.Book.Name/@verse.Chapter/@verse.Verse">@verse.Book.Name @verse.Chapter:@verse.Verse</a></li>
+				}
+			}
+			else
+			{
+				<li>No verses.</li>
+			}
+		</ul>
+		<h2>Terms</h2> 
+		@if (Model.Terms != null && Model.Terms.Count() >= 50) { <h4><br />(limited to 50, go online to see all)</h4> }
+		<ul>
+			@if (Model.Terms != null && Model.Terms.Count() > 0)
+			{
+				foreach (var term in Model.Terms)
+				{
+					<li><a href="@Model.AbsoluteRoot/Glossary/Term/@term.Id">@term.Term</a></li>
+				}
+			}
+			else
+			{
+				<li>No terms.</li>
+			}
+		</ul>
+		<hr />
+		<p style="font-size:10px;">You've received this email because your email address was manually added to the list of people to be notified on the church website.  If you no longer want to receive these messages, just <a href="@Model.AbsoluteRoot/Admin/Emails">log in and unsubscribe</a>.</p>
+	</body>
+</html>

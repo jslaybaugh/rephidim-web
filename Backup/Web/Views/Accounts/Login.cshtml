@@ -1,0 +1,60 @@
+﻿@model LoginView
+@{
+	ViewBag.Title = "Login";
+	Layout = "~/Views/Shared/_NoAuth.cshtml";
+}
+
+@if (Model.Messages != null && Model.Messages.Count() > 0)
+{ 
+	foreach (var msg in Model.Messages)
+	{
+		<div class="alert-message @msg.Style.ToLowerInvariant()">@Html.Raw(msg.Value)</div>
+	}
+}
+<div id="uxiOSVersion" class="alert-message warning none">To be able to use this site, you need to upgrade your device's operating system <a href="http://www.apple.com/ios/" style="text-decoration:underline;" target="_blank">to at least version 5.0</a>.</div>
+
+<div class="login-container">
+	<p class="church">REPHIDIM CHURCH</p>
+	<p class="scripture">I, myself will worship toward the temple of Your Holiness and I will celebrate Your person, because of Your grace and because of Your doctrine, because You have magnified Your doctrinal teaching above your reputation.</p>
+	<p class="scripture" style="text-align:right;color:#888;">~ Psalm 138:2</p>
+	@using (Html.BeginForm("Login", "Accounts", FormMethod.Post, new { id = "frmLogin", @class="form-inline" }))
+	{ 
+		@Html.HiddenFor(m => m.ReturnUrl)
+		@Html.ValidationMessageFor(m => m.UserName, "User Name is required.", new { @class = "alert-message error"})
+		@Html.ValidationMessageFor(m => m.Password, "Password is required.", new { @class = "alert-message error" })
+		@Html.ValidationMessageFor(m => m.Error, "Authentication Failed. Please try again.", new { @class = "alert-message error" })
+		<div class="module clear login-bg ">
+			<div class="login-contents" style="border:none 0px;"><br />
+				<div id="user-box" class="control-group @(Model.UserName != null && Model.UserName.MatchesTrimmed("rephidim") ? "none" : "")">
+					<label class="control-label" for="UserName">User Name:</label> @Html.TextBoxFor(m => m.UserName, new { placeholder = "Enter User Name" })<br />
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="Password">Password:</label> @Html.PasswordFor(m => m.Password, new { placeholder = "Enter Password" }) &nbsp; <input type="submit" class="btn" value="Knock" />
+				</div>
+			</div>
+			<a id="lnk-more" class="bold @(Model.UserName != null && Model.UserName.MatchesTrimmed("rephidim") ? "" : "none")" href="#">More Options</a>
+		</div>
+		<p class="center-align">&copy; Rephidim Church, Inc. / RDBS, Inc. 1971-@DateTime.Now.Year<br />4430 Allendale Rd, Wichita Falls, TX 76310<br /><a href="mailto:rci@wfbiz.rr.com">Questions?</a></p>
+	 }
+ </div>
+
+ @section scripts
+ {
+	<script type="text/javascript">
+		$(function ()
+		{
+			$("#lnk-more").click(function ()
+			{
+				$("#UserName").val("");
+				$("#user-box").fadeIn();
+				$(this).hide();
+			});
+
+
+			if (navigator.userAgent.match(/(ipad|ipod|iphone)/i) && navigator.userAgent.match(/CPU OS [1234]/i))
+			{
+				$("#uxiOSVersion").show();
+			}
+		});
+	</script>
+ }

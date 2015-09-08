@@ -1,0 +1,81 @@
+﻿@{	
+	Layout = "_Master.cshtml";
+}
+
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="brand" href="@(Url.Action<HomeController>(x => x.Home()))">Rephidim</a>
+			<ul class="nav">
+				<li @(ViewBag.NavHome != null && ViewBag.NavHome == true ? "class=active" : "")><a href="@(Url.Action<HomeController>(x => x.Home()))">Home</a></li>
+				<li @(ViewBag.NavGlossary != null && ViewBag.NavGlossary == true ? "class=active" : "")><a href="@(Url.Action<GlossaryController>(x => x.Term(null, null)))">Glossary</a></li>
+				<li @(ViewBag.NavFiles != null && ViewBag.NavFiles == true ? "class=active" : "")><a href="@(Url.Action<FilesController>(x => x.Browse(null)))">Files</a></li>
+				<li @(ViewBag.NavScripture != null && ViewBag.NavScripture == true ? "class=active" : "")><a href="@(Url.Action<ScriptureController>(x => x.Read("Genesis", 1, 1)))">Bible</a></li>
+				<li class="dropdown @(ViewBag.NavOther != null && ViewBag.NavOther == true ? "active" : "")">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Resources <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="@(Url.Action<StaticController>(x => x.Show("tapelist.pdf")))">Tape List</a></li>
+						<li class="divider"></li>
+						<li><a class="link-large" href="@(Url.Action<StaticController>(x => x.Show("chronology.html")))">Chronology (Full Version)</a></li>
+						<li><a href="@(Url.Action<StaticController>(x => x.Show("chrono.html")))">Chronology (Compact Version)</a></li>
+						<li class="divider"></li>
+						<li><a href="@(Url.Action<StaticController>(x => x.Show("Atlas_Front.pdf")))">Atlas (Introduction)</a></li>
+						<li><a href="@(Url.Action<StaticController>(x => x.Show("Atlas_Chapter1.pdf")))">Atlas (Ch 1 - L/G/H Interpretation)</a></li>
+						<li><a href="@(Url.Action<StaticController>(x => x.Show("Atlas_Chapter2.pdf")))">Atlas (Ch 2 - Reliability)</a></li>
+						<li><a href="@(Url.Action<StaticController>(x => x.Show("Atlas_Chapter3.pdf")))">Atlas (Ch 3 - Canonicity)</a></li>
+						<li><a href="@(Url.Action<StaticController>(x => x.Show("Atlas_Chapter4.pdf")))">Atlas (Ch 4 - Divine Revelation)</a></li>
+						<li><a href="@(Url.Action<StaticController>(x => x.Show("Atlas_Chapter5.pdf")))">Atlas (Ch 5 - Attributes of God)</a></li>
+						<li><a href="@(Url.Action<StaticController>(x => x.Show("Atlas_Addenda.pdf")))">Atlas (Addenda)</a></li>
+					</ul>
+				</li>
+			</ul>
+			<form id="frmNavSearch" method="get" class="navbar-search pull-left form-search" action="@(Url.Action<HomeController>(x => x.Search(null)))">
+				<input type="search" class="span2" placeholder="Search All Items" value="@ViewBag.SearchQuery" name="query" />
+				<span id="uxAppWait" class="wait-light" style="display:none;"></span>
+			</form>
+			<ul class="nav pull-right">
+				<li><a href="@(Url.Action<HomeController>(x => x.Help()))" style="padding:0px;margin-top:7px;width:24px;" title="Get help">@Sprite.Image("~/App_Sprites/icon_help.png")</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">User: <b>@User.Identity.Name</b> <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="@(Url.Action<AdminController>(x => x.Emails()))">Email Notifications</a></li>
+						@if (User.IsInRole("Messages"))	{ <li><a href="@(Url.Action<AdminController>(x=>x.Messages()))">Manage Messages</a></li> }
+						@if (User.IsInRole("Dev"))	{ <li><a href="@(Url.Action<AdminController>(x=>x.Users()))">Manage Users</a></li> }
+						@if (User.IsInRole("Dev"))	{ <li><a href="@(Url.Action<AdminController>(x=>x.Parse()))">Parsing Utility</a></li> }
+						@if (User.IsInRole("Dev"))	{ <li><a id="lnkViewSource" href="#">View Source</a></li> }
+						<li class="divider"></li>
+						<li><a href="@(Url.Action<AccountsController>(x => x.Logout()))">Logout</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="container">
+	@RenderBody()
+</div>
+
+
+@section styles 
+{
+	@if (IsSectionDefined("styles"))
+	{
+		@RenderSection("styles")
+	}
+}
+
+@section scripts 
+{
+	@if (IsSectionDefined("scripts"))
+	{
+		@RenderSection("scripts")
+	}
+}
+
+@section templates 
+{
+	@if (IsSectionDefined("templates"))
+	{
+		@RenderSection("templates")
+	}
+}

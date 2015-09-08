@@ -46,3 +46,4 @@ C:\Side Work\Rephidim Church\Rephidim Web 2011\Web\obj\Debug\Web.csprojResolveAs
 \\psf\Home\Projects\Rephidim-Web\Web\obj\Debug\Web.csprojResolveAssemblyReference.cache
 \\psf\Home\Projects\Rephidim-Web\Web\obj\Debug\Web.dll
 \\psf\Home\Projects\Rephidim-Web\Web\obj\Debug\Web.pdb
+\\psf\Home\Projects\Rephidim-Web\Web\bin\Web.dll.config

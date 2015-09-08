@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "System Help";
+}
+
+<div class="row">
+	<div class="span12 module primary-content">
+		<h1>
+			System Help	
+			<a href="#" class="report-issue right" data-details="Help Page" title="Report Issue">@(Sprite.Image("~/App_Sprites/icon_report.png"))</a>
+		</h1>
+		<div class="scrollable" id="help">
+			<h2>Home</h2>
+			<div>From the <code><b>Home</b></code> screen you can view the most recently updated verses, glossary terms, and files.  Files include downloadable charts, notes, bible class lessons, shows, etc.<br /><br />If there are any messages from the P-T, they will appear at the top of the page in either blue, yellow, red, or green depending upon severity.</div>
+			<h2>Report Issues</h2>
+			<div>If you encounter any issues while using this system you can report them via the @(Sprite.Image("~/App_Sprites/icon_report.png")) icon on any page.  It doesn't matter if the issue is technical or content (misspelling, typo, etc.), please let us know!  The system will relay information about the specific page you are on, but please be as descriptive as possible about the issue you are encountering.</div>
+			<h2>Glossary</h2>
+			<div>You can use the <code><b>Glossary</b></code> section to browse the many terms taught during Bible class lessons.  Term definitions may include links to other glossary terms or verses.  Links to other terms will be in <a class="term-link">blue</a> and links to other verses will be in <a class="verse-link">green</a>.
+			<br /><br />If you would like to print any single definition or all the definitions, please use the @(Sprite.Image("~/App_Sprites/icon_pdf.png")) and @(Sprite.Image("~/App_Sprites/icon_pdfmulti.png")) icons in the upper right hand corner of the selected glossary term.  This will create a PDF designed to fit to a printed page that you can then print out easily.</div>
+			<h2>Files</h2>
+			<div>You can use the <code><b>Files</b></code> section to browse and download charts, notes, Bible class lessons, shows, and other available files.  On iOS devices, special options will be available (such as opening PDF's directly in GoodReader™, if it is installed).</div>
+			<h2>Bible</h2>
+			<div>You can use the <code><b>Bible</b></code> section to browse the verses of the Bible.  All 31,102 verses are there, and when available, the corrected translation is provided (otherwise the NASB translation is provided).  Verses may include links to glossary terms.
+			<br /><br />It is important to review the glossary term <a style="text-decoration:underline;" href="@Href("~/Glossary/Term/277")">face to face communication</a> while browsing the verses provided here. ;-)</div>
+			<h2>Resources</h2>
+			<div>You can use the <code><b>Resources</b></code> menu to select to quickly find and view other publications such as the <b>Tape List</b>, the full and compact versions of the <b>Chronology</b>, and <b>Atlas of Biblical Theology</b>.</div>
+			<h2>Search</h2>
+			<div>You can utilize the search box to simultaneously search across all glossary terms, all verses, and all files.
+				<br /><br /><b><u>Search Tips</u></b><br /><br />
+				<ol>
+					<li>Make your search as specific as possible.<br /><br /></li>
+					<li>If you are searching for a specific phrase, be sure to include quotations around the Phrase. (Ex. rather than searching for <code><b>tomb of David</b></code>, search for the phrase <code><b>"tomb of David"</b></code> to get more relevant results.<br /><br /></li>
+					<li>If you do not use quotes around your phrase, the system will remove common words (of, and, the, etc) and then find results that match ALL the remaining words.</li>
+				</ol>
+			</div>
+			<h2>User Name Menu</h2>
+			<div>Using the <code><b>Email Notifications</b></code> option, you can add your email address to the list of people who are periodically notified of any updates to the glossary, files, or Bible verses.  You may also remove your address from this list at any time.<br /><br />
+			Using the <code><b>Logout</b></code> option you can log out and close your session.  This same action will also happen when you close your browser.</div>
+			<br /><br />
+			<h2 class="center-align">Enjoy! To whom much is given, much is required!</h2>
+			<br /><br />
+		</div>
+	</div>
+</div>

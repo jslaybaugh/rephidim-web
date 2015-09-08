@@ -37,14 +37,25 @@ namespace Web.Areas.Ajax.Controllers
 		}
 
 		[HttpPost]
-		public JsonResult Save(int id, string value, string style, bool isActive, bool onHomePage, bool onLoginPage)
+		public JsonResult Save(MessageSaveView m)
 		{
 			if (User.IsInRole("Messages"))
 			{
-				return Json(DataAccess.UpsertMessage(id, value, style, isActive, onHomePage, onLoginPage));
+				return Json(DataAccess.UpsertMessage(m.Id, m.Value, m.Style, m.IsActive, m.OnHomePage, m.OnLoginPage));
 			}
 			else
 				throw new Exception("Access Denied.");
+		}
+
+		public class MessageSaveView
+		{
+			public int Id { get; set; }
+			[AllowHtml]
+			public string Value { get; set; }
+			public string Style { get; set; }
+			public bool IsActive { get; set; }
+			public bool OnHomePage { get; set; }
+			public bool OnLoginPage { get; set; }
 		}
 
     }
