@@ -23,6 +23,7 @@ namespace Web.Controllers
 		}
 
 		// this remains open for good reader [Authorize]
+		[Authorize]
 		public ActionResult Open(string path)
 		{
 			var m = GetData(path);

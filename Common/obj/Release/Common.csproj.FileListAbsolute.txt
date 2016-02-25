@@ -5,3 +5,10 @@ C:\Side Work\Rephidim Church\Rephidim Web 2011\Common\bin\Release\Dapper.pdb
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Common\obj\Release\ResolveAssemblyReference.cache
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Common\obj\Release\Common.dll
 C:\Side Work\Rephidim Church\Rephidim Web 2011\Common\obj\Release\Common.pdb
+\\psf\Home\Projects\Rephidim-Web\Common\bin\Release\Common.dll
+\\psf\Home\Projects\Rephidim-Web\Common\bin\Release\Common.pdb
+\\psf\Home\Projects\Rephidim-Web\Common\bin\Release\Dapper.dll
+\\psf\Home\Projects\Rephidim-Web\Common\bin\Release\Dapper.pdb
+\\psf\Home\Projects\Rephidim-Web\Common\obj\Release\Common.csprojResolveAssemblyReference.cache
+\\psf\Home\Projects\Rephidim-Web\Common\obj\Release\Common.dll
+\\psf\Home\Projects\Rephidim-Web\Common\obj\Release\Common.pdb

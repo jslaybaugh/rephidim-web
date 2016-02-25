@@ -1,9 +1,6 @@
 ﻿<div>
 	<ul class="unstyled lines">
 		<li><a href="${App.ResolveUrl('~/Files/Open/' + encodeURIComponent(Path))}" target="_blank">{{html App.ChooseIcon("open")}}Open (new window)</a></li>
-		{{if Device == "iOS" && (Extension == "pdf" || Extension == "mp3") }}
-			<li><a href="${App.ResolveUrl('~/Files/Open/' + encodeURIComponent(Path), 'ghttp')}" target="_blank">{{html App.ChooseIcon("goodreader")}}Open in GoodReader™</a></li>
-		{{/if}}
 		{{if Device != "iOS" }}
 			<li><a href="${App.ResolveUrl('~/Files/Download/' + encodeURIComponent(Path))}" target="_blank">{{html App.ChooseIcon("usb")}}Download & Save</a></li>
 		{{/if}}

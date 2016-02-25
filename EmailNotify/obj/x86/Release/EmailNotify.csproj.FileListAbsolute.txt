@@ -15,3 +15,22 @@ C:\Side Work\Rephidim Church\Rephidim Web 2011\EmailNotify\obj\x86\Release\Email
 C:\Side Work\Rephidim Church\Rephidim Web 2011\EmailNotify\obj\x86\Release\EmailNotify.application
 C:\Side Work\Rephidim Church\Rephidim Web 2011\EmailNotify\obj\x86\Release\EmailNotify.exe
 C:\Side Work\Rephidim Church\Rephidim Web 2011\EmailNotify\obj\x86\Release\EmailNotify.pdb
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Release\EmailNotify.exe.config
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Release\EmailNotify.exe
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Release\EmailNotify.pdb
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Release\Common.dll
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Release\Postal.dll
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Release\RazorEngine.dll
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Release\System.Web.Mvc.dll
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Release\System.Web.Razor.dll
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Release\Dapper.dll
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Release\System.Web.WebPages.Razor.dll
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Release\System.Web.WebPages.dll
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Release\Microsoft.Web.Infrastructure.dll
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Release\System.Web.WebPages.Deployment.dll
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Release\Common.pdb
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Release\Dapper.pdb
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Release\Microsoft.Web.Infrastructure.xml
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\obj\x86\Release\EmailNotify.csprojResolveAssemblyReference.cache
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\obj\x86\Release\EmailNotify.exe
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\obj\x86\Release\EmailNotify.pdb

@@ -28,3 +28,9 @@ C:\Side Work\Rephidim Church\Rephidim Web 2011\EmailNotify\obj\x86\Debug\EmailNo
 \\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Debug\Dapper.pdb
 \\psf\Home\Projects\Rephidim-Web\EmailNotify\obj\x86\Debug\EmailNotify.exe
 \\psf\Home\Projects\Rephidim-Web\EmailNotify\obj\x86\Debug\EmailNotify.pdb
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Debug\System.Web.Mvc.dll
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Debug\System.Web.WebPages.Razor.dll
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Debug\System.Web.WebPages.dll
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Debug\Microsoft.Web.Infrastructure.dll
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Debug\System.Web.WebPages.Deployment.dll
+\\psf\Home\Projects\Rephidim-Web\EmailNotify\bin\Debug\Microsoft.Web.Infrastructure.xml
