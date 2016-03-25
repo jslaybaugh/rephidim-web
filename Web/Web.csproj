@@ -89,6 +89,10 @@
     </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\System.Web.Helpers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\libs\System.Web.Mvc.dll</HintPath>
@@ -99,9 +103,6 @@
     </Reference>
     <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\libs\System.Web.WebPages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\libs\System.Web.Helpers.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -148,6 +149,7 @@
     <Compile Include="Models\AdminMessagesView.cs" />
     <Compile Include="Models\AdminEmailsView.cs" />
     <Compile Include="Models\AdminUsersView.cs" />
+    <Compile Include="Models\DocsView.cs" />
     <Compile Include="Models\ScriptureView.cs" />
     <Compile Include="Models\StaticView.cs" />
     <Compile Include="Models\SearchView.cs" />
@@ -298,6 +300,9 @@
     </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Help.cshtml" />
+    <Content Include="Views\Shared\Content.cshtml" />
+    <Content Include="Views\Shared\_Nothing.cshtml" />
+    <Content Include="Views\Accounts\Docs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Accounts\Login.cshtml" />

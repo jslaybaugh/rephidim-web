@@ -2,14 +2,47 @@
 @{	
 	Layout = "_Master.cshtml";
 }
-<div class="container">
+
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="brand" href="@(Url.Action<HomeController>(x => x.Home()))">Rephidim</a>
+			<ul class="nav">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Who We Are <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="@(Url.Action<AccountsController>(x => x.Docs("about")))">About</a></li>
+						<li><a href="@(Url.Action<AccountsController>(x => x.Docs("statement-of-faith")))">Statement of Faith</a></li>
+						<li><a href="@(Url.Action<AccountsController>(x => x.Docs("purpose")))">Purpose</a></li>
+						<li><a href="@(Url.Action<AccountsController>(x => x.Docs("financial-policy")))">Financial Policy</a></li>
+						<li><a href="@(Url.Action<AccountsController>(x => x.Docs("customary-assembly-practices")))">Customary Assembly Practices</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Vital Truths <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="@Href("~/Content/Static/Rephidim_Vital_Truth_Gospel_of_Jesus Christ.pdf")" target="_blank">Gospel of Jesus Christ</a></li>
+						<li><a href="@Href("~/Content/Static/Rephidim_Vital_Truth_Removal_of_Sin_Barrier.pdf")" target="_blank">Removal of Sin Barrier</a></li>
+						<li><a href="@Href("~/Content/Static/Rephidim_Vital_Truth_Holiness_of_God.pdf")" target="_blank">Holiness of God</a></li>
+						<li><a href="@Href("~/Content/Static/Rephidim_Vital_Truth_Literal_Grammatical_Historical_Interpretation.pdf")" target="_blank">Literal, Grammatical, Historical Interpretation of Scripture</a></li>
+					</ul>
+				</li>
+			</ul>
+			<ul class="nav pull-right">
+				<li><a href="@(Url.Action<HomeController>(x=>x.Home()))" id="lnk-login">Login</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="@(ViewBag.NoContainer == true ? "" : "container")">
 	@RenderBody()
 </div>
 	
 
 @section styles 
 {
-	<style type="text/css">body {padding-top:5px;}</style>
+	<style type="text/css">body {padding-top:50px;}</style>
 	@if (IsSectionDefined("styles"))
 	{
 		@RenderSection("styles")

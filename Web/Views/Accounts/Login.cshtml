@@ -1,8 +1,12 @@
 ﻿@model LoginView
 @{
 	ViewBag.Title = "Login";
+	ViewBag.NoContainer = true;
 	Layout = "~/Views/Shared/_NoAuth.cshtml";
 }
+
+
+
 
 @if (Model.Messages != null && Model.Messages.Count() > 0)
 { 
@@ -15,34 +19,62 @@
 
 <div class="login-container">
 	<p class="church">REPHIDIM CHURCH</p>
-	<p class="scripture">I, myself will worship toward the temple of Your Holiness and I will celebrate Your person, because of Your grace and because of Your doctrine, because You have magnified Your doctrinal teaching above your reputation.</p>
-	<p class="scripture" style="text-align:right;color:#888;">~ Psalm 138:2</p>
-	@using (Html.BeginForm("Login", "Accounts", FormMethod.Post, new { id = "frmLogin", @class="form-inline" }))
-	{ 
+	<div class="public-links">
+		<p class="center-align" style="margin-bottom:10px;"><a href="@(Url.Action<AccountsController>(x => x.Docs("about")))">About</a> &nbsp;&bull;&nbsp; <a href="@(Url.Action<AccountsController>(x => x.Docs("statement-of-faith")))">Statement of Faith</a> &nbsp;&bull;&nbsp; <a href="@(Url.Action<AccountsController>(x => x.Docs("purpose")))">Purpose</a></p>
+		<p class="center-align"><a href="@(Url.Action<AccountsController>(x => x.Docs("financial-policy")))">Financial Policy</a> &nbsp;&bull;&nbsp; <a href="@(Url.Action<AccountsController>(x => x.Docs("customary-assembly-practices")))">Customary Assembly Practices</a></p>
+	</div>
+ </div>
+
+<div class="footer">&copy; Rephidim Church, Inc. / RDBS, Inc. 1971-@DateTime.Now.Year &nbsp;&bull;&nbsp; 4430 Allendale Rd, Wichita Falls, TX 76310 &nbsp;&bull;&nbsp; (940) 691-1166 &nbsp;&bull;&nbsp; <a href="mailto:rci@wfbiz.rr.com">Email us</a></div>
+
+<div id="uxLoginDialog" class="none">
+
+	@using (Html.BeginForm("Login", "Accounts", FormMethod.Post, new { id = "frmLogin", @class = "form-inline" }))
+	{
 		@Html.HiddenFor(m => m.ReturnUrl)
-		@Html.ValidationMessageFor(m => m.UserName, "User Name is required.", new { @class = "alert-message error"})
+		@Html.ValidationMessageFor(m => m.UserName, "User Name is required.", new { @class = "alert-message error" })
 		@Html.ValidationMessageFor(m => m.Password, "Password is required.", new { @class = "alert-message error" })
 		@Html.ValidationMessageFor(m => m.Error, "Authentication Failed. Please try again.", new { @class = "alert-message error" })
-		<div class="module clear login-bg ">
-			<div class="login-contents" style="border:none 0px;"><br />
+		<div class="clear login-bg ">
+			<div class="login-contents" style="border:none 0px;">
+				<br />
 				<div id="user-box" class="control-group @(Model.UserName != null && Model.UserName.MatchesTrimmed("rephidim") ? "none" : "")">
 					<label class="control-label" for="UserName">User Name:</label> @Html.TextBoxFor(m => m.UserName, new { placeholder = "Enter User Name" })<br />
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="Password">Password:</label> @Html.PasswordFor(m => m.Password, new { placeholder = "Enter Password" }) &nbsp; <input type="submit" class="btn" value="Knock" />
+					<label class="control-label" for="Password">Password:</label> @Html.PasswordFor(m => m.Password, new { placeholder = "Enter Password" }) &nbsp; <input type="submit" class="btn" value="Login" />
 				</div>
+				<hr />
+				<p style="text-align:center;color:#999;">If you'd like to request access to the password-protected resources on this site please call 940-691-1166 or <a href="mailto:rci@wfbiz.rr.com">email us</a> for the password.</p>
 			</div>
-			<a id="lnk-more" class="bold @(Model.UserName != null && Model.UserName.MatchesTrimmed("rephidim") ? "" : "none")" href="#">More Options</a>
+			<a id="lnk-cancel" class="" href="#">Cancel</a>
+			<a id="lnk-more" class="@(Model.UserName != null && Model.UserName.MatchesTrimmed("rephidim") ? "" : "none")" href="#">More Options</a>
 		</div>
-		<p class="center-align">&copy; Rephidim Church, Inc. / RDBS, Inc. 1971-@DateTime.Now.Year<br />4430 Allendale Rd, Wichita Falls, TX 76310<br /><a href="mailto:rci@wfbiz.rr.com">Questions?</a></p>
-	 }
- </div>
+	}
+
+</div>
+
 
  @section scripts
  {
-	<script type="text/javascript">
+<script type="text/javascript">
 		$(function ()
 		{
+			var showDialog = function ()
+			{
+				$("#uxLoginDialog").dialog(
+				{
+					width: 470,
+					height: 278,
+					modal: true,
+					resizable: false,
+					open: function ()
+					{
+						$(".ui-dialog .ui-dialog-titlebar").remove()
+					}
+				});
+			};
+
 			$("#lnk-more").click(function ()
 			{
 				$("#UserName").val("");
@@ -50,11 +82,22 @@
 				$(this).hide();
 			});
 
-
-			if (navigator.userAgent.match(/(ipad|ipod|iphone)/i) && navigator.userAgent.match(/CPU OS [1234]/i))
+			$("#lnk-cancel").click(function ()
 			{
-				$("#uxiOSVersion").show();
+				$("#uxLoginDialog").dialog("close");
+			});
+
+			@if (ViewBag.LoginTried != null && ViewBag.LoginTried == true)
+			{
+				<text>showDialog();</text>
 			}
+
+			$("#lnk-login").click(function(e)
+			{
+				e.preventDefault();
+				showDialog();
+			})
+
 		});
-	</script>
+</script>
  }

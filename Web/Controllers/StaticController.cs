@@ -7,10 +7,10 @@ using Web.Models;
 
 namespace Web.Controllers
 {
-	[Authorize]
 	public class StaticController : Controller
 	{
 
+		[Authorize]
 		public ActionResult Show(string path)
 		{
 			var m = new StaticView();

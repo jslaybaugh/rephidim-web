@@ -47,6 +47,7 @@ namespace Web.Controllers
 		[HttpPost]
 		public ActionResult Login(LoginView m)
 		{
+			ViewBag.LoginTried = true;
 			m.Messages = DataAccess.GetActiveLoginMesssages();
 			if (!ModelState.IsValid) return View(m);
 
@@ -95,6 +96,13 @@ namespace Web.Controllers
 				}
 			}
 			return this.RedirectToAction<HomeController>(x => x.Home());
+		}
+
+		public ActionResult Docs(string id)
+		{
+			var m = new DocsView();
+			m.Doc = id.ToLower().Trim();
+			return View("Docs", m);
 		}
 
 

@@ -228,10 +228,8 @@
 	.boxshadow.borderradius .module { -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; box-shadow: 0 0 10px #444;  }
 	.boxshadow .module > div {border: none 0;}
 	.no-boxshadow .module > div {border:solid 1px #999; }
-	.module h1 { clear: both; -webkit-border-top-left-radius: 5px; -moz-border-top-left-radius: 5px; border-top-left-radius: 5px; -webkit-border-top-right-radius: 5px; -moz-border-top-right-radius: 5px; border-top-right-radius: 5px; margin: 0px; display: block; padding: 8px; color: #eee; font-size: 18px; line-height: 20px; background: #222; font-weight: normal; }
+	.module h1 { background :#222; clear: both; -webkit-border-top-left-radius: 5px; -moz-border-top-left-radius: 5px; border-top-left-radius: 5px; -webkit-border-top-right-radius: 5px; -moz-border-top-right-radius: 5px; border-top-right-radius: 5px; margin: 0px; display: block; padding: 8px; color: #eee; font-size: 18px; line-height: 20px; background: #222; font-weight: normal; }
 	.module h1 input, .module h1 select {margin:0px;margin-top:-5px;}
-	.cssgradients .module h1 { filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333', endColorstr='#222'); background: -webkit-gradient(linear, left top, left bottom, from(#333), to(#222)); background: -moz-linear-gradient(top,  #333,  #222); }
-	.no-cssgradients .module h1 { background: #222; }
 	.module h1 a, .module h1 a:link, .module h1 a:visited, .module h1 a:hover, .module h1 a:active { color: #eee; text-decoration: underline; }
 
 	
@@ -283,17 +281,22 @@
 
 /* LOGIN PAGE */
 
-	.church { font-family: 'Acme', serif; font-size: 54px; width: 500px; margin: auto; margin-bottom: 10px; text-align: center; font-weight: 900; border-bottom: solid 1px #444; padding-bottom: 5px; line-height: 50px; }
-	.scripture { font-family: 'Acme' , serif; font-size: 16px; width: 470px; margin: auto; margin-bottom: 5px; text-align: justify; line-height:16px;}
-	.login-container { margin: 30px auto 0px auto; }
-	.boxshadow .login-bg, .no-boxshadow .login-bg { margin: auto auto 10px auto; background: #333 url(../img/microphone.png) top left; width: 470px; height: 278px; position:relative;  }
+	.church { font-family: 'Acme', serif; font-size: 60px; width: 520px; margin: auto; margin-bottom: 10px; text-align: center; font-weight: 900; padding-bottom: 5px; line-height: 50px; }
+	.scripture { font-family: 'Acme' , serif; font-size: 18px; width: 600px; margin: auto; margin-bottom: 5px; text-align: justify; line-height:16px;}
+	.public-links {font-family: 'Acme', serif; width:350px; margin:auto;padding:10px;}
+	.public-links p {font-family: 'Acme', serif; font-size: 16px; line-height:16px;margin:0; }
+	.login-container { margin: 200px auto 0px auto; }
+	.boxshadow .login-bg, .no-boxshadow .login-bg { margin: auto auto 10px auto;  }
 	.login-contents { margin: 0px 0 0 10px; }
-	.login-contents label { width: 100px; color: #ddd; font-weight: bold; text-align: left; }
+	.login-contents label { width: 100px; font-weight: bold; text-align: left; }
 	.login-container .alert-message { width: 440px; margin: auto; margin-bottom: 10px; clear: both; }
-
-	#lnk-more:link, #lnk-more:active, #lnk-more:visited, #lnk-more:hover { position: absolute; bottom: 5px; right: 10px; color: #fff; }
+	
+	#lnk-cancel:link, #lnk-cancel:active, #lnk-cancel:visited, #lnk-cancel:hover { position: absolute; bottom: 5px; left: 10px; text-decoration:underline; }
+	#lnk-more:link, #lnk-more:active, #lnk-more:visited, #lnk-more:hover { position: absolute; bottom: 5px; right: 10px; text-decoration:underline; }
 	
 	.boxshadow .error-img, .no-boxshadow .error-img { margin:auto auto 20px auto;background-color:#333;background-image: url(../img/mosquito-elephant.png);width:653px;height:500px;}
+
+	.footer {position:absolute;bottom:5px;left:0;width:100%;text-align:center;font-size:12px !important;color:#999 !important;}
 
 
 /* SYZE OVERRIDES OF MY STYLES */
@@ -326,8 +329,10 @@
 
 	.ltMonitor .module h1 {font-size:22px;line-height:24px;}
 	.ltMonitor .small-info {font-size:13px;line-height:18px;}
-	.ltMonitor p.church {font-size: 54px;line-height:50px;}
-	.ltMonitor p.scripture {font-size: 16px;line-height:16px;}
+	.ltMonitor p.church {font-size: 60px;line-height:50px;}
+	.ltMonitor p.scripture {font-size: 18px;line-height:16px;}
+
+	.ltMonitor .footer {position:absolute;bottom:5px;left:0;width:100%;text-align:center;font-size:12px !important;color:#999 !important;}
 
 
 /* PRINT STYLES */
