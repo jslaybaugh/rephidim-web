@@ -214,6 +214,7 @@
     <Content Include="Content\img\arcs-114.png" />
     <Content Include="Content\img\arcs-144.png" />
     <Content Include="Content\img\bg.png" />
+    <Content Include="Content\img\blur1.jpg" />
     <Content Include="Content\img\favicon.ico" />
     <Content Include="Content\img\mosquito-elephant.png" />
     <Content Include="Content\img\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -285,6 +286,11 @@
     <Content Include="Views\Admin\Users.cshtml" />
     <None Include="App_Sprites\timeStamp.dat" />
     <Content Include="Views\Admin\Draw.cshtml" />
+    <Content Include="Content\static\Rephidim_Vital_Truth_Gospel_of_Jesus Christ.pdf" />
+    <Content Include="Content\static\Rephidim_Vital_Truth_Holiness_of_God.pdf" />
+    <Content Include="Content\static\Rephidim_Vital_Truth_Literal_Grammatical_Historical_Interpretation.pdf" />
+    <Content Include="Content\static\Rephidim_Vital_Truth_Removal_of_Sin_Barrier.pdf" />
+    <Content Include="Content\static\Rephidim_Vital_Truth_Love.pdf" />
     <None Include="Views\Emails\Notification.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
