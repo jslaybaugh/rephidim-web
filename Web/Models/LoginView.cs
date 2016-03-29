@@ -16,5 +16,6 @@ namespace Web.Models
 		public bool Error { get; set; }
 		public string ReturnUrl { get; set; }
 		public IEnumerable<MessageItem> Messages { get; set; }
+		public bool ShowLogin { get; set; }
 	}
 }

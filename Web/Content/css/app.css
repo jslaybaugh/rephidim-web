@@ -281,13 +281,13 @@
 
 /* LOGIN PAGE */
 
-	.church { font-family: 'Acme', serif; font-size: 60px; width: 520px; margin: auto; margin-bottom: 0; text-align: center; font-weight: 900; padding-bottom: 5px; line-height: 50px; color:#444; }
-	.scripture { font-family: 'Acme' , serif; font-size: 18px; width: 600px; margin: auto; margin-bottom: 5px; text-align: justify; line-height:16px;}
-	.public-links {font-family: 'Acme', serif; width:520px; margin:auto;padding:10px;}
+	.church { font-family: 'Acme', serif; font-size: 60px; margin-bottom: 0; text-align: center; font-weight: 900; padding-bottom: 5px; line-height: 50px; color:#444; }
+	.scripture { font-family: 'Acme' , serif; font-size: 18px; margin-bottom: 5px; text-align: center; line-height:16px;}
+	.public-links {font-family: 'Acme', serif; padding:10px;}
 	.public-links p {font-family: 'Acme', serif; font-size: 16px; line-height:16px;margin:0; }
 	.public-links a, .public-links a:link, .public-links a:visited, .public-links a:hover {color:#444;text-decoration:underline;}
 	.public-links a:hover {}
-	.login-container { margin: 200px auto 0px auto; }
+	.login-container { margin-top:200px; }
 	.boxshadow .login-bg, .no-boxshadow .login-bg { margin: auto auto 10px auto;  }
 	.login-contents { margin: 0px 0 0 10px; }
 	.login-contents label { width: 100px; font-weight: bold; text-align: left; }
@@ -298,7 +298,7 @@
 	
 	.boxshadow .error-img, .no-boxshadow .error-img { margin:auto auto 20px auto;background-color:#333;background-image: url(../img/mosquito-elephant.png);width:653px;height:500px;}
 
-	.footer {position:absolute;bottom:5px;left:0;width:100%;text-align:center;font-size:12px !important;color:#fff !important;}
+	.footer {position:absolute;bottom:5px;left:0;width:100%;text-align:center;font-size:12px !important;color:#333 !important;}
 
 
 /* SYZE OVERRIDES OF MY STYLES */

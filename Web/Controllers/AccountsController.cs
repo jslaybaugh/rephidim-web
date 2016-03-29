@@ -17,7 +17,7 @@ namespace Web.Controllers
 		[HttpGet]
 		public ActionResult Index()
 		{
-			return this.RedirectToAction<AccountsController>(x => x.Login(string.Empty));
+			return this.RedirectToAction<AccountsController>(x => x.Login(string.Empty, false));
 		}
 
 		public ActionResult Error()
@@ -27,7 +27,7 @@ namespace Web.Controllers
 		}
 
 		[HttpGet]
-		public ActionResult Login(string returnUrl)
+		public ActionResult Login(string returnUrl, bool showLogin = false)
 		{
 			var cookie = Request.Cookies["rephidim_user"];
 			string lastUser = "rephidim";
@@ -37,9 +37,11 @@ namespace Web.Controllers
 			}
 
 			var m = new LoginView();
+
 			m.UserName = lastUser;
 			m.ReturnUrl = returnUrl;
 			m.Messages = DataAccess.GetActiveLoginMesssages();
+			m.ShowLogin = showLogin;
 			
 			return View("Login", m);
 		}
@@ -47,7 +49,7 @@ namespace Web.Controllers
 		[HttpPost]
 		public ActionResult Login(LoginView m)
 		{
-			ViewBag.LoginTried = true;
+			m.ShowLogin = true;
 			m.Messages = DataAccess.GetActiveLoginMesssages();
 			if (!ModelState.IsValid) return View(m);
 

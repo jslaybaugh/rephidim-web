@@ -30,13 +30,13 @@
 				</li>
 			</ul>
 			<ul class="nav pull-right">
-				<li><a href="@(Url.Action<HomeController>(x=>x.Home()))" id="lnk-login">Login</a></li>
+				<li><a href="@(Url.Action<AccountsController>(x=>x.Login(null, true)))" id="lnk-login">Login</a></li>
 			</ul>
 		</div>
 	</div>
 </div>
 
-<div class="@(ViewBag.NoContainer == true ? "" : "container")">
+<div class="container">
 	@RenderBody()
 </div>
 	

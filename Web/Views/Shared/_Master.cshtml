@@ -32,8 +32,8 @@
 	<title>@String.Format(titleFormat, ViewBag.Title)</title>
 	<meta name="description" content="Rephidim Web Site, Created 12/2011">
 	<meta name="author" content="Jorin Slaybaugh -- see humans.txt">
-	@if (Request.IsAuthenticated)
-	{
+	@*@if (Request.IsAuthenticated)
+	{*@
 		<script type="text/javascript">
 			if (window.screen.width < 768)
 			{
@@ -44,7 +44,7 @@
 				document.write('<meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0" />');
 			}
 		</script>
-	}
+	@*}*@
 	<meta name="format-detection" content="telephone=no" />
 	<link rel="apple-touch-icon-precomposed" href="@Href("~/content/img/arcs-057.png")">
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="@Href("~/content/img/arcs-072.png")">
