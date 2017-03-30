@@ -67,6 +67,15 @@ namespace Web.Controllers
 				cookie.Expires = DateTime.Now.AddMonths(12);
 				Response.Cookies.Add(cookie);
 
+				var forceCookie = Request.Cookies["rephidim_forceout"];
+				if (forceCookie == null)
+				{
+					forceCookie = new HttpCookie("rephidim_forceout");
+				}
+				forceCookie["rephidim_forceout"] = string.Format("{0:yyyy-MM-dd}", DateTime.Now);
+				forceCookie.Expires = DateTime.Now.AddDays(2);
+				Response.Cookies.Add(forceCookie);
+
 				var ticket = new FormsAuthenticationTicket(1, user.Name, DateTime.Now, DateTime.Now.AddDays(30), false, user.Rights);
 				var encTicket = FormsAuthentication.Encrypt(ticket);
 
@@ -96,6 +105,14 @@ namespace Web.Controllers
 					authCookie.Expires = DateTime.Now.AddDays(-1);
 					Response.SetCookie(authCookie);
 				}
+
+				var forceCookie = Request.Cookies["rephidim_forceout"];
+				if (forceCookie != null)
+				{
+					forceCookie.Expires = DateTime.Now.AddDays(-1);
+					Response.SetCookie(forceCookie);
+				}
+
 			}
 			return this.RedirectToAction<HomeController>(x => x.Home());
 		}

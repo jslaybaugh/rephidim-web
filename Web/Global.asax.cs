@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
 using System.Security.Principal;
+using System.Configuration;
 
 namespace Web
 {
@@ -94,6 +95,24 @@ namespace Web
 		{
 			if (HttpContext.Current.Request.IsAuthenticated)
 			{
+				if (!HttpContext.Current.Request.RawUrl.ToLower().Contains("accounts"))
+				{
+					var cookie = HttpContext.Current.Request.Cookies["rephidim_forceout"];
+					string val = "";
+					if (cookie != null)
+					{
+						val = cookie["rephidim_forceout"];
+					}
+
+					bool pass = string.Compare(val, ConfigurationManager.AppSettings["ForceDate"], true) >= 0;
+					if (!pass)
+					{
+						// kick em out
+						HttpContext.Current.Response.Redirect("~/Accounts/Logout");
+					}
+				}
+
+
 				var roles = (HttpContext.Current.User.Identity as FormsIdentity).Ticket.UserData.Split('|');
 				HttpContext.Current.User = new GenericPrincipal(HttpContext.Current.User.Identity, roles);
 			}
