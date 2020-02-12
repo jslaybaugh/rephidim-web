@@ -39,7 +39,7 @@
 		<p class="center-align"><a href="@(Url.Action<AccountsController>(x => x.Docs("financial-policy")))">Financial Policy</a> &nbsp;&bull;&nbsp; <a href="@(Url.Action<AccountsController>(x => x.Docs("customary-assembly-practices")))">Customary Assembly Practices</a></p>
 	</div>
 </div>
-<div class="footer">&copy; Rephidim Church 1971-@DateTime.Now.Year &nbsp;&bull;&nbsp; 4430 Allendale Rd, Wichita Falls, TX 76310 &nbsp;&bull;&nbsp; (940) 691-1166 &nbsp;&bull;&nbsp; <a href="mailto:rci@wfbiz.rr.com" style="color:#333;text-decoration:underline;">Email us</a></div>
+<div class="footer">&copy; Rephidim Church 1971-@DateTime.Now.Year &nbsp;&bull;&nbsp; 4430 Allendale Rd, Wichita Falls, TX 76310 &nbsp;&bull;&nbsp; (940) 691-1166 &nbsp;&bull;&nbsp; <a href="mailto:rephidimwf@gmail.com" style="color:#333;text-decoration:underline;">Email us</a></div>
 
 <div id="uxLoginDialog" class="none">
 
@@ -59,7 +59,7 @@
 					<label class="control-label" for="Password">Password:</label> @Html.PasswordFor(m => m.Password, new { placeholder = "Enter Password" }) &nbsp; <input type="submit" class="btn" value="Login" />
 				</div>
 				<hr />
-				<p style="text-align:center;color:#999;">If you'd like to request access to the password-protected resources on this site please call 940-691-1166 or <a href="mailto:rci@wfbiz.rr.com">email us</a> for the password.</p>
+				<p style="text-align:center;color:#999;">If you'd like to request access to the password-protected resources on this site please call 940-691-1166 or <a href="mailto:rephidimwf@gmail.com">email us</a> for the password.</p>
 			</div>
 			<a id="lnk-cancel" class="" href="#">Cancel</a>
 			<a id="lnk-more" class="@(Model.UserName != null && Model.UserName.MatchesTrimmed("rephidim") ? "" : "none")" href="#">More Options</a>
