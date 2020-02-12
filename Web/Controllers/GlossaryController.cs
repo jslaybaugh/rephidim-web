@@ -120,7 +120,7 @@ namespace Web.Controllers
 					cbCover.ShowTextAligned(PdfContentByte.ALIGN_CENTER, "Published by:", (PageWidth / 2) * ppi, ((PageHeight / 2) - Convert.ToSingle(0.6)) * ppi, 0);
 					cbCover.ShowTextAligned(PdfContentByte.ALIGN_CENTER, "Rephidim Doctrinal Bible Studies, Inc.", (PageWidth / 2) * ppi, ((PageHeight / 2) - Convert.ToSingle(0.8)) * ppi, 0);
 					cbCover.ShowTextAligned(PdfContentByte.ALIGN_CENTER, "4430 Allendale Rd., Wichita Falls, Texas 76310", (PageWidth / 2) * ppi, ((PageHeight / 2) - Convert.ToSingle(1.0)) * ppi, 0);
-					cbCover.ShowTextAligned(PdfContentByte.ALIGN_CENTER, "(940) 691-1166     rephidim.org     rci@wfbiz.rr.com", (PageWidth / 2) * ppi, ((PageHeight / 2) - Convert.ToSingle(1.2)) * ppi, 0);
+					cbCover.ShowTextAligned(PdfContentByte.ALIGN_CENTER, "(940) 691-1166     rephidim.org     rephidimwf@gmail.com", (PageWidth / 2) * ppi, ((PageHeight / 2) - Convert.ToSingle(1.2)) * ppi, 0);
 
 					cbCover.SetFontAndSize(bfGaramond, 10);
 					cbCover.SetRGBColorFill(0, 0, 0);
